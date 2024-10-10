@@ -33,6 +33,7 @@
   pointer-events: none;
   margin-right: 20px; /*space between logo and home*/
 }
+.login-reg{}
 .taskbar-item:hover .icon,
 .taskbar-item:hover .icon-text,
 .taskbar-item:active .icon,
