@@ -2,7 +2,7 @@
   display: flex;
   background-color: #ffffff;
   padding: 0px;
-  height: 80px;
+  height: 60px;
   justify-content: start;
   align-items: center;
   position: fixed;
@@ -32,9 +32,10 @@
   font-family: Roboto, sans-serif;
 }
 .logo{
-  height:80px;
+  height:60px;
   margin:0;
   padding:0;
+  pointer-events: none;
 }
 .taskbar-item.login-reg {
   position: absolute; /*position it freely*/
@@ -44,7 +45,7 @@
   background-color: rgba(60, 177, 41);
   right: 0;
   height: 100%;
-  width: 180px; /*can change*/
+  width: 60px; 
   z-index: 2; /*overlay .taskbar*/
 }
 .login-content {

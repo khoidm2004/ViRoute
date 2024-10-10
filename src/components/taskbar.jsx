@@ -15,9 +15,8 @@ const Taskbar = () => {
   return (
     <div className="taskbar">
       <img className="logo" src="./images/ViRoute_white.png"/>
-      <div className='taskbar-item'>
+      <div className='taskbar-item' onClick={home}>
         <Icon icon="subway:home-1" className='icon' />
-        <div className='taskbar-item' onClick={home}>
         <span className='icon-text'>Home</span>
       </div>
       <div className='taskbar-item'>
