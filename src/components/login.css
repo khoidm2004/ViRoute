@@ -5,3 +5,16 @@
   background-color: white;
   width: 100%;
 }
+.login-container {}
+.text {}
+.input-field{
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  padding: 10px 15px;
+  background-color: red;
+  outline:none;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
