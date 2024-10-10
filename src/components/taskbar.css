@@ -1,0 +1,56 @@
+.taskbar {
+  display: flex;
+  background-color: #FFF;
+  padding: 5px;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.taskbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.icon {
+  font-size: 30px;
+  color:rgba(0, 0, 0);
+}
+.icon-text {
+  font-size: 15px;
+  color:rgba(0, 0, 0);
+}
+.logo{
+  font-size:5px;
+  pointer-events: none;
+  margin-right: 20px; /*space between logo and home*/
+}
+.taskbar-item:hover .icon,
+.taskbar-item:hover .icon-text,
+.taskbar-item:active .icon,
+.taskbar-item:active .icon-text {
+  color: rgba(60, 177, 41) /*color figma in rbg*/
+}
+/*(Phone) Styles for devices with a maxium screen width of 360px
+    px này lấy trên mạng, idk px cụ thể nào phù hợp*/
+@media only screen and (max-width: 480px){
+  .my_element {
+    display: none; /*hide element on small scr*/
+  }
+}
+/*medium-sized screen*/
+@media only screen and (min-width:480px) and (max-width: 1024px){
+  .my_element {
+    display: block
+  }
+}
+@media only screen and (orientation: portrait) {}
+@media only screen and (orientation: landscape) {}
