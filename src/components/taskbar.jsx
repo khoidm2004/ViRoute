@@ -4,22 +4,25 @@ import { Icon } from '@iconify/react';
 import {useNavigate} from 'react-router-dom';
 const Taskbar = () => {
     const navigate = useNavigate();
-    const loginClick = () => {
+    const login= () => {
       navigate('/login');
+    };
+    const home =() => {
+      navigate('/home')
     };
     const [activeItem, setActiveItem] = useState(null);
     const itemClick = (item) => {}
   return (
     <div className="taskbar">
       <img className="logo" src="./images/ViRoute.png"/>
-      <div className='taskbar-item'>
+      <div className='taskbar-item' onClick={home}>
         <Icon icon="ion:home" className='icon'/>
         <span className='icon-text'>Home</span>
       </div>
       <div className='taskbar-item'>
         <Icon icon="" className='icon'/>
       </div>
-      <div className='taskbar-item login-reg' onClick={loginClick}>
+      <div className='taskbar-item login-reg' onClick={login}>
         <span className='login-content'>
           <Icon icon="material-symbols:account-circle" className='login-icon'/>
           <span className='login-text'>Login/Sign up</span>
