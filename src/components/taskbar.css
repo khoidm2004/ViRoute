@@ -39,6 +39,7 @@
 .taskbar-item:active .icon-text {
   color: rgba(60, 177, 41) /*color figma in rbg*/
 }
+
 /*(Phone) Styles for devices with a maxium screen width of 360px
     px này lấy trên mạng, idk px cụ thể nào phù hợp*/
 @media only screen and (max-width: 480px){
