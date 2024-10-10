@@ -14,6 +14,15 @@ const Taskbar = () => {
       <div className='taskbar-item'>
         <Icon icon="" className='icon'/>
       </div>
+      <div className='taskbar-item'>
+        <span className='login-reg'>
+          <tr>
+            <td>
+              <Icon icon="material-symbols:account-circle" className='login-icon'/>
+            </td>
+          </tr>
+        </span>
+      </div>
     </div>
   );
 };

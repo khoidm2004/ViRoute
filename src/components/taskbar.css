@@ -34,6 +34,10 @@
   margin-right: 20px; /*space between logo and home*/
 }
 .login-reg{}
+.login-icon{
+    font-size: 10px;
+    color:rgba(0, 0, 0);
+}
 .taskbar-item:hover .icon,
 .taskbar-item:hover .icon-text,
 .taskbar-item:active .icon,
