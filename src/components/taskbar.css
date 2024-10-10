@@ -8,6 +8,7 @@
   width: 100%;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 .taskbar-item {
   display: flex;
@@ -33,10 +34,30 @@
   pointer-events: none;
   margin-right: 20px; /*space between logo and home*/
 }
-.login-reg{}
-.login-icon{
-    font-size: 10px;
-    color:rgba(0, 0, 0);
+.taskbar-item.login-reg {
+  position: absolute; /*position it freely*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(60, 177, 41);
+  right: 0;
+  height: 100%;
+  width: 180px; /*can change*/
+  z-index: 2; /*overlay .taskbar*/
+}
+.login-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px
+}
+.login-icon {
+  font-size: 30px;
+  color:rgba(0, 0, 0);
+}
+.login-text {
+  font-size: 20px;
+  color: rgba(0, 0, 0);
 }
 .taskbar-item:hover .icon,
 .taskbar-item:hover .icon-text,
