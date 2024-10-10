@@ -1,14 +1,15 @@
 .taskbar {
   display: flex;
-  background-color: #FFF;
-  padding: 5px;
+  background-color: #ffffff;
+  padding: 0px;
+  height: 80px;
   justify-content: start;
   align-items: center;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 1;
+  margin: 0;
 }
 .taskbar-item {
   display: flex;
@@ -16,23 +17,24 @@
   align-items: center;
   background: none;
   border: none;
-  font-size: 15px;
   cursor: pointer;
-  padding: 0px;
+  padding: 30px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 .icon {
-  font-size: 30px;
-  color:rgba(0, 0, 0);
+  font-size: 26px;
+  color:rgba(0, 0, 0, 0.5);
+  align-items: center
 }
 .icon-text {
-  font-size: 15px;
-  color:rgba(0, 0, 0);
+  font-size: 13px;
+  color:rgba(0, 0, 0, 0.5);
+  font-family: Roboto, sans-serif;
 }
 .logo{
-  font-size:5px;
-  pointer-events: none;
-  margin-right: 20px; /*space between logo and home*/
+  height:80px;
+  margin:0;
+  padding:0;
 }
 .taskbar-item.login-reg {
   position: absolute; /*position it freely*/
