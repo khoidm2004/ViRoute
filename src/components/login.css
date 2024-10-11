@@ -2,19 +2,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  color: white;
   width: 100%;
 }
-.login-container {}
-.text {}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 380px; /*can change for responsive*/
+  padding: 15px;
+  padding-bottom: 20px;
+  position: relative;
+  background-color: rgba(60, 177, 41, 0.3);
+  border: none;
+  border-radius: 20px
+}
+.text {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
 .input-field{
   width: 100%;
   border: none;
-  border-radius: 30px;
-  font-size: 20px;
+  border-radius: 10px;
+  font-size: 30px; /*text size*/
   padding: 10px 15px;
-  background-color: red;
+  background-color: white;
+  color:black;
   outline:none;
   box-sizing: border-box;
   background-clip: padding-box;
+}
+.input-field::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
