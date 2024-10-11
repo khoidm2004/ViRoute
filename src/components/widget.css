@@ -1,0 +1,9 @@
+.topup {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    
+}

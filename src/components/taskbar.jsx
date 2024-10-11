@@ -3,19 +3,19 @@ import './Taskbar.css'; // Add styling as needed
 import { Icon } from '@iconify/react';
 import {useNavigate} from 'react-router-dom';
 const Taskbar = () => {
+    const [activeItem, setActiveItem] = useState(null);
     const navigate = useNavigate();
     const login= () => {
       navigate('/login');
     };
     const home =() => {
-      navigate('/home')
+      setActiveItem('home')
     };
-    const [activeItem, setActiveItem] = useState(null);
-    const itemClick = (item) => {}
   return (
     <div className="taskbar">
       <img className="logo" src="./images/ViRoute_white.png"/>
-      <div className='taskbar-item' onClick={home}>
+      <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`}
+        onClick={home} >
         <Icon icon="subway:home-1" className='icon' />
         <span className='icon-text'>Home</span>
       </div>
