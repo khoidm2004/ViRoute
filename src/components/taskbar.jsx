@@ -35,11 +35,15 @@ const Taskbar = () => {
         <Icon icon="icon-park-outline:change" className='icon'/>
         <span className='icon-text'>Change city</span>
       </div>
+      <div className='city-text'>
+        <span className='city-text'>Hanoi</span>
+      </div>
       <div className='taskbar-item login-reg' onClick={login}>
         <span className='login-content'>
           <Icon icon="material-symbols:account-circle" className='login-icon'/>
-          <span className='login-text'>Login/Sign up</span>
+          <span className='login-text'>Login/ Sign up</span>
         </span>
+        <img className="logo" src="./images/Green_background.png"/>
       </div>
     </div>
   );
