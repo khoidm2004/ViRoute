@@ -3,8 +3,9 @@ import './App.css';
 import Taskbar from './components/taskbar';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Login from './components/login';
+import Register from './components/register';
 
-const withTaskbar = ({children}) => {
+const WithTaskbar = ({children}) => {
   return (
     <>
       <Taskbar />
@@ -12,14 +13,13 @@ const withTaskbar = ({children}) => {
     </>
   );
 };
-/*lỗi hiện taskbar - kh hiện taskbar*/ 
 function App() {
-  const [count, setCount] = useState(0);
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<WithTaskbar><div>Homescreen</div></WithTaskbar>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/home" element={<withTaskbar><div>Homescreen</div></withTaskbar>} />
+        <Route path="/register" element={<Register/>}/>
       </Routes>
     </Router>
   );
