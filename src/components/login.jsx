@@ -16,7 +16,7 @@ const Login = () => {
     <div className='login-page'>
       <span className='turn-back'>
         <Icon icon="material-symbols:arrow-back-rounded" className='back-icon' onClick={turnback}/>
-        <img className='logo' src='./images/ViRoute_green.png'/>
+        <img className='logo-login' src='./images/ViRoute_green.png'/>
       </span>
       <form className='login-container'>             {/*action='' to send data*/}
         <label className='header'>Login</label>
