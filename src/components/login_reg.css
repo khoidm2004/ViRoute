@@ -59,6 +59,7 @@
   text-decoration: underline;
   text-align: left;
   width: 80%;
+  cursor: pointer;
 }
 .reg-text {  /*create new acc text*/
   font-size: 18px;

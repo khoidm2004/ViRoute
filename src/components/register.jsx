@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import './login_reg.css';
 import { Icon } from '@iconify/react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import Popupcustom from './popup-reg.jsx';
+import 'reactjs-popup/dist/index.css'
 
 const Register = () => {
-    const [activeItem, setActiveItem] = useState(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const handleRegister = () => {
+      setIsPopupOpen(true);
+    };
+    const closePopup = () => {
+      setIsPopupOpen(false);
+      navigate('/login');
+    };
     const navigate = useNavigate();
     const turnback = () => {
       navigate(-1);
@@ -27,8 +37,9 @@ const Register = () => {
         <input type='register-text' className='reg-input-field' id='password' placeholder='Password'/>
         <label className='register-text'>Confirm password:</label>
         <input type='register-text' className='reg-input-field' id='password' placeholder='Password'/>
-        <input type='button' className='button' value="Register"/>
-      </form>  
+        <input type='button' className='button' value="Register" onClick={handleRegister}/>
+      </form> 
+      <Popupcustom isOpen={isPopupOpen} closePopup={closePopup}/>   
     </div>
   );
 };
