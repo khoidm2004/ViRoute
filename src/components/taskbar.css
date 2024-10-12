@@ -96,8 +96,8 @@
 }
 /*medium-sized screen*/
 @media only screen and (min-width:480px) and (max-width: 1024px){
-  .my_element {
-    display: block
+  .taskbar-item {
+    display: block;
   }
 }
 @media only screen and (orientation: portrait) {}
