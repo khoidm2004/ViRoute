@@ -18,7 +18,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 30px;
+    padding: 35px;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   .icon {
@@ -74,15 +74,11 @@
     color: rgba(0, 0, 0);
   }
   .city-text{
-    position: absolute;
-    right: 125px; 
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 30px;
-    font-style: bold;
     color: rgba(0, 0, 0);
+    margin: auto; 
     white-space: nowrap;
-    padding-right: 350px;
+    padding: 0px;
   }
 .taskbar-item:hover .icon,
 .taskbar-item:hover .icon-text,
