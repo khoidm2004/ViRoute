@@ -1,5 +1,6 @@
 import { Children, useState } from 'react';
 import './App.css';
+import Footer from './components/footer';
 import Taskbar from './components/taskbar';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Login from './components/login';
@@ -9,6 +10,7 @@ const WithTaskbar = ({children}) => {
   return (
     <>
       <Taskbar />
+      <Footer />
       {children}
     </>
   );
