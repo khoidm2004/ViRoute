@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Taskbar.css'; // Add styling as needed
+import './Taskbar.css'; 
 import { Icon } from '@iconify/react';
 import {useNavigate} from 'react-router-dom';
 const Taskbar = () => {
@@ -9,7 +9,8 @@ const Taskbar = () => {
       navigate('/login');
     };
     const home =() => {
-      setActiveItem('home')
+      setActiveItem('home');
+      navigate('/');
     };
   return (
     <div className="taskbar">
