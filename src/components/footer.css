@@ -6,9 +6,14 @@
   padding: 30px 50px;
   font-family: Arial, sans-serif;
   align-items: flex-start;
-  width: 100%; 
-  position: relative;
-  }
+  width: 100vw;
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  box-sizing: border-box;
+}
+
   
   .footer-item {
     display: flex;
@@ -17,7 +22,7 @@
   }
   
   .footer-text {
-    font-size: 18px;
+    font-size: 25px;
     margin-bottom: 0;
     color: #000;
   }
@@ -25,7 +30,7 @@
   .contact-item, .footer-icon, .app-icons {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
   }
   
   .footer-icon {
@@ -36,7 +41,7 @@
   .footer-heading {
     color: #000;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     text-decoration: none;
   }
 
@@ -56,4 +61,50 @@
     flex-direction: column;
     gap: 20px;
   }
+
+  .social-media-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    gap: 15px;
+  }
+  
+  .social-icons a {
+    font-size: 30px;
+    color: #000;
+  }
+  
+  .app-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .app-icon-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid black; /* Border around both the icon and text */
+    border-radius: 5px; /* Slight rounding of corners */
+    font-size: 25px;
+    height: auto;
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .app-icon-wrapper a {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .app-icon-wrapper:hover {
+    background-color: #f0f0f0; /* Optional: Change background on hover */
+  }

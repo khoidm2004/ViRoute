@@ -26,18 +26,28 @@ const Footer = () => {
       <div className="footer-item social-app-section">
         <div className="social-media-section">
           <span className="footer-heading">Follow us on social media</span>
-          <div className="footer-icon">
-            <a href="#"><Icon icon="mdi:facebook" className="footer-icon" /></a>
-            <a href="#"><Icon icon="mdi:linkedin" className="footer-icon" /></a>
-            <a href="#"><Icon icon="mdi:github" className="footer-icon" /></a>
+          <div className="social-icons">
+            <a href="#"><Icon icon="mdi:facebook" /></a>
+            <a href="#"><Icon icon="mdi:linkedin" /></a>
+            <a href="#"><Icon icon="mdi:github" /></a>
           </div>
         </div>
 
         <div className="app-section">
           <span className="footer-heading">Download our app</span>
           <div className="app-icons">
-            <a href="#"><Icon icon="simple-icons:googleplay" alt="Google Play"/>Google Play</a>
-            <a href="#"><Icon icon="ion:logo-apple-appstore" alt="App Store"/>App Store</a>
+            <div className="app-icon-wrapper">
+              <a href="#">
+                <Icon icon="simple-icons:googleplay" alt="Google Play" />
+                <span>Google Play</span>
+              </a>
+            </div>
+            <div className="app-icon-wrapper">
+              <a href="#">
+                <Icon icon="ion:logo-apple-appstore" alt="App Store" />
+                <span>App Store</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
