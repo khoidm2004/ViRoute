@@ -1,0 +1,22 @@
+.password-field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+    font-size: 30px; /*text size*/
+    padding: 20px; 
+    background-color: white;
+    color:black;
+    outline:none;
+    box-sizing: border-box;
+    background-clip: padding-box;
+}
+.password-text {
+    width: 80%;
+    font-size: 25px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: black;
+}
