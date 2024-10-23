@@ -7,17 +7,17 @@ import Input from "@mui/material/Input";
 import './hidePass.css'
 
 const HidePass = ({ values, handleClickShowPassword, handleMouseDownPassword, handlePasswordChange }) => {
-  const inputRef = useRef(null); // Create a ref for the input
+  const inputRef = useRef(null);
 
   const handleTogglePasswordVisibility = () => {
-    const currentPos = inputRef.current.selectionStart; // Get current cursor position
+    const currentPos = inputRef.current.selectionStart; 
 
     handleClickShowPassword(); // Toggle password visibility
 
     // Wait for the state to update and re-render, then set the caret position
     setTimeout(() => {
       if (inputRef.current) {
-        inputRef.current.setSelectionRange(currentPos, currentPos); // Restore the cursor position
+        inputRef.current.setSelectionRange(currentPos, currentPos); 
       }
     }, 0); 
   };
@@ -26,22 +26,22 @@ const HidePass = ({ values, handleClickShowPassword, handleMouseDownPassword, ha
     <Input
       placeholder="Password"
       sx={{
-        width: "80%",  // Control width of input field
-        fontSize: "20px",  // Control text size inside the input
-        padding: "10px",  // Add some padding to the input
+        width: "80%", 
+        fontSize: "20px",  
+        padding: "10px",  
         paddingLeft: "20px",
-        color: "#000czx",  // Input text color
-        '& input::placeholder': {  // Placeholder styling via Material-UI sx prop
+        color: "#000",  
+        '& input::placeholder': {  
           color: "#000",
-          opacity: 0.5,  // Placeholder text color
-          fontSize: "20px", // Placeholder text size
+          opacity: 0.5,  
+          fontSize: "20px",
         },
-        backgroundColor: '#fff',  // Set background color of input field
-        borderRadius: "10px",  // Round the corners
+        backgroundColor: '#fff',  
+        borderRadius: "10px",  
       }}
       inputRef={inputRef} 
       type={values.showPassword ? "text" : "password"}
-      onChange={handlePasswordChange("password")}
+      onChange={handlePasswordChange}
       value={values.password}
       endAdornment={
         <InputAdornment position="end">
