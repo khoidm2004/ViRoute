@@ -5,6 +5,7 @@ import Taskbar from './components/taskbar';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Login from './components/login';
 import Register from './components/register';
+import Homescreen from './components/homescreen';
 
 const WithTaskbar = ({children}) => {
   return (
@@ -18,7 +19,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WithTaskbar><div>Homescreen</div></WithTaskbar>} />
+        <Route path="/" element={<WithTaskbar><Homescreen/></WithTaskbar>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>}/>
       </Routes>

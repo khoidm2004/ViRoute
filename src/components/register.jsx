@@ -62,6 +62,7 @@ const Register = () => {
         <input type='button' className='button' value="Register" onClick={handleRegister}/>
       </form> 
       <RegisterSuccessNotify />
+      <Footer />
     </div>    
   );
 };
