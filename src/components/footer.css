@@ -6,19 +6,19 @@ body {
 }
 .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #e0e0e0;
   flex-direction: row;
-  padding: 30px 50px;
+  padding: 30px;
   font-family: Arial, sans-serif;
-  align-items: flex-start;
   width: 100vw;
   position: relative; 
   bottom: 0; 
   left: 0; 
   right: 0; 
   box-sizing: border-box;
-  margin-top: auto;
+  margin-top: 11%;
+  align-items: center;
 }
 .footer-item {
   display: flex;
@@ -61,12 +61,12 @@ body {
 .social-app-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: start;
 }
 .social-media-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0px;
 }
 
 .social-icons {
@@ -88,11 +88,12 @@ body {
 
 .app-icon-wrapper {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 10px;
   border: 2px solid black; /* Border around both the icon and text */
   border-radius: 5px; /* Slight rounding of corners */
-  font-size: 25px;
+  font-size: 20px;
   height: auto;
   text-decoration: none;
   color: #000;
@@ -108,4 +109,18 @@ body {
 
 .app-icon-wrapper:hover {
   background-color: #f0f0f0; /* Optional: Change background on hover */
+}
+.footer-item.contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: start;
+  margin-right: 60px;
+}
+.copyright {
+  color: black;
+  font-size: 15px;
+  position: absolute;
+  margin-top: 10px;
+  bottom: 0;
 }

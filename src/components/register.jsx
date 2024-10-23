@@ -18,13 +18,10 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    if (values.password !== values.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
     triggerRegisterSuccessNotification(); 
-    navigate('/login');
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
   };
 
   const handleClickShowPassword = () => {
@@ -46,7 +43,6 @@ const Register = () => {
   const home = () => {
     navigate('/');
   };
-
   return (
     <div className='register-page'>
       <div className='turn-back'>
@@ -64,6 +60,7 @@ const Register = () => {
         <label className='register-text'>Password:</label>
         <HidePass
           values={{ password: values.password, showPassword: values.showPassword }} 
+          handleClickShowPassword={handleClickShowPassword} 
           handleMouseDownPassword={handleMouseDownPassword}
           handlePasswordChange={handlePasswordChange("password")}
         />        
