@@ -1,3 +1,9 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; /* Ensures the body takes full height */
+  margin: 0;
+}
 .footer {
   display: flex;
   justify-content: space-between;
@@ -7,7 +13,7 @@
   font-family: Arial, sans-serif;
   align-items: flex-start;
   width: 100vw;
-  position: absolute; 
+  position: relative; 
   bottom: 0; 
   left: 0; 
   right: 0; 

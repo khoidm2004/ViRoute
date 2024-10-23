@@ -6,7 +6,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Input from "@mui/material/Input"; 
 import './hidePass.css'
 
-const HidePass = ({ values, handleClickShowPassword, handleMouseDownPassword, handlePasswordChange }) => {
+const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPassword, handlePasswordChange }) => {
   const inputRef = useRef(null); // Create a ref for the input
 
   const handleTogglePasswordVisibility = () => {
@@ -27,14 +27,14 @@ const HidePass = ({ values, handleClickShowPassword, handleMouseDownPassword, ha
       placeholder="Password"
       sx={{
         width: "80%",  // Control width of input field
-        fontSize: "20px",  // Control text size inside the input
+        fontSize: "25px",  // Control text size inside the input
         padding: "10px",  // Add some padding to the input
         paddingLeft: "20px",
         color: "#000czx",  // Input text color
         '& input::placeholder': {  // Placeholder styling via Material-UI sx prop
           color: "#000",
           opacity: 0.5,  // Placeholder text color
-          fontSize: "20px", // Placeholder text size
+          fontSize: "25px", // Placeholder text size
         },
         backgroundColor: '#fff',  // Set background color of input field
         borderRadius: "10px",  // Round the corners
@@ -59,4 +59,4 @@ const HidePass = ({ values, handleClickShowPassword, handleMouseDownPassword, ha
   );
 };
 
-export default HidePass;
+export default HidePassLogin;
