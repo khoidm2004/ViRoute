@@ -5,11 +5,115 @@
   align-items: center;
   background-color: white;
 }
-.information {  
+
+.icon {
+  font-size: 26px;
+  color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.information {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: white;
+  padding: 50px;
 }
- 
+
+.search {
+  width: 550px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  flex-grow: 1; /* Allow inputs to grow equally */
+}
+
+.search-input {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: black;
+  margin-left: var(--padding);
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+/* Styling for the swap icon */
+.swap-icon {
+  font-size: 36px;
+  cursor: pointer;
+  color: #555;
+  margin: 0 50px;
+}
+
+/* Search Button */
+.search-btn {
+  background-color: rgba(60, 177, 41, 1);
+  color: white;
+  height: 42px;
+  padding: 0 30px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: center;
+  margin-left: 30px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; /* Align items to the left */
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.departure-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.departure-option label {
+  margin-left: 10px;
+  font-size: 16px;
+  color: black;
+}
+
+.favorite-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(60, 177, 41, 1);
+  color: white;
+  font-size: 14px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.favorite-btn .option-icon {
+  margin-right: 10px;
+}
+
+/* Divider Styling */
+.divider {
+  width: 1350px;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 40px 0;
+}
+
+.option-icon {
+  font-size: 26px;
+  color: rgba(0, 0, 0);
+  align-items: center;
+}
