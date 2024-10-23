@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Footer from './components/footer';
-import Taskbar from './components/taskbar';
+import Footer from './components/footer/footer';
+import Taskbar from './components/taskbar/taskbar';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Login from './components/login';
-import Register from './components/register';
-import Homescreen from './components/homescreen';
+import Login from './components/login/login';
+import Register from './components/register/register';
+import Homescreen from './components/home/homescreen';
 
 const WithTaskbar = ({children}) => {
   return (

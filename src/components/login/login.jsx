@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import LoginSuccessNotify, { triggerLoginSuccessNotification } from './noti-login.jsx';
-import Popup_repass from './repass.jsx';
-import HidePassLogin from './hidePassLogin.jsx'; 
-import Footer from './footer.jsx';
+import LoginSuccessNotify, { triggerLoginSuccessNotification } from '../notification/noti-login.jsx';
+import Popup_repass from '../repass/repass.jsx';
+import HidePassLogin from '../hidepass/hidePassLogin.jsx'; 
+import Footer from '../footer/footer.jsx';
 
 const Login = () => {
   const navigate = useNavigate();

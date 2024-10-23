@@ -1,6 +1,5 @@
 import React from 'react';
 import './homescreen.css';
-import './Icon.css'; 
 import { Icon } from '@iconify/react';
 import { Button } from '@mui/material';
 
