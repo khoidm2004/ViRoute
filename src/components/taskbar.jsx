@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Taskbar.css'; 
 import { Icon } from '@iconify/react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 const Taskbar = () => {
-    const [activeItem, setActiveItem] = useState(null);
+    const [activeItem, setActiveItem] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    useEffect(() => {
+      if (location.pathname === '/') {
+        setActiveItem('Home');
+      } else if (location.pathname === '/tracking') {
+        setActiveItem('Tracking');
+      } else if (location.pathname === '/tickets') {
+        setActiveItem('Tickets');
+      } else if (location.pathname === '/feedback') {
+        setActiveItem('Feedback');
+      } else {
+        setActiveItem(''); // Reset if none match
+      }
+    }, [location.pathname]);
     const login= () => {
       navigate('/login');
     };
     const home =() => {
-      setActiveItem('home');
       navigate('/');
     };
   return (
     <div className="taskbar">
       <img className="logo" src="./images/ViRoute_white.png"/>
-      <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`}
-        onClick={home} >
+      <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={home}>
         <Icon icon="subway:home-1" className='icon' />
         <span className='icon-text'>Home</span>
       </div>

@@ -10,7 +10,6 @@ const WithTaskbar = ({children}) => {
   return (
     <>
       <Taskbar />
-      <Footer />
       {children}
     </>
   );
