@@ -12,6 +12,11 @@
   align-items: center;
   background-color: white;
 }
-.search-field {}
+.search-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .input-field {}
 .fav-place {}
