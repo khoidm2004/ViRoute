@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="app-section">
+        <div className="social-app-section">
           <span className="footer-heading">Download our app</span>
           <div className="app-icons">
             <div className="app-icon-wrapper">
@@ -51,6 +51,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <h1 className='copyright'>@Copyright</h1>
     </div>
   );
 };

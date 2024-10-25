@@ -6,6 +6,7 @@
   background-color: white;
   width: 100%;
   min-height: 100%;
+  flex: 1;
 }
 
 .login-container {
@@ -20,6 +21,7 @@
   background-color: rgba(60, 177, 41, 0.3);
   border: none;
   border-radius: 20px;
+  margin-bottom: 30px;
 }
 .button {
   display: flex;

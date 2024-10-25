@@ -1,0 +1,20 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.information {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.search-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+

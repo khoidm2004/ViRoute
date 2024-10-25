@@ -18,7 +18,11 @@
   .popup-overlay {
     background-color: rgba(0, 0, 0, 0.7);
   }
-  
+  .popup-inner input[type='text'] {
+    background-color: white;
+    color:black;
+    font-size: 20px;
+  }
   
   .popup-inner button {
     display: flex;
