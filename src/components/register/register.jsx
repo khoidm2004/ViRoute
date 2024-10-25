@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
-import HidePass from './hidePass.jsx'; 
-import RegisterSuccessNotify, { triggerRegisterSuccessNotification } from './noti-reg.jsx';
+import HidePass from '../hidepass/hidePass.jsx'; 
+import RegisterSuccessNotify, { triggerRegisterSuccessNotification } from '../notification/noti-reg.jsx';
 import 'reactjs-popup/dist/index.css';
-import Footer from './footer.jsx';
+import Footer from '../footer/footer.jsx';
 
 const Register = () => {
   const navigate = useNavigate();
