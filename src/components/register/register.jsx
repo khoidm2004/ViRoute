@@ -14,7 +14,6 @@ const Register = () => {
     showPassword: false,
     showConfirmPassword: false
   });
-
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -23,19 +22,15 @@ const Register = () => {
       navigate('/login');
     }, 2000);
   };
-
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-
   const handleClickShowConfirmPassword = () => {
     setValues({ ...values, showConfirmPassword: !values.showConfirmPassword });
   };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };

@@ -12,12 +12,10 @@ body {
   padding: 30px;
   font-family: Arial, sans-serif;
   width: 100vw;
-  position: relative; 
+  position: fixed; 
   bottom: 0; 
   left: 0; 
-  right: 0; 
   box-sizing: border-box;
-  margin-top: 11%;
   align-items: center;
 }
 .footer-item {

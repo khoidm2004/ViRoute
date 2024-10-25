@@ -7,21 +7,13 @@ import Login from './components/login/login';
 import Register from './components/register/register';
 import Homescreen from './components/home/homescreen';
 
-const WithTaskbar = ({children}) => {
-  return (
-    <>
-      <Taskbar />
-      {children}
-    </>
-  );
-};
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WithTaskbar><Homescreen/></WithTaskbar>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/" element={<><Taskbar/><Homescreen/></>} />
+        <Route path="/login" element={<><Login/><Footer/></>} />
+        <Route path="/register" element={<><Register/><Footer/></>}/>
       </Routes>
     </Router>
   );

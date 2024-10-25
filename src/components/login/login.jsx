@@ -18,15 +18,7 @@ const Login = () => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    //login logic here
-    //const loginSuccess = true; 
     triggerLoginSuccessNotification(); 
-
-    //if (loginSuccess) {
-    //  triggerLoginSuccessNotification(); 
-    //  navigate('/'); 
-    //} else {
-    //  console.log('Login failed');
   };
   const home = () => {
     navigate('/');
@@ -37,16 +29,12 @@ const Login = () => {
   const closeRepass = () => {
     setIsRepass(false);
   };
-
-  // Password visibility toggle handlers
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -73,7 +61,7 @@ const Login = () => {
       </form>
       <Popup_repass isOpen={isRepass} closePopup={closeRepass} />
       <LoginSuccessNotify />
-      <Footer />
+      <Footer/>
     </div>
   );
 };

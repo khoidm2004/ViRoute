@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       {/* Contact Section */}
       <div className="footer-item contact-section">
         <span className="footer-heading">Contact us</span>
@@ -52,7 +52,7 @@ const Footer = () => {
         </div>
       </div>
       <h1 className='copyright'>@Copyright</h1>
-    </div>
+    </footer>
   );
 };
 
