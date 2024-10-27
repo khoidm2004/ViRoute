@@ -59,7 +59,6 @@ const Register = () => {
           handleMouseDownPassword={handleMouseDownPassword}
           handlePasswordChange={handlePasswordChange("password")}
         />        
-        
         <label className='register-text'>Confirm password:</label>
         <HidePass
           values={{ password: values.confirmPassword, showPassword: values.showConfirmPassword }} 
@@ -67,11 +66,10 @@ const Register = () => {
           handleMouseDownPassword={handleMouseDownPassword}
           handlePasswordChange={handlePasswordChange("confirmPassword")} 
         />        
-
         <input type='button' className='button' value="Register" onClick={handleRegister}/>
       </form> 
       <RegisterSuccessNotify />
-      <Footer />
+      <Footer/>
     </div>    
   );
 };

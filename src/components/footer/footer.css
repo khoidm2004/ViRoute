@@ -4,7 +4,7 @@ body {
   height: 100%; /* Ensures the body takes full height */
   margin: 0;
 }
-.footer {
+footer {
   display: flex;
   justify-content: center;
   background-color: #e0e0e0;
@@ -12,7 +12,7 @@ body {
   padding: 30px;
   font-family: Arial, sans-serif;
   width: 100vw;
-  position: fixed; 
+  position: relative; 
   bottom: 0; 
   left: 0; 
   box-sizing: border-box;

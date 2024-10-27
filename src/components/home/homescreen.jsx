@@ -12,7 +12,6 @@ const Homescreen = () => {
     setStart(destination);
     setDestination(temp);
   };
-
   return (
     <div className='home'>
       <div className='information'>

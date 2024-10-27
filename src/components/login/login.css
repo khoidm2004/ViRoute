@@ -76,7 +76,7 @@
 .input-field{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 80%;
   border: none;
   border-radius: 10px;

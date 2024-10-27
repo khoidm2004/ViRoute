@@ -13,15 +13,9 @@ const Login = () => {
     password: "",
     showPassword: false,
   });
-  const register = () => {
-    navigate('/register');
-  };
   const handleLogin = (e) => {
     e.preventDefault();
     triggerLoginSuccessNotification(); 
-  };
-  const home = () => {
-    navigate('/');
   };
   const handleRepass = () => {
     setIsRepass(true);
@@ -38,11 +32,13 @@ const Login = () => {
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
+  const changepage = (page) => {
+    navigate(page);
+};
   return (
     <div className='login-page'>
       <div className='turn-back'>
-        <img className='logo-login' src='./images/ViRoute_green.png' onClick={home}/>
+        <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage('/')}/>
       </div>
       <form className='login-container'>
         <label className='header'>Login</label>
@@ -57,7 +53,7 @@ const Login = () => {
         />
         <label className='repass-text' onClick={handleRepass}>Forgot your password?</label>
         <input type='button' className='button' value="Login" onClick={handleLogin} />
-        <label className='reg-text' onClick={register}>Create new account</label>
+        <label className='reg-text' onClick={() => changepage('/register')}>Create new account</label>
       </form>
       <Popup_repass isOpen={isRepass} closePopup={closeRepass} />
       <LoginSuccessNotify />

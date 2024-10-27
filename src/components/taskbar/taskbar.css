@@ -83,9 +83,9 @@
 }
 .taskbar-item:hover .icon,
 .taskbar-item:hover .icon-text,
-.taskbar-item:active .icon,
-.taskbar-item:active .icon-text {
-  color: rgba(60, 177, 41) /*color figma in rbg*/
+.taskbar-item.active .icon,
+.taskbar-item.active .icon-text{
+  color: rgba(60, 177, 41); /*color figma in rbg*/
 }
 
 @media only screen and (max-width: 480px){
