@@ -17,16 +17,16 @@ const RouteDetail = () => {
         navigate(`/${busRoute}`); 
     };
     return (
-        <div className='homescreen'>
-            <div className='info'>
+        <div className='home-route'>
+            <div className='info-route'>
                 <div className="search-field">
-                    <Icon icon="material-symbols:search" className='icon' />
+                    <Icon icon="material-symbols:search" className='icon-route' />
                     <input
                         type="text"
                         value={start}
                         onChange={(e) => setStart(e.target.value)}
                         placeholder="Enter your start"
-                        className="input"
+                        className="input-route"
                     />
                 </div>
                 <Icon
@@ -41,7 +41,7 @@ const RouteDetail = () => {
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
                         placeholder="Enter your destination"
-                        className="input"
+                        className="input-route"
                     />
                 </div>
             </div>

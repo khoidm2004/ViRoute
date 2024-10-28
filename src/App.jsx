@@ -12,12 +12,11 @@ function App() {
   return (
     <Router>
       <Routes>
-
-        <Route path="/" element={<><Taskbar/><Homescreen/></>} />
-        <Route path="/:route" element={<><Taskbar/><RouteDetail /></>} />
-        <Route path="/tracking" element={<><Taskbar/></>}/>
-        <Route path="/tickets" element={<><Taskbar/></>}/>
-        <Route path="/feedback" element={<><Taskbar/></>}/>
+        <Route path="/:cityCode/" element={<><Taskbar/><Homescreen/></>} />
+        <Route path="/:cityCode/:route" element={<><Taskbar/><RouteDetail /></>} />
+        <Route path="/:cityCode/tracking" element={<><Taskbar/></>}/>
+        <Route path="/:cityCode/tickets" element={<><Taskbar/></>}/>
+        <Route path="/:cityCode/feedback" element={<><Taskbar/></>}/>
         <Route path="/login" element={<><Login/></>} />
         <Route path="/register" element={<><Register/></>}/>        
       </Routes>

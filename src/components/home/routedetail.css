@@ -1,21 +1,21 @@
-.homescreen {
+
+.home-route {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: flex-start; 
-    background-color: white;
-    padding: 20px; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: red;
+    margin-left: 0; 
 }
 
-.info {
+.info-route {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: flex-start;
-    background-color: white;
-    padding: 0;
-    width: auto; 
-    margin-left: 0; 
+    justify-content: flex-start;
+    align-items: flex-start; 
+    width: 100%; 
+    margin: 0; 
 }
 
 .search-field {
@@ -27,21 +27,16 @@
     background: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-    flex-grow: 1;
-    left: 0; 
-}  
-
-.icon {
-    font-size: 26px;
-    color: rgba(0, 0, 0, 0.5);
-    align-items: center;
 }
 
-.input {
+.icon-route {
+    font-size: 26px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.input-route {
     font-size: 16px;
-    font-family: Arial, sans-serif;
-    color: black;
-    margin-left: var(--padding); 
+    margin-left: 10px;
     outline: none;
     border: none;
     background: transparent;
@@ -51,24 +46,5 @@
     font-size: 36px;
     cursor: pointer;
     color: #555;
-    margin: 0 50px; 
-}
-
-.departure-option {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.departure-option label {
-    margin-left: 10px;
-    font-size: 16px;
-    color: black;
-}
-
-.divider {
-    width: 1350px;
-    height: 2px;
-    background-color: rgba(0, 0, 0, 0.2);
-    margin: 40px 0;
+    margin: 0 10px; /* Adjusts spacing to keep it near input fields */
 }
