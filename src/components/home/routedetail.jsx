@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './routedetail.css';
 
 const RouteDetail = () => {
     const [start, setStart] = useState('');
     const [destination, setDestination] = useState('');
     const navigate = useNavigate();
+    const { cityCode } = useParams();
     const handleSwap = () => {
         const temp = start;
         setStart(destination);
@@ -14,7 +15,7 @@ const RouteDetail = () => {
     };
     const findBusRoute = () => {
         const busRoute = `${encodeURIComponent(start)}${encodeURIComponent(destination)}`;
-        navigate(`/${busRoute}`); 
+        navigate(`/${cityCode}/${busRoute}`); 
     };
     return (
         <div className='home-route'>
