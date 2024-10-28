@@ -13,23 +13,9 @@ const Login = () => {
     password: "",
     showPassword: false,
   });
-  const register = () => {
-    navigate('/register');
-  };
   const handleLogin = (e) => {
     e.preventDefault();
-    //login logic here
-    //const loginSuccess = true; 
     triggerLoginSuccessNotification(); 
-
-    //if (loginSuccess) {
-    //  triggerLoginSuccessNotification(); 
-    //  navigate('/'); 
-    //} else {
-    //  console.log('Login failed');
-  };
-  const home = () => {
-    navigate('/');
   };
   const handleRepass = () => {
     setIsRepass(true);
@@ -37,24 +23,22 @@ const Login = () => {
   const closeRepass = () => {
     setIsRepass(false);
   };
-
-  // Password visibility toggle handlers
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
+  const changepage = (page) => {
+    navigate(page);
+};
   return (
     <div className='login-page'>
       <div className='turn-back'>
-        <img className='logo-login' src='./images/ViRoute_green.png' onClick={home}/>
+        <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage('/')}/>
       </div>
       <form className='login-container'>
         <label className='header'>Login</label>
@@ -69,11 +53,11 @@ const Login = () => {
         />
         <label className='repass-text' onClick={handleRepass}>Forgot your password?</label>
         <input type='button' className='button' value="Login" onClick={handleLogin} />
-        <label className='reg-text' onClick={register}>Create new account</label>
+        <label className='reg-text' onClick={() => changepage('/register')}>Create new account</label>
       </form>
       <Popup_repass isOpen={isRepass} closePopup={closeRepass} />
       <LoginSuccessNotify />
-      <Footer />
+      <Footer/>
     </div>
   );
 };

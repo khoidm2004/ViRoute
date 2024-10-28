@@ -4,7 +4,7 @@ body {
   min-height: 100%; /* Ensures the body takes full height */
   margin: 0;
 }
-.footer {
+footer {
   display: flex;
   justify-content: space-between;
   background-color: #e0e0e0;
@@ -16,8 +16,13 @@ body {
   position: relative; 
   bottom: 0; 
   left: 0; 
-  right: 0; 
   box-sizing: border-box;
+  align-items: center;
+}
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
   

@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import './homescreen.css';
 import { Icon } from '@iconify/react';
 import { Button } from '@mui/material';
+import { useNavigate} from 'react-router-dom';
 
 const Homescreen = () => {
   const [start, setStart] = useState("");
   const [destination, setDestination] = useState("");
+  const navigate = useNavigate();
 
   const handleSwap = () => {
     const temp = start;
     setStart(destination);
     setDestination(temp);
   };
-
+  const findbusroute = (start, destination) => {
+    const busroute = `/${encodeURIComponent(start)}${encodeURIComponent(destination)}`;
+    navigate(busroute);
+  };
   return (
     <div className='home'>
       <div className='information'>
@@ -41,9 +46,8 @@ const Homescreen = () => {
             className="search-input"
           />
         </div>
-        <Button variant="contained" className="search-btn">Find</Button>
+        <Button variant="contained" className="search-btn" onClick={() => findbusroute(start, destination)}>Find</Button>
       </div>
-
       <div className='options'>
         <div className="departure-option">
           <Icon icon="mage:clock" className="option-icon" />
@@ -54,7 +58,6 @@ const Homescreen = () => {
           Add favourite place
         </button>
       </div>
-
       <div className="divider" />
     </div>
   );

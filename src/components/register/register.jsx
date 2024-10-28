@@ -7,29 +7,35 @@ import 'reactjs-popup/dist/index.css';
 import Footer from '../footer/footer.jsx';
 
 const Register = () => {
-   const navigate = useNavigate();
-   const [values, setValues] = useState({
-     password: "",
-     showPassword: false,
-   });
-   const handleRegister = (e) => {
-     e.preventDefault();
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    password: "",
+    confirmPassword: "", 
+    showPassword: false,
+    showConfirmPassword: false
+  });
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-     triggerRegisterSuccessNotification(); 
-     navigate('/login');
-   }; 
-   const handleClickShowPassword = () => {
-     setValues({ ...values, showPassword: !values.showPassword });
-   };
- 
-   const handleMouseDownPassword = (event) => {
-     event.preventDefault();
-   };
- 
-   const handlePasswordChange = (prop) => (event) => {
-     setValues({ ...values, [prop]: event.target.value });
-   };
-   const home = () => {
+    triggerRegisterSuccessNotification(); 
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
+  };
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+  const handleClickShowConfirmPassword = () => {
+    setValues({ ...values, showConfirmPassword: !values.showConfirmPassword });
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const handlePasswordChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const home = () => {
     navigate('/');
   };
   return (
@@ -62,7 +68,7 @@ const Register = () => {
         <input type='button' className='button' value="Register" onClick={handleRegister}/>
       </form> 
       <RegisterSuccessNotify />
-      <Footer />
+      <Footer/>
     </div>    
   );
 };
