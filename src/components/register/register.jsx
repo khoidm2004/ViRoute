@@ -41,30 +41,29 @@ const Register = () => {
   return (
     <div className='register-page'>
       <div className='turn-back'>
-        <img className='logo-login' src='./images/ViRoute_green.png' onClick={home} />
+        <img className='logo-login' src='./images/ViRoute_green.png' onClick={home}/>
       </div>
-      <form className='register-container'>
+      <form className='register-container'>             {/*action='' to send data*/}
         <label className='header'>Register</label>
         <label className='register-text'>Name:</label>
         <input type='text' className='reg-input-field' placeholder='Name'/>
         <label className='register-text'>Email:</label>
         <input type='email' className='reg-input-field' placeholder='Email'/>
-        <label className='register-text'>Phone number:</label>
-        <input type='tel' pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" className='reg-input-field' placeholder='Phone number'/>
-        
+        <label className='register-text'>Phone number</label>
+        <input type='tel' pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"  className='reg-input-field' placeholder='Phone number'/>
         <label className='register-text'>Password:</label>
         <HidePass
-          values={{ password: values.password, showPassword: values.showPassword }} 
-          handleClickShowPassword={handleClickShowPassword} 
+          values={values}
+          handleClickShowPassword={handleClickShowPassword}
           handleMouseDownPassword={handleMouseDownPassword}
-          handlePasswordChange={handlePasswordChange("password")}
+          handlePasswordChange={handlePasswordChange}
         />        
         <label className='register-text'>Confirm password:</label>
         <HidePass
-          values={{ password: values.confirmPassword, showPassword: values.showConfirmPassword }} 
-          handleClickShowPassword={handleClickShowConfirmPassword} 
+          values={values}
+          handleClickShowPassword={handleClickShowPassword}
           handleMouseDownPassword={handleMouseDownPassword}
-          handlePasswordChange={handlePasswordChange("confirmPassword")} 
+          handlePasswordChange={handlePasswordChange}
         />        
         <input type='button' className='button' value="Register" onClick={handleRegister}/>
       </form> 
@@ -73,5 +72,4 @@ const Register = () => {
     </div>    
   );
 };
-
-export default Register;
+export default Register
