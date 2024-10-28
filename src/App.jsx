@@ -14,9 +14,10 @@ function App() {
       <Routes>
 
         <Route path="/" element={<><Taskbar/><Homescreen/></>} />
-        <Route path="/:route" element={<RouteDetail />} />
+        <Route path="/:route" element={<><Taskbar/><RouteDetail /></>} />
         <Route path="/tracking" element={<><Taskbar/></>}/>
-
+        <Route path="/tickets" element={<><Taskbar/></>}/>
+        <Route path="/feedback" element={<><Taskbar/></>}/>
         <Route path="/login" element={<><Login/></>} />
         <Route path="/register" element={<><Register/></>}/>        
       </Routes>

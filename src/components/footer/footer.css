@@ -1,8 +1,9 @@
 body {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Ensures the body takes full height */
+  height: 100vh; /* Ensures the body takes full height */
   margin: 0;
+   /*lỗi footer*/
 }
 footer {
   display: flex;
@@ -12,11 +13,12 @@ footer {
   padding: 30px;
   font-family: Arial, sans-serif;
   width: 100vw;
-  position: relative; 
   bottom: 0; 
   left: 0; 
+  right: 0; 
   box-sizing: border-box;
   align-items: center;
+  position: relative;
 }
 .footer-item {
   display: flex;
@@ -59,12 +61,13 @@ footer {
 .social-app-section {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
 }
 .social-media-section {
   display: flex;
   flex-direction: column;
   gap: 0px;
+  align-items: center;
 }
 
 .social-icons {
@@ -108,12 +111,12 @@ footer {
 .app-icon-wrapper:hover {
   background-color: #f0f0f0; /* Optional: Change background on hover */
 }
-.footer-item.contact-section {
+.footer-item.section {
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: start;
-  margin-right: 60px;
+  margin-right: 10%;
 }
 .copyright {
   color: black;

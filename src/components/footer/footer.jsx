@@ -4,9 +4,20 @@ import { Icon } from '@iconify/react';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      {/* Contact Section */}
-      <div className="footer-item contact-section">
+    <footer>
+      <div className='footer-item section'>
+        <span className="footer-heading">About </span>
+          <div className="contact-item">
+            <span className="footer-text">Company</span>
+          </div>
+          <div className="contact-item">
+            <span className="footer-text">Customers</span>
+          </div>
+          <div className="contact-item">
+            <span className="footer-text">Products</span>
+          </div>
+      </div>
+      <div className="footer-item section">
         <span className="footer-heading">Contact us</span>
         <div className="contact-item">
             <Icon icon="material-symbols:mail" className="footer-icon" />
@@ -22,8 +33,8 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Social Media + App Section (grouped in one column) */}
-      <div className="footer-item social-app-section">
+      {/* Social Media + App Section */}
+      <div className="footer-item section">
         <div className="social-media-section">
           <span className="footer-heading">Follow us on social media</span>
           <div className="social-icons">
@@ -51,9 +62,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <h1 className='copyright'>@Copyright</h1>
+      <h1 className='copyright'>@Project</h1>
     </footer>
-  );
+    );
 };
-
 export default Footer;

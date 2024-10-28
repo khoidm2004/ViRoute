@@ -7,6 +7,7 @@
   width: 100%;
   min-height: 100%;
   flex: 1;
+  flex-grow: 1;
 }
 
 .login-container {
@@ -21,7 +22,6 @@
   background-color: rgba(60, 177, 41, 0.3);
   border: none;
   border-radius: 20px;
-  margin-bottom: 30px;
 }
 .button {
   display: flex;
@@ -48,16 +48,6 @@
   font-weight: bold;
   color: black;
   margin-bottom: 10px;
-}
-.turn-back {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  top: 20px;
-  left: 20px;
-  gap: 10px;
 }
 .repass-text {
   color: black;
@@ -94,6 +84,8 @@
 }
 .logo-login {
   cursor: pointer;
-  width: 120px;
   height: auto;
+  position: absolute;
+  left: 10px;
+  top: 20px;
 }

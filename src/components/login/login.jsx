@@ -36,29 +36,30 @@ const Login = () => {
     navigate(page);
 };
   return (
-    <div className='login-page'>
-      <div className='turn-back'>
+    <body>
+      <div className='login-page'>
         <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage('/')}/>
+        <form className='login-container'>
+          <label className='header'>Login</label>
+          <label className='text'>Email:</label>
+          <input type='email' className='input-field' placeholder='Email'/>
+          <label className='text'>Password:</label>
+          <HidePassLogin
+            values={values}
+            handleClickShowPassword={handleClickShowPassword}
+            handleMouseDownPassword={handleMouseDownPassword}
+            handlePasswordChange={handlePasswordChange}
+          />
+          <label className='repass-text' onClick={handleRepass}>Forgot your password?</label>
+          <input type='button' className='button' value="Login" onClick={handleLogin} />
+          <label className='reg-text' onClick={() => changepage('/register')}>Create new account</label>
+        </form>
+        <Popup_repass isOpen={isRepass} closePopup={closeRepass} />
+        <LoginSuccessNotify />
       </div>
-      <form className='login-container'>
-        <label className='header'>Login</label>
-        <label className='text'>Email:</label>
-        <input type='email' className='input-field' placeholder='Email'/>
-        <label className='text'>Password:</label>
-        <HidePassLogin
-          values={values}
-          handleClickShowPassword={handleClickShowPassword}
-          handleMouseDownPassword={handleMouseDownPassword}
-          handlePasswordChange={handlePasswordChange}
-        />
-        <label className='repass-text' onClick={handleRepass}>Forgot your password?</label>
-        <input type='button' className='button' value="Login" onClick={handleLogin} />
-        <label className='reg-text' onClick={() => changepage('/register')}>Create new account</label>
-      </form>
-      <Popup_repass isOpen={isRepass} closePopup={closeRepass} />
-      <LoginSuccessNotify />
       <Footer/>
-    </div>
+    </body>
+
   );
 };
 
