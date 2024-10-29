@@ -52,7 +52,7 @@ const Login = () => {
           />
           <label className='repass-text' onClick={handleRepass}>Forgot your password?</label>
           <input type='button' className='button' value="Login" onClick={handleLogin} />
-          <label className='reg-text' onClick={() => changepage('/register')}>Create new account</label>
+          <label className='reg-text' onClick={() => changepage('/register')}>Don't have an account? Create new account</label>
         </form>
         <Popup_repass isOpen={isRepass} closePopup={closeRepass} />
         <LoginSuccessNotify />

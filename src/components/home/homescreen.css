@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   background-color: white;
 }
 
@@ -22,14 +22,13 @@
 }
 
 .search {
-  width: 550px;
+  width: 600px;
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius: 28px;
+  border-radius: 20px;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
   flex-grow: 1; /* Allow inputs to grow equally */
 }
 
@@ -48,30 +47,22 @@
   font-size: 36px;
   cursor: pointer;
   color: #555;
-  margin: 0 50px;
+  margin: 20px 0;
 }
 
 /* Search Button */
 .search-btn {
-  background-color: rgba(60, 177, 41, 1);
-  color: white;
-  height: 42px;
-  padding: 0 30px;
-  border-radius: 20px;
-  font-size: 14px;
+  background: #ffffff;
+  margin: 50px;
+  border: none;
+  outline: None;
   cursor: pointer;
-  align-self: center;
-  margin-left: 30px;
 }
 
-.options {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start; /* Align items to the left */
-  width: 100%;
-  max-width: 600px;
-  margin-top: 20px;
+.search-btn--find{  
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-radius: 20px;
 }
 
 .departure-option {
@@ -80,10 +71,11 @@
   margin-bottom: 20px;
 }
 
-.departure-option label {
-  margin-left: 10px;
+.departure-text{
   font-size: 16px;
   color: black;
+  font-family: Arial, sans-serif;
+  margin-left: 10px;
 }
 
 .favorite-btn {
@@ -100,8 +92,10 @@
   cursor: pointer;
 }
 
-.favorite-btn .option-icon {
-  margin-right: 10px;
+.addfav-text{
+  font-size: 16px;
+  color: black;
+  font-family: Arial, sans-serif;
 }
 
 /* Divider Styling */

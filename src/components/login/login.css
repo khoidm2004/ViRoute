@@ -50,6 +50,7 @@
   margin-bottom: 10px;
 }
 .repass-text {
+  font-size: 18px;
   color: black;
   text-decoration: underline;
   text-align: left;
@@ -58,8 +59,7 @@
 }
 .reg-text {  /*create new acc text*/
   font-size: 18px;
-  color: black;
-  font-style: italic;
+  color: black; 
   margin-top: 10px;
   cursor: pointer;
 }
