@@ -1,0 +1,104 @@
+.taskbar {
+  display: flex;
+  background-color: #ffffff;
+  padding: 0px;
+  height: 60px;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+.taskbar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 35px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .icon {
+    font-size: 26px;
+    color:rgba(0, 0, 0, 0.5);
+    align-items: center
+  }
+  .icon-text {
+    font-size: 13px;
+    color:rgba(0, 0, 0, 0.5);
+    font-family: Roboto, sans-serif;
+  }
+  .logo{
+    height:60px;
+    margin:0;
+    padding:0;
+    pointer-events: none;
+  }
+  .taskbar-item.login-reg {
+    position: absolute; /*position it freely*/
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    height: 60px;
+    width: 125px; 
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    padding:0;
+  }
+  .login-content {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index: 1;
+  }
+  .login-background::before{
+    color: rgba(60, 177, 41);
+    width:100%;
+    height:100%;
+    z-index: 0;
+  }
+  .login-icon { 
+    font-size: 50px;
+    color:rgba(0, 0, 0);;
+  }
+  .login-text {
+    font-size: 20px;
+    color: rgba(0, 0, 0);
+  }
+  .city-text{
+    font-size: 30px;
+    color: rgba(0, 0, 0);
+    margin: auto; 
+    white-space: nowrap;
+    padding: 0px;
+  }
+.taskbar-item:hover .icon,
+.taskbar-item:hover .icon-text,
+.taskbar-item:active .icon,
+.taskbar-item:active .icon-text {
+  color: rgba(60, 177, 41) /*color figma in rbg*/
+}
+
+/*(Phone) Styles for devices with a maxium screen width of 360px
+    px này lấy trên mạng, idk px cụ thể nào phù hợp*/
+@media only screen and (max-width: 480px){
+  .my_element {
+    display: none; /*hide element on small scr*/
+  }
+}
+/*medium-sized screen*/
+@media only screen and (min-width:480px) and (max-width: 1024px){
+  .taskbar-item {
+    display: block;
+  }
+}
+@media only screen and (orientation: portrait) {}
+@media only screen and (orientation: landscape) {}

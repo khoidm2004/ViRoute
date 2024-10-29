@@ -1,0 +1,126 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  max-width: 380px; /*can change for responsive*/
+  padding: 20px 40px 20px 40px; /*top right bottom left*/
+  position: relative;
+  background-color: rgba(60, 177, 41, 0.3);
+  border: none;
+  border-radius: 20px
+}
+.button {
+  display: flex;
+  padding: 15px;
+  width: 35%;
+  background-color: #5F8F55;
+  font-size: 20px;
+  border: none;
+  border-radius: 40px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.text {
+  width: 80%;
+  font-size: 25px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: black;
+}
+.header {
+  width: 100%;
+  font-size: 35px;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+}
+.turn-back {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  top: 20px;
+  left: 20px;
+  gap: 10px;
+}
+.repass-text {
+  color: black;
+  text-decoration: underline;
+  text-align: left;
+  width: 80%;
+  cursor: pointer;
+}
+.reg-text {  /*create new acc text*/
+  font-size: 18px;
+  color: black;
+  font-style: italic;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.input-field{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+  font-size: 25px; /*text size*/
+  padding: 20px; 
+  background-color: white;
+  color:black;
+  outline:none;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
+.input-field::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 25px;
+}
+.back-icon {
+  color:black;
+  cursor: pointer;
+  width: 40px; 
+  height: auto;
+}
+.logo-login {
+  pointer-events: none;
+  width: 120px;
+  height: auto;
+}
+.register-text {
+  width: 80%;
+  font-size: 20px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: black;
+}
+.reg-input-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px; /*text size*/
+  padding: 20px; 
+  background-color: white;
+  color:black;
+  outline:none;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
+.reg-input-field::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+}
