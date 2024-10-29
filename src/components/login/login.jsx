@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './login.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LoginSuccessNotify, { triggerLoginSuccessNotification } from '../notification/noti-login.jsx';
 import Popup_repass from '../repass/repass.jsx';
 import HidePassLogin from '../hidepass/hidePassLogin.jsx'; 
@@ -8,6 +8,7 @@ import Footer from '../footer/footer.jsx';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { cityCode } = useParams();
   const [isRepass, setIsRepass] = useState(false);
   const [values, setValues] = useState({
     password: "",
@@ -38,7 +39,7 @@ const Login = () => {
   return (
     <body>
       <div className='login-page'>
-        <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage('/')}/>
+        <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage(`/${cityCode}/`)}/>
         <form className='login-container'>
           <label className='header'>Login</label>
           <label className='text'>Email:</label>

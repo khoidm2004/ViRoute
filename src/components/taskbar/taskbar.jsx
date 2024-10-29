@@ -16,7 +16,7 @@ const Taskbar = () => {
     ];
     useEffect(() => {
         if (location.pathname === '/') {
-            navigate('/hn/tracking');
+            navigate('/hn');
         } else if (location.pathname.startsWith('/hn')) {
             setCityCode('hn');
         } else if (location.pathname.startsWith('/hcm')) {
@@ -67,7 +67,7 @@ const Taskbar = () => {
             <div className="city-text">
                 <span>{cityCode === 'hn' ? 'Hanoi' : 'Ho Chi Minh'}</span>
             </div>
-            <div className='taskbar-item login-reg' onClick={() => navigate(`/${cityCode}/login`)}>
+            <div className='taskbar-item login-reg' onClick={() => navigate(`/login`)}>
                 <span className='login-content'>
                     <Icon icon="material-symbols:account-circle" className='login-icon'/>
                     <span className='login-text'>Login/ Sign up</span>
