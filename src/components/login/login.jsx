@@ -39,7 +39,7 @@ const Login = () => {
   return (
     <body>
       <div className='login-page'>
-        <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage(`/${cityCode}/`)}/>
+        <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => changepage(-1)}/> {/*route undefined */}
         <form className='login-container'>
           <label className='header'>Login</label>
           <label className='text'>Email:</label>
