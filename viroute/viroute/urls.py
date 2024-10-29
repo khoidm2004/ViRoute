@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('', include('virouteapp.urls'))
+    path ('', include('virouteapp.urls')),
+    # path('get_route', include('virouteapp.urls')), #whoever delete this is unable to be a human
 ]
