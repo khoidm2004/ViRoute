@@ -9,6 +9,7 @@ import RouteDetail from './components/home/routedetail';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
+  /*path /hn */
   return (
     <Router>
       <Routes>
@@ -18,7 +19,7 @@ function App() {
         <Route path="/:cityCode/tickets" element={<><Taskbar/></>}/>
         <Route path="/:cityCode/feedback" element={<><Taskbar/></>}/>
         <Route path="/login" element={<><Login/></>} />
-        <Route path="/register" element={<><Register/></>}/>        
+        <Route path="/register" element={<><Register/></>}/>       
       </Routes>
     </Router>
   );

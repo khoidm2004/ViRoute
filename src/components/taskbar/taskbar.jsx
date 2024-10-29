@@ -15,15 +15,13 @@ const Taskbar = () => {
         { code: 'hn', name: 'Hanoi' },
     ];
     useEffect(() => {
-        // Set default route if no specific path is defined
         if (location.pathname === '/') {
-            navigate('/hn/tracking');
+            navigate('/hn');
         } else if (location.pathname.startsWith('/hn')) {
             setCityCode('hn');
         } else if (location.pathname.startsWith('/hcm')) {
             setCityCode('hcm');
         }
-        // Set active item based on route
         if (location.pathname.endsWith('/tracking')) setActiveItem('Tracking');
         else if (location.pathname.endsWith('/tickets')) setActiveItem('Tickets');
         else if (location.pathname.endsWith('/feedback')) setActiveItem('Feedback');

@@ -6,7 +6,6 @@
   min-height: 100vh;
   background-color: white;
   flex-grow: 1;
-  overflow-y: auto;
 }
 
 .register-container {
