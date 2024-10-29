@@ -33,11 +33,7 @@ const Homescreen = () => {
             className="search-input"
           />
         </div>
-        <Icon
-          icon="material-symbols:swap-vert"
-          className='swap-icon'
-          onClick={handleSwap}
-        />
+        <Icon icon="eva:swap-fill" className='swap-icon' onClick={handleSwap}/>
         <div className="search">
           <Icon icon="material-symbols:search" className='icon' />
           <input
@@ -48,20 +44,19 @@ const Homescreen = () => {
             className="search-input"
           />
         </div>
-        <Button variant="contained" className="search-btn" onClick={() => findbusroute(start, destination)}>Find</Button>
+        <Button class="search-btn--find" type="button" onClick={() => findbusroute(start, destination)}>Find</Button>
       </div>
-      <div className='options'>
-        <div className="departure-option">
-          <Icon icon="mage:clock" className="option-icon" />
-          <label htmlFor="departureNow">Departure now?</label>
-        </div>
-        <button className="favorite-btn">
-          <Icon icon="ic:outline-plus" className="option-icon" />
-          Add favourite place
-        </button>
+      <div className="departure-option">
+        <Icon icon="mage:clock" className="option-icon" />
+        <span className='departure-text'>Departure now?</span>
       </div>
+      <button className="favorite-btn">
+        <Icon icon="ic:outline-plus" className="option-icon" />
+        <span className='addfav-text'>Add favourite place</span>
+      </button>
       <div className="divider" />
     </div>
+
   );
 };
 
