@@ -1,50 +1,77 @@
-
-.home-route {
+.route-detail-container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+}
+
+.sidebar {
+    width: 400px;
+    height: auto;
+    background-color: #f9f9f9;
+    position: fixed;
+    top: 60px;
+    left: 0;
     padding: 20px;
-    background-color: red;
-    margin-left: 0; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-route {
+.route-info {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start; 
-    width: 100%; 
-    margin: 0; 
+    gap: 20px;
 }
 
-.search-field {
-    width: 100%; 
+.input-box {
     display: flex;
     align-items: center;
-    padding: 10px;
-    border-radius: 28px;
-    background: #ffffff;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-}
-
-.icon-route {
-    font-size: 26px;
-    color: rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .input-route {
-    font-size: 16px;
-    margin-left: 10px;
-    outline: none;
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #ffffff; /* Ensures the input field is white */
+    color: black;
     border: none;
-    background: transparent;
+    outline: none;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-left: var(--padding);
 }
 
-.swap-icon {
-    font-size: 36px;
-    cursor: pointer;
-    color: #555;
-    margin: 0 10px; /* Adjusts spacing to keep it near input fields */
+.icon-left {
+    color: #9e9e9e;
+    font-size: 26px;
+    margin-right: 10px;
 }
+
+.icon-right {
+    color: #9e9e9e;
+    font-size: 26px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.departure-box {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+    color: #000000;
+    font-size: 14px;
+}
+
+.departure-icon {
+    font-size: 26px;
+    color: rgba(0, 0, 0);
+    align-items: center;
+}
+
+.departure-text {
+    font-size: 16px;
+    color: black;
+    font-family: Arial, sans-serif;
+    margin-left: 10px;
+  }

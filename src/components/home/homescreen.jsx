@@ -46,16 +46,14 @@ const Homescreen = () => {
           </div>
           <Button class="search-btn--find" type="button" onClick={() => findbusroute(start, destination)}>Find</Button>
         </div>
-        <div className="options-container">
-          <div className="departure-option">
-            <Icon icon="mage:clock" className="option-icon" />
-            <span className='departure-text'>Departure now?</span>
-          </div>
-          <button className="favorite-btn">
-            <Icon icon="ic:outline-plus" className="option-icon" />
-            <span className='addfav-text'>Add favourite place</span>
-          </button>
+        <div className="departure-option">
+          <Icon icon="mage:clock" className="option-icon" />
+          <span className='departure-text'>Departure now?</span>
         </div>
+        <button className="favorite-btn">
+          <Icon icon="ic:outline-plus" className="option-icon" />
+          <span className='addfav-text'>Add favourite place</span>
+        </button>
       <div className="divider" />
     </div>
   );
