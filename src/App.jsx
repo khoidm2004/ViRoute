@@ -6,6 +6,7 @@ import Login from './components/login/login';
 import Register from './components/register/register';
 import Homescreen from './components/home/homescreen';
 import RouteDetail from './components/home/routedetail';
+import Map from './components/map';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/:cityCode/feedback" element={<><Taskbar/></>}/>
         <Route path="/login" element={<><Login/></>} />
         <Route path="/register" element={<><Register/></>}/>       
+        <Route path="/map" element={<Map/>}/>
       </Routes>
     </Router>
   );
