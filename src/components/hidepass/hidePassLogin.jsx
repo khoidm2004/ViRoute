@@ -7,7 +7,7 @@ import Input from "@mui/material/Input";
 import './hidePass.css'
 
 const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPassword, handlePasswordChange }) => {
-  const inputRef = useRef(null); // Create a ref for the input
+  const inputRef = useRef(null); //ref for the input
 
   const handleTogglePasswordVisibility = () => {
     const currentPos = inputRef.current.selectionStart; // Get current cursor position
@@ -17,7 +17,7 @@ const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPasswor
     // Wait for the state to update and re-render, then set the caret position
     setTimeout(() => {
       if (inputRef.current) {
-        inputRef.current.setSelectionRange(currentPos, currentPos); // Restore the cursor position
+        inputRef.current.setSelectionRange(currentPos, currentPos); 
       }
     }, 0); 
   };
@@ -26,18 +26,18 @@ const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPasswor
     <Input
       placeholder="Password"
       sx={{
-        width: "80%",  // Control width of input field
-        fontSize: "25px",  // Control text size inside the input
-        padding: "10px",  // Add some padding to the input
+        width: "80%", 
+        fontSize: "25px",  
+        padding: "10px",  
         paddingLeft: "20px",
-        color: "#000czx",  // Input text color
-        '& input::placeholder': {  // Placeholder styling via Material-UI sx prop
+        color: "#000czx", 
+        '& input::placeholder': {  
           color: "#000",
-          opacity: 0.5,  // Placeholder text color
-          fontSize: "25px", // Placeholder text size
+          opacity: 0.5,  
+          fontSize: "25px", 
         },
-        backgroundColor: '#fff',  // Set background color of input field
-        borderRadius: "10px",  // Round the corners
+        backgroundColor: '#fff',  
+        borderRadius: "10px",  
       }}
       inputRef={inputRef} 
       type={values.showPassword ? "text" : "password"}

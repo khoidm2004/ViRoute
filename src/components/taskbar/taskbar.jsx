@@ -9,45 +9,41 @@ const Taskbar = () => {
     const [cityCode, setCityCode] = useState('hn'); // Default city set to Hanoi
     const navigate = useNavigate();
     const location = useLocation();
-    const currentRoute = location.pathname.split('/').slice(2).join('/');
     const cities = [
         { code: 'hcm', name: 'Ho Chi Minh' },
         { code: 'hn', name: 'Hanoi' },
     ];
     useEffect(() => {
         if (location.pathname === '/') {
-            navigate('/hn');
-        } else if (location.pathname.startsWith('/hn')) {
-            setCityCode('hn');
-        } else if (location.pathname.startsWith('/hcm')) {
-            setCityCode('hcm');
-        }
-        if (location.pathname.endsWith('/tracking')) setActiveItem('Tracking');
-        else if (location.pathname.endsWith('/tickets')) setActiveItem('Tickets');
-        else if (location.pathname.endsWith('/feedback')) setActiveItem('Feedback');
-        else setActiveItem('Home');
-    }, [location.pathname, navigate]);
+            setActiveItem('Home');
+        } else if (location.pathname === ('/tracking')) {
+            setActiveItem('Tracking');
+        } else if (location.pathname === ('/tickets')) {
+            setActiveItem('Tickets');
+        } else if (location.pathname === ('/feedback')) {
+            setActiveItem('Feedback');
+        }}
+        );
     const handleCityChange = (code) => {
         setCityCode(code);
         setShowCities(false);
-        navigate(`/${code}/${currentRoute}`);
     };
     return (
         <div className="taskbar">
             <img className="logo" src="../images/ViRoute_white.png" alt="Logo" />
-            <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => navigate(`/${cityCode}/`)}>
+            <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => navigate(`/`)}>
                 <Icon icon="subway:home-1" className='icon' />
                 <span className='icon-text'>Home</span>
             </div>
-            <div className={`taskbar-item ${activeItem === 'Tracking' ? 'active' : ''}`} onClick={() => navigate(`/${cityCode}/tracking`)}>
+            <div className={`taskbar-item ${activeItem === 'Tracking' ? 'active' : ''}`} onClick={() => navigate(`/tracking`)}>
                 <Icon icon="mdi:sign-direction-plus" className='icon' />
                 <span className='icon-text'>Tracking</span>
             </div>
-            <div className={`taskbar-item ${activeItem === 'Tickets' ? 'active' : ''}`} onClick={() => navigate(`/${cityCode}/tickets`)}>
+            <div className={`taskbar-item ${activeItem === 'Tickets' ? 'active' : ''}`} onClick={() => navigate(`/tickets`)}>
                 <Icon icon="heroicons:ticket-solid" className='icon'/>
                 <span className='icon-text'>Tickets</span>
             </div>
-            <div className={`taskbar-item ${activeItem === 'Feedback' ? 'active' : ''}`} onClick={() => navigate(`/${cityCode}/feedback`)}>
+            <div className={`taskbar-item ${activeItem === 'Feedback' ? 'active' : ''}`} onClick={() => navigate(`/feedback`)}>
                 <Icon icon="majesticons:phone" className='icon'/>
                 <span className='icon-text'>Feedback</span>
             </div>
