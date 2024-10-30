@@ -94,7 +94,7 @@
 .divider {
   width: 100%;
   height: 2px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0);
   margin: 40px 0;
 }
 
