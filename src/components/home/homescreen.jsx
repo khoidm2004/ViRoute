@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import './homescreen.css';
 import { Icon } from '@iconify/react';
 import { Button } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Homescreen = () => {
   const [start, setStart] = useState("");
   const [destination, setDestination] = useState("");
   const navigate = useNavigate();
-  const { cityCode } = useParams();
 
   const handleSwap = () => {
     const temp = start;
@@ -17,7 +16,7 @@ const Homescreen = () => {
   };
 
   const findbusroute = (start, destination) => {
-    const busroute = `/${cityCode}/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
+    const busroute = `/${encodeURIComponent(start)}/${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
 
