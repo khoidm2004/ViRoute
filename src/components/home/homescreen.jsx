@@ -17,14 +17,13 @@ const Homescreen = () => {
   };
 
   const findbusroute = (start, destination) => {
-    const busroute = `/${cityCode}/${encodeURIComponent(start)}${encodeURIComponent(destination)}`;
+    const busroute = `/${cityCode}/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
 
   return (
     <div className='home'>
-      <div className='information-container'>
-        <div className='information'>
+        <div className='information-container'>
           <div className="search">
             <Icon icon="material-symbols:search" className='icon' />
             <input
@@ -58,7 +57,6 @@ const Homescreen = () => {
             <span className='addfav-text'>Add favourite place</span>
           </button>
         </div>
-      </div>
       <div className="divider" />
     </div>
   );
