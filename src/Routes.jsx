@@ -6,14 +6,15 @@ import Register from './components/register/register';
 import Homescreen from './components/home/homescreen';
 import RouteDetail from './components/home/routedetail';
 import Map from './components/map/map';
+import Tracking from './components/tracking/tracking';
 import { Routes, Route} from 'react-router-dom';
 
 function AppRoutes() {
     return (
         <Routes>
           <Route path="/" element={<><Taskbar/><Homescreen/></>} />
-          <Route path="/:route" element={<><Taskbar/><RouteDetail /></>} />
-          <Route path="/tracking" element={<><Taskbar/></>}/>
+          <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
+          <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
           <Route path="/tickets" element={<><Taskbar/></>}/>
           <Route path="/feedback" element={<><Taskbar/></>}/>
           <Route path="/login" element={<><Login/></>} />
