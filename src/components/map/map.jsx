@@ -16,10 +16,10 @@ const MapEventsHandler = ({ setPosition }) => {
 };
 
 const Map = () => {
-  const [position, setPosition] = useState([51.505, -0.09]); // Default position
+  const [position, setPosition] = useState([21.0285, 105.8542]); // Default position
 
   return (
-    <MapContainer center={position} zoom={13} className="map-container">
+    <MapContainer center={position} zoom={50} className="map-container">
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

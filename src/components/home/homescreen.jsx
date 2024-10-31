@@ -22,6 +22,7 @@ const Homescreen = () => {
   };
 
   return (
+    <>
     <div className='home'>
         <div className='information-container'>
           <div className="search">
@@ -56,8 +57,10 @@ const Homescreen = () => {
           <span className='addfav-text'>Add favourite place</span>
         </button>
       <div className="divider" />
-      <Map/>
     </div>
+    <Map/>
+    </>
+    
   );
 };
 
