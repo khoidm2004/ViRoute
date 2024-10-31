@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useNavigate} from 'react-router-dom';
 import './routedetail.css';
+import '../map/map.css';
+import Map from '../map/map';
 
 const RouteDetail = () => {
     const [start, setStart] = useState('');
@@ -20,6 +22,7 @@ const RouteDetail = () => {
     };
 
     return (
+        <>
         <div className='route-detail-container'>
             <div className='sidebar'>
                 <div className='route-info'>
@@ -70,6 +73,9 @@ const RouteDetail = () => {
                 </div>
             </div>
         </div>
+
+    </>
+        
     );
 };
 
