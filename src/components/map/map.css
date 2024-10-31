@@ -1,6 +1,9 @@
 .map-container {
-    height: 100vh;
-    width: 100%;
-    border-radius: 2rem;
+    height: 60%; /* Adjust height as needed */
+    width: 100vw; /* Full width of the viewport */
+    position: absolute;
+    overflow: hidden; /* Prevent scrolling */
+    left: 0;
+    bottom: 0;
   }
   
