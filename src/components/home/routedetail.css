@@ -16,7 +16,18 @@
 .route-info {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px; /* Reduce or set to 0 to eliminate gap between items */
+    overflow-y: auto;
+    max-height: calc(100vh - 120px); /* Adjust to fit within the viewport */
+    padding-right: 10px; /* For scroll spacing */
+    
+    /* Hide scrollbar for WebKit-based browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.route-info::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
 }
 
 .input-box {
@@ -32,7 +43,7 @@
 .input-route {
     flex-grow: 1;
     padding: 10px;
-    background-color: #ffffff; /* Ensures the input field is white */
+    background-color: #ffffff;
     color: black;
     border: none;
     outline: none;
@@ -74,4 +85,21 @@
     color: black;
     font-family: Arial, sans-serif;
     margin-left: 10px;
-  }
+}
+
+/* Route item and divider styles */
+.route-item {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    margin: 5px 0;
+}
