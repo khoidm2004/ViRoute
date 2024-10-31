@@ -9,8 +9,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-block: 50px;
-  margin-bottom: 20px;
+  margin-block: 30px;
+  margin-bottom: 1px;
 }
 
 .search {
@@ -38,8 +38,8 @@
 .swap-icon {
   font-size: 36px;
   cursor: pointer;
-  color: #555;
-  margin: 20px 0;
+  color: black;
+  margin: 20px;
 }
 
 /* Search Button */
@@ -55,12 +55,13 @@
   background-color: #4CAF50;
   color: #ffffff;
   border-radius: 20px;
+  margin:20px;
 }
 
 .departure-option {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .departure-text {
