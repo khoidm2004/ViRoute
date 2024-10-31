@@ -19,6 +19,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
+    "react-leaflet-cluster": "^2.1.0",
     "react-router-dom": "^6.26.2",
     "react-toastify": "^10.0.6",
     "reactjs-popup": "^2.0.6"

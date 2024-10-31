@@ -3,6 +3,7 @@ import './homescreen.css';
 import { Icon } from '@iconify/react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Map from '../map/map.jsx';
 
 const Homescreen = () => {
   const [start, setStart] = useState("");
@@ -16,7 +17,7 @@ const Homescreen = () => {
   };
 
   const findbusroute = (start, destination) => {
-    const busroute = `/${encodeURIComponent(start)}/${encodeURIComponent(destination)}`;
+    const busroute = `/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
 
@@ -55,6 +56,7 @@ const Homescreen = () => {
           <span className='addfav-text'>Add favourite place</span>
         </button>
       <div className="divider" />
+      <Map/>
     </div>
   );
 };
