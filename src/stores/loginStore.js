@@ -3,7 +3,7 @@ import { create } from 'zustand';
 const useLoginStore = create((set) => ({
   email: '',
   password: '',
-  isLoggedIn: false,
+  isLoggedIn: true, /*default false*/ 
   error: null,
 
   setEmail: (email) => set({ email }),
