@@ -59,8 +59,9 @@ const Login = () => {
             values={{ password }}
             handlePasswordChange={(e) => setPassword(e.target.value)}
           />
-          {error && <p className='error'>{error}</p>}
+          {/*<label className='repass-text' {/*onClick={}}>Forgot your password?</label>*/}
           <input type='button' className='button' value="Login" onClick={handleLogin} />
+          <label className='reg-text' onClick={() => changepage('/register')}>Don't have an account? Create new account</label>
         </form>
         <Popup_repass />
         {showNotification && <LoginSuccessNotify />} {/* Conditionally render the notification */}
