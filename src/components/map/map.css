@@ -1,9 +1,16 @@
 .map-container {
-    height: 60%; /* Adjust height as needed */
-    width: 100vw; /* Full width of the viewport */
+    height: 67%; /* Adjust height as needed */
+    width: 100%; /* Full width of the viewport */
     position: absolute;
     overflow: hidden; /* Prevent scrolling */
     left: 0;
     bottom: 0;
   }
+  .map-routedetail {
+    right: 0;
+    height: 100%;
+    overflow: hidden;
+    width:50%;
+    position: absolute;
+}
   

@@ -58,7 +58,7 @@ const Homescreen = () => {
         </button>
       <div className="divider" />
     </div>
-    <Map/>
+    <Map className="map-container"/>
     </>
     
   );
