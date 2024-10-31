@@ -4,6 +4,11 @@
   justify-content: center;
 }
 
+.option-icon {
+  font-size: 26px;
+  color: rgba(0, 0, 0);
+}
+
 .information-container {
   display: flex;
   flex-direction: row;
@@ -38,7 +43,7 @@
 .swap-icon {
   font-size: 36px;
   cursor: pointer;
-  color: black;
+  color: #555;
   margin: 20px;
 }
 
