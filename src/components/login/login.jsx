@@ -64,8 +64,9 @@ const Login = () => {
         </form>
         <Popup_repass />
         {showNotification && <LoginSuccessNotify />} {/* Conditionally render the notification */}
-        <Footer />
+        
       </div>
+      <Footer />
     </body>
   );
 };
