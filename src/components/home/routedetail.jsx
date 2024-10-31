@@ -73,7 +73,7 @@ const RouteDetail = () => {
                 </div>
             </div>
         </div>
-
+        <Map className="map-container"/>
     </>
         
     );
