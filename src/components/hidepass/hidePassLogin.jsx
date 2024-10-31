@@ -4,17 +4,14 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility"; 
 import VisibilityOff from "@mui/icons-material/VisibilityOff"; 
 import Input from "@mui/material/Input"; 
-import './hidePass.css'
+import './hidePass.css';
 
 const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPassword, handlePasswordChange }) => {
-  const inputRef = useRef(null); //ref for the input
+  const inputRef = useRef(null);
 
   const handleTogglePasswordVisibility = () => {
-    const currentPos = inputRef.current.selectionStart; // Get current cursor position
-
-    handleClickShowPassword(); // Toggle password visibility
-
-    // Wait for the state to update and re-render, then set the caret position
+    const currentPos = inputRef.current.selectionStart;
+    handleClickShowPassword();
     setTimeout(() => {
       if (inputRef.current) {
         inputRef.current.setSelectionRange(currentPos, currentPos); 
@@ -30,7 +27,7 @@ const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPasswor
         fontSize: "25px",  
         padding: "10px",  
         paddingLeft: "20px",
-        color: "#000czx", 
+        color: "#000", 
         '& input::placeholder': {  
           color: "#000",
           opacity: 0.5,  
@@ -41,12 +38,11 @@ const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPasswor
       }}
       inputRef={inputRef} 
       type={values.showPassword ? "text" : "password"}
-      onChange={handlePasswordChange("password")}
+      onChange={handlePasswordChange}
       value={values.password}
       endAdornment={
         <InputAdornment position="end">
           <IconButton
-            className="input-adornment-icon" 
             onClick={handleTogglePasswordVisibility}
             onMouseDown={handleMouseDownPassword}
           >
