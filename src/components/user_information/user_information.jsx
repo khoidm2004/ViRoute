@@ -20,6 +20,7 @@ function UserInformation() {
     setPhone,
   } = useUserInformationStore();
 
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -57,7 +58,7 @@ function UserInformation() {
           {activeTab === 'general' && (
             <div className="general-tab">
               <div className="balance-avatar-container">
-                <div className="avatar-section">
+                <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
                     <img src={avatar} alt="Avatar" />
                   </div>
@@ -68,11 +69,11 @@ function UserInformation() {
                     accept="image/png"
                     onChange={handleFileChange}
                   />
-                  <button className="upload-button" onClick={handleUploadClick}>
-                    Upload new photo
-                  </button>
                 </div>
-                <div className="balance">
+                <div className="top-text">
+                  ID: {userId}
+                </div>
+                <div className="top-text">
                   <label>Balance: 100 Euro</label>
                 </div>
               </div>

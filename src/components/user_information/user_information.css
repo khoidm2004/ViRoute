@@ -85,8 +85,10 @@
   /* Avatar Upload Section */
   .avatar-section {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    cursor: pointer; /* Make cursor a pointer to indicate clickable */
   }
   
   .avatar img {
@@ -94,34 +96,20 @@
     height: 60px;
     border-radius: 50%;
     border: 2px solid #ccc;
-    margin-right: 10px;
   }
   
   .upload-button {
-    background: none;
-    border: 1px solid rgba(60, 177, 41);
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 4px;
-    font-size: 14px;
-    color: rgba(60, 177, 41);
-    cursor: pointer;
-  }
-  
-  .upload-button:hover {
-    background-color: rgba(60, 177, 41);
-    color: white;
+    display: none; /* Hide the upload button */
   }
   
   /* Balance text styling */
-  .balance {
+  .top-text {
     width: 500px;
     color: #000;
     font-weight: bold;
     text-align: center;
-    margin-top: 20px; /* Space between avatar section and balance */
-    margin-bottom: 30px;
-    font-size: 25px;
+    margin-bottom: 10px;
+    font-size: 20px;
   }
   
   /* Ensuring uniform input box sizes and left-aligning labels */
