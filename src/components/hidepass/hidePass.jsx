@@ -45,7 +45,7 @@ const HidePass = ({ values, handleClickShowPassword, handleMouseDownPassword, ha
       value={values.password}
       endAdornment={
         <InputAdornment position="end">
-          <IconButton
+          <IconButton 
             className="input-adornment-icon" 
             onClick={handleTogglePasswordVisibility}
             onMouseDown={handleMouseDownPassword}

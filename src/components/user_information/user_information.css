@@ -154,4 +154,7 @@
   .save-button:hover {
     background-color: rgba(50, 150, 35);
   }
+  .current-password {
+    width: 80%
+  }
   
