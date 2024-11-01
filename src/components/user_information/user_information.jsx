@@ -9,6 +9,7 @@ function UserInformation() {
     setActiveTab,
     avatar,
     setAvatar,
+    userId,
     selectedFile,
     setSelectedFile,
     fullName,
@@ -70,7 +71,7 @@ function UserInformation() {
                   />
                 </div>
                 <div className="top-text">
-                  ID: {userId}
+                  ID: 123456487{userId}
                 </div>
                 <div className="top-text">
                   <label>Balance: 100 Euro</label>
