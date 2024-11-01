@@ -1,0 +1,169 @@
+/* Main container layout */
+.account-settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 1000px;
+    box-sizing: border-box;
+  }
+  
+  /* Header for Account Information */
+  .account-info-header {
+    align-self: flex-start;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Shadowed box for content, with fixed dimensions */
+  .settings-box {
+    display: flex;
+    width: 100%; /* Increased width */
+    max-width: 1000px; /* Wider max-width */
+    min-height: 600px; /* Fixed minimum height */
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  /* Tabs container for General and Change Password */
+  .tabs-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .tabs-container button {
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    color: #333;
+    transition: background-color 0.3s;
+  }
+  
+  .tabs-container button:hover,
+  .tabs-container button.active {
+    background-color: rgba(60, 177, 41);
+    color: white;
+  }
+  
+  /* Main content area styling with fixed dimensions */
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(100% - 200px); /* Take up remaining width after tabs */
+    max-width: 800px;
+    box-sizing: border-box;
+  }
+  
+  /* Balance and avatar section container */
+  .balance-avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  /* Avatar Upload Section */
+  .avatar-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar img {
+    width: 60px; /* Increased size for visibility */
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  .upload-button {
+    background: none;
+    border: 1px solid rgba(60, 177, 41);
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: rgba(60, 177, 41);
+    cursor: pointer;
+  }
+  
+  .upload-button:hover {
+    background-color: rgba(60, 177, 41);
+    color: white;
+  }
+  
+  /* Balance text styling */
+  .balance {
+    width: 500px;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px; /* Space between avatar section and balance */
+    margin-bottom: 30px;
+    font-size: 25px;
+  }
+  
+  /* Ensuring uniform input box sizes and left-aligning labels */
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    width: 120px; /* Fixed width for labels to align them left */
+    font-weight: bold;
+    color: #000; /* Black label text */
+    margin-right: 10px; /* Gap between label and input */
+    text-align: left;
+  }
+  
+  .form-group input {
+    flex: 1; /* Let input field take remaining space */
+    padding: 10px; /* Consistent padding */
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); /* Box shadow */
+  }
+  
+  /* Button styling for save button */
+  .save-button {
+    background-color: rgba(60, 177, 41);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+  
+  .save-button:hover {
+    background-color: rgba(50, 150, 35);
+  }
+  
