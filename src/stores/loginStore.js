@@ -11,8 +11,9 @@ const useLoginStore = create((set) => ({
   setPassword: (password) => set({ password }),
   setIsLoggedIn: (status) => set({ isLoggedIn: status }),
   setError: (error) => set({ error }),
-  setShowPassword: (status) => set({ showPassword: status }), // Function to set showPassword
-
+  setShowPassword: (status) => set({ showPassword: status }), 
+  togglePopupOpen: () => set((state) => ({ isPopupOpen: !state.isPopupOpen })),// Function to set showPassword
+  closePopup: () => set({ isPopupOpen: false }),
   login: async (email, password) => {
     try {
       const response = await fetch('https://your-api-url.com/login', {
