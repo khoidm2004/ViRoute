@@ -7,6 +7,7 @@ import Homescreen from './components/home/homescreen';
 import RouteDetail from './components/home/routedetail';
 import Map from './components/map/map';
 import Tracking from './components/tracking/tracking';
+import UserInformation from './components/user_information/user_information';
 import { Routes, Route} from 'react-router-dom';
 
 function AppRoutes() {
@@ -20,6 +21,7 @@ function AppRoutes() {
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
           <Route path="/map" element={<><Map/></>} />    
+          <Route path="/user_information" element={<><Taskbar/><UserInformation/></>} />
         </Routes>
     );
   };

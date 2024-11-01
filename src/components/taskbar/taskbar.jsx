@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const Taskbar = () => {
     const [activeItem, setActiveItem] = useState('');
     const [showCities, setShowCities] = useState(false);
-    const [cityCode, setCityCode] = useState('hn'); // Default city set to Hanoi
+    const [cityCode, setCityCode] = useState('hn'); 
     const navigate = useNavigate();
     const location = useLocation();
     const cities = [

@@ -15,7 +15,8 @@ const Tracking = () => {
     { number: '10', route: 'Some route 10' },
     { number: '11', route: 'Some route 11' },
     { number: '100', route: 'Some route 100' },
-    { number: '101', route: 'Some route 101' }
+    { number: '101', route: 'Some route 101' },
+    { number: '102', route: 'Some route 102' }
   ];
 
   const handleSearch = (event) => {

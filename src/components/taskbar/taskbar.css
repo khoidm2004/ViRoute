@@ -86,7 +86,7 @@
 .taskbar-item:hover .icon-text,
 .taskbar-item.active .icon,
 .taskbar-item.active .icon-text{
-  color: rgba(60, 177, 41); /*color figma in rbg*/
+  color: rgba(60, 177, 41);
 }
 .city-dropdown {
   position: absolute;
