@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import LoginSuccessNotify, { triggerLoginSuccessNotification } from '../notification/noti-login.jsx';
+import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
 import Popup_repass from '../repass/repass.jsx';
 import HidePassLogin from '../hidepass/hidePassLogin.jsx';
 import Footer from '../footer/footer.jsx';
@@ -9,6 +9,9 @@ import useLoginStore from '../../stores/loginStore';
 
 const Login = () => {
   const navigate = useNavigate();
+  const togglePopupOpen = useLoginStore((state) => state.togglePopupOpen);
+
+  const changepage = (page) => navigate(page);
   const {
     email,
     password,
@@ -25,18 +28,18 @@ const Login = () => {
     e.preventDefault();
     await login(email, password);
     if (isLoggedIn) {
-      triggerLoginSuccessNotification(); 
-      setShowNotification(true); 
-      navigate('/'); 
+      triggerSuccessNotification('Login Successful!');
+      setShowNotification(true);
+      navigate('/');
     }
   };
 
   useEffect(() => {
     if (showNotification) {
       const timer = setTimeout(() => {
-        setShowNotification(false); 
+        setShowNotification(false);
       }, 2000);
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [showNotification]);
 
@@ -59,13 +62,12 @@ const Login = () => {
             values={{ password }}
             handlePasswordChange={(e) => setPassword(e.target.value)}
           />
-          {/*<label className='repass-text' {/*onClick={}}>Forgot your password?</label>*/}
+          <label className='repass-text' onClick={togglePopupOpen}>Forgot your password?</label> {/* Open popup */}
           <input type='button' className='button' value="Login" onClick={handleLogin} />
           <label className='reg-text' onClick={() => changepage('/register')}>Don't have an account? Create new account</label>
         </form>
         <Popup_repass />
-        {showNotification && <LoginSuccessNotify />} {/* Conditionally render the notification */}
-        
+        {showNotification && <SuccessNotify />}
       </div>
       <Footer />
     </body>

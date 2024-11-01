@@ -7,10 +7,11 @@
     bottom: 0;
   }
   .map-routedetail {
+    top: 60px;
     right: 0;
-    height: 100%;
     overflow: hidden;
-    width:50%;
+    width: calc(100% - 440px); /* Full width minus the sidebar */
+    height: calc(100vh - 60px);
     position: absolute;
 }
   

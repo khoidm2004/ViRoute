@@ -1,29 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './homescreen.css';
 import { Icon } from '@iconify/react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Map from '../map/map.jsx';
+import useHomescreenStore from '../../stores/homeStore';
 
 const Homescreen = () => {
-  const [start, setStart] = useState("");
-  const [destination, setDestination] = useState("");
   const navigate = useNavigate();
+  const { start, destination, setStart, setDestination, swapLocations } = useHomescreenStore();
 
-  const handleSwap = () => {
-    const temp = start;
-    setStart(destination);
-    setDestination(temp);
-  };
-
-  const findbusroute = (start, destination) => {
+  const findbusroute = () => {
     const busroute = `/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
 
   return (
     <>
-    <div className='home'>
+      <div className='home'>
         <div className='information-container'>
           <div className="search">
             <Icon icon="material-symbols:search" className='icon' />
@@ -35,7 +29,7 @@ const Homescreen = () => {
               className="search-input"
             />
           </div>
-          <Icon icon="eva:swap-fill" className='swap-icon' onClick={handleSwap} />
+          <Icon icon="eva:swap-fill" className='swap-icon' onClick={swapLocations} />
           <div className="search">
             <Icon icon="material-symbols:search" className='icon' />
             <input
@@ -46,7 +40,7 @@ const Homescreen = () => {
               className="search-input"
             />
           </div>
-          <Button class="search-btn--find" type="button" onClick={() => findbusroute(start, destination)}>Find</Button>
+          <Button className="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
         </div>
         <div className="departure-option">
           <Icon icon="mage:clock" className="option-icon" />
@@ -56,11 +50,10 @@ const Homescreen = () => {
           <Icon icon="ic:outline-plus" className="option-icon" />
           <span className='addfav-text'>Add favourite place</span>
         </button>
-      <div className="divider" />
-    </div>
-    <Map className="map-container"/>
+        <div className="divider" />
+      </div>
+      <Map className="map-container"/>
     </>
-    
   );
 };
 

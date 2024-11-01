@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
-import './user_information.css'; // Link to your CSS file for styling
+// UserInformation.js
+import React from 'react';
+import './user_information.css';
+import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
+import useUserInformationStore from '../../stores/userinfoStore';
 
 function UserInformation() {
-  const [activeTab, setActiveTab] = useState('general');
-  const [avatar, setAvatar] = useState('../images/Default_avatar.png'); // Initial avatar URL
-  const [selectedFile, setSelectedFile] = useState(null); // State for selected file
-  const userId = "123435767"; // Example user ID
+  const {
+    activeTab,
+    setActiveTab,
+    avatar,
+    setAvatar,
+    selectedFile,
+    setSelectedFile,
+    fullName,
+    setFullName,
+    email,
+    setEmail,
+    phone,
+    setPhone,
+  } = useUserInformationStore();
 
-  const [fullName, setFullName] = useState('Thang'); // State for full name
-  const [email, setEmail] = useState('thang@mail.com'); // State for email
-  const [phone, setPhone] = useState('0123456789'); // State for phone
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setSelectedFile(file);
-      // Optionally, create a URL for the selected image to preview it
       setAvatar(URL.createObjectURL(file));
     }
   };
@@ -24,28 +33,23 @@ function UserInformation() {
     document.getElementById('fileInput').click();
   };
 
-  const handleInputChange = (setter) => (event) => {
-    setter(event.target.value);
+  const handleSaveChanges = () => {
+    triggerSuccessNotification('Profile updated successfully!');
+  };
+
+  const handleChangePassword = () => {
+    triggerSuccessNotification('Password changed successfully!');
   };
 
   return (
     <div className="account-settings-container">
-      {/* Account Information Header */}
       <h2 className="account-info-header">Account Information</h2>
-
-      {/* Main Content Wrapper with Shadow Box */}
       <div className="settings-box">
         <div className="tabs-container">
-          <button
-            className={activeTab === 'general' ? 'active' : ''}
-            onClick={() => setActiveTab('general')}
-          >
+          <button className={activeTab === 'general' ? 'active' : ''} onClick={() => setActiveTab('general')}>
             General
           </button>
-          <button
-            className={activeTab === 'changePassword' ? 'active' : ''}
-            onClick={() => setActiveTab('changePassword')}
-          >
+          <button className={activeTab === 'changePassword' ? 'active' : ''} onClick={() => setActiveTab('changePassword')}>
             Change Password
           </button>
         </div>
@@ -53,11 +57,10 @@ function UserInformation() {
         <div className="content">
           {activeTab === 'general' && (
             <div className="general-tab">
-              {/* Balance and Avatar Upload Section */}
               <div className="balance-avatar-container">
                 <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
-                    <img src={avatar} alt="Avatar" /> {/* Replace with user's avatar URL */}
+                    <img src={avatar} alt="Avatar" />
                   </div>
                   <input
                     type="file"
@@ -80,7 +83,7 @@ function UserInformation() {
                   type="text"
                   value={fullName}
                   placeholder="Enter your full name"
-                  onChange={handleInputChange(setFullName)}
+                  onChange={(e) => setFullName(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -89,7 +92,7 @@ function UserInformation() {
                   type="email"
                   value={email}
                   placeholder="Enter your email"
-                  onChange={handleInputChange(setEmail)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -98,10 +101,12 @@ function UserInformation() {
                   type="text"
                   value={phone}
                   placeholder="Enter your mobile phone"
-                  onChange={handleInputChange(setPhone)}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
-              <button className="save-button">Save changes</button>
+              <button className="save-button" onClick={handleSaveChanges}>
+                Save changes
+              </button>
             </div>
           )}
 
@@ -119,11 +124,14 @@ function UserInformation() {
                 <label>Repeat New Password</label>
                 <input type="password" placeholder="Repeat new password" />
               </div>
-              <button className="save-button">Change password</button>
+              <button className="save-button" onClick={handleChangePassword}>
+                Change password
+              </button>
             </div>
           )}
         </div>
       </div>
+      <SuccessNotify />
     </div>
   );
 }

@@ -1,31 +1,31 @@
-// LoginSuccessNotify.js
 import React from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const LoginSuccessNotify = () => {
+const SuccessNotify = ({ message }) => {
   const notifySuccess = () => {
-    toast.success('Login Successful!', {
+    toast.success(message, {
       position: "top-right",
-      autoClose: 3000, // Notification closes automatically after 3 seconds
+      autoClose: 1000, 
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored", // Can be light or dark theme too
+      theme: "colored", 
     });
   };
 
   return (
     <div>
-      <ToastContainer /> {/* Toast Container where notifications appear */}
+      <ToastContainer /> 
     </div>
   );
 };
 
-export const triggerLoginSuccessNotification = () => {
-  toast.success('Login Successful!', {
+
+export const triggerSuccessNotification = (message) => {
+  toast.success(message, {
     position: "top-right",
     autoClose: 3000,
     hideProgressBar: false,
@@ -37,4 +37,4 @@ export const triggerLoginSuccessNotification = () => {
   });
 };
 
-export default LoginSuccessNotify;
+export default SuccessNotify;

@@ -1,5 +1,6 @@
 .route-detail-container {
     display: flex;
+    flex-direction: row;
 }
 
 .sidebar {
