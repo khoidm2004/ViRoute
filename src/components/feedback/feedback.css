@@ -1,0 +1,57 @@
+.feedback-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px;
+    gap: 100px;    
+}
+
+.feedback-text {
+    width: 50%;
+    text-align: left;
+}
+
+.feedback-text h1 {
+    color: black;
+    margin-top: 60px;
+}
+
+.feedback-text h2 {
+    color: black;
+    font-weight: 400;
+}
+.feedback-form {
+    width: 50%;
+    margin-top: 60px;
+}
+
+.feedback-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-form label {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: start;
+}
+
+.feedback-form input {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+    color:black;
+}
+
+.feedback-form input::placeholder {
+    color: #aaa;
+    font-size: 14px;
+}
+.feedback-form button {
+    width: 30%;
+
+}

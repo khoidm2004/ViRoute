@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
 import useUserInformationStore from '../../stores/userinfoStore';
+import HidePass from '../hidepass/hidePass.jsx';
 
 function UserInformation() {
   const {
@@ -18,8 +19,18 @@ function UserInformation() {
     setEmail,
     phone,
     setPhone,
+    currentPassword,
+    newPassword,
+    confirmPassword,
+    setCurrentPassword,
+    setNewPassword,
+    setConfirmPassword,
+    resetPasswords,
   } = useUserInformationStore();
 
+  // Local state to manage password visibility
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -35,10 +46,16 @@ function UserInformation() {
 
   const handleSaveChanges = () => {
     triggerSuccessNotification('Profile updated successfully!');
+    // Additional save logic as needed
   };
 
   const handleChangePassword = () => {
-    triggerSuccessNotification('Password changed successfully!');
+    if (newPassword === confirmPassword) {
+      triggerSuccessNotification('Password changed successfully!');
+      resetPasswords(); // Reset password fields after success
+    } else {
+      alert('Passwords do not match!');
+    }
   };
 
   return (
@@ -71,7 +88,7 @@ function UserInformation() {
                   />
                 </div>
                 <div className="top-text">
-                  ID: 123456487{userId}
+                  ID: {userId}
                 </div>
                 <div className="top-text">
                   <label>Balance: 100 Euro</label>
@@ -114,15 +131,30 @@ function UserInformation() {
             <div className="change-password-tab">
               <div className="form-group">
                 <label>Current Password</label>
-                <input type="password" placeholder="Enter current password" />
+                <HidePass
+                  values={{ password: currentPassword, showPassword: false }}
+                  handlePasswordChange={(e) => setCurrentPassword(e.target.value)}
+                  handleClickShowPassword={() => {}}
+                  handleMouseDownPassword={(e) => e.preventDefault()}
+                />
               </div>
               <div className="form-group">
                 <label>New Password</label>
-                <input type="password" placeholder="Enter new password" />
+                <HidePass
+                  values={{ password: newPassword, showPassword: showNewPassword }}
+                  handlePasswordChange={(e) => setNewPassword(e.target.value)}
+                  handleClickShowPassword={() => setShowNewPassword(!showNewPassword)}
+                  handleMouseDownPassword={(e) => e.preventDefault()}
+                />
               </div>
               <div className="form-group">
                 <label>Repeat New Password</label>
-                <input type="password" placeholder="Repeat new password" />
+                <HidePass
+                  values={{ password: confirmPassword, showPassword: showConfirmPassword }}
+                  handlePasswordChange={(e) => setConfirmPassword(e.target.value)}
+                  handleClickShowPassword={() => setShowConfirmPassword(!showConfirmPassword)}
+                  handleMouseDownPassword={(e) => e.preventDefault()}
+                />
               </div>
               <button className="save-button" onClick={handleChangePassword}>
                 Change password
