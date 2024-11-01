@@ -39,6 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'virouteapp.apps.VirouteappConfig',
+    "rest_framework",
+    "rest_framework.authtoken",
+    'dj_rest_auth',
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.github",
+    "oauth2_provider",
+    'ViRoute',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'viroute.urls'
@@ -133,3 +143,34 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 OPENROUTE_API_KEY = '5b3ce3597851110001cf62481c184721ac24419cbc62a1f87c43d9dc' #whoever copy my api is the cuntest in the world, should be ashamed of themselves
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',  # Add authen 
+    ),
+}
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",  # Django default 
+    "allauth.account.auth_backends.AuthenticationBackend",  # Backend of allauth
+)
+
+REST_USE_JWT = True  # Bật JWT cho dj-rest-auth
+SITE_ID = 1  # Đảm bảo đã tạo Site với ID này trong admin của Django
+
+# Tắt xác minh email cho đơn giản hóa
+ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = "/"  # URL chuyển hướng sau đăng nhập thành công
+LOGOUT_REDIRECT_URL = "/"  # URL chuyển hướng sau khi đăng xuất
+
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        "APP": {
+            "client_id": "Ov23li5qLxiU0WU7GNJc",  # Thay YOUR_GITHUB_CLIENT_ID bằng client_id của bạn
+            "secret": "9643a077a202c2158e08dbb3fb4c42843c524032",  # Thay YOUR_GITHUB_SECRET_KEY bằng secret của bạn
+            "key": "",
+            "redirect_uri": "http://127.0.0.1:8000/callback",  # URL callback cho GitHub
+        }
+    }
+}
