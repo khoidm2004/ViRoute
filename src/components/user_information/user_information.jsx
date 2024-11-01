@@ -1,4 +1,3 @@
-// UserInformation.js
 import React from 'react';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
