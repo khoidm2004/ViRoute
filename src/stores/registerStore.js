@@ -17,7 +17,11 @@ const useRegisterStore = create((set) => ({
   setConfirmPassword: (confirmPassword) => set({ confirmPassword }),
   toggleShowPassword: () => set((state) => ({ showPassword: !state.showPassword })),
   toggleShowConfirmPassword: () => set((state) => ({ showConfirmPassword: !state.showConfirmPassword })),
-  triggerNotification: () => set({ showNotification: true }),
+  
+  triggerNotification: () => {
+    set({ showNotification: true });
+    setTimeout(() => set({ showNotification: false }), 2000); 
+  },
 
   resetForm: () => set({
     name: '',

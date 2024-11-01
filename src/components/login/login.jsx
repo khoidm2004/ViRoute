@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import LoginSuccessNotify, { triggerLoginSuccessNotification } from '../notification/noti-login.jsx';
+import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
 import Popup_repass from '../repass/repass.jsx';
 import HidePassLogin from '../hidepass/hidePassLogin.jsx';
 import Footer from '../footer/footer.jsx';
@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     await login(email, password);
     if (isLoggedIn) {
-      triggerLoginSuccessNotification();
+      triggerSuccessNotification('Login Successful!');
       setShowNotification(true);
       navigate('/');
     }
@@ -67,7 +67,7 @@ const Login = () => {
           <label className='reg-text' onClick={() => changepage('/register')}>Don't have an account? Create new account</label>
         </form>
         <Popup_repass />
-        {showNotification && <LoginSuccessNotify />}
+        {showNotification && <SuccessNotify />}
       </div>
       <Footer />
     </body>
