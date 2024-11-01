@@ -5,6 +5,7 @@ function UserInformation() {
   const [activeTab, setActiveTab] = useState('general');
   const [avatar, setAvatar] = useState('../images/Default_avatar.png'); // Initial avatar URL
   const [selectedFile, setSelectedFile] = useState(null); // State for selected file
+  const userId = "123435767"; // Example user ID
 
   const [fullName, setFullName] = useState('Thang'); // State for full name
   const [email, setEmail] = useState('thang@mail.com'); // State for email
@@ -54,7 +55,7 @@ function UserInformation() {
             <div className="general-tab">
               {/* Balance and Avatar Upload Section */}
               <div className="balance-avatar-container">
-                <div className="avatar-section">
+                <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
                     <img src={avatar} alt="Avatar" /> {/* Replace with user's avatar URL */}
                   </div>
@@ -65,11 +66,11 @@ function UserInformation() {
                     accept="image/png"
                     onChange={handleFileChange}
                   />
-                  <button className="upload-button" onClick={handleUploadClick}>
-                    Upload new photo
-                  </button>
                 </div>
-                <div className="balance">
+                <div className="top-text">
+                  ID: {userId}
+                </div>
+                <div className="top-text">
                   <label>Balance: 100 Euro</label>
                 </div>
               </div>
