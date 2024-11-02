@@ -1,3 +1,4 @@
+// user_information.jsx
 import React, { useState } from 'react';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
@@ -28,6 +29,10 @@ function UserInformation() {
     resetPasswords,
   } = useUserInformationStore();
 
+  // Local states to manage temp avatar and temp full name before saving
+  const [tempAvatar, setTempAvatar] = useState(avatar);
+  const [tempFullName, setTempFullName] = useState(fullName); // Temporary full name state
+
   // Local state to manage password visibility
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -36,7 +41,7 @@ function UserInformation() {
     const file = event.target.files[0];
     if (file) {
       setSelectedFile(file);
-      setAvatar(URL.createObjectURL(file));
+      setTempAvatar(URL.createObjectURL(file)); // Update temp avatar locally
     }
   };
 
@@ -45,6 +50,9 @@ function UserInformation() {
   };
 
   const handleSaveChanges = () => {
+    // Update the global avatar and fullName in the store
+    setAvatar(tempAvatar);
+    setFullName(tempFullName); // Update global store fullName
     triggerSuccessNotification('Profile updated successfully!');
     // Additional save logic as needed
   };
@@ -77,7 +85,7 @@ function UserInformation() {
               <div className="balance-avatar-container">
                 <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
-                    <img src={avatar} alt="Avatar" />
+                    <img src={tempAvatar} alt="Avatar" /> {/* Show temp avatar */}
                   </div>
                   <input
                     type="file"
@@ -98,9 +106,9 @@ function UserInformation() {
                 <label>Full Name</label>
                 <input
                   type="text"
-                  value={fullName}
+                  value={tempFullName} // Use tempFullName for input
                   placeholder="Enter your full name"
-                  onChange={(e) => setFullName(e.target.value)}
+                  onChange={(e) => setTempFullName(e.target.value)} // Update tempFullName locally
                 />
               </div>
               <div className="form-group">

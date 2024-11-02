@@ -1,8 +1,8 @@
 .map-container {
-    height: 67%; /* Adjust height as needed */
+    height: 65%; /* Adjust height as needed */
     width: 100%; /* Full width of the viewport */
     position: absolute;
-    overflow: hidden; /* Prevent scrolling */
+    align-items: center;
     left: 0;
     bottom: 0;
   }

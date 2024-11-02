@@ -13,6 +13,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
+
 .taskbar-item {
   display: flex;
   flex-direction: column;
@@ -23,74 +24,77 @@
   padding: 35px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .icon {
   font-size: 26px;
-  color:rgba(0, 0, 0, 0.5);
-  align-items: center
+  color: rgba(0, 0, 0, 0.5);
+  align-items: center;
 }
+
 .icon-text {
   font-size: 13px;
-  color:rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   font-family: Arial, fantasy;
 }
-.logo{
-  height:60px;
-  margin:0;
-  padding:0;
+
+.logo {
+  height: 60px;
+  margin: 0;
+  padding: 0;
   pointer-events: none;
 }
+
 .taskbar-item.login-reg {
-  position: absolute; /*position it freely*/
+  position: absolute;
   align-items: center;
   justify-content: center;
   right: 0;
   height: 60px;
-  width: 125px; 
-  display:flex;
-  align-items: center;
-  justify-content:center;
-  padding:0;
+  width: 125px;
+  display: flex;
+  padding: 0;
 }
+
 .login-content {
   display: flex;
   align-items: center;
   position: absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   z-index: 1;
 }
-.login-background::before{
-  color: rgba(60, 177, 41);
-  width:100%;
-  height:100%;
-  z-index: 0;
-}
+
 .login-icon { 
   font-size: 50px;
-  color:rgba(0, 0, 0);;
-}
-.login-text {
-  font-size: 20px;
   color: rgba(0, 0, 0);
 }
-.city-text{
+
+.login-text {
+  font-size: 18px;
+  color: rgba(0, 0, 0);
+  font-weight: normal;
+}
+
+.city-text {
   font-size: 30px;
   color: rgba(0, 0, 0);
   margin: auto; 
   white-space: nowrap;
   padding: 0px;
 }
+
 .taskbar-item:hover .icon,
 .taskbar-item:hover .icon-text,
 .taskbar-item.active .icon,
-.taskbar-item.active .icon-text{
+.taskbar-item.active .icon-text {
   color: rgba(60, 177, 41);
 }
+
 .city-dropdown {
   position: absolute;
-  top: 60px; /* Adjust based on Taskbar height */
+  top: 60px;
   background: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -107,16 +111,85 @@
 .city-option:hover {
   background-color: rgba(60, 177, 41, 0.1);
 }
-@media only screen and (max-width: 480px){
+
+/* User Profile Section */
+.taskbar-item.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  background-color: #3cb129;
+  cursor: pointer;
+  height: 60px;
+  width:125px;
+  position: absolute;
+  right: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Align text to the left within the container */
+}
+
+.welcome-text {
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+  line-height: 1; /* Adjust line height for closer alignment */
+}
+
+.user-name {
+  font-size: 14px;
+  color: black;
+  line-height: 1;
+}
+
+/* Updated User Dropdown */
+.user-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0; /* Align flush with the right edge */
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 200; /* Ensure dropdown appears above other elements */
+  width: 125px;
+}
+
+.user-dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #333;
+}
+
+.user-dropdown-item:hover {
+  background-color: rgba(60, 177, 41, 0.1);
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 480px) {
   .my_element {
-    display: none; /*hide element on small scr*/
+    display: none; /* Hide element on small screens */
   }
 }
-/*medium-sized screen*/
-@media only screen and (min-width:480px) and (max-width: 1024px){
+
+/* Medium-sized screen */
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
   .taskbar-item {
     display: block;
   }
 }
-@media only screen and (orientation: portrait) {}
-@media only screen and (orientation: landscape) {}
