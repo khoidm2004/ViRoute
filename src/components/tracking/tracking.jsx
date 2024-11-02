@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { Icon } from '@iconify/react';
 import './tracking.css';
+import '../map/map.css'; // Import map.css for map container styling
+import Map from '../map/map'; // Adjust the import path according to your project structure
 
 const Tracking = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBuses, setFilteredBuses] = useState([]);
+  const [activeBus, setActiveBus] = useState(null);
 
   const buses = [
     { number: '1', route: 'Gia Lam Bus Station - Yen Nghia Bus Station' },
@@ -30,6 +33,10 @@ const Tracking = () => {
     }
   };
 
+  const handleBusClick = (busNumber) => {
+    setActiveBus(activeBus === busNumber ? null : busNumber);
+  };
+
   const busesToDisplay = searchTerm ? filteredBuses : buses;
 
   return (
@@ -46,7 +53,17 @@ const Tracking = () => {
       </div>
       {busesToDisplay.map((bus, index) => (
         <React.Fragment key={bus.number}>
-          <div className='tracking-item'>Bus {bus.number}: {bus.route}</div>
+          <div
+            className={`tracking-item ${activeBus === bus.number ? 'active' : ''}`}
+            onClick={() => handleBusClick(bus.number)}
+          >
+            Bus {bus.number}: {bus.route}
+          </div>
+          {activeBus === bus.number && (
+            <div className="map-container-tracking active">
+              <Map className="map-container-tracking" />
+            </div>
+          )}
           {index < busesToDisplay.length - 1 && <div className="divider" />}
         </React.Fragment>
       ))}
