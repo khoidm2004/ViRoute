@@ -9,6 +9,7 @@ import Map from './components/map/map';
 import Tracking from './components/tracking/tracking';
 import Feedback from './components/feedback/feedback';
 import UserInformation from './components/user_information/user_information';
+import Tickets from './components/tickets/tickets';
 import { Routes, Route} from 'react-router-dom';
 
 function AppRoutes() {
@@ -17,7 +18,7 @@ function AppRoutes() {
           <Route path="/" element={<><Taskbar/><Homescreen/></>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
           <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
-          <Route path="/tickets" element={<><Taskbar/></>}/>
+          <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 

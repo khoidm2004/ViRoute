@@ -3,9 +3,10 @@ import { create } from 'zustand';
 const useLoginStore = create((set) => ({
   email: '',
   password: '',
-  isLoggedIn: true, // Default to false
+  isLoggedIn: false, // Default to false
   error: null,
-  showPassword: false, // State to manage password visibility
+  showPassword: false,
+  showNotification: false, 
 
   setEmail: (email) => set({ email }),
   setPassword: (password) => set({ password }),
@@ -14,6 +15,10 @@ const useLoginStore = create((set) => ({
   setShowPassword: (status) => set({ showPassword: status }), 
   togglePopupOpen: () => set((state) => ({ isPopupOpen: !state.isPopupOpen })),// Function to set showPassword
   closePopup: () => set({ isPopupOpen: false }),
+  triggerNotification: () => {
+    set({ showNotification: true });
+    setTimeout(() => set({ showNotification: false }), 2000); 
+  },
   login: async (email, password) => {
     try {
       const response = await fetch('https://your-api-url.com/login', {
@@ -33,6 +38,9 @@ const useLoginStore = create((set) => ({
       set({ error: 'An error occurred. Please try again later.' });
     }
   },
+  reset: () => set({
+    showNotification: false,
+  })
 }));
 
 export default useLoginStore;
