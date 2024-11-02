@@ -2,9 +2,9 @@ import React from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const SuccessNotify = ({ message }) => {
-  const notifySuccess = () => {
-    toast.success(message, {
+const ErrorNotify = ({ message }) => {
+  const notifyError = () => {
+    toast.error(message, {
       position: "top-right",
       autoClose: 1000, 
       hideProgressBar: false,
@@ -24,8 +24,8 @@ const SuccessNotify = ({ message }) => {
 };
 
 
-export const triggerSuccessNotification = (message) => {
-  toast.success(message, {
+export const triggerErrorNotification = (message) => {
+  toast.error(message, {
     position: "top-right",
     autoClose: 3000,
     hideProgressBar: false,
@@ -37,4 +37,4 @@ export const triggerSuccessNotification = (message) => {
   });
 };
 
-export default SuccessNotify;
+export default ErrorNotify;

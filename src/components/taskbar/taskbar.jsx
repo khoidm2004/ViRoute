@@ -10,7 +10,7 @@ const Taskbar = () => {
     const [showCities, setShowCities] = useState(false);
     const [cityCode, setCityCode] = useState('hn'); 
     const [showUserDropdown, setShowUserDropdown] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true); // State to track login status
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
     const navigate = useNavigate();
     const location = useLocation();
 

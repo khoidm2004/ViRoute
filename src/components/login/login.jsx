@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
+import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
 import Popup_repass from '../repass/repass.jsx';
 import HidePassLogin from '../hidepass/hidePassLogin.jsx';
 import Footer from '../footer/footer.jsx';

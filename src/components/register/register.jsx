@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
 import HidePass from '../hidepass/hidePass.jsx';
-import SuccessNotify from '../notification/noti.jsx';
+import SuccessNotify from '../notification/noti_success.jsx';
 import Footer from '../footer/footer.jsx';
 import useRegisterStore from '../../stores/registerStore';
 

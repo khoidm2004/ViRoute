@@ -1,7 +1,7 @@
 import React from 'react';
 import './feedback.css';
 import Footer from '../footer/footer.jsx';
-import SuccessNotify, { triggerSuccessNotification } from '../notification/noti.jsx';
+import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
 
 const Feedback = () => {
     const handleSend = () => {
