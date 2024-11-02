@@ -27,17 +27,18 @@ def get_route(request):
     start = request.GET.get('start')
     end = request.GET.get('end')
     url = f"https://api.openrouteservice.org/v2/directions/driving-car?
-            api_key=5b3ce3597851110001cf62481c184721ac24419cbc62a1f87c43d9dc&
-            start=105.883999,21.049659&end=105.855546,21.024705"
-# test location: [105.883999,21.049659],[105.855546,21.024705]
+            api_key=5b3ce3597851110001cf62481c184721ac24419cbc62a1f87c43d9dc&"
+# syntax: &start = {start} & end = {end}
+# test location: &start=105.883999,21.049659&end=105.855546,21.024705
     respond = requests.get(url) # Request API from this
-    
+
     if respond.status_code == 200:
         return JsonResponse(respond.json())
     else:
         return JsonResponse({'error': respond.status_code})
 
 
+# Github Login
 class GitHubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
     callback_url = "http://localhost:8000/accounts/github/login/callback/"
