@@ -20,28 +20,21 @@ const Login = () => {
     setEmail,
     setPassword,
     login,
+    showNotification,
+    triggerNotification,
   } = useLoginStore();
 
-  const [showNotification, setShowNotification] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await login(email, password);
-    if (isLoggedIn) {
-      triggerSuccessNotification('Login Successful!');
-      setShowNotification(true);
+    //await login(email, password);
+    //if (isLoggedIn) {  
+    triggerNotification();
+    setTimeout(() => {
       navigate('/');
-    }
+    }, 2000);
+    //}
   };
-
-  useEffect(() => {
-    if (showNotification) {
-      const timer = setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [showNotification]);
 
   return (
     <body>
@@ -67,7 +60,7 @@ const Login = () => {
           <label className='reg-text' onClick={() => changepage('/register')}>Don't have an account? Create new account</label>
         </form>
         <Popup_repass />
-        {showNotification && <SuccessNotify />}
+        {showNotification && <SuccessNotify message='Login Successful!'/>}
       </div>
       <Footer />
     </body>

@@ -1,0 +1,39 @@
+.ticket-page {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px;
+    margin-top: 60px;
+    gap: 10%;
+  }
+.download-container {
+    text-align: start;
+    width: 60%;
+    color: #000000;
+}
+.download-container h2 {
+    font-weight: 500;
+}
+.ticket-container {
+    width: 25%;
+  background-color: rgba(60, 177, 41, 0.3);
+  padding: 20px 50px 30px 50px;
+  border-radius: 10px;
+}
+.ticket-container h1 {
+    font-size: 40px;
+    color:black
+}
+.ticket-container h2 {
+    color: black;
+    font-size: 30px;
+    font-weight: 500;
+}
+.qr-code {
+  margin: 20px 0;
+}
+
+.countdown-timer {
+  font-size: 24px;
+  color: black;
+}
