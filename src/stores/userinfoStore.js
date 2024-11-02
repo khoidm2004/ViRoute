@@ -1,16 +1,20 @@
 // userinfoStore.js
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 const useUserInformationStore = create((set) => ({
   activeTab: 'general',
   setActiveTab: (tab) => set({ activeTab: tab }),
 
   avatar: '../images/Default_avatar.png',
-  setAvatar: (avatar) => set({ avatar }),
+  setAvatar: (newAvatar) => set({ avatar: newAvatar }),
 
   userId: '123456487',
   selectedFile: null,
   setSelectedFile: (file) => set({ selectedFile: file }),
+
+  // Temporary fields for unsaved changes
+  tempFullName: '', // Store temp full name here
+  setTempFullName: (name) => set({ tempFullName: name }),
 
   fullName: '',
   setFullName: (name) => set({ fullName: name }),
@@ -34,7 +38,10 @@ const useUserInformationStore = create((set) => ({
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
-  })
+  }),
+
+  // Function to apply temp full name to the main fullName
+  applyTempFullName: () => set((state) => ({ fullName: state.tempFullName })),
 }));
 
 export default useUserInformationStore;
