@@ -1,17 +1,25 @@
 .map-container {
-    height: 65%; /* Adjust height as needed */
-    width: 100%; /* Full width of the viewport */
-    position: absolute;
-    align-items: center;
-    left: 0;
-    bottom: 0;
-  }
-  .map-routedetail {
-    top: 60px;
-    right: 0;
-    overflow: hidden;
-    width: calc(100% - 440px); /* Full width minus the sidebar */
-    height: calc(100vh - 60px);
-    position: absolute;
+  height: 65%; /* Adjust height as needed */
+  width: 100%; /* Full width of the viewport */
+  position: absolute;
+  align-items: center;
+  left: 0;
+  bottom: 0;
 }
-  
+.map-routedetail {
+  top: 60px;
+  right: 0;
+  overflow: hidden;
+  width: calc(100% - 440px); /* Full width minus the sidebar */
+  height: calc(100vh - 60px);
+  position: absolute;
+}
+
+.map-container-tracking {
+  height: 400px; /* Adjust height as needed */
+  width: 100%; /* Ensure it takes full width of the tracking item */
+}
+
+.map-container-tracking.active {
+  display: block; /* Show map when active */
+}
