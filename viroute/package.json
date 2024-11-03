@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@react-leaflet/core": "^2.1.0",
-    "leaflet": "^1.9.4",
-    "react-leaflet": "^4.2.1",
-    "vite": "^5.4.9"
-  }
-}
