@@ -156,21 +156,21 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",  # Backend of allauth
 )
 
-REST_USE_JWT = True  # Bật JWT cho dj-rest-auth
-SITE_ID = 1  # Đảm bảo đã tạo Site với ID này trong admin của Django
+REST_USE_JWT = True  # Turn on JWT for dj-rest-auth
+SITE_ID = 1  # Make sure you have created a Site with this ID in Django admin
 
-# Tắt xác minh email cho đơn giản hóa
+# Turn off email verification for simplification
 ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_REDIRECT_URL = "/"  # URL chuyển hướng sau đăng nhập thành công
-LOGOUT_REDIRECT_URL = "/"  # URL chuyển hướng sau khi đăng xuất
+LOGIN_REDIRECT_URL = "/"  # Redirect URL after successful login
+LOGOUT_REDIRECT_URL = "/"  # Redirect URL after successful logout
 
 SOCIALACCOUNT_PROVIDERS = {
     "github": {
         "APP": {
-            "client_id": "Ov23li5qLxiU0WU7GNJc",  # Thay YOUR_GITHUB_CLIENT_ID bằng client_id của bạn
-            "secret": "9643a077a202c2158e08dbb3fb4c42843c524032",  # Thay YOUR_GITHUB_SECRET_KEY bằng secret của bạn
+            "client_id": "Ov23li5qLxiU0WU7GNJc",  # Client ID of GitHub
+            "secret": "9643a077a202c2158e08dbb3fb4c42843c524032",  # secret key of GitHub
             "key": "",
-            "redirect_uri": "http://127.0.0.1:8000/callback",  # URL callback cho GitHub
+            "redirect_uri": "http://127.0.0.1:8000/callback",  # URL callback for GitHub
         }
     }
 }
