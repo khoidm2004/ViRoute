@@ -81,3 +81,26 @@ DATABASES = {
     }
 }
 ```
+
+## For changing database table variables
+
+1. Delete the migrations folder in the app folder
+
+2. Delete the database
+
+    ```sql
+    DROP DATABASE viroute;
+    ```
+
+3. Make migrations
+
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+4. Apply data
+    
+    ```python
+    python run fake_data.py
+    ```
