@@ -43,7 +43,7 @@ class User(models.Model):
     phoneNumber = PhoneNumberField(unique=True, null=False, validators=[MinLengthValidator(10)],blank=False)
     userEmail = models.EmailField (max_length=100,unique=True,null=False,blank=False)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    citizenship = models.CharField(max_length=40,null=False,blank=False)
+    citizenship = models.CharField(max_length=100,null=False,blank=False)
     accounts = models.ManyToManyField(Account, through='AccountHasUser')
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
     dateofbirth = models.DateField(null=False, blank=False)
