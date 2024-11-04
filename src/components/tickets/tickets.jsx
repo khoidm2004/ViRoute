@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code'; // Use react-qr-code
 import './tickets.css'; 
 import { Icon } from '@iconify/react';
+import Footer from '../footer/footer';
 
 const TicketPage = () => {
   //const [timeLeft, setTimeLeft] = useState(300); // Countdown time in seconds (e.g., 5 minutes)
@@ -28,6 +29,7 @@ const TicketPage = () => {
   //}, []);
 //
   return (
+    <body>
     <div className="ticket-page">
         <div className='download-container'>
             <h1>VIROUTE APP</h1>
@@ -58,8 +60,9 @@ const TicketPage = () => {
             {/*  <p>{formatTime(timeLeft)}</p>*/}
             {/*</div>*/}
         </div>
-      
-    </div>
+      </div>
+      <Footer/>
+      </body>
   );
 };
 
