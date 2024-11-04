@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
     "oauth2_provider",
-    'ViRoute',
+    'viroute',
 ]
 
 MIDDLEWARE = [
