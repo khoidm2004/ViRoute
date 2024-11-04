@@ -4,7 +4,7 @@ import random
 import pandas as pd
 from faker import Faker
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "viroute.settings")
 django.setup()
 
 from virouteapp.models import Bus, Metro, Ticket, Account, User, UserTicket, AccountHasUser  
@@ -21,11 +21,17 @@ data = {
 }
 
 def create_fake_buses(num):
+    used_bus_ids = set()
     for _ in range(num):
+        while True:
+            bus_id = fake.unique.random_int(min=1, max=999999)
+            if bus_id not in used_bus_ids:
+                used_bus_ids.add(bus_id)
+                break
         bus = Bus.objects.create(
-            bus_id=fake.unique.random_int(min=1, max=999999),
+            bus_id=bus_id,
             route=fake.city(),
-            plate_number=fake.license_plate(),
+            plate_number=fake.unique.license_plate(),
         )
         data["Bus"].append({
             "bus_id": bus.bus_id,
@@ -34,11 +40,17 @@ def create_fake_buses(num):
         })
 
 def create_fake_metros(num):
+    used_metro_ids = set()
     for _ in range(num):
+        while True:
+            metro_id = fake.unique.random_int(min=1, max=999999)
+            if metro_id not in used_metro_ids:
+                used_metro_ids.add(metro_id)
+                break
         metro = Metro.objects.create(
-            metro_id=fake.unique.random_int(min=1, max=999999),
+            metro_id=metro_id,
             route=fake.city(),
-            plate_number=fake.license_plate(),
+            plate_number=fake.unique.license_plate(),
         )
         data["Metro"].append({
             "metro_id": metro.metro_id,
@@ -47,9 +59,15 @@ def create_fake_metros(num):
         })
 
 def create_fake_tickets(num):
+    used_ticket_ids = set()
     for _ in range(num):
+        while True:
+            ticket_id = fake.unique.random_int(min=1, max=9999)
+            if ticket_id not in used_ticket_ids:
+                used_ticket_ids.add(ticket_id)
+                break
         ticket = Ticket.objects.create(
-            ticketID=fake.unique.random_int(min=1, max=9999),
+            ticketID=ticket_id,
             departurePoint=fake.city(),
             destinationPoint=fake.city(),
             price=round(fake.random_number(digits=4) / 100, 2),  
@@ -72,9 +90,15 @@ def create_fake_tickets(num):
         })
 
 def create_fake_accounts(num):
+    used_account_ids = set()
     for _ in range(num):
+        while True:
+            account_id = fake.unique.random_int(min=1, max=9999)
+            if account_id not in used_account_ids:
+                used_account_ids.add(account_id)
+                break
         account = Account.objects.create(
-            accountID=fake.unique.random_int(min=1, max=9999),
+            accountID=account_id,
             paymentHistory=fake.text(max_nb_chars=200),
             purchaseHistory=fake.text(max_nb_chars=200),
             topUpHistory=fake.text(max_nb_chars=200),
@@ -89,14 +113,17 @@ def create_fake_accounts(num):
         })
 
 def create_fake_users(num):
+    used_user_ids = set()
     for _ in range(num):
-        date_of_birth = fake.date_of_birth(minimum_age=18, maximum_age=70)
-        formatted_dob = date_of_birth.strftime('%d%m%Y')
-        phone_number = fake.phone_number()
-        last_four_digits = phone_number[-4:]
-
-        user_id = f"{formatted_dob}{last_four_digits}"
-
+        while True:
+            date_of_birth = fake.date_of_birth(minimum_age=18, maximum_age=70)
+            formatted_dob = date_of_birth.strftime('%d%m%Y')
+            phone_number = fake.phone_number()
+            last_four_digits = phone_number[-4:]
+            user_id = f"{formatted_dob}{last_four_digits}"
+            if user_id not in used_user_ids:
+                used_user_ids.add(user_id)
+                break
         user = User.objects.create(
             userID=user_id,
             fullName=fake.name(),
@@ -118,14 +145,17 @@ def create_fake_users(num):
 def create_fake_user_tickets(num):
     users = list(User.objects.all())
     tickets = list(Ticket.objects.all())
+    created_entries = set()
 
     for _ in range(num):
         if not users or not tickets:
             break
-
-        user = random.choice(users)
-        ticket = random.choice(tickets)
-
+        while True:
+            user = random.choice(users)
+            ticket = random.choice(tickets)
+            if (user.userID, ticket.ticketID) not in created_entries:
+                created_entries.add((user.userID, ticket.ticketID))
+                break
         user_ticket = UserTicket.objects.create(
             user=user,
             ticket=ticket,
@@ -138,7 +168,7 @@ def create_fake_user_tickets(num):
 def create_fake_account_has_user(num):
     accounts = list(Account.objects.all())
     users = list(User.objects.all())
-    created_entries = set()  # To keep track of created (account, user) pairs
+    created_entries = set()
 
     for _ in range(num):
         if not accounts or not users:
@@ -146,20 +176,17 @@ def create_fake_account_has_user(num):
         while True:
             account = random.choice(accounts)
             user = random.choice(users)
-
-            # Check if this combination already exists
             if (account.accountID, user.userID) not in created_entries:
-                account_has_user = AccountHasUser.objects.create(
-                    account=account,
-                    user=user,
-                )
-                data["AccountHasUser"].append({
-                    "account": account.accountID,
-                    "user": user.userID,
-                })
-                created_entries.add((account.accountID, user.userID))  # Record the created combination
-                break  # Exit the while loop to go to the next iteration
-
+                created_entries.add((account.accountID, user.userID))
+                break
+        account_has_user = AccountHasUser.objects.create(
+            account=account,
+            user=user,
+        )
+        data["AccountHasUser"].append({
+            "account": account.accountID,
+            "user": user.userID,
+        })
 
 if __name__ == "__main__":
     create_fake_buses(5)      
@@ -169,3 +196,4 @@ if __name__ == "__main__":
     create_fake_users(10)      
     create_fake_user_tickets(10)  
     create_fake_account_has_user(10)  
+    #print(data)
