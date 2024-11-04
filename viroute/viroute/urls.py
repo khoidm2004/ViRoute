@@ -19,7 +19,7 @@ from virouteapp.views import GitHubLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('', include('virouteapp.urls')),
+    #path ('', include('virouteapp.urls')),
     path('auth/github/', GitHubLogin.as_view(), name='github_login')
     # path('get_route', include('virouteapp.urls')), #whoever delete this is unable to be a human
 ]
