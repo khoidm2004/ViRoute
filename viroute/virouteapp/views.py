@@ -9,6 +9,18 @@ from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 
+# Authen API
+import bcrypt
+import json
+from .models import User
+from .serializers import UserLoginSerializer
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+
+
 #Get route/ map API
 def get_route(request):
     start = request.GET.get('start')
@@ -48,3 +60,21 @@ class GitHubLogin(SocialLoginView):
             return JsonResponse({
                 'error': str(e),
             }, status=500)
+
+
+class UserLoginView(APIView):
+    def post(self, request):
+        serializer = UserLoginSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            return Response({
+                "message": "Login successful",
+                "user": {
+                    "userID": user.userID,
+                    "fullName": user.fullName,
+                    "userEmail": user.userEmail,
+                    "balance": str(user.balance)  
+                }
+            }, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
