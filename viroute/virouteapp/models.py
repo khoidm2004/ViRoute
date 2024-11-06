@@ -47,6 +47,7 @@ class User(models.Model):
     accounts = models.ManyToManyField(Account, through='AccountHasUser')
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
     dateofbirth = models.DateField(null=False, blank=False)
+    password = models.CharField(max_length=70,null=False,blank=False)
 
 class UserTicket(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
