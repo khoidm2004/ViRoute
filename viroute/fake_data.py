@@ -3,6 +3,8 @@ import django
 import random
 import pandas as pd
 from faker import Faker
+import bcrypt
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "viroute.settings")
 django.setup()
@@ -120,7 +122,11 @@ def create_fake_users(num):
             formatted_dob = date_of_birth.strftime('%d%m%Y')
             phone_number = fake.phone_number()
             last_four_digits = phone_number[-4:]
+            raw_password = fake.password()
+            hashed_password = bcrypt.hashpw(raw_password.encode('utf-8'), bcrypt.gensalt())
+            
             user_id = f"{formatted_dob}{last_four_digits}"
+            
             if user_id not in used_user_ids:
                 used_user_ids.add(user_id)
                 break
@@ -129,6 +135,7 @@ def create_fake_users(num):
             fullName=fake.name(),
             phoneNumber=phone_number,
             userEmail=fake.unique.email(),
+            password=hashed_password.decode('utf-8'),
             balance=round(fake.random_number(digits=4) / 100, 2), 
             citizenship=fake.country(),
             dateofbirth=date_of_birth,
@@ -140,6 +147,7 @@ def create_fake_users(num):
             "userEmail": user.userEmail,
             "balance": user.balance,
             "citizenship": user.citizenship,
+            "password": raw_password
         })
 
 def create_fake_user_tickets(num):
