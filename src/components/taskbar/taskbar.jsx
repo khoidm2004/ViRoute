@@ -20,7 +20,6 @@ const Taskbar = () => {
     ];
 
     useEffect(() => {
-        // Set active item based on the current route
         if (location.pathname === '/') setActiveItem('Home');
         else if (location.pathname === '/tracking') setActiveItem('Tracking');
         else if (location.pathname === '/tickets') setActiveItem('Tickets');

@@ -118,9 +118,7 @@ const Homescreen = () => {
               className="search-input"
             />
           </div>
-          <Button class="search-btn--find" type="button" onClick={findbusroute}>
-            Find
-          </Button>
+          <Button class="search-btn--find" type="button" onClick={findbusroute}>Find </Button>
         </div>
         <div className="departure-option" onClick={toggleTimeDropdown}>
           <Icon icon="mage:clock" className="option-icon" />
