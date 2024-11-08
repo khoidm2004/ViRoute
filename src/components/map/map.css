@@ -1,7 +1,7 @@
 .map-container {
-  height: 65%; /* Adjust height as needed */
+  height: 100%; /* Adjust height as needed */
   width: 100%; /* Full width of the viewport */
-  position: absolute;
+  position: relative;
   align-items: center;
   left: 0;
   bottom: 0;
