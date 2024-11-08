@@ -6,86 +6,110 @@
   background-color: white;
   width: 100%;
   min-height: 100%;
-  flex: 1;
-  flex-grow: 1;
 }
-
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  max-width: 380px; /*can change for responsive*/
-  padding: 20px 40px 20px 40px; /*top right bottom left*/
+  width: 70%;
+  max-width: 25rem; 
+  padding: 2rem 3rem; 
   position: relative;
   background-color: rgba(60, 177, 41, 0.3);
   border: none;
-  border-radius: 20px;
+  border-radius: 1.25rem; 
+  text-align: center;
 }
-.button {
+.login-button {
   display: flex;
-  padding: 15px;
-  width: 35%;
+  padding: 1rem 1.25rem; 
   background-color: #5F8F55;
-  font-size: 20px;
+  font-size: 1.25rem; 
   border: none;
-  border-radius: 40px;
-  margin-top: 20px;
+  border-radius: 2.5rem; 
+  margin-top: 1.25rem; 
   cursor: pointer;
 }
 .text {
   width: 80%;
-  font-size: 25px;
-  margin-bottom: 5px;
+  font-size: 1.25rem; 
+  margin-bottom: 0.3125rem; 
   text-align: left;
   color: black;
 }
 .header {
   width: 100%;
-  font-size: 35px;
+  font-size: 2.1875rem; 
   text-align: center;
   font-weight: bold;
   color: black;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem; 
 }
 .repass-text {
-  font-size: 18px;
+  font-size: 1.125rem; 
   color: black;
   text-decoration: underline;
   text-align: left;
   width: 80%;
   cursor: pointer;
 }
-.reg-text {  /*create new acc text*/
-  font-size: 18px;
+.reg-text {
+  font-size: 1.125rem; 
   color: black; 
-  margin-top: 10px;
+  margin-top: 0.625rem; 
   cursor: pointer;
 }
-.input-field{
+.input-field {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 80%;
   border: none;
-  border-radius: 10px;
-  font-size: 25px; /*text size*/
-  padding: 20px; 
+  border-radius: 0.625rem; 
+  font-size: 1.25rem; 
+  padding: 1.25rem; 
   background-color: white;
-  color:black;
-  outline:none;
+  color: black;
+  outline: none;
   box-sizing: border-box;
   background-clip: padding-box;
 }
 .input-field::placeholder {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 25px;
+  font-size: 1.25rem; 
 }
 .logo-login {
   cursor: pointer;
   height: auto;
   position: absolute;
-  left: 10px;
-  top: 20px;
+  left: 1rem; 
+  top: 1.25rem; 
+}
+@media only screen and (min-width: 30em) and (max-width: 64em) {
+  .login-container {
+    width: 85%; 
+    padding: 4%; 
+  }
+}
+
+@media only screen and (max-width: 30em) {
+  .login-container {
+    width: 90%; 
+    padding: 5%; 
+  }
+
+  .login-button {
+    font-size: 1rem; 
+    padding: 1rem; 
+  }
+
+  .text, .header, .repass-text, .reg-text {
+    font-size: 1rem; 
+  }
+
+  .input-field {
+    font-size: 1rem; 
+    padding: 1rem; 
+  }
 }
