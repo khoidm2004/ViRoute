@@ -148,9 +148,7 @@ const Homescreen = () => {
              placeholder="Select date"
              className="date-select"
            />
-           
-
-            <Button variant="contained" onClick={confirmTimeSelection} className="time-confirm">Confirm</Button>
+            <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
           </div>
         )}
         <button className="favorite-btn" onClick={toggleFavouritePlace}>
@@ -196,7 +194,7 @@ const Homescreen = () => {
               </div>
             </div>
             {error && <div className="error-message">{error}</div>}
-            <Button variant="contained" onClick={handleConfirmFavourite}>Confirm</Button>
+            <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
           </div>
         )}
         <div className="divider" />
