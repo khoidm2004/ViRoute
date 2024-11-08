@@ -1,9 +1,9 @@
 .map-container {
-  height: 100%; /* Adjust height as needed */
+  height: 160%; /* Adjust height as needed */
+  max-height: 400px;
   width: 100%; /* Full width of the viewport */
   position: relative;
   align-items: center;
-  left: 0;
   bottom: 0;
 }
 .map-routedetail {

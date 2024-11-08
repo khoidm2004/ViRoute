@@ -14,6 +14,10 @@
   transition: box-shadow 0.3s ease;
 }
 
+::-webkit-scrollbar{
+  display:None;
+}
+
 .taskbar-item {
   display: flex;
   flex-direction: column;

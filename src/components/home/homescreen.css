@@ -5,6 +5,10 @@
   overflow-y: hidden;
 }
 
+::-webkit-scrollbar{
+  display:None;
+}
+
 .option-icon {
   font-size: 26px;
   color: rgba(0, 0, 0);
@@ -108,10 +112,6 @@
   outline: none;
   border: none;
   font-family: Arial, sans-serif;
-}
-
-.time-confirm {
-  margin-left: auto;
 }
 
 .favorite-btn {
@@ -227,7 +227,7 @@
 .places-btn {
   display: flex;
   align-items: center;
-  background-color: rgba(60, 177, 41, 1);
+  background-color: rgba(60, 177, 41);
   color: white;
   font-size: 14px;
   padding: 30px 35px;
@@ -267,4 +267,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   padding: 2px;
+}
+
+.confirm-button{
+  background-color: #4CAF50;
 }
