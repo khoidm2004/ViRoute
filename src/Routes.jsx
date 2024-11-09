@@ -24,6 +24,7 @@ function AppRoutes() {
           <Route path="/register" element={<><Register/></>}/> 
           <Route path="/map" element={<><Map/></>} />    
           <Route path="/user_information" element={<><Taskbar/><UserInformation/></>} />
+          <Route path="/footer" element={<Footer/>}/>
         </Routes>
     );
   };

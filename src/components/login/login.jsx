@@ -5,7 +5,7 @@ import SuccessNotify from '../notification/noti_success';
 import PopupRepass from '../repass/repass';
 import HidePassLogin from '../hidepass/hidePassLogin';
 import Footer from '../footer/footer';
-import login from '../services/useLogin';
+import login from '../../services/useLogin.js'
 import authStore from '../../stores/authStore';
 
 const Login = () => {
@@ -41,7 +41,7 @@ const Login = () => {
     }));
   };
   return (
-    <body>
+    <>
     <div className="login-page">
       <img
         className="logo-login"
@@ -76,8 +76,8 @@ const Login = () => {
       {isPopupOpen && <PopupRepass onClose={() => setIsPopupOpen(false)} />}
       {showNotification && <SuccessNotify message="Login Successful!" />}
     </div>
-    {/*<Footer />*/}
-    </body>
+    <Footer style={{ margin: '0', padding: '0', width: '100vw' }} />
+    </>
   );
 };
 
