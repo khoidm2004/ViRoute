@@ -10,8 +10,9 @@ const Homescreen = () => {
   const navigate = useNavigate();
   const { start, destination, setStart, setDestination, swapLocations } = useHomescreenStore();
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
   const [selectedTime, setSelectedTime] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(today);
   const [showFavouritePlace, setShowFavouritePlace] = useState(false);
   const [streetAddress, setStreetAddress] = useState('');
   const [locationName, setLocationName] = useState('');
@@ -29,17 +30,13 @@ const Homescreen = () => {
   };
 
   const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
-    if (event.target.value === 'Now') {
-      const currentTime = new Date();
-      const hours = String(currentTime.getHours()).padStart(2, '0');
-      const minutes = String(currentTime.getMinutes()).padStart(2, '0');
-      setSelectedTime(`Now (${hours}:${minutes})`);
-    }
+    const selectedOption = event.target.value;
+    setSelectedTime(selectedOption);
   };
 
-  const handleDateChange = (event) => {
-    setSelectedDate(new Date(event.target.value));
+  const handleDateInput = (event) => {
+    const inputDate = event.target.value;
+    setSelectedDate(inputDate);
   };
 
   const confirmTimeSelection = () => {
@@ -66,7 +63,7 @@ const Homescreen = () => {
   const getTimeOptions = () => {
     const now = new Date();
     const options = [];
-    const isToday = selectedDate.toDateString() === now.toDateString();
+    const isToday = selectedDate === today;
     let startHour = 0;
 
     if (isToday) {
@@ -87,10 +84,22 @@ const Homescreen = () => {
 
   const deleteFavoritePlace = (index) => {
     setFavouritePlaces(favouritePlaces.filter((_, i) => i !== index));
-  
   };
+
   const handlePlaceClick = (streetAddress) => {
     setStart(streetAddress);
+  };
+
+  const getDisplayedTime = () => {
+    const isToday = selectedDate === today;
+    if (selectedTime === 'Now') {
+      return `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
+    } else if (selectedTime && isToday) {
+      return `${selectedTime} (Today)`;
+    } else if (selectedTime) {
+      return `${selectedTime} (${new Date(selectedDate).toLocaleDateString()})`;
+    }
+    return `Departure now? (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
   };
 
   return (
@@ -122,30 +131,26 @@ const Homescreen = () => {
         </div>
         <div className="departure-option" onClick={toggleTimeDropdown}>
           <Icon icon="mage:clock" className="option-icon" />
-          <span className="departure-text">
-            {selectedTime || `Departure now? (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`}
-          </span>
+          <span className="departure-text">{getDisplayedTime()}</span>
         </div>
         {showTimeDropdown && (
           <div className="time-dropdown">
             <Select
-             value={selectedTime || `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`}
-             onChange={handleTimeChange}
-             displayEmpty
-             className="time-select"
-           >
-             {getTimeOptions().map((option, index) => (
-               <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
-             ))}
-           </Select>
-           
-           <input
-             type="date"
-             value={selectedDate.toISOString().split('T')[0]}  // Defaults to today's date
-             onChange={handleDateChange}  // Updates selectedDate when changed
-             placeholder="Select date"
-             className="date-select"
-           />
+              value={selectedTime || `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`}
+              onChange={handleTimeChange}
+              displayEmpty
+              className="time-select"
+            >
+              {getTimeOptions().map((option, index) => (
+                <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
+              ))}
+            </Select>
+            <TextField
+              type="date"
+              value={selectedDate}
+              onChange={handleDateInput}
+              className="date-select"
+            />
             <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
           </div>
         )}
@@ -174,21 +179,21 @@ const Homescreen = () => {
             <div className="icon-selection">
               <span style={{ textAlign: 'left' }}>Select an icon</span>
               <div className="addfav-icons">
-              <Icon
-                icon="mdi:home"
-                onClick={() => setSelectedIcon('mdi:home')}
-                className={selectedIcon === 'mdi:home' ? 'icon-selected' : ''}
-              />
-              <Icon
-                icon="mdi:work"
-                onClick={() => setSelectedIcon('mdi:work')}
-                className={selectedIcon === 'mdi:work' ? 'icon-selected' : ''}
-              />
-              <Icon
-                icon="mdi:school"
-                onClick={() => setSelectedIcon('mdi:school')}
-                className={selectedIcon === 'mdi:school' ? 'icon-selected' : ''}
-              />
+                <Icon
+                  icon="mdi:home"
+                  onClick={() => setSelectedIcon('mdi:home')}
+                  className={selectedIcon === 'mdi:home' ? 'icon-selected' : ''}
+                />
+                <Icon
+                  icon="mdi:work"
+                  onClick={() => setSelectedIcon('mdi:work')}
+                  className={selectedIcon === 'mdi:work' ? 'icon-selected' : ''}
+                />
+                <Icon
+                  icon="mdi:school"
+                  onClick={() => setSelectedIcon('mdi:school')}
+                  className={selectedIcon === 'mdi:school' ? 'icon-selected' : ''}
+                />
               </div>
             </div>
             {error && <div className="error-message">{error}</div>}
@@ -204,7 +209,7 @@ const Homescreen = () => {
                   <span className="location-name">{place.locationName}</span>
                   <span className="address-name">{place.streetAddress}</span>
                 </div>
-                <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times; </span>
+                <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
               </div>
             ))}
           </div>
