@@ -61,7 +61,6 @@ const TicketPage = () => {
             {/*</div>*/}
         </div>
       </div>
-      <Footer/>
       </body>
   );
 };

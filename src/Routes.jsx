@@ -18,7 +18,7 @@ function AppRoutes() {
           <Route path="/" element={<><Taskbar/><Homescreen/></>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
           <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
-          <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>
+          <Route path="/tickets" element={<><Tickets/></>}/>   {/*<Taskbar/> */}
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 

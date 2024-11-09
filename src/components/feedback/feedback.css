@@ -2,57 +2,136 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 40px;
-    gap: 100px;    
-}
-
-.feedback-text {
+    padding: 2.5rem;
+    gap: 6.25rem; /* Large gap for desktop view */
+  }
+  
+  .feedback-text {
     width: 50%;
     text-align: left;
-}
-
-.feedback-text h1 {
+  }
+  
+  .feedback-text h1 {
     color: black;
-    margin-top: 60px;
-}
-
-.feedback-text h2 {
+    margin-top: 3.75rem;
+    font-size: 2rem;
+  }
+  
+  .feedback-text h2 {
     color: black;
     font-weight: 400;
-}
-.feedback-form {
+    font-size: 1.5rem;
+  }
+  
+  .feedback-form {
     width: 50%;
-    margin-top: 60px;
-}
-
-.feedback-form form {
+    margin-top: 3.75rem;
+  }
+  
+  .feedback-form form {
     display: flex;
     flex-direction: column;
-}
-
-.feedback-form label {
-    font-size: 20px;
+  }
+  
+  .feedback-form label {
+    font-size: 1.25rem;
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem;
     text-align: start;
-}
-
-.feedback-form input {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
+  }
+  
+  .feedback-form input {
+    padding: 0.625rem;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #F9F9F9;
-    color:black;
-}
-
-.feedback-form input::placeholder {
+    border-radius: 0.3125rem;
+    background-color: #f9f9f9;
+    color: black;
+  }
+  
+  .feedback-form input::placeholder {
     color: #aaa;
-    font-size: 14px;
-}
-.feedback-form button {
+    font-size: 0.875rem;
+  }
+  
+  .feedback-form button {
     width: 30%;
-    background-color:  rgba(60, 177, 41);
-
-}
+    background-color: rgba(60, 177, 41);
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feedback-form button:hover {
+    background-color: rgba(60, 177, 41, 0.8);
+  }
+  
+  /* Medium-sized screen adjustments */
+  @media only screen and (min-width: 30em) and (max-width: 64em) {
+    .feedback-container {
+      flex-direction: column;
+      padding: 2rem;
+      gap: 1.5rem; /* Reduced gap for medium screens */
+    }
+  
+    .feedback-text, .feedback-form {
+      width: 100%;
+    }
+  
+    .feedback-text h1 {
+      font-size: 1.75rem;
+    }
+  
+    .feedback-text h2 {
+      font-size: 1.25rem;
+    }
+  
+    .feedback-form label {
+      font-size: 1.125rem;
+    }
+  
+    .feedback-form input {
+      font-size: 0.875rem;
+    }
+  
+    .feedback-form button {
+      width: 100%;
+    }
+  }
+  
+  /* Small screens */
+  @media only screen and (max-width: 30em) {
+    .feedback-container {
+      flex-direction: column;
+      padding: 1.25rem;
+      gap: 1rem; /* Smaller gap for mobile screens */
+    }
+  
+    .feedback-text h1 {
+      font-size: 1.5rem;
+    }
+  
+    .feedback-text h2 {
+      font-size: 1rem;
+    }
+  
+    .feedback-form label {
+      font-size: 1rem;
+    }
+  
+    .feedback-form input {
+      font-size: 0.875rem;
+      padding: 0.5rem;
+    }
+  
+    .feedback-form button {
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+  

@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import './repass.css';
 import 'reactjs-popup/dist/index.css';
-import useLoginStore from '../../stores/loginStore';
+import useLoginStore from '../../stores/authStore';
 
 const Popup_repass = () => {
   const isOpen = useLoginStore((state) => state.isPopupOpen);

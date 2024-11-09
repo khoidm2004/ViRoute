@@ -6,26 +6,25 @@ import PopupRepass from '../repass/repass';
 import HidePassLogin from '../hidepass/hidePassLogin';
 import Footer from '../footer/footer';
 import login from '../services/useLogin';
-import loginStore from '../../stores/loginStore';
+import authStore from '../../stores/authStore';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [userEmail, setEmail] = useState('');
   const [password, setPassword] = useState({
       password: '',
       showPassword: false,
   });
   const [showNotification, setShowNotification] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const { login: setUser } = loginStore();
+  const { login: setUser } = authStore();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userData = await login(email, password);
+      const userData = await login(userEmail, password.password);
       setUser(userData); 
       setShowNotification(true);
-
       setTimeout(() => {
         setShowNotification(false);
         navigate('/');
@@ -48,7 +47,7 @@ const Login = () => {
         className="logo-login"
         src="./images/ViRoute_green.png"
         alt="logo"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate('/')}
       />
       <form className="login-container" onSubmit={handleLogin}>
         <label className="header">Login</label>
@@ -57,7 +56,7 @@ const Login = () => {
           type="email"
           className="input-field"
           placeholder="Email"
-          value={email}
+          value={userEmail}
           onChange={(e) => setEmail(e.target.value)}
         />
         <label className="text">Password:</label>

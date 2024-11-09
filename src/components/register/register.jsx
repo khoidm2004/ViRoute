@@ -1,45 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
 import HidePass from '../hidepass/hidePass.jsx';
 import SuccessNotify from '../notification/noti_success.jsx';
 import Footer from '../footer/footer.jsx';
-import useRegisterStore from '../../stores/registerStore';
 
 const Register = () => {
   const navigate = useNavigate();
-  const {
-    name,
-    email,
-    phoneNumber,
-    password,
-    confirmPassword,
-    showPassword,
-    showConfirmPassword,
-    showNotification,
-    setName,
-    setEmail,
-    setPhoneNumber,
-    setPassword,
-    setConfirmPassword,
-    toggleShowPassword,
-    toggleShowConfirmPassword,
-    triggerNotification,
-    resetForm,
-  } = useRegisterStore();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    triggerNotification(); // Show success notification
+    setShowNotification(true); // Show success notification
     setTimeout(() => {
       resetForm();
       navigate('/login');
     }, 2000);
   };
 
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setPhoneNumber('');
+    setPassword('');
+    setConfirmPassword('');
+    setShowPassword(false);
+    setShowConfirmPassword(false);
+    setShowNotification(false);
+  };
+
   return (
-    <body>
     <div className='register-page'>
       <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => navigate('/')} alt="Logo" />
       <form className='register-container'>
@@ -71,21 +69,19 @@ const Register = () => {
         <label className='register-text'>Password:</label>
         <HidePass
           values={{ password, showPassword }}
-          handleClickShowPassword={toggleShowPassword}
+          handleClickShowPassword={() => setShowPassword(!showPassword)}
           handlePasswordChange={(e) => setPassword(e.target.value)}
         />
         <label className='register-text'>Confirm password:</label>
         <HidePass
           values={{ password: confirmPassword, showPassword: showConfirmPassword }}
-          handleClickShowPassword={toggleShowConfirmPassword}
+          handleClickShowPassword={() => setShowConfirmPassword(!showConfirmPassword)}
           handlePasswordChange={(e) => setConfirmPassword(e.target.value)}
         />
         <input type='button' className='button' value="Register" onClick={handleRegister} />
       </form>
       {showNotification && <SuccessNotify message="Register Successful!" />}
     </div>
-    <Footer />
-    </body>
   );
 };
 
