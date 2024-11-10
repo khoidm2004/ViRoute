@@ -23,6 +23,9 @@
     background-color: rgba(60, 177, 41, 0.3);
     padding: 1.25rem 3.125rem 1.875rem 3.125rem;
     border-radius: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .ticket-container h1 {

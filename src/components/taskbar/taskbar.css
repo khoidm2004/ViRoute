@@ -37,12 +37,13 @@
 }
 
 .icon-text {
-  font-size: 13px;
+  font-size:  13px;
   color: rgba(0, 0, 0, 0.5);
   font-family: Arial, fantasy;
 }
 
 .logo {
+  display: flex;
   height: 60px;
   margin: 0;
   padding: 0;
@@ -52,21 +53,24 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #3cb129;
   width: 125px;
   height: 60px;
   left: 0;
 }
 
+.logged-out-bg {
+  background-color: #3cb129;
+}
+
 .login-content {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0px 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .login-icon { 
@@ -83,9 +87,8 @@
 .city-text {
   font-size: 30px;
   color: rgba(0, 0, 0);
-  margin: auto; 
+  margin: auto;
   padding: 0px;
-  margin-right: 20px;
 }
 
 .taskbar-item:hover .icon,
@@ -183,22 +186,50 @@
 }
 
 /* Responsive Design */
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 660px) and (min-width: 360px) {
   .taskbar-item {
     display: none;
-  }
-  .city-text {
-    margin-right: 10px; /* Smaller gap on smaller screens */
   }
 }
 
 /* Medium-sized screen */
-@media only screen and (min-width: 480px) and (max-width: 1024px) {
+@media only screen and (min-width: 760px) and (max-width: 1024px) {
+  .taskbar {
+    height: 55px;
+  }
   .taskbar-item {
     padding: 1rem;
   }
   .city-text {
     margin: 0;
     margin-right: 15px;
+  }
+  .logo {
+    height: 55px;
+  }
+  .login-reg {
+    height: 55px;
+  }
+}
+
+@media only screen and (min-width: 660px) and (max-width: 760px) {
+  .taskbar {
+    height: 50px;
+  }
+  .taskbar-item {
+    padding: 0.85rem;
+  }
+  .city-text {
+    margin: 0;
+    margin-right: 15px;
+  }
+  .logo {
+    height: 50px;
+  }
+  .login-reg {
+    height: 50px;
+  }
+  .city-text {
+    display: none;
   }
 }
