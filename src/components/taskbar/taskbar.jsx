@@ -70,6 +70,7 @@ const Taskbar = () => {
             <div className="city-text">
                 <span>{cityCode === 'hn' ? 'Hanoi' : 'Ho Chi Minh'}</span>
             </div>
+            <div className='login-reg'>
             {isLoggedIn ? (
                 <div className="taskbar-item user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
                     <div className="user-info">
@@ -88,14 +89,14 @@ const Taskbar = () => {
                     )}
                 </div>
             ) : (
-                <div className="taskbar-item login-reg" onClick={() => navigate('/login')}>
+                <div className="taskbar-item" onClick={() => navigate('/login')}>
                     <span className='login-content'>
                         <Icon icon="material-symbols:account-circle" className='login-icon'/>
                         <span className='login-text'>Login/ Sign up</span>
                     </span>
-                    <img className="logo" src="../images/Green_background.png" alt="Login Background"/>
                 </div>
             )}
+            </div>
         </div>
     );
 };

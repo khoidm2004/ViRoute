@@ -1,7 +1,7 @@
 .map-container {
-  height: 160%; /* Adjust height as needed */
+  height: 160%; 
   max-height: 400px;
-  width: 100%; /* Full width of the viewport */
+  width: 100%; 
   position: relative;
   align-items: center;
   bottom: 0;
@@ -10,16 +10,16 @@
   top: 60px;
   right: 0;
   overflow: hidden;
-  width: calc(100% - 440px); /* Full width minus the sidebar */
+  width: calc(100% - 440px); 
   height: calc(100vh - 60px);
   position: absolute;
 }
 
 .map-container-tracking {
-  height: 400px; /* Adjust height as needed */
-  width: 100%; /* Ensure it takes full width of the tracking item */
+  height: 400px;
+  width: 100%; 
 }
 
 .map-container-tracking.active {
-  display: block; /* Show map when active */
+  display: block; 
 }

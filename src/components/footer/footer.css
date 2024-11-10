@@ -97,20 +97,20 @@ footer {
 .app-icon-wrapper a {
   display: flex;
   align-items: center;
-  gap: 0.625rem; /* Converted from 10px to rem */
+  gap: 0.625rem; 
   text-decoration: none;
   color: #000;
 }
 
 .app-icon-wrapper:hover {
-  background-color: #f0f0f0; /* Optional: Change background on hover */
+  background-color: #f0f0f0; 
 }
 
 .copyright {
   color: black;
-  font-size: 0.9375rem; /* Converted from 15px to rem */
+  font-size: 0.9375rem; 
   position: absolute;
-  margin-top: 0.625rem; /* Converted from 10px to rem */
+  margin-top: 0.625rem; 
   bottom: 0;
 }
 @media only screen and (min-width: 30em) and (max-width: 64em) {
@@ -118,11 +118,11 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem 1rem; /* Padding adjustment */
+    padding: 2rem 1rem;
   }
 
   .footer-item-section {
-    margin-bottom: 2rem; /* More space between sections */
+    margin-bottom: 2rem; 
     align-items: center;
   }
   .footer-item-section .contact-item{
@@ -130,7 +130,7 @@ footer {
   }
 
   .footer-text {
-    font-size: 1.375rem; /* Slightly smaller font size */
+    font-size: 1.375rem; 
   }
 
   .footer-heading {

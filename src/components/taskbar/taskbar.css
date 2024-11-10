@@ -1,10 +1,11 @@
 .taskbar {
   display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
   background-color: #ffffff;
   padding: 0px;
   height: 60px;
-  justify-content: start;
-  align-items: center;
   position: absolute;
   width: 100%;
   top: 0;
@@ -47,16 +48,14 @@
   padding: 0;
   pointer-events: none;
 }
-
-.taskbar-item.login-reg {
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  right: 0;
-  height: 60px;
-  width: 125px;
+.login-reg {
   display: flex;
-  padding: 0;
+  flex-direction: row;
+  align-items: center;
+  background-color: #3cb129;
+  width: 125px;
+  height: 60px;
+  left: 0;
 }
 
 .login-content {
@@ -85,8 +84,8 @@
   font-size: 30px;
   color: rgba(0, 0, 0);
   margin: auto; 
-  white-space: nowrap;
   padding: 0px;
+  margin-right: 20px;
 }
 
 .taskbar-item:hover .icon,
@@ -161,7 +160,6 @@
   line-height: 1;
 }
 
-/* Updated User Dropdown */
 .user-dropdown {
   position: absolute;
   top: 60px;
@@ -186,14 +184,21 @@
 
 /* Responsive Design */
 @media only screen and (max-width: 480px) {
-  .my_element {
-    display: none; /* Hide element on small screens */
+  .taskbar-item {
+    display: none;
+  }
+  .city-text {
+    margin-right: 10px; /* Smaller gap on smaller screens */
   }
 }
 
 /* Medium-sized screen */
 @media only screen and (min-width: 480px) and (max-width: 1024px) {
   .taskbar-item {
-    display: block;
+    padding: 1rem;
+  }
+  .city-text {
+    margin: 0;
+    margin-right: 15px;
   }
 }
