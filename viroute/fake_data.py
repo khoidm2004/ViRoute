@@ -4,6 +4,7 @@ import random
 import pandas as pd
 from faker import Faker
 import bcrypt
+import datetime
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "viroute.settings")
@@ -11,6 +12,31 @@ django.setup()
 
 from virouteapp.models import Bus, Metro, Ticket, Account, User, UserTicket, AccountHasUser  
 
+#Create user information setting IRL 
+class User:
+    def __init__(self, fullName, userEmail, phoneNumber, password, dateofbirth="27-01-2003"):
+        self.fullName = fullName
+        self.userEmail = userEmail
+        self.phoneNumber = phoneNumber
+        self.password = password
+        self.__userID = f"{self.dateofbirth.strftime('%d%m%y')}{phoneNumber[-4:]}" #format userID: ddmmyy + last 4 digits of phone number. And make it private
+        self.balance = 0
+        self.citizenship = "Vietnam"
+        self.dateofbirth = datetime.strptime(dateofbirth, '%d%m%Y')
+    
+    def get_userID(self):
+        return self.__userID
+    
+    def change_name(self, newName):
+        self.fullName = newName
+    
+    def change_email(self, newEmail):
+        self.userEmail = newEmail
+    
+    #etc ...    
+
+    
+# Fake data
 fake = Faker()
 data = {
     "Bus": [],
@@ -204,4 +230,4 @@ if __name__ == "__main__":
     create_fake_users(10)      
     create_fake_user_tickets(10)  
     create_fake_account_has_user(10)  
-    #print(data)
+    print(data)
