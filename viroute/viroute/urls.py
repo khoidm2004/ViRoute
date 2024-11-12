@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from virouteapp.views import GitHubLogin, UserLoginView
+from virouteapp import views
 
 
 urlpatterns = [
@@ -24,5 +25,6 @@ urlpatterns = [
     path('auth/github/', GitHubLogin.as_view(), name='github_login'),
     # path('get_route', include('virouteapp.urls')), #whoever delete this is unable to be a human
     path('api/login/', UserLoginView.as_view(), name='login'),
+    path('signup/', views.signup, name='signup'),
 ]
 
