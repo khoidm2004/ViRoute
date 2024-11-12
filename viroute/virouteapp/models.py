@@ -43,10 +43,10 @@ class User(models.Model):
     phoneNumber = PhoneNumberField(unique=True, null=False, validators=[MinLengthValidator(10)],blank=False)
     userEmail = models.EmailField (max_length=100,unique=True,null=False,blank=False)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    citizenship = models.CharField(max_length=100,null=False,blank=False)
+    citizenship = models.CharField(max_length=100,null=False,default= 'Vietnam') # should be fixed later 
     accounts = models.ManyToManyField(Account, through='AccountHasUser')
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
-    dateofbirth = models.DateField(null=False, blank=False)
+    dateofbirth = models.DateField(null=False, default= '2003-12-15') # should be fixed later
     password = models.CharField(max_length=70,null=False,blank=False)
 
 class UserTicket(models.Model):
