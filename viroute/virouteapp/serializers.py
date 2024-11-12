@@ -21,3 +21,17 @@ class UserLoginSerializer(serializers.Serializer):
 
         attrs['user'] = user 
         return attrs
+    
+class UserSerializer(serializers.ModelSerializer): # sign up
+    class Meta:
+        model = User
+        fields = ['fullName', 'phoneNumber', 'userEmail', 'password']
+        # fields = ['userID', 'fullName', 'phoneNumber', 'userEmail', 'balance', 'citizenship', 'dateofbirth', 'password']
+
+    def create(self, validated_data):
+        password = validated_data['password']
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        validated_data['password'] = hashed_password
+
+        user = User.objects.create(**validated_data)
+        return user
