@@ -95,6 +95,9 @@ const Taskbar = () => {
                     </div>
                 )}
             </div>
+            <div className='taskbar-menu'>
+                <img className="user-avatar" src={avatar} alt="User Avatar" />
+            </div>
         </div>
     );
 };

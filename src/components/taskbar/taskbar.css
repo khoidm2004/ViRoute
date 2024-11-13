@@ -49,13 +49,14 @@
   padding: 0;
   pointer-events: none;
 }
+
 .login-reg {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 125px;
   height: 60px;
-  left: 0;
+  margin-left: auto;
 }
 
 .logged-out-bg {
@@ -184,17 +185,26 @@
 .user-dropdown-item:hover {
   background-color: rgba(60, 177, 41, 0.1);
 }
-
-/* Responsive Design */
-@media only screen and (max-width: 660px) and (min-width: 360px) {
-  .taskbar-item {
+.taskbar-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(60, 177, 41);
+  width: 125px;
+  height: 60px;
+}
+@media screen and (min-width: 1024px) {
+  .taskbar-menu {
     display: none;
   }
 }
-
-/* Medium-sized screen */
 @media only screen and (min-width: 760px) and (max-width: 1024px) {
-  .taskbar {
+  .taskbar-menu {
+    display: none;
+  }
+  .taskbar,
+  .logo,
+  .login-reg {
     height: 55px;
   }
   .taskbar-item {
@@ -204,16 +214,11 @@
     margin: 0;
     margin-right: 15px;
   }
-  .logo {
-    height: 55px;
-  }
-  .login-reg {
-    height: 55px;
-  }
 }
-
 @media only screen and (min-width: 660px) and (max-width: 760px) {
-  .taskbar {
+  .taskbar,
+  .logo,
+  .login-reg {
     height: 50px;
   }
   .taskbar-item {
@@ -223,13 +228,16 @@
     margin: 0;
     margin-right: 15px;
   }
-  .logo {
-    height: 50px;
+  .city-text,
+  .taskbar-menu {
+    display: none;
+  }
+}
+@media only screen and (max-width: 660px) and (min-width: 360px) {
+  .taskbar-item {
+    display: none;
   }
   .login-reg {
-    height: 50px;
-  }
-  .city-text {
     display: none;
   }
 }
