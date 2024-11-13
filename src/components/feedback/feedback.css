@@ -109,7 +109,7 @@
   .feedback-container {
     flex-direction: column;
     padding: 20px;
-    gap: 16px; /* Smaller gap for mobile screens */
+    gap: 16px; 
   }
 
   .feedback-text h1 {
