@@ -1,5 +1,5 @@
 :root {
-  font-size: 16px; /* Default root font size */
+  font-size: 16px; 
 }
 
 .body-page {
@@ -22,62 +22,62 @@
   justify-content: center;
   align-items: center;
   width: 90%;
-  max-width: 24rem; 
-  padding: 1.25rem 2.5rem; 
+  max-width: 384px; 
+  padding: 20px 40px; 
   background-color: rgba(60, 177, 41, 0.3);
   border: none;
-  border-radius: 1.25rem;
+  border-radius: 20px; 
   margin-top: 5%;
 }
 
 .button {
   display: flex;
-  padding: 1rem;
-  width: 40%; 
+  padding: 16px; 
+  width: 40%;
   background-color: #5F8F55;
-  font-size: 1.25rem;
+  font-size: 20px; 
   border: none;
-  border-radius: 2.5rem;
-  margin-top: 1.25rem;
+  border-radius: 40px; 
+  margin-top: 20px;
   cursor: pointer;
 }
 
 .text {
   width: 80%;
-  font-size: 1.5rem;
-  margin-bottom: 0.3rem;
+  font-size: 24px;
+  margin-bottom: 5px; 
   text-align: left;
   color: black;
 }
 
 .header {
   width: 100%;
-  font-size: 2rem;
+  font-size: 32px;
   text-align: center;
   font-weight: bold;
   color: black;
-  margin-bottom: 0.6rem;
+  margin-bottom: 10px;
 }
 
 .reg-text { 
-  font-size: 1rem;
+  font-size: 16px; 
   color: black;
   font-style: italic;
-  margin-top: 0.6rem;
+  margin-top: 10px;
   cursor: pointer;
 }
 
 .logo-login {
   display: flex;
   cursor: pointer;
-  width: 7.5rem; 
+  width: 120px; 
   height: auto;
 }
 
 .register-text {
   width: 80%;
-  font-size: 1.25rem;
-  margin-bottom: 0.3rem;
+  font-size: 20px; 
+  margin-bottom: 5px; 
   text-align: left;
   color: black;
 }
@@ -88,9 +88,9 @@
   justify-content: center;
   width: 80%;
   border: none;
-  border-radius: 0.625rem;
-  font-size: 1.25rem; 
-  padding: 1.25rem;
+  border-radius: 10px; 
+  font-size: 20px; 
+  padding: 20px; 
   background-color: white;
   color: black;
   outline: none;
@@ -100,56 +100,53 @@
 
 .reg-input-field::placeholder {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 1.25rem;
+  font-size: 20px; 
 }
 
-/* Tablet Screens (480px to 1024px) */
-@media only screen and (min-width: 30em) and (max-width: 64em) {
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
   .register-container {
-    width: 85%; 
-    padding: 3%; 
+    width: 85%;
+    padding: 3%;
   }
 
   .header {
-    font-size: 1.75rem; 
+    font-size: 28px; 
   }
   .register-text, .text, .reg-input-field::placeholder {
-    font-size: 1.125rem; 
+    font-size: 18px; 
   }
-  
 
   .button {
-    font-size: 1.125rem; 
+    font-size: 18px; 
   }
 }
 
-
-@media only screen and (max-width: 30em) {
+@media only screen and (max-width: 480px) {
   .register-container {
-    width: 90%; 
-    padding: 5%; 
+    width: 90%;
+    padding: 5%;
   }
 
   .header {
-    font-size: 1.5rem; 
+    font-size: 24px; 
   }
 
   .register-text, .text, .reg-input-field::placeholder {
-    font-size: 1rem; 
+    font-size: 16px; 
   }
 
   .reg-input-field {
-    font-size: 1rem; 
-    padding: 0.875rem; 
+    font-size: 16px; 
+    padding: 14px; 
   }
 
   .button {
-    font-size: 1rem; 
-    padding: 0.75rem;
-    width: 50%; 
+    font-size: 16px; 
+    padding: 12px; 
+    width: 50%;
   }
 
   .logo-login {
-    width: 5rem; 
+    width: 80px; 
   }
 }

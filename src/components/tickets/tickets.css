@@ -1,81 +1,77 @@
 .ticket-page {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 1.25rem;
-    margin-top: 3.75rem;
-    gap: 10%;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px; 
+  margin-top: 60px; 
+  gap: 10%;
+}
+
+.download-container {
+  text-align: start;
+  width: 60%;
+  color: #000000;
+}
+
+.download-container h2 {
+  font-weight: 500;
+  font-size: 24px; 
+}
+
+.ticket-container {
+  width: 25%;
+  background-color: rgba(60, 177, 41, 0.3);
+  padding: 20px 50px 30px 50px;
+  border-radius: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticket-container h1 {
+  font-size: 40px;
+  color: black;
+}
+
+.ticket-container h2 {
+  color: black;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.qr-code {
+  display: flex;
+  margin: 20px 0; 
+}
+
+.countdown-timer {
+  font-size: 24px; 
+  color: black;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
+
   .download-container {
-    text-align: start;
-    width: 60%;
-    color: #000000;
-  }
-  
-  .download-container h2 {
-    font-weight: 500;
-    font-size: 1.5rem;
-  }
-  
-  .ticket-container {
-    width: 25%;
-    background-color: rgba(60, 177, 41, 0.3);
-    padding: 1.25rem 3.125rem 1.875rem 3.125rem;
-    border-radius: 0.625rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .ticket-container h1 {
-    font-size: 2.5rem;
-    color: black;
-  }
-  
-  .ticket-container h2 {
-    color: black;
-    font-size: 1.875rem;
-    font-weight: 500;
-  }
-  
-  .qr-code {
-    display: flex;
-    margin: 1.25rem 0;
-  }
-  
-  .countdown-timer {
-    font-size: 1.5rem;
-    color: black;
-  }
-  
-  /* Medium-sized screen adjustments */
-  @media only screen and (min-width: 480px) and (max-width: 1024px) {
-  
-    .download-container {
       width: 80%;
-    }
-  
-    .ticket-container {
-      width: 60%;
-      padding: 1rem 2rem;
-    }
   }
-  
-  /* Small screens */
-  @media only screen and (max-width: 480px) {
-    .ticket-page {
+
+  .ticket-container {
+      width: 60%;
+      padding: 16px 32px; 
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 480px) {
+  .ticket-page {
       flex-direction: column;
       align-items: center;
-    }
-  
-    .download-container {
-      width: 90%;
-    }
-  
-    .ticket-container {
-      display: none;
-    }
-
   }
-  
+
+  .download-container {
+      width: 90%;
+  }
+
+  .ticket-container {
+      display: none;
+  }
+}
