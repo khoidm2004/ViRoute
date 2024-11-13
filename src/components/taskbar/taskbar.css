@@ -119,7 +119,6 @@
   background-color: rgba(60, 177, 41, 0.1);
 }
 
-/* User Profile Section */
 .taskbar-item.user-profile {
   display: flex;
   align-items: center;
@@ -148,14 +147,14 @@
 .welcome-container {
   display: flex;
   flex-direction: column;
-  text-align: left; /* Align text to the left within the container */
+  text-align: left; 
 }
 
 .welcome-text {
   font-size: 14px;
   color: black;
   font-weight: bold;
-  line-height: 1; /* Adjust line height for closer alignment */
+  line-height: 1; 
 }
 
 .user-name {
@@ -167,12 +166,12 @@
 .user-dropdown {
   position: absolute;
   top: 60px;
-  right: 0; /* Align flush with the right edge */
+  right: 0; 
   background: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 10px;
-  z-index: 200; /* Ensure dropdown appears above other elements */
+  z-index: 200; 
   width: 125px;
 }
 
@@ -198,7 +197,7 @@
     display: none;
   }
 }
-@media only screen and (min-width: 760px) and (max-width: 1024px) {
+@media only screen and (min-width: 860px) and (max-width: 1024px) {
   .taskbar-menu {
     display: none;
   }
@@ -215,7 +214,7 @@
     margin-right: 15px;
   }
 }
-@media only screen and (min-width: 660px) and (max-width: 760px) {
+@media only screen and (min-width: 480px) and (max-width: 860px) {
   .taskbar,
   .logo,
   .login-reg {
@@ -233,7 +232,7 @@
     display: none;
   }
 }
-@media only screen and (max-width: 660px) and (min-width: 360px) {
+@media only screen and (max-width: 480px) {
   .taskbar-item {
     display: none;
   }
