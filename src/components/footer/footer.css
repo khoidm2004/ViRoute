@@ -1,3 +1,10 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensures the body takes full height */
+  margin: 0;
+}
+
 footer {
   display: flex;
   background-color: #e0e0e0;
