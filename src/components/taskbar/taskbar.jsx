@@ -70,32 +70,31 @@ const Taskbar = () => {
             <div className="city-text">
                 <span>{cityCode === 'hn' ? 'Hanoi' : 'Ho Chi Minh'}</span>
             </div>
-            {isLoggedIn ? (
-                <div className="taskbar-item user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
-                    <div className="user-info">
-                        <img className="user-avatar" src={avatar} alt="User Avatar" />
-                        <div className="welcome-container">
-                            <span className="welcome-text">Welcome,</span>
-                            <span className="user-name">{fullName}</span> {/* Display fullName */}
+            <div className={`login-reg ${!isLoggedIn ? 'logged-out-bg' : ''}`}>
+                {isLoggedIn ? (
+                    <div className="taskbar-item user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
+                        <div className="user-info">
+                            <img className="user-avatar" src={avatar} alt="User Avatar" />
+                            <div className="welcome-container">
+                                <span className="welcome-text">Welcome,</span>
+                                <span className="user-name">{fullName}</span> {/* Display fullName */}
+                            </div>
                         </div>
+                        {showUserDropdown && (
+                            <div className="user-dropdown">
+                                <div className="user-dropdown-item" onClick={() => navigate('/user_information')}>Edit Profile</div>
+                                <div className="user-dropdown-item" onClick={() => navigate('/feedback')}>Feedback</div>
+                                <div className="user-dropdown-item" onClick={handleLogout}>Logout</div>
+                            </div>
+                        )}
                     </div>
-                    {showUserDropdown && (
-                        <div className="user-dropdown">
-                            <div className="user-dropdown-item" onClick={() => navigate('/user_information')}>Edit Profile</div>
-                            <div className="user-dropdown-item" onClick={() => navigate('/feedback')}>Feedback</div>
-                            <div className="user-dropdown-item" onClick={handleLogout}>Logout</div>
-                        </div>
-                    )}
-                </div>
-            ) : (
-                <div className="taskbar-item login-reg" onClick={() => navigate('/login')}>
-                    <span className='login-content'>
+                ) : (
+                    <div className="login-content" onClick={() => navigate('/login')}>
                         <Icon icon="material-symbols:account-circle" className='login-icon'/>
                         <span className='login-text'>Login/ Sign up</span>
-                    </span>
-                    <img className="logo" src="../images/Green_background.png" alt="Login Background"/>
-                </div>
-            )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

@@ -5,27 +5,26 @@ import SuccessNotify from '../notification/noti_success';
 import PopupRepass from '../repass/repass';
 import HidePassLogin from '../hidepass/hidePassLogin';
 import Footer from '../footer/footer';
-import login from '../services/useLogin';
-import loginStore from '../../stores/loginStore';
+import login from '../../services/useLogin.js'
+import authStore from '../../stores/authStore';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [userEmail, setEmail] = useState('');
   const [password, setPassword] = useState({
       password: '',
       showPassword: false,
   });
   const [showNotification, setShowNotification] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const { login: setUser } = loginStore();
+  const { login: setUser } = authStore();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userData = await login(email, password);
+      const userData = await login(userEmail, password.password);
       setUser(userData); 
       setShowNotification(true);
-
       setTimeout(() => {
         setShowNotification(false);
         navigate('/');
@@ -42,13 +41,13 @@ const Login = () => {
     }));
   };
   return (
-    <body>
+    <>
     <div className="login-page">
       <img
         className="logo-login"
         src="./images/ViRoute_green.png"
         alt="logo"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate('/')}
       />
       <form className="login-container" onSubmit={handleLogin}>
         <label className="header">Login</label>
@@ -57,7 +56,7 @@ const Login = () => {
           type="email"
           className="input-field"
           placeholder="Email"
-          value={email}
+          value={userEmail}
           onChange={(e) => setEmail(e.target.value)}
         />
         <label className="text">Password:</label>
@@ -77,8 +76,8 @@ const Login = () => {
       {isPopupOpen && <PopupRepass onClose={() => setIsPopupOpen(false)} />}
       {showNotification && <SuccessNotify message="Login Successful!" />}
     </div>
-    {/*<Footer />*/}
-    </body>
+    <Footer style={{ margin: '0', padding: '0', width: '100vw' }} />
+    </>
   );
 };
 

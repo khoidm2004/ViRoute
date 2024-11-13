@@ -8,7 +8,7 @@ const Feedback = () => {
         triggerSuccessNotification('Send Successful!');
     }
     return (
-        <body>
+        <>
         <div className='feedback-container'>
             <div className='feedback-text'>
                 <h1>Can we help you?</h1>
@@ -30,7 +30,7 @@ const Feedback = () => {
             <SuccessNotify />
         </div>
         <Footer/>
-        </body>
+        </>
     )
 }
 export default Feedback;

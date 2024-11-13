@@ -5,19 +5,13 @@ import { Icon } from '@iconify/react';
 const Footer = () => {
   return (
     <footer>
-      <div className='footer-item section'>
+      <div className='footer-item-section'>
         <span className="footer-heading">About </span>
-          <div className="contact-item">
-            <span className="footer-text">Company</span>
-          </div>
-          <div className="contact-item">
-            <span className="footer-text">Customers</span>
-          </div>
-          <div className="contact-item">
-            <span className="footer-text">Products</span>
-          </div>
+        <span className="footer-text">Company</span>
+        <span className="footer-text">Customers</span>
+        <span className="footer-text">Products</span>
       </div>
-      <div className="footer-item section">
+      <div className="footer-item-section">
         <span className="footer-heading">Contact us</span>
         <div className="contact-item">
             <Icon icon="material-symbols:mail" className="footer-icon" />
@@ -32,9 +26,7 @@ const Footer = () => {
           <span className="footer-text">Yliopistonkatu 123456</span>
         </div>
       </div>
-
-      {/* Social Media + App Section */}
-      <div className="footer-item section">
+      <div className="footer-item-section">
         <div className="social-media-section">
           <span className="footer-heading">Follow us on social media</span>
           <div className="social-icons">
@@ -43,7 +35,6 @@ const Footer = () => {
             <a href="#"><Icon icon="mdi:github" /></a>
           </div>
         </div>
-
         <div className="social-app-section">
           <span className="footer-heading">Download our app</span>
           <div className="app-icons">
@@ -62,7 +53,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <h1 className='copyright'>@Project</h1>
+      {/*<h1 className='copyright'>@Project</h1>*/}
     </footer>
     );
 };

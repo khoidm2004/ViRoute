@@ -29,8 +29,8 @@ const TicketPage = () => {
   //}, []);
 //
   return (
-    <body>
-    <div className="ticket-page">
+      <>
+      <div className="ticket-page">
         <div className='download-container'>
             <h1>VIROUTE APP</h1>
             <h2>Using the ViRoute app to stay up-to-date with the latest changes. Travel all around the city with just one app. Download the free app to look up directions and buy tickets for public transport.</h2>
@@ -62,7 +62,7 @@ const TicketPage = () => {
         </div>
       </div>
       <Footer/>
-      </body>
+      </>
   );
 };
 

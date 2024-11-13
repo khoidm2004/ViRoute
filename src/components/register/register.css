@@ -1,6 +1,11 @@
+:root {
+  font-size: 16px; /* Default root font size */
+}
+
 .body-page {
   height: 100vh;
 }
+
 .register-page {
   display: flex;
   flex-direction: column;
@@ -16,79 +21,135 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  max-width: 380px; /*can change for responsive*/
-  padding: 20px 40px 20px 40px; /*top right bottom left*/
+  width: 90%;
+  max-width: 24rem; 
+  padding: 1.25rem 2.5rem; 
   background-color: rgba(60, 177, 41, 0.3);
   border: none;
-  border-radius: 20px;
-  margin-top: 10%;
+  border-radius: 1.25rem;
+  margin-top: 5%;
 }
 
 .button {
   display: flex;
-  padding: 15px;
-  width: 35%;
+  padding: 1rem;
+  width: 40%; 
   background-color: #5F8F55;
-  font-size: 20px;
+  font-size: 1.25rem;
   border: none;
-  border-radius: 40px;
-  margin-top: 20px;
+  border-radius: 2.5rem;
+  margin-top: 1.25rem;
   cursor: pointer;
 }
+
 .text {
   width: 80%;
-  font-size: 25px;
-  margin-bottom: 5px;
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
   text-align: left;
   color: black;
 }
+
 .header {
   width: 100%;
-  font-size: 35px;
+  font-size: 2rem;
   text-align: center;
   font-weight: bold;
   color: black;
-  margin-bottom: 10px;
+  margin-bottom: 0.6rem;
 }
 
-.reg-text {  /*create new acc text*/
-  font-size: 18px;
+.reg-text { 
+  font-size: 1rem;
   color: black;
   font-style: italic;
-  margin-top: 10px;
+  margin-top: 0.6rem;
   cursor: pointer;
 }
+
 .logo-login {
   display: flex;
   cursor: pointer;
-  width: 120px;
+  width: 7.5rem; 
   height: auto;
-
 }
+
 .register-text {
   width: 80%;
-  font-size: 20px;
-  margin-bottom: 5px;
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
   text-align: left;
   color: black;
 }
+
 .reg-input-field {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80%;
   border: none;
-  border-radius: 10px;
-  font-size: 20px; /*text size*/
-  padding: 20px; 
+  border-radius: 0.625rem;
+  font-size: 1.25rem; 
+  padding: 1.25rem;
   background-color: white;
-  color:black;
-  outline:none;
+  color: black;
+  outline: none;
   box-sizing: border-box;
   background-clip: padding-box;
 }
+
 .reg-input-field::placeholder {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 20px;
+  font-size: 1.25rem;
+}
+
+/* Tablet Screens (480px to 1024px) */
+@media only screen and (min-width: 30em) and (max-width: 64em) {
+  .register-container {
+    width: 85%; 
+    padding: 3%; 
+  }
+
+  .header {
+    font-size: 1.75rem; 
+  }
+  .register-text, .text, .reg-input-field::placeholder {
+    font-size: 1.125rem; 
+  }
+  
+
+  .button {
+    font-size: 1.125rem; 
+  }
+}
+
+
+@media only screen and (max-width: 30em) {
+  .register-container {
+    width: 90%; 
+    padding: 5%; 
+  }
+
+  .header {
+    font-size: 1.5rem; 
+  }
+
+  .register-text, .text, .reg-input-field::placeholder {
+    font-size: 1rem; 
+  }
+
+  .reg-input-field {
+    font-size: 1rem; 
+    padding: 0.875rem; 
+  }
+
+  .button {
+    font-size: 1rem; 
+    padding: 0.75rem;
+    width: 50%; 
+  }
+
+  .logo-login {
+    width: 5rem; 
+  }
 }
