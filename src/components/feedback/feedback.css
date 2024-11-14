@@ -3,7 +3,6 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 40px;
-  gap: 100px; /* Large gap for desktop view */
 }
 
 .feedback-text {
@@ -71,12 +70,10 @@
   background-color: rgba(60, 177, 41, 0.8);
 }
 
-/* Medium-sized screen adjustments */
 @media only screen and (min-width: 480px) and (max-width: 1024px) {
   .feedback-container {
     flex-direction: column;
     padding: 32px;
-    gap: 24px; /* Reduced gap for medium screens */
   }
 
   .feedback-text, .feedback-form {

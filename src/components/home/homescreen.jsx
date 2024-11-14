@@ -4,11 +4,11 @@ import { Icon } from '@iconify/react';
 import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Map from '../map/map.jsx';
-import useHomescreenStore from '../../stores/homeStore';
 
 const Homescreen = () => {
   const navigate = useNavigate();
-  const { start, destination, setStart, setDestination, swapLocations } = useHomescreenStore();
+  const [start, setStart] = useState('');
+  const [destination, setDestination] = useState('');
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const today = new Date().toISOString().split("T")[0];
   const [selectedTime, setSelectedTime] = useState('');
@@ -116,7 +116,7 @@ const Homescreen = () => {
               className="search-input"
             />
           </div>
-          <Icon icon="eva:swap-fill" className="swap-icon" onClick={swapLocations} />
+          <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
           <div className="search">
             <Icon icon="material-symbols:search" className="icon" />
             <input
@@ -201,18 +201,18 @@ const Homescreen = () => {
           </div>
         )}
         <div className="divider" />
-          <div className="places-container">
-            {favouritePlaces.map((place, index) => (
-              <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
-                <Icon icon={place.selectedIcon} className="place-icon" />
-                <div className="placetext-container">
-                  <span className="location-name">{place.locationName}</span>
-                  <span className="address-name">{place.streetAddress}</span>
-                </div>
-                <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
+        <div className="places-container">
+          {favouritePlaces.map((place, index) => (
+            <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
+              <Icon icon={place.selectedIcon} className="place-icon" />
+              <div className="placetext-container">
+                <span className="location-name">{place.locationName}</span>
+                <span className="address-name">{place.streetAddress}</span>
               </div>
-            ))}
-          </div>
+              <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
+            </div>
+          ))}
+        </div>
       </div>
       <Map className="map-container" />
     </>
