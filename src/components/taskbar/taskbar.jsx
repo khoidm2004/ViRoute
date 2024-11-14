@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import './Taskbar.css'; 
+import './Taskbar.css';
 import { Icon } from '@iconify/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useUserInformationStore from '../../stores/userinfoStore';
 
 const Taskbar = () => {
-    const { avatar, fullName } = useUserInformationStore();  // Access fullName from the store
+    const { avatar, fullName } = useUserInformationStore(); 
     const [activeItem, setActiveItem] = useState('');
     const [showCities, setShowCities] = useState(false);
     const [cityCode, setCityCode] = useState('hn'); 
     const [showUserDropdown, setShowUserDropdown] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true); // Mobile menu toggle state
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -27,7 +28,7 @@ const Taskbar = () => {
     }, [location.pathname]);
 
     const handleLogout = () => {
-        setIsLoggedIn(false); // Update login state to false
+        setIsLoggedIn(false);
     };
 
     const handleCityChange = (code) => {
@@ -38,6 +39,48 @@ const Taskbar = () => {
     return (
         <div className="taskbar">
             <img className="logo" src="../images/ViRoute_white.png" alt="Logo" />
+            {/* Hamburger Menu */}
+            <div className='taskbar-menu' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                <Icon icon="mdi:menu" className="mobile-menu-icon" />
+            </div>
+
+            {/* Mobile Menu Items */}
+            {isMobileMenuOpen && (
+                <div className="mobile-menu">
+                    <div className="mobile-menu-item" onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}>
+                        <span>Home</span>
+                    </div>
+                    <div className="mobile-menu-item" onClick={() => { navigate('/tracking'); setIsMobileMenuOpen(false); }}>
+                        <span>Tracking</span>
+                    </div>
+                    <div className="mobile-menu-item" onClick={() => { navigate('/tickets'); setIsMobileMenuOpen(false); }}>
+                        <span>Tickets</span>
+                    </div>
+                    <div className="mobile-menu-item" onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }}>
+                        <span>Feedback</span>
+                    </div>
+                    <div className="mobile-menu-item" onClick={() => setShowCities(!showCities)}>
+                        <span>Choose City</span>
+                    </div>
+                    <div className="mobile-menu-item" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
+                        <span>Login/Signup</span>
+                    </div>
+                    {showCities && (
+                        <div className="city-dropdown">
+                            {cities.map((city) => (
+                                <div key={city.code} onClick={() => handleCityChange(city.code)} className="city-option">
+                                    {city.name}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    <div className="login-content" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
+                        <span>{isLoggedIn ? 'Logout' : 'Login / Signup'}</span>
+                    </div>
+                </div>
+            )}
+
+            {/* Full Taskbar for larger screens */}
             <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => navigate('/')}>
                 <Icon icon="subway:home-1" className='icon' />
                 <span className='icon-text'>Home</span>
@@ -77,7 +120,7 @@ const Taskbar = () => {
                             <img className="user-avatar" src={avatar} alt="User Avatar" />
                             <div className="welcome-container">
                                 <span className="welcome-text">Welcome,</span>
-                                <span className="user-name">{fullName}</span> {/* Display fullName */}
+                                <span className="user-name">{fullName}</span>
                             </div>
                         </div>
                         {showUserDropdown && (
@@ -94,9 +137,6 @@ const Taskbar = () => {
                         <span className='login-text'>Login/ Sign up</span>
                     </div>
                 )}
-            </div>
-            <div className='taskbar-menu'>
-                <img className="user-avatar" src={avatar} alt="User Avatar" />
             </div>
         </div>
     );

@@ -1,242 +1,357 @@
-.taskbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 0px;
-  height: 60px;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  margin: 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-::-webkit-scrollbar{
-  display:None;
-}
-
-.taskbar-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 35px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.icon {
-  font-size: 26px;
-  color: rgba(0, 0, 0, 0.5);
-  align-items: center;
-}
-
-.icon-text {
-  font-size:  13px;
-  color: rgba(0, 0, 0, 0.5);
-  font-family: Arial, fantasy;
-}
-
-.logo {
-  display: flex;
-  height: 60px;
-  margin: 0;
-  padding: 0;
-  pointer-events: none;
-}
-
-.login-reg {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 125px;
-  height: 60px;
-  margin-left: auto;
-}
-
-.logged-out-bg {
-  background-color: #3cb129;
-}
-
-.login-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0px 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.login-icon { 
-  font-size: 50px;
-  color: rgba(0, 0, 0);
-}
-
-.login-text {
-  font-size: 18px;
-  color: rgba(0, 0, 0);
-  font-weight: normal;
-}
-
-.city-text {
-  font-size: 30px;
-  color: rgba(0, 0, 0);
-  margin: auto;
-  padding: 0px;
-}
-
-.taskbar-item:hover .icon,
-.taskbar-item:hover .icon-text,
-.taskbar-item.active .icon,
-.taskbar-item.active .icon-text {
-  color: rgba(60, 177, 41);
-}
-
-.city-dropdown {
-  position: absolute;
-  top: 60px;
-  background: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 100;
-}
-
-.city-option {
-  padding: 8px 12px;
-  cursor: pointer;
-  color: #333;
-}
-
-.city-option:hover {
-  background-color: rgba(60, 177, 41, 0.1);
-}
-
-.taskbar-item.user-profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  background-color: #3cb129;
-  cursor: pointer;
-  height: 60px;
-  width:125px;
-  position: absolute;
-  right: 0;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-}
-
-.user-avatar {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  text-align: left; 
-}
-
-.welcome-text {
-  font-size: 14px;
-  color: black;
-  font-weight: bold;
-  line-height: 1; 
-}
-
-.user-name {
-  font-size: 14px;
-  color: black;
-  line-height: 1;
-}
-
-.user-dropdown {
-  position: absolute;
-  top: 60px;
-  right: 0; 
-  background: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 200; 
-  width: 125px;
-}
-
-.user-dropdown-item {
-  padding: 8px 12px;
-  cursor: pointer;
-  color: #333;
-}
-
-.user-dropdown-item:hover {
-  background-color: rgba(60, 177, 41, 0.1);
-}
-.taskbar-menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(60, 177, 41);
-  width: 125px;
-  height: 60px;
-}
-@media screen and (min-width: 1024px) {
-  .taskbar-menu {
-    display: none;
-  }
-}
-@media only screen and (min-width: 860px) and (max-width: 1024px) {
-  .taskbar-menu {
-    display: none;
-  }
-  .taskbar,
-  .logo,
-  .login-reg {
-    height: 55px;
-  }
-  .taskbar-item {
-    padding: 1rem;
-  }
-  .city-text {
+  .taskbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 0px;
+    height: 60px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
     margin: 0;
-    margin-right: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
   }
-}
-@media only screen and (min-width: 480px) and (max-width: 860px) {
-  .taskbar,
-  .logo,
-  .login-reg {
-    height: 50px;
+
+  ::-webkit-scrollbar {
+    display: none;
   }
+
   .taskbar-item {
-    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 35px;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  .city-text {
+
+  .icon {
+    font-size: 26px;
+    color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+  }
+
+  .icon-text {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: Arial, fantasy;
+  }
+
+  .logo {
+    display: flex;
+    height: 60px;
     margin: 0;
-    margin-right: 15px;
+    padding: 0;
+    pointer-events: none;
   }
-  .city-text,
-  .taskbar-menu {
-    display: none;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .taskbar-item {
-    display: none;
-  }
+
   .login-reg {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 125px;
+    height: 60px;
+    margin-left: auto;
   }
-}
+
+  .logged-out-bg {
+    background-color: #3cb129;
+  }
+
+  .login-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0px 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .login-icon {
+    font-size: 50px;
+    color: rgba(0, 0, 0);
+  }
+
+  .login-text {
+    font-size: 18px;
+    color: rgba(0, 0, 0);
+    font-weight: normal;
+  }
+
+  .city-text {
+    font-size: 30px;
+    color: rgba(0, 0, 0);
+    margin: auto;
+    padding: 0px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .taskbar-item:hover .icon,
+  .taskbar-item:hover .icon-text,
+  .taskbar-item.active .icon,
+  .taskbar-item.active .icon-text {
+    color: rgba(60, 177, 41);
+  }
+
+  .city-dropdown {
+    position: absolute;
+    top: 60px;
+    background: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 100;
+  }
+
+  .city-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .city-option:hover {
+    background-color: rgba(60, 177, 41, 0.1);
+  }
+
+  .taskbar-item.user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    background-color: #3cb129;
+    cursor: pointer;
+    height: 60px;
+    width: 125px;
+    position: absolute;
+    right: 0;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .welcome-text {
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .user-name {
+    font-size: 14px;
+    color: black;
+    line-height: 1;
+  }
+
+  .user-dropdown {
+    position: absolute;
+    align-items: left;
+    top: 60px;
+    right: 0;
+    background: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 200;
+    width: 125px;
+    font-size: 16px;
+  }
+
+  .user-dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .user-dropdown-item:hover {
+    background-color: rgba(60, 177, 41, 0.1);
+  }
+
+  .taskbar-menu {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(60, 177, 41);
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    position: absolute;
+    margin-right: 0;
+    right: 0; 
+  }
+
+  .mobile-menu-icon{
+    color: white;
+    font-size: 26px;
+    right: 0;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .taskbar-menu {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width: 860px) and (max-width: 1024px) {
+    .taskbar-menu {
+      display: none;
+    }
+    .taskbar,
+    .logo,
+    .login-reg {
+      height: 55px;
+    }
+    .taskbar-item {
+      padding: 1rem;
+    }
+  }
+
+  @media only screen and (min-width:480px) and (max-width: 859px) {
+    /* Display Hamburger Menu Icon */
+    .taskbar-menu {
+      display: flex;
+    }
+
+    /* Hide desktop taskbar items */
+    .taskbar-item,
+    .login-reg {
+      display: none;
+    }
+
+    .city-text {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      z-index: 9999;
+      width: 125px;
+    }
+
+    /* Mobile menu item styles */
+    .mobile-menu-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .mobile-menu-item:hover {
+      background-color: rgba(60, 177, 41, 0.1);
+    }
+
+    .city-dropdown {
+      position: relative; /* Ensure it flows within the document layout */
+      top: 20px; /* Add a margin or padding to push it below */
+      margin-top: 10px;
+      left: 0; /* Align dropdown to left if needed */
+      width: 100%; /* Full width for easier selection on small screens */
+  }
+
+    .city-option {
+      padding: 8px 12px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .city-option:hover {
+      background-color: rgba(60, 177, 41, 0.1);
+    }
+  }
+
+  @media only screen and (min-width:360px) and (max-width: 479px) {
+    /* Display Hamburger Menu Icon */
+    .taskbar-menu {
+      display: flex;
+    }
+
+    /* Hide desktop taskbar items */
+    .taskbar-item,
+    .login-reg {
+      display: none;
+    }
+
+    .city-text {
+      font-size: 24px;
+      margin-right: 40px;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      z-index: 9999;
+      width: 125px;
+    }
+
+    /* Mobile menu item styles */
+    .mobile-menu-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .mobile-menu-item:hover {
+      background-color: rgba(60, 177, 41, 0.1);
+    }
+
+    .logo{
+      width: 125px;
+    }
+
+    .city-dropdown {
+      position: relative; /* Ensure it flows within the document layout */
+      top: 20px; /* Add a margin or padding to push it below */
+      margin-top: 10px;
+      left: 0; /* Align dropdown to left if needed */
+      width: 100%; /* Full width for easier selection on small screens */
+  }
+
+    .city-option {
+      padding: 8px 12px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .city-option:hover {
+      background-color: rgba(60, 177, 41, 0.1);
+    }
+  }
+
+  /* Hide mobile menu when screen width is larger */
+  @media (min-width: 861px) {
+    .mobile-menu {
+      display: none;
+    }
+  }
