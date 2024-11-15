@@ -46,39 +46,42 @@ const Taskbar = () => {
 
             {/* Mobile Menu Items */}
             {isMobileMenuOpen && (
-                <div className="mobile-menu">
-                    <div className="mobile-menu-item" onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}>
-                        <span>Home</span>
-                    </div>
-                    <div className="mobile-menu-item" onClick={() => { navigate('/tracking'); setIsMobileMenuOpen(false); }}>
-                        <span>Tracking</span>
-                    </div>
-                    <div className="mobile-menu-item" onClick={() => { navigate('/tickets'); setIsMobileMenuOpen(false); }}>
-                        <span>Tickets</span>
-                    </div>
-                    <div className="mobile-menu-item" onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }}>
-                        <span>Feedback</span>
-                    </div>
-                    <div className="mobile-menu-item" onClick={() => setShowCities(!showCities)}>
-                        <span>Choose City</span>
-                    </div>
-                    <div className="mobile-menu-item" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                        <span>Login/Signup</span>
-                    </div>
-                    {showCities && (
-                        <div className="city-dropdown">
-                            {cities.map((city) => (
-                                <div key={city.code} onClick={() => handleCityChange(city.code)} className="city-option">
-                                    {city.name}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    <div className="login-content" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                        <span>{isLoggedIn ? 'Logout' : 'Login / Signup'}</span>
-                    </div>
+            <div className="mobile-menu">
+                <div className="mobile-menu-item" onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}>
+                    <span>Home</span>
                 </div>
-            )}
+                <div className="mobile-menu-item" onClick={() => { navigate('/tracking'); setIsMobileMenuOpen(false); }}>
+                    <span>Tracking</span>
+                </div>
+                <div className="mobile-menu-item" onClick={() => { navigate('/tickets'); setIsMobileMenuOpen(false); }}>
+                    <span>Tickets</span>
+                </div>
+                <div className="mobile-menu-item" onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }}>
+                    <span>Feedback</span>
+                </div>
+
+                {/* Change City Button */}
+                <div className="mobile-menu-item" onClick={() => setShowCities(!showCities)}>
+                    <span>Choose City</span>
+                </div>
+
+                {/* City Dropdown */}
+                {showCities && (
+                    <div className="city-dropdown-mobile">
+                        {cities.map((city) => (
+                            <div key={city.code} onClick={() => handleCityChange(city.code)} className="city-option">
+                                {city.name}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Login/Signup or Logout */}
+                <div className="mobile-menu-item" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
+                    <span>Login/Signup</span>
+                </div>
+            </div>
+        )}
 
             {/* Full Taskbar for larger screens */}
             <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => navigate('/')}>
