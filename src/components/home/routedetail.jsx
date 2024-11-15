@@ -128,7 +128,7 @@ const RouteDetail = () => {
                                         onChange={handleDateInput}
                                         className="routedetails-dateselect"
                                     />
-                                    <Button variant="contained" onClick={confirmTimeSelection} className="confirm-button">Confirm</Button>
+                                    <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
                                 </div>
                             )}
 

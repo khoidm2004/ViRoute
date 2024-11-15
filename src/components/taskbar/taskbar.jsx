@@ -10,8 +10,8 @@ const Taskbar = () => {
     const [showCities, setShowCities] = useState(false);
     const [cityCode, setCityCode] = useState('hn'); 
     const [showUserDropdown, setShowUserDropdown] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true); // Mobile menu toggle state
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -29,6 +29,7 @@ const Taskbar = () => {
 
     const handleLogout = () => {
         setIsLoggedIn(false);
+        setIsMobileMenuOpen(false);
     };
 
     const handleCityChange = (code) => {
@@ -47,6 +48,17 @@ const Taskbar = () => {
             {/* Mobile Menu Items */}
             {isMobileMenuOpen && (
             <div className="mobile-menu">
+                {isLoggedIn && (
+                    <div className="mobile-menu-item user-info" onClick={() => { navigate('/user_information'); setIsMobileMenuOpen(false); }}>
+                        <div className="user-info">
+                            <img className="user-avatar" src={avatar} alt="User Avatar" />
+                            <div className="welcome-container">
+                                <span className="welcome-text">Welcome,</span>
+                                <span className="user-name">{fullName}</span>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div className="mobile-menu-item" onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}>
                     <span>Home</span>
                 </div>
@@ -77,11 +89,11 @@ const Taskbar = () => {
                 )}
 
                 {/* Login/Signup or Logout */}
-                <div className="mobile-menu-item" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                    <span>Login/Signup</span>
+                <div className="mobile-menu-item" onClick={isLoggedIn ? handleLogout : () => { navigate('/login'); setIsMobileMenuOpen(false); }}>
+                    <span>{isLoggedIn ? 'Logout' : 'Login/Signup'}</span>
                 </div>
             </div>
-        )}
+            )}
 
             {/* Full Taskbar for larger screens */}
             <div className={`taskbar-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => navigate('/')}>
@@ -136,7 +148,7 @@ const Taskbar = () => {
                     </div>
                 ) : (
                     <div className="login-content" onClick={() => navigate('/login')}>
-                        <Icon icon="material-symbols:account-circle" className='login-icon'/>
+                        <img className="login-avatar" src={avatar} alt="User Avatar" />
                         <span className='login-text'>Login/ Sign up</span>
                     </div>
                 )}
