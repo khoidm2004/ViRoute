@@ -228,7 +228,7 @@
     }
   }
 
-  @media only screen and (min-width:480px) and (max-width: 859px) {
+  @media only screen and (min-width: 481px) and (max-width: 860px) {
     /* Display Hamburger Menu Icon */
     .taskbar-menu {
       display: flex;
@@ -268,26 +268,30 @@
       background-color: rgba(60, 177, 41, 0.1);
     }
 
-    .city-dropdown {
-      position: relative; /* Ensure it flows within the document layout */
-      top: 20px; /* Add a margin or padding to push it below */
-      margin-top: 10px;
-      left: 0; /* Align dropdown to left if needed */
-      width: 100%; /* Full width for easier selection on small screens */
+    .city-dropdown-mobile {
+      position: absolute;
+      top: 0;
+      left: -160px; /* Điều chỉnh giá trị này để căn chỉnh chính xác với chữ "Choose City" */
+      width: 140px;
+      background: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      z-index: 10;
   }
 
-    .city-option {
+  /* Căn chỉnh các tùy chọn thành phố */
+  .city-option {
       padding: 8px 12px;
       cursor: pointer;
       color: #333;
-    }
-
-    .city-option:hover {
-      background-color: rgba(60, 177, 41, 0.1);
-    }
   }
 
-  @media only screen and (min-width:360px) and (max-width: 479px) {
+  .city-option:hover {
+      background-color: rgba(60, 177, 41, 0.1);
+  }
+}
+
+  @media only screen and (max-width: 480px) {
     /* Display Hamburger Menu Icon */
     .taskbar-menu {
       display: flex;
@@ -330,24 +334,28 @@
       width: 125px;
     }
 
-    .city-dropdown {
-      position: relative; /* Ensure it flows within the document layout */
-      top: 20px; /* Add a margin or padding to push it below */
-      margin-top: 10px;
-      left: 0; /* Align dropdown to left if needed */
-      width: 100%; /* Full width for easier selection on small screens */
+    .city-dropdown-mobile {
+      position: absolute;
+      top: 0;
+      left: -160px; /* Điều chỉnh giá trị này để căn chỉnh chính xác với chữ "Choose City" */
+      width: 140px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      padding: 10px;
+      z-index: 10;
   }
 
-    .city-option {
+  /* Căn chỉnh các tùy chọn thành phố */
+  .city-option {
       padding: 8px 12px;
       cursor: pointer;
       color: #333;
-    }
-
-    .city-option:hover {
-      background-color: rgba(60, 177, 41, 0.1);
-    }
   }
+
+  .city-option:hover {
+      background-color: rgba(60, 177, 41, 0.1);
+  }
+}
 
   /* Hide mobile menu when screen width is larger */
   @media (min-width: 861px) {
