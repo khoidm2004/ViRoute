@@ -1,20 +1,3 @@
-.map-container {
-  height: 160%; 
-  max-height: 400px;
-  width: 100%; 
-  position: relative;
-  align-items: center;
-  bottom: 0;
-}
-.map-routedetail {
-  top: 60px;
-  right: 0;
-  overflow: hidden;
-  width: calc(100% - 440px); 
-  height: calc(100vh - 60px);
-  position: absolute;
-}
-
 .map-container-tracking {
   height: 400px;
   width: 100%; 
