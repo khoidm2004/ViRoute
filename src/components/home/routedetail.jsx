@@ -1,37 +1,40 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 import { Select, MenuItem, Button } from '@mui/material';
 import './routedetail.css';
 import '../map/map.css';
 import Map from '../map/map';
-import useRouteStore from '../../stores/routeStore';
 
 const RouteDetail = () => {
     const navigate = useNavigate();
     const today = new Date().toISOString().split("T")[0];
+    const [start, setStart] = useState('');
+    const [destination, setDestination] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedDate, setSelectedDate] = useState(today);
     const [showTimeDropdown, setShowTimeDropdown] = useState(false);
-    const { start, destination, setStart, setDestination, swapLocations } = useRouteStore();
 
     const findBusRoute = () => {
         const busRoute = `${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
         navigate(`/${busRoute}`);
     };
 
+    const swapLocations = () => {
+        setStart(destination);
+        setDestination(start);
+    };
+
     const toggleTimeDropdown = () => {
         setShowTimeDropdown(!showTimeDropdown);
-      };
+    };
     
     const handleTimeChange = (event) => {
-        const selectedOption = event.target.value;
-        setSelectedTime(selectedOption);
+        setSelectedTime(event.target.value);
     };
     
     const handleDateInput = (event) => {
-        const inputDate = event.target.value;
-        setSelectedDate(inputDate);
+        setSelectedDate(event.target.value);
     };
     
     const confirmTimeSelection = () => {
@@ -122,10 +125,10 @@ const RouteDetail = () => {
                                     <input
                                         type="date"
                                         value={selectedDate} 
-                                        onChange={handleDateInput}  // Updates selectedDate when changed
+                                        onChange={handleDateInput}
                                         className="routedetails-dateselect"
                                     />
-                                        <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
+                                    <Button variant="contained" onClick={confirmTimeSelection} className="confirm-button">Confirm</Button>
                                 </div>
                             )}
 
