@@ -4,6 +4,7 @@ import './register.css';
 import HidePass from '../hidepass/hidePass.jsx';
 import SuccessNotify from '../notification/noti_success.jsx';
 import Footer from '../footer/footer.jsx';
+import useRegister from '../../services/useRegister';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,15 +16,30 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setNotificationMessage('Passwords do not match');
+      setShowNotification(true);
+      return;
+    }
 
-    setShowNotification(true); // Show success notification
-    setTimeout(() => {
-      resetForm();
-      navigate('/login');
-    }, 2000);
+    const userData = { name, email, phoneNumber, password };
+    const result = await useRegister(userData);
+
+    if (result.success) {
+      setNotificationMessage(result.message);
+      setShowNotification(true);
+      setTimeout(() => {
+        resetForm();
+        navigate('/login');
+      }, 2000);
+    } else {
+      setNotificationMessage(result.message);
+      setShowNotification(true);
+    }
   };
 
   const resetForm = () => {
@@ -38,6 +54,7 @@ const Register = () => {
   };
 
   return (
+    <>
     <div className='register-page'>
       <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => navigate('/')} alt="Logo" />
       <form className='register-container'>
@@ -80,8 +97,10 @@ const Register = () => {
         />
         <input type='button' className='button' value="Register" onClick={handleRegister} />
       </form>
-      {showNotification && <SuccessNotify message="Register Successful!" />}
+      {showNotification && <SuccessNotify message={notificationMessage} />}
     </div>
+    <Footer/>
+    </>
   );
 };
 
