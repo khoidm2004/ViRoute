@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 
 const Footer = () => {
   return (
-    <footer>
+    <div className='footer'>
       <div className='footer-item-section'>
         <span className="footer-heading">About </span>
         <span className="footer-text">Company</span>
@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
       </div>
       {/*<h1 className='copyright'>@Project</h1>*/}
-    </footer>
+    </div>
     );
 };
 export default Footer;

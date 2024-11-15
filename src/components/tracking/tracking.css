@@ -1,4 +1,8 @@
-/* Default Styles */
+.tracking-container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
 .search-tracking {
   width: 152vh;
   display: flex;
@@ -58,7 +62,9 @@
   }
 }
 
+
 @media only screen and (min-width: 481px) and (max-width: 860px) {
+
   .search-tracking {
     padding: 8px 16px;
     margin-block: 20px;

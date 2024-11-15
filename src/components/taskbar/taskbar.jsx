@@ -119,7 +119,7 @@ const Taskbar = () => {
             <div className={`login-reg ${!isLoggedIn ? 'logged-out-bg' : ''}`}>
                 {isLoggedIn ? (
                     <div className="taskbar-item user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
-                        <div className="user-info">
+                        <div className="user-info"> 
                             <img className="user-avatar" src={avatar} alt="User Avatar" />
                             <div className="welcome-container">
                                 <span className="welcome-text">Welcome,</span>
