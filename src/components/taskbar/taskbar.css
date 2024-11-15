@@ -54,9 +54,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 0 10px;
     width: 125px;
     height: 60px;
     margin-left: auto;
+  }
+
+  .login-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
   }
 
   .logged-out-bg {
@@ -74,15 +82,9 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  .login-icon {
-    font-size: 50px;
-    color: rgba(0, 0, 0);
-  }
-
   .login-text {
     font-size: 18px;
     color: rgba(0, 0, 0);
-    font-weight: normal;
   }
 
   .city-text {
@@ -150,19 +152,24 @@
     display: flex;
     flex-direction: column;
     text-align: left;
+    max-width: 80px;
+    max-height: 50px;
+    overflow: hidden;
   }
 
   .welcome-text {
     font-size: 14px;
     color: black;
     font-weight: bold;
-    line-height: 1;
+    line-height: 1.2;
   }
 
   .user-name {
     font-size: 14px;
     color: black;
-    line-height: 1;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .user-dropdown {
@@ -289,6 +296,43 @@
   .city-option:hover {
       background-color: rgba(60, 177, 41, 0.1);
   }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+
+  .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+
+  .welcome-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 40px; 
+      max-width: 100px; 
+      overflow: hidden;
+  }
+
+  .welcome-text {
+      font-size: 14px;
+      color: #000;
+      font-weight: bold;
+      line-height: 1.2;
+  }
+
+  .user-name {
+      font-size: 14px;
+      color: #000;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 }
 
   @media only screen and (max-width: 480px) {
@@ -354,6 +398,43 @@
 
   .city-option:hover {
       background-color: rgba(60, 177, 41, 0.1);
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 40px; /* Adjust as needed */
+    max-width: 100px; /* Ensure it fits within the layout */
+    overflow: hidden;
+}
+
+.welcome-text {
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #000;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
   }
 }
 

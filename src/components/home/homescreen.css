@@ -42,6 +42,8 @@
   outline: none;
   border: none;
   background: transparent;
+  width: 100%; /* Ensures input field takes the full width */
+  padding-left: 10px;
 }
 
 /* Styling for the swap icon */
