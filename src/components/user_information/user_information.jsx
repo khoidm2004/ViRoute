@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
 import ErrorNotify, { triggerErrorNotification } from '../notification/noti_error.jsx';
@@ -142,9 +142,9 @@ function UserInformation() {
               <div className="form-group">
                 <label>Current Password</label>
                 <HidePass
-                  values={{ password: currentPassword, showPassword: false }}
+                  values={{ password: currentPassword, showPassword: showCurrentPassword }}
                   handlePasswordChange={(e) => setCurrentPassword(e.target.value)}
-                  handleClickShowPassword={() => {}}
+                  handleClickShowPassword={() => setShowCurrentPassword(!showCurrentPassword)}
                   handleMouseDownPassword={(e) => e.preventDefault()}
                 />
               </div>
