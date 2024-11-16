@@ -2,39 +2,22 @@ import React, { useState } from 'react';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
 import ErrorNotify, { triggerErrorNotification } from '../notification/noti_error.jsx';
-import useUserInformationStore from '../../stores/userinfoStore';
 import HidePass from '../hidepass/hidePass.jsx';
 
 function UserInformation() {
-  const {
-    activeTab,
-    setActiveTab,
-    avatar,
-    setAvatar,
-    userId,
-    selectedFile,
-    setSelectedFile,
-    fullName,
-    setFullName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    currentPassword,
-    newPassword,
-    confirmPassword,
-    setCurrentPassword,
-    setNewPassword,
-    setConfirmPassword,
-    resetPasswords,
-  } = useUserInformationStore();
-
-  // Local states to manage temp avatar and temp full name before saving
+  const [activeTab, setActiveTab] = useState('general');
+  const [avatar, setAvatar] = useState('../images/Default_avatar.png');
+  const [userId] = useState('123456487');
+  const [selectedFile, setSelectedFile] = useState(null);
   const [tempAvatar, setTempAvatar] = useState(avatar);
-  const [tempFullName, setTempFullName] = useState(fullName); // Temporary full name state
-  const [nameError, setNameError] = useState(''); // Error message for name validation
-
-  // Local state to manage password visibility
+  const [fullName, setFullName] = useState('');
+  const [tempFullName, setTempFullName] = useState(fullName);
+  const [nameError, setNameError] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -51,21 +34,22 @@ function UserInformation() {
   };
 
   const handleSaveChanges = () => {
-    // Validate the tempFullName before saving
     if (/^[A-Za-z\s]*$/.test(tempFullName)) {
       setAvatar(tempAvatar);
-      setFullName(tempFullName); // Update global store fullName
+      setFullName(tempFullName);
       triggerSuccessNotification('Profile updated successfully!');
-      setNameError(''); // Clear error if successful
+      setNameError('');
     } else {
-      setNameError('Full name can only contain letters and spaces.'); // Set error if invalid
+      setNameError('Full name can only contain letters and spaces.');
     }
   };
 
   const handleChangePassword = () => {
     if (newPassword === confirmPassword) {
       triggerSuccessNotification('Password changed successfully!');
-      resetPasswords(); // Reset password fields after success
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
     } else {
       alert('Passwords do not match!');
     }
@@ -76,10 +60,16 @@ function UserInformation() {
       <h2 className="account-info-header">Account Information</h2>
       <div className="settings-box">
         <div className="tabs-container">
-          <button className={activeTab === 'general' ? 'active' : ''} onClick={() => setActiveTab('general')}>
+          <button
+            className={activeTab === 'general' ? 'active' : ''}
+            onClick={() => setActiveTab('general')}
+          >
             General
           </button>
-          <button className={activeTab === 'changePassword' ? 'active' : ''} onClick={() => setActiveTab('changePassword')}>
+          <button
+            className={activeTab === 'changePassword' ? 'active' : ''}
+            onClick={() => setActiveTab('changePassword')}
+          >
             Change Password
           </button>
         </div>
@@ -90,7 +80,7 @@ function UserInformation() {
               <div className="balance-avatar-container">
                 <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
-                    <img src={tempAvatar} alt="Avatar" /> {/* Show temp avatar */}
+                    <img src={tempAvatar} alt="Avatar" />
                   </div>
                   <input
                     type="file"
@@ -100,9 +90,7 @@ function UserInformation() {
                     onChange={handleFileChange}
                   />
                 </div>
-                <div className="top-text">
-                  ID: {userId}
-                </div>
+                <div className="top-text">ID: {userId}</div>
                 <div className="top-text">
                   <label>Balance: 100 Euro</label>
                 </div>
@@ -111,11 +99,11 @@ function UserInformation() {
                 <label>Full Name</label>
                 <input
                   type="text"
-                  value={tempFullName} // Use tempFullName for input
+                  value={tempFullName}
                   placeholder="Enter your full name"
-                  onChange={(e) => setTempFullName(e.target.value)} // Update tempFullName locally
+                  onChange={(e) => setTempFullName(e.target.value)}
                 />
-                {nameError && <span className="error-message">{nameError}</span>} {/* Show error if invalid */}
+                {nameError && <span className="error-message">{nameError}</span>}
               </div>
               <div className="form-group">
                 <label>Email</label>

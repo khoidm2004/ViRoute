@@ -21,7 +21,7 @@ const Homescreen = () => {
   const [error, setError] = useState('');
 
   const findbusroute = () => {
-    const busroute = `/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
+    const busroute = `/route/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
 
