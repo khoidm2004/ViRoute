@@ -4,40 +4,34 @@ import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_
 import ErrorNotify, { triggerErrorNotification } from '../notification/noti_error.jsx';
 import useUserInformationStore from '../../stores/userinfoStore';
 import HidePass from '../hidepass/hidePass.jsx';
+import authStore from '../../stores/authStore.js';
 
 function UserInformation() {
+  const user = authStore((state) => state.user);
   const {
     activeTab,
     setActiveTab,
     avatar,
     setAvatar,
-    userId,
     selectedFile,
     setSelectedFile,
-    fullName,
-    setFullName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    currentPassword,
-    newPassword,
-    confirmPassword,
-    setCurrentPassword,
-    setNewPassword,
-    setConfirmPassword,
+
     resetPasswords,
   } = useUserInformationStore();
-
-  // Local states to manage temp avatar and temp full name before saving
+  
   const [tempAvatar, setTempAvatar] = useState(avatar);
-  const [tempFullName, setTempFullName] = useState(fullName); // Temporary full name state
-  const [nameError, setNameError] = useState(''); // Error message for name validation
+  const [tempFullName, setTempFullName] = useState(''); 
+  const [nameError, setNameError] = useState(''); 
+  const [fullName, setFullName] = useState('')
 
-  // Local state to manage password visibility
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -55,11 +49,11 @@ function UserInformation() {
     // Validate the tempFullName before saving
     if (/^[A-Za-z\s]*$/.test(tempFullName)) {
       setAvatar(tempAvatar);
-      setFullName(tempFullName); // Update global store fullName
+      setFullName(tempFullName); 
       triggerSuccessNotification('Profile updated successfully!');
-      setNameError(''); // Clear error if successful
+      setNameError(''); 
     } else {
-      setNameError('Full name can only contain letters and spaces.'); // Set error if invalid
+      setNameError('Full name can only contain letters and spaces.'); 
     }
   };
 
@@ -73,6 +67,7 @@ function UserInformation() {
   };
 
   return (
+    
     <div className="account-settings-container">
       <h2 className="account-info-header">Account Information</h2>
       <div className="settings-box">
@@ -102,10 +97,10 @@ function UserInformation() {
                   />
                 </div>
                 <div className="top-text">
-                  ID: {userId}
+                  ID: {user.userID}
                 </div>
                 <div className="top-text">
-                  <label>Balance: 100 Euro</label>
+                  <label>Balance: {user.balance} Euro</label>
                 </div>
               </div>
               <div className="form-group">
@@ -113,7 +108,7 @@ function UserInformation() {
                 <input
                   type="text"
                   value={tempFullName} // Use tempFullName for input
-                  placeholder="Enter your full name"
+                  placeholder={user.fullName}
                   onChange={(e) => setTempFullName(e.target.value)} // Update tempFullName locally
                 />
                 {nameError && <span className="error-message">{nameError}</span>} {/* Show error if invalid */}
@@ -123,7 +118,7 @@ function UserInformation() {
                 <input
                   type="email"
                   value={email}
-                  placeholder="Enter your email"
+                  placeholder={user.userEmail}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>

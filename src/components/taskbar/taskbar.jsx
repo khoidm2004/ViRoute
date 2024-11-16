@@ -3,14 +3,15 @@ import './Taskbar.css';
 import { Icon } from '@iconify/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useUserInformationStore from '../../stores/userinfoStore';
+import authStore from '../../stores/authStore';
 
 const Taskbar = () => {
-    const { avatar, fullName } = useUserInformationStore(); 
+    const user = authStore((state) => state.user);
+    const { avatar} = useUserInformationStore(); 
     const [activeItem, setActiveItem] = useState('');
     const [showCities, setShowCities] = useState(false);
     const [cityCode, setCityCode] = useState('hn'); 
     const [showUserDropdown, setShowUserDropdown] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
@@ -28,7 +29,7 @@ const Taskbar = () => {
     }, [location.pathname]);
 
     const handleLogout = () => {
-        setIsLoggedIn(false);
+        authStore.getState().logout();
         setIsMobileMenuOpen(false);
     };
 
@@ -48,13 +49,13 @@ const Taskbar = () => {
             {/* Mobile Menu Items */}
             {isMobileMenuOpen && (
             <div className="mobile-menu">
-                {isLoggedIn && (
+                { user && (
                     <div className="mobile-menu-item user-info" onClick={() => { navigate('/user_information'); setIsMobileMenuOpen(false); }}>
                         <div className="user-info">
                             <img className="user-avatar" src={avatar} alt="User Avatar" />
                             <div className="welcome-container">
                                 <span className="welcome-text">Welcome,</span>
-                                <span className="user-name">{fullName}</span>
+                                <span className="user-name">{user.fullName}</span>
                             </div>
                         </div>
                     </div>
@@ -89,8 +90,8 @@ const Taskbar = () => {
                 )}
 
                 {/* Login/Signup or Logout */}
-                <div className="mobile-menu-item" onClick={isLoggedIn ? handleLogout : () => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                    <span>{isLoggedIn ? 'Logout' : 'Login/Signup'}</span>
+                <div className="mobile-menu-item" onClick={ user ?  handleLogout : () => { navigate('/login'); setIsMobileMenuOpen(false); }}>
+                    <span>{user ? 'Logout' : 'Login/Signup'}</span>
                 </div>
             </div>
             )}
@@ -128,19 +129,19 @@ const Taskbar = () => {
             <div className="city-text">
                 <span>{cityCode === 'hn' ? 'Hanoi' : 'Ho Chi Minh'}</span>
             </div>
-            <div className={`login-reg ${!isLoggedIn ? 'logged-out-bg' : ''}`}>
-                {isLoggedIn ? (
+            <div className={`login-reg ${! user ? 'logged-out-bg' : ''}`}>
+                { user ? (
                     <div className="taskbar-item user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
                         <div className="user-info"> 
                             <img className="user-avatar" src={avatar} alt="User Avatar" />
                             <div className="welcome-container">
                                 <span className="welcome-text">Welcome,</span>
-                                <span className="user-name">{fullName}</span>
+                                <span className="user-name">{user.fullName}</span>
                             </div>
                         </div>
                         {showUserDropdown && (
                             <div className="user-dropdown">
-                                <div className="user-dropdown-item" onClick={() => navigate('/user_information')}>Edit Profile</div>
+                                <div className="user-dropdown-item" onClick={() => navigate(`/${user.userID}`)}>Edit Profile</div>
                                 <div className="user-dropdown-item" onClick={() => navigate('/feedback')}>Feedback</div>
                                 <div className="user-dropdown-item" onClick={handleLogout}>Logout</div>
                             </div>

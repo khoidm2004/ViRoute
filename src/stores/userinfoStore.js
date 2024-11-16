@@ -1,4 +1,4 @@
-// userinfoStore.js
+// temporary
 import { create } from 'zustand';
 
 const useUserInformationStore = create((set) => ({
@@ -12,8 +12,7 @@ const useUserInformationStore = create((set) => ({
   selectedFile: null,
   setSelectedFile: (file) => set({ selectedFile: file }),
 
-  // Temporary fields for unsaved changes
-  tempFullName: '', // Store temp full name here
+  tempFullName: '', 
   setTempFullName: (name) => set({ tempFullName: name }),
 
   fullName: '',
@@ -25,7 +24,6 @@ const useUserInformationStore = create((set) => ({
   phone: '',
   setPhone: (phone) => set({ phone }),
 
-  // New password states
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',
@@ -33,14 +31,12 @@ const useUserInformationStore = create((set) => ({
   setNewPassword: (password) => set({ newPassword: password }),
   setConfirmPassword: (password) => set({ confirmPassword: password }),
 
-  // Function to reset passwords after successful change
   resetPasswords: () => set({
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   }),
 
-  // Function to apply temp full name to the main fullName
   applyTempFullName: () => set((state) => ({ fullName: state.tempFullName })),
 }));
 

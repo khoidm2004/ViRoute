@@ -25,7 +25,13 @@ const SuccessNotify = ({ message }) => {
 
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer
+        style={{
+          width: '90%', // Makes it take 90% of the viewport width for smaller screens
+          maxWidth: '320px', // Maximum width for larger screens
+          margin: '0 auto', // Center the notification horizontally
+        }}
+      />
     </div>
   );
 };
@@ -33,7 +39,7 @@ const SuccessNotify = ({ message }) => {
 export const triggerSuccessNotification = (message) => {
   toast.success(message, {
     position: "top-right",
-    autoClose: 3000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

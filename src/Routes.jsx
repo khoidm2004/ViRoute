@@ -16,15 +16,14 @@ function AppRoutes() {
     return (
         <Routes>
           <Route path="/" element={<><Taskbar/><Homescreen/></>} />
-          <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
           <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
           <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>   {/*<Taskbar/> */}
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
-          <Route path="/map" element={<><Map/></>} />    
-          <Route path="/user_information" element={<><Taskbar/><UserInformation/></>} />
-          <Route path="/footer" element={<Footer/>}/>
+
+          <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
+          <Route path="/route/:route" element={<><Taskbar/><RouteDetail/></>} />
         </Routes>
     );
   };
