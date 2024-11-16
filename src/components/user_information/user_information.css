@@ -137,7 +137,9 @@
     color: #000; /* Black text */
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); /* Box shadow */
   }
-  
+  .form-group input::placeholder {
+    color:#000;
+  }
   /* Button styling for save button */
   .save-button {
     background-color: rgba(60, 177, 41);
