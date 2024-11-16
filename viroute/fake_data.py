@@ -20,7 +20,7 @@ class UserInformation:
         self.phoneNumber = phoneNumber
         self.password = password
         self.__userID = f"{self.dateofbirth.strftime('%d%m%y')}{phoneNumber[-4:]}" #format userID: ddmmyy + last 4 digits of phone number. And make it private
-        self.balance = 0
+        self.__balance = 0
         self.citizenship = "Vietnam"
         self.dateofbirth = datetime.strptime(dateofbirth, '%d%m%Y')
     
@@ -33,6 +33,20 @@ class UserInformation:
     def change_email(self, newEmail):
         self.userEmail = newEmail
     
+    def change_passweord(self, password):
+        self.password = password
+        
+    def change_phone(self, newPhone):
+        self.phoneNumber = newPhone
+        
+    def add_balance(self, amount):
+        self.__balance += amount
+        
+    def get_balance(self):
+        return self.__balance
+    
+    def __str__(self): #return user information
+        return f"User: {self.fullName}\nEmail: {self.userEmail}\nPhone: {self.phoneNumber} \nDate of Birth: {self.dateofbirth}\nCitizenship: {self.citizenship}\nBalance: {self.__balance}"
     #etc ...    
 
 
