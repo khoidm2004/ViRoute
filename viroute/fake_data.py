@@ -47,7 +47,7 @@ class UserInformation:
     
     def __str__(self): #return user information
         return f"User: {self.fullName}\nEmail: {self.userEmail}\nPhone: {self.phoneNumber} \nDate of Birth: {self.dateofbirth}\nCitizenship: {self.citizenship}\nBalance: {self.__balance}"
-    #etc ...    
+    #etc ...
 
 
 # Fake data
