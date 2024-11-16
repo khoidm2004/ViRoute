@@ -13,7 +13,7 @@ django.setup()
 from virouteapp.models import Bus, Metro, Ticket, Account, User, UserTicket, AccountHasUser  
 
 #Create user information setting IRL 
-class User:
+class UserInformation:
     def __init__(self, fullName, userEmail, phoneNumber, password, dateofbirth="27-01-2003"):
         self.fullName = fullName
         self.userEmail = userEmail
@@ -35,7 +35,7 @@ class User:
     
     #etc ...    
 
-    
+
 # Fake data
 fake = Faker()
 data = {
