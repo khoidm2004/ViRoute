@@ -35,6 +35,7 @@ function UserInformation() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -111,6 +112,7 @@ function UserInformation() {
                   <label>Balance: {user.balance} Euro</label>
                 </div>
               </div>
+              <form onSubmit={handleSaveChanges}>
               <div className="form-group">
                 <label>Full Name</label>
                 <input
@@ -133,20 +135,22 @@ function UserInformation() {
               <div className="form-group">
                 <label>Mobile Phone</label>
                 <input
-                  type="text"
+                  type="tel"
                   value={phone}
                   placeholder="Enter your mobile phone"
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
-              <button className="save-button" onClick={handleSaveChanges}>
+              <button type='submit' className="save-button">
                 Save changes
               </button>
+              </form>
             </div>
           )}
 
           {activeTab === 'changePassword' && (
             <div className="change-password-tab">
+              <form onSubmit={handleChangePassword}>
               <div className="form-group">
                 <label>Current Password</label>
                 <HidePass
@@ -174,9 +178,10 @@ function UserInformation() {
                   handleMouseDownPassword={(e) => e.preventDefault()}
                 />
               </div>
-              <button className="save-button" onClick={handleChangePassword}>
+              <button type='submit' className="save-button" >
                 Change password
               </button>
+              </form>
             </div>
           )}
         </div>

@@ -50,7 +50,7 @@ const Taskbar = () => {
             {isMobileMenuOpen && (
             <div className="mobile-menu">
                 { user && (
-                    <div className="mobile-menu-item user-info" onClick={() => { navigate(`/setting/${user.userID}`); setIsMobileMenuOpen(false); }}>
+                    <div className="mobile-menu-item user-info" onClick={() => { navigate(`/${user.userID}`); setIsMobileMenuOpen(false); }}>
                         <div className="user-info">
                             <img className="user-avatar" src={avatar} alt="User Avatar" />
                             <div className="welcome-container">
@@ -141,7 +141,7 @@ const Taskbar = () => {
                         </div>
                         {showUserDropdown && (
                             <div className="user-dropdown">
-                                <div className="user-dropdown-item" onClick={() => navigate(`/setting/${user.userID}`)}>Edit Profile</div>
+                                <div className="user-dropdown-item" onClick={() => navigate(`/${user.userID}`)}>Edit Profile</div>
                                 <div className="user-dropdown-item" onClick={() => navigate('/feedback')}>Feedback</div>
                                 <div className="user-dropdown-item" onClick={handleLogout}>Logout</div>
                             </div>

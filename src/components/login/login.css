@@ -22,7 +22,9 @@
   border-radius: 20px;
   text-align: center;
 }
-
+.login-container input::placeholder {
+  font-size: 25px;
+}
 .login-button {
   display: flex;
   padding: 16px 20px;

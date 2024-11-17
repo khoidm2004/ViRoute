@@ -22,7 +22,7 @@ function AppRoutes() {
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
 
-          <Route path="/setting/:id" element={<><Taskbar/><UserInformation/></>} />
+          <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
           <Route path="/route/:route" element={<><Taskbar/><RouteDetail/></>} />
         </Routes>
     );

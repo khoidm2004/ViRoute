@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import SuccessNotify from '../notification/noti_success';
-import ErrorNotify from '../notification/noti_error';
+import ErrorNotify from '../notification/noti_error'; // Import ErrorNotify
 import PopupRepass from '../repass/repass';
 import HidePassLogin from '../hidepass/hidePassLogin';
 import Footer from '../footer/footer';
@@ -17,16 +17,10 @@ const Login = () => {
   });
   const [showNotification, setShowNotification] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState(''); // Error message state
   const { login: setUser } = authStore();
   const navigate = useNavigate();
 
-  const triggerErrorMessage = () => {
-    setErrorMessage(false);
-    setTimeout(() => {
-      setShowErrorNoti(true);
-    }, 100);
-  };
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -38,7 +32,7 @@ const Login = () => {
         navigate('/');
       }, 2000);
     } catch (error) {
-      triggerErrorMessage('Invalid login credentials. Please try again.'); 
+      setErrorMessage('Invalid login credentials. Please try again.'); // Set error message
     }
   };
 
