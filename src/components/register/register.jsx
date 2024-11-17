@@ -9,11 +9,6 @@ import useRegister from '../../services/useRegister';
 
 const Register = () => {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
@@ -26,19 +21,26 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       setNotificationMessage('Passwords do not match');
       setShowErrorNotification(true); 
       return;
     }
 
-    const userData = { fullName, userEmail, phoneNumber, password };
+    const userData = {
+      fullName: formData.fullName,
+      userEmail: formData.userEmail,
+      phoneNumber: formData.phoneNumber,
+      password: formData.password,
+    };
     const result = await useRegister(userData);
 
     if (result.success) {
@@ -53,13 +55,14 @@ const Register = () => {
       setShowErrorNotification(true); 
     }
   };
-
   const resetForm = () => {
-    setFullName('');
-    setUserEmail('');
-    setPhoneNumber('');
-    setPassword('');
-    setConfirmPassword('');
+    setFormData({
+      fullName: '',
+      userEmail: '',
+      phoneNumber: '',
+      password: '',
+      confirmPassword: '',
+    });
     setShowPassword(false);
     setShowConfirmPassword(false);
     setShowSuccessNotification(false);
@@ -77,36 +80,36 @@ const Register = () => {
             type='text'
             className='reg-input-field'
             placeholder='Name'
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={formData.fullName}
+            onChange={handleInputChange}
           />
           <label className='register-text'>Email:</label>
           <input
             type='email'
             className='reg-input-field'
             placeholder='Email'
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
+            value={formData.userEmail}
+            onChange={handleInputChange}
           />
           <label className='register-text'>Phone number:</label>
           <input
             type='tel'
             className='reg-input-field'
             placeholder='Phone number'
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
           />
           <label className='register-text'>Password:</label>
           <HidePass
-            values={{ password, showPassword }}
+            values={{ password: formData.password, showPassword }}
             handleClickShowPassword={() => setShowPassword(!showPassword)}
-            handlePasswordChange={(e) => setPassword(e.target.value)}
+            handlePasswordChange={(e) => handleInputChange({ target: { name: 'password', value: e.target.value } })}
           />
           <label className='register-text'>Confirm password:</label>
           <HidePass
-            values={{ password: confirmPassword, showPassword: showConfirmPassword }}
+            values={{ password: formData.confirmPassword, showPassword: showConfirmPassword }}
             handleClickShowPassword={() => setShowConfirmPassword(!showConfirmPassword)}
-            handlePasswordChange={(e) => setConfirmPassword(e.target.value)}
+            handlePasswordChange={(e) => handleInputChange({ target: { name: 'confirmPassword', value: e.target.value } })}
           />
           <input type='button' className='button' value="Register" onClick={handleRegister} />
         </form>
