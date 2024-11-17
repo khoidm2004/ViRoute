@@ -30,16 +30,15 @@
   margin-top: 5%;
 }
 
-.button {
+.reg-button {
   display: flex;
   padding: 16px; 
-  width: 40%;
+  width: 28%;
   background-color: #5F8F55;
   font-size: 20px; 
   border: none;
   border-radius: 40px; 
   margin-top: 20px;
-  cursor: pointer;
 }
 
 .text {

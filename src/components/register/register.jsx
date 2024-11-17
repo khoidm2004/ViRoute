@@ -73,13 +73,14 @@ const Register = () => {
     <>
       <div className='register-page'>
         <img className='logo-login' src='./images/ViRoute_green.png' onClick={() => navigate('/')} alt="Logo" />
-        <form className='register-container'>
+        <form className='register-container' onSubmit={handleRegister}>
           <label className='header'>Register</label>
           <label className='register-text'>Name:</label>
           <input
             type='text'
             className='reg-input-field'
             placeholder='Name'
+            name='fullName'
             value={formData.fullName}
             onChange={handleInputChange}
           />
@@ -88,6 +89,7 @@ const Register = () => {
             type='email'
             className='reg-input-field'
             placeholder='Email'
+            name='userEmail'
             value={formData.userEmail}
             onChange={handleInputChange}
           />
@@ -96,6 +98,7 @@ const Register = () => {
             type='tel'
             className='reg-input-field'
             placeholder='Phone number'
+            name='phoneNumber'
             value={formData.phoneNumber}
             onChange={handleInputChange}
           />
@@ -111,7 +114,7 @@ const Register = () => {
             handleClickShowPassword={() => setShowConfirmPassword(!showConfirmPassword)}
             handlePasswordChange={(e) => handleInputChange({ target: { name: 'confirmPassword', value: e.target.value } })}
           />
-          <input type='button' className='button' value="Register" onClick={handleRegister} />
+          <button type='submit' className='reg-button'>Register</button>
         </form>
         {showSuccessNotification && <SuccessNotify message={notificationMessage} />}
         {showErrorNotification && <ErrorNotify message={notificationMessage} />}
