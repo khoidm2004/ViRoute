@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket list</title>
+</head>
+<body>
+    <h1>Ticket list</h1>
+    <ul>
+        {% for ticket in tickets %}
+            <li>{{ ticket.title }} - {{ ticket.created_at }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
