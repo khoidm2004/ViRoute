@@ -6,3 +6,42 @@ viroute/virouteapp/__pycache__/admin.cpython-312.pyc
 viroute/virouteapp/__pycache__/models.cpython-312.pyc
 viroute/virouteapp/__pycache__/views.cpython-312.pyc
 viroute/virouteapp/migrations/0001_initial.py
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.sqlite3-journal
+*.db-journal
+media/
+staticfiles/
+static/
