@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
 import ErrorNotify, { triggerErrorNotification } from '../notification/noti_error.jsx';
@@ -8,6 +9,11 @@ import authStore from '../../stores/authStore.js';
 
 function UserInformation() {
   const user = authStore((state) => state.user);
+  const navigate = useNavigate();
+  if (!user) {
+    navigate('/'); 
+    return null; 
+  }
   const {
     activeTab,
     setActiveTab,
@@ -32,6 +38,8 @@ function UserInformation() {
 
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
