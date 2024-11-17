@@ -143,27 +143,7 @@
     position: absolute;
 }
 
-@media only screen and (max-width: 480px) {
-    .sidebar {
-        width: 90%; 
-        position: absolute; 
-        top: 60px;
-        left: 0;
-        box-shadow: none;
-    }
-
-    .map-routedetail {
-        display: none;
-    }
-
-    .route-info {
-        max-height: unset;
-        overflow-y: visible; 
-        padding-right: 0; 
-    }
-}
-
-@media only screen and (min-width: 481px) and (max-width: 860px) {
+@media only screen and (max-width: 860px) {
     .sidebar {
         width: 90%; 
         position: absolute; 

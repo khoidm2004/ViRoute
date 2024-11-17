@@ -150,9 +150,9 @@ function UserInformation() {
               <div className="form-group">
                 <label>Current Password</label>
                 <HidePass
-                  values={{ password: currentPassword, showPassword: false }}
+                  values={{ password: currentPassword, showPassword: showCurrentPassword }}
                   handlePasswordChange={(e) => setCurrentPassword(e.target.value)}
-                  handleClickShowPassword={() => {}}
+                  handleClickShowPassword={() => setShowCurrentPassword(!showCurrentPassword)}
                   handleMouseDownPassword={(e) => e.preventDefault()}
                 />
               </div>
