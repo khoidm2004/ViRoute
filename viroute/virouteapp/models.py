@@ -11,11 +11,11 @@ class Vehicle(models.Model):
 
 class Bus(Vehicle):
     bus_id = models.CharField(max_length=20, primary_key=True)
-    bus_plate = models.CharField(max_length=20, unique=True)
+    #bus_plate = models.CharField(max_length=20, unique=True)
 
 class Metro(Vehicle):
     metro_id = models.CharField(max_length=20, primary_key=True)
-    metro_plate = models.CharField(max_length=20, unique=True)
+    #metro_plate = models.CharField(max_length=20, unique=True)
 
 class Ticket(models.Model):
     ticketID = models.IntegerField(validators=[MaxValueValidator(16)],null=False,unique=True,primary_key=True)
@@ -29,21 +29,12 @@ class Ticket(models.Model):
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE, null=True, blank=True, related_name='tickets')
     metro = models.ForeignKey(Metro, on_delete=models.CASCADE, null=True, blank=True, related_name='tickets')
 
+    #String format for Ticket
     def __str__(self):
         if self.bus:
-            return f"{self.ticketID} 
-            \n{self.departurePoint}\t{self.destinationPoint} 
-            \n{self.departureTime}\t{self.destinationTime} 
-            \n{self.bus} 
-            \n{self.price} 
-            \n{self.paymentMethod}"
+            return f"{self.ticketID}\n{self.departurePoint}\t{self.destinationPoint}\n{self.departureTime}\t{self.destinationTime}\n{self.bus}\n{self.price}\n{self.paymentMethod}"
         if self.metro:
-            return f"{self.ticketID} 
-            \n{self.departurePoint}\t{self.destinationPoint} 
-            \n{self.departureTime}\t{self.destinationTime} 
-            \n{self.metro} 
-            \n{self.price} 
-            \n{self.paymentMethod}"
+            return f"{self.ticketID}\n{self.departurePoint}\t{self.destinationPoint}\n{self.departureTime}\t{self.destinationTime}\n{self.metro}\n{self.price}\n{self.paymentMethod}"
     
 class Account(models.Model):
     accountID = models.IntegerField(validators=[MaxValueValidator(15)],null=False,unique=True,primary_key=True)
