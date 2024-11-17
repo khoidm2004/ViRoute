@@ -22,6 +22,9 @@ from rest_framework import status
 from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 
+#Ticket list
+from .models import Ticket
+
 
 #Get route/ map API
 def get_route(request):
@@ -98,3 +101,9 @@ def signup(request):
                 }
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#Ticket list
+def ticketList(request):
+    tickets = Ticket.objects.all()
+    return render(request, 'virouteapp/ticket_list.html', {'tickets': tickets})
