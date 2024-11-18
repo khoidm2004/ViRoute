@@ -10,6 +10,7 @@ import Tracking from './components/tracking/tracking';
 import Feedback from './components/feedback/feedback';
 import UserInformation from './components/user_information/user_information';
 import Tickets from './components/tickets/tickets';
+import NotFound from './components/not_found/not_found';
 import { Routes, Route} from 'react-router-dom';
 
 function AppRoutes() {
@@ -24,6 +25,8 @@ function AppRoutes() {
 
           <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
           <Route path="/route/:route" element={<><Taskbar/><RouteDetail/></>} />
+
+          <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
         </Routes>
     );
   };
