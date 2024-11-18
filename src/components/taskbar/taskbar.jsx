@@ -50,7 +50,7 @@ const Taskbar = () => {
             {isMobileMenuOpen && (
             <div className="mobile-menu">
                 { user && (
-                    <div className="mobile-menu-item user-info" onClick={() => { navigate('/user_information'); setIsMobileMenuOpen(false); }}>
+                    <div className="mobile-menu-item user-info" onClick={() => { navigate(`/${user.userID}`); setIsMobileMenuOpen(false); }}>
                         <div className="user-info">
                             <img className="user-avatar" src={avatar} alt="User Avatar" />
                             <div className="welcome-container">

@@ -11,8 +11,8 @@ const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
-  const [showErrorNotification, setShowErrorNotification] = useState(false);
+  const [showSuccessNoti, setShowSuccessNoti] = useState(false);
+  const [showErrorNoti, setShowErrorNoti] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -21,7 +21,12 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
-
+  const triggerErrorNoti = () => {
+    setShowErrorNoti(false);
+    setTimeout(() => {
+      setShowErrorNoti(true);
+    }, 100);
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -30,8 +35,9 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
+      resetForm();
       setNotificationMessage('Passwords do not match');
-      setShowErrorNotification(true); 
+      triggerErrorNoti();
       return;
     }
 
@@ -41,20 +47,22 @@ const Register = () => {
       phoneNumber: formData.phoneNumber,
       password: formData.password,
     };
-    const result = await useRegister(userData);
 
+    const result = await useRegister(userData);
     if (result.success) {
       setNotificationMessage(result.message);
-      setShowSuccessNotification(true);
+      setShowSuccessNoti(true);
       setTimeout(() => {
         resetForm();
         navigate('/login');
       }, 2000);
     } else {
+      resetForm();
       setNotificationMessage(result.message || 'Registration failed. Please try again.');
-      setShowErrorNotification(true); 
+      triggerErrorNoti();
     }
   };
+  
   const resetForm = () => {
     setFormData({
       fullName: '',
@@ -65,8 +73,7 @@ const Register = () => {
     });
     setShowPassword(false);
     setShowConfirmPassword(false);
-    setShowSuccessNotification(false);
-    setShowErrorNotification(false);
+    setShowSuccessNoti(false);
   };
 
   return (
@@ -116,8 +123,8 @@ const Register = () => {
           />
           <button type='submit' className='reg-button'>Register</button>
         </form>
-        {showSuccessNotification && <SuccessNotify message={notificationMessage} />}
-        {showErrorNotification && <ErrorNotify message={notificationMessage} />}
+        {showSuccessNoti && <SuccessNotify message={notificationMessage} />}
+        {showErrorNoti && <ErrorNotify message={notificationMessage} />}
       </div>
       <Footer />
     </>
