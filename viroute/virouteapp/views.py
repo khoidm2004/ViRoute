@@ -22,6 +22,7 @@ from rest_framework import status
 from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 
+
 #Ticket list
 from .models import Ticket
 
@@ -40,31 +41,6 @@ def get_route(request):
     else:
         return JsonResponse({'error': respond.status_code})
 
-
-# Github Login
-class GitHubLogin(SocialLoginView):
-    adapter_class = GitHubOAuth2Adapter
-    callback_url = "http://localhost:8000/accounts/github/login/callback/"
-    client_class = OAuth2Client
-
-    def post(self, request, *args, **kwargs):
-        try:
-            return super().post(request, *args, **kwargs)
-        except MultipleObjectsReturned:
-            # Get Github account from all users
-            user = request.user
-            accounts = SocialAccount.objects.filter(user=user, provider='github')
-            account_list = [{"id": account.id, "username": account.username} for account in accounts]
-
-            return JsonResponse({
-                'error': 'Many Github accounts have been linked.',
-                'accounts': account_list,  # Return accounts list
-            }, status=400)
-
-        except Exception as e:
-            return JsonResponse({
-                'error': str(e),
-            }, status=500)
 
 #Login
 class UserLoginView(APIView):
