@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "oauth2_provider",
     'viroute',
     'corsheaders',
-
 ]
 
 MIDDLEWARE = [
@@ -91,9 +90,9 @@ WSGI_APPLICATION = 'viroute.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'viroute',
+        'NAME': 'viroute', #your name
         'USER': 'root',
-        'PASSWORD': 'sherloque',
+        'PASSWORD': 'sherloque', #your password
         'HOST':'127.0.0.1',
         'PORT':'3306',
         'OPTIONS': {
@@ -181,5 +180,3 @@ LOGOUT_REDIRECT_URL = "/"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
-
-
