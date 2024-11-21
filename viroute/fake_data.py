@@ -243,5 +243,8 @@ if __name__ == "__main__":
     create_fake_accounts(10)   
     create_fake_users(10)      
     create_fake_user_tickets(10)  
-    create_fake_account_has_user(10)  
-    print(data)
+    create_fake_account_has_user(10)
+    # Save data to csv
+    if data["User"]:
+        df = pd.DataFrame(data["User"])
+        df.to_csv('users.csv', index=False)
