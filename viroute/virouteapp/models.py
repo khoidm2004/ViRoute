@@ -1,6 +1,8 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import MinLengthValidator,MaxValueValidator
+from datetime import datetime
+
 
 class Vehicle(models.Model):
     route = models.CharField(max_length=100)
@@ -44,8 +46,6 @@ class Account(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00,blank=False,null = False)
     
 
-
-
 class User(models.Model):
     userID = models.CharField(max_length=40,unique=True,null=False,blank=False,primary_key=True)
     fullName = models.CharField(max_length=255,null=False,blank=False)
@@ -57,6 +57,19 @@ class User(models.Model):
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
     dateofbirth = models.DateField(null=False, default= '2003-12-15') # should be fixed later
     password = models.CharField(max_length=70,null=False,blank=False)
+    def save(self, *args, **kwargs): #Thang Thong chua giai thich cho tao, dit me 
+        if not self.userID:
+            if isinstance(self.dateofbirth, str):
+                self.dateofbirth = datetime.strptime(self.dateofbirth, '%Y-%m-%d').date()
+            
+            birth_date_str = self.dateofbirth.strftime('%d%m%Y')
+            
+            phone_number_str = str(self.phoneNumber)
+            last_four_digits = phone_number_str[-4:]
+            
+            self.userID = birth_date_str + last_four_digits
+
+        super().save(*args, **kwargs)
 
 class UserTicket(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
@@ -73,5 +86,3 @@ class AccountHasUser(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['account', 'user'], name='unique_account_user')
         ]
-
-    
