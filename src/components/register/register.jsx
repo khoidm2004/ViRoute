@@ -34,6 +34,7 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
       resetForm();
       setNotificationMessage('Passwords do not match');
@@ -74,6 +75,9 @@ const Register = () => {
     setShowPassword(false);
     setShowConfirmPassword(false);
     setShowSuccessNoti(false);
+    if (authStore.getState().logout) {
+      authStore.getState().logout();
+    }
   };
 
   return (

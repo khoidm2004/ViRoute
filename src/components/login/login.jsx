@@ -17,7 +17,7 @@ const Login = () => {
   });
   const [showNotification, setShowNotification] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); // Error message state
+  const [errorMessage, setErrorMessage] = useState(''); 
   const { login: setUser } = authStore();
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const Login = () => {
         navigate('/');
       }, 2000);
     } catch (error) {
-      setErrorMessage('Invalid login credentials. Please try again.'); // Set error message
+      setErrorMessage('Invalid login credentials. Please try again.'); 
     }
   };
 
