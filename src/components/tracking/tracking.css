@@ -55,7 +55,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 1024px) {
+@media (max-width: 860px) {
   .search-tracking,
   .tracking-item {
     width: 90vw; /* Limit to viewport width for smaller screens */
