@@ -19,10 +19,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-block: 30px;
+  margin-bottom: 1px;
 }
 
 .search {
@@ -77,8 +75,6 @@
   align-items: center;
   margin-bottom: 15px;
   cursor: pointer;
-  margin-left: 30px;
-  margin-right: 30px;
 }
 
 .departure-text {
@@ -97,9 +93,6 @@
   border-radius: 20px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: min-content;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 20px;
 }
 
 .time-select {
@@ -133,8 +126,6 @@
   border: none;
   cursor: pointer;
   margin: 10px 0;
-  margin-left: 30px;
-  margin-right: 30px;
 }
 
 .addfav-text {
@@ -149,8 +140,6 @@
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  margin-left: 30px;
-  margin-right: 30px;
 }
 
 .fav-input {
@@ -185,7 +174,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 100%;
+  max-width: 100%; /* Ensures it doesn't exceed the divider width */
 }
 
 .location-name {
@@ -207,12 +196,10 @@
   text-overflow: ellipsis;
 }
 
-.divider-home {
+.divider {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  height: 2px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin: 40px 0;
 }
 
 .error-message {
@@ -288,108 +275,17 @@
 .map-container {
   height: 160%; 
   max-height: 400px;
-  width: 98.5%; 
+  width: 100%; 
   position: relative;
   align-items: center;
-  margin-left: 30px;
-  margin-right: 30px;
   bottom: 0;
 }
 
-/* Chỉnh thông tin bên trong container khi màn hình nhỏ */
-@media only screen and (max-width: 860px) {
-  .information-container {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .search {
-    margin-bottom: 10px;
-    padding: 20px;
-  }
-
-  .small-swap {
-    cursor: pointer;
-    color: #555;
-    margin-right: 0;
-    font-size: 24px;
-  }
-
-  .search-btn--find {
-    width: 100px;
-    height: 40px;
-    font-size: 14px;
-    margin-left: auto; /* Canh sang phải trong không gian hẹp */
-    margin-right: 0;
-  }
-
-  .favorite-btn {
-    position:left;
-  }
-
-  .favourite-form {
-    width: calc(100% - 60px); /* Giữ khoảng cách cách 30px */
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .places-container {
-    margin-left: 30px; /* Khoảng cách cố định từ trái */
-    margin-right: 30px; /* Khoảng cách cố định từ phải */
-  }
-}
-/* Màn hình nhỏ hơn 480px */
 @media only screen and (max-width: 480px) {
-  .map-container{
-    display:none;
-
-  }
-  .information-container {
-    flex-direction: column;
-    align-items: flex;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .search {
-    margin-bottom: 10px;
-    padding: 25px;
-  }
-
-  .small-swap {
-    cursor: pointer;
-    color: #555;
-    margin-right: 0;
-    font-size: 24px;
-  }
-
-  .search-btn--find {
-    width: 100px;
-    height: 40px;
-    font-size: 14px;
-    margin-left: auto; /* Canh sang phải trong không gian hẹp */
-    margin-right: 0;
-  }
-
-  .favorite-btn {
-    position:left;
-  }
-
-  .favourite-form {
-    width: calc(100% - 60px); /* Giữ khoảng cách cách 30px */
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .places-container {
-    margin-left: 30px; /* Khoảng cách cố định từ trái */
-    margin-right: 30px; /* Khoảng cách cố định từ phải */
-  }
-
-  .divider-home{
-    display:None;
+  .map-container {
+    display: none;
   }
 }
 
+@media only screen and (min-width: 481px) and (max-width: 860px) {
+}
