@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   overflow-y: hidden;
+  padding: 0px 10px;
 }
 
 ::-webkit-scrollbar{
