@@ -105,7 +105,7 @@ const Homescreen = () => {
   return (
     <>
       <div className="home">
-        <div className={`information-container ${window.innerWidth <= 860 ? 'info-small' : ''}`}>
+        <div className="information-container">
           <div className="search">
             <Icon icon="material-symbols:search" className="icon" />
             <input
@@ -154,17 +154,12 @@ const Homescreen = () => {
             <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
           </div>
         )}
-        <button
-          className={`favorite-btn ${window.innerWidth <= 860 ? 'small-fav-btn' : ''}`}
-          onClick={toggleFavouritePlace}
-        >
+        <button className="favorite-btn" onClick={toggleFavouritePlace}>
           <Icon icon="ic:outline-plus" className="option-icon" />
           <span className="addfav-text">Add favourite place</span>
         </button>
         {showFavouritePlace && (
-          <div
-            className='favourite-form'  
-          >
+          <div className="favourite-form">
             <TextField
               placeholder="Street address or place name"
               value={streetAddress}
@@ -202,12 +197,10 @@ const Homescreen = () => {
               </div>
             </div>
             {error && <div className="error-message">{error}</div>}
-            <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>
-              Confirm
-            </Button>
+            <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
           </div>
         )}
-        <div className="divider-home" />
+        <div className="divider" />
         <div className="places-container">
           {favouritePlaces.map((place, index) => (
             <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
