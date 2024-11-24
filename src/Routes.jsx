@@ -18,13 +18,13 @@ function AppRoutes() {
         <Routes>
           <Route path="/" element={<><Taskbar/><Homescreen/></>} />
           <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
-          <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>   {/*<Taskbar/> */}
+          <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>   
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
 
           <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
-          <Route path="/route/:route" element={<><Taskbar/><RouteDetail/></>} />
+          <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
 
           <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
         </Routes>
