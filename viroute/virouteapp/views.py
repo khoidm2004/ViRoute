@@ -5,7 +5,6 @@ from django.conf import settings
 # Login authen
 from django.core.exceptions import MultipleObjectsReturned
 from allauth.socialaccount.models import SocialAccount
-from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 
@@ -82,4 +81,4 @@ def signup(request):
 #Ticket list
 def ticketList(request):
     tickets = Ticket.objects.all()
-    return render(request, 'virouteapp/ticket_list.html', {'tickets': tickets})
+    return render(request, 'virouteapp/templates/ticket_list.html', {'tickets': tickets})

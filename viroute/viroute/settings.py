@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.github",
+    #"allauth.socialaccount.providers.github",
     "oauth2_provider",
     'viroute',
     'corsheaders',
@@ -163,7 +163,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"  # Redirect URL after successful login
 LOGOUT_REDIRECT_URL = "/"  # Redirect URL after successful logout
 
-SOCIALACCOUNT_PROVIDERS = {
+'''SOCIALACCOUNT_PROVIDERS = {
     "github": {
         "APP": {
             "client_id": "Ov23li5qLxiU0WU7GNJc",  # Client ID of GitHub
@@ -173,7 +173,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-
+'''
 ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/" 
 LOGOUT_REDIRECT_URL = "/"
