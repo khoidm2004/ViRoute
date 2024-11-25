@@ -1,5 +1,4 @@
 import axios from 'axios';
-import authStore from '../stores/authStore';
 
 const useRegister = async (userData) => {
   try {
