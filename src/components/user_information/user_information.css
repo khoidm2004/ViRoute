@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    width: 1000px;
+    width: 100%;;
     box-sizing: border-box;
   }
 
@@ -153,6 +153,43 @@
     width: 80%
   }
 
-  @media only screen and (max-width: 860px) {
+  /* Toggle collapsed balance-avatar-container for mobile */
+/* Adjust layout for mobile screens */
+@media only screen and (max-width: 860px) {
+  .settings-box {
+      flex-direction: column; /* Stack tabs and content vertically */
+      min-height: auto; /* Let the height adjust */
   }
-  
+
+  .tabs-container {
+      flex-direction: row; /* Make tabs horizontal for medium screens */
+      justify-content: space-evenly; /* Space tabs evenly */
+      width: 100%; /* Full width for tabs */
+      padding: 0; /* Adjust padding */
+  }
+
+  .content {
+      width: 100%; /* Make content take full width */
+      max-width: 100%; /* Remove width limit */
+      padding: 10px; /* Adjust padding */
+  }
+
+  .tabs-container button {
+    flex: 1; /* Make buttons take equal space */
+    text-align: center; /* Center-align text */
+    padding: 10px 0; /* Add uniform padding */
+    font-size: 16px; /* Maintain font size */
+    border: none; /* Remove border for uniform look */
+  }
+
+  .tabs-container button:hover,
+  .tabs-container button.active {
+    background-color: rgba(60, 177, 41); /* Highlight color */
+    color: white; /* Change text color on hover or active */
+  }
+
+  .tabs-container-button:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(60, 177, 41, 0.8); /* Green shadow for focus */
+  }
+}
