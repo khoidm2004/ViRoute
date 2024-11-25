@@ -39,8 +39,6 @@ function UserInformation() {
 
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  
-
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -76,7 +74,7 @@ function UserInformation() {
   };
 
   return (
-    
+
     <div className="account-settings-container">
       <h2 className="account-info-header">Account Information</h2>
       <div className="settings-box">
@@ -178,9 +176,7 @@ function UserInformation() {
                   handleMouseDownPassword={(e) => e.preventDefault()}
                 />
               </div>
-              <button type='submit' className="save-button" >
-                Change password
-              </button>
+              <button type='submit' className="save-button" >Change password</button>
               </form>
             </div>
           )}
