@@ -35,6 +35,7 @@ from django.shortcuts import get_object_or_404
 def get_route(request):
     start = request.GET.get('start')
     end = request.GET.get('end')
+    # API key should be hidden when publish
     url = f"https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62481c184721ac24419cbc62a1f87c43d9dc&start={start}&end={end}"
 # syntax: &start = {start} & end = {end}
 # test location: &start=105.883999,21.049659&end=105.855546,21.024705
