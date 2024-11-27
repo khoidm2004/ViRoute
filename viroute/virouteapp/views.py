@@ -1,16 +1,19 @@
+# Base module
+import requests
+import os
+import bcrypt
+import json
+
+# Login authen
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-import requests
 from django.conf import settings
-# Login authen
 from django.core.exceptions import MultipleObjectsReturned
 from allauth.socialaccount.models import SocialAccount
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 
 # Authen API
-import bcrypt
-import json
 from .models import User
 from .serializers import UserLoginSerializer
 from django.views.decorators.csrf import csrf_exempt
@@ -21,10 +24,12 @@ from rest_framework import status
 from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 
-
-#Ticket list
+# Ticket list
 from .models import Ticket
 
+# Image
+from .models import Image
+from django.shortcuts import get_object_or_404
 
 #Get route/ map API
 def get_route(request):
@@ -56,8 +61,12 @@ class UserLoginView(APIView):
                     "balance": str(user.balance)  
                 }
             }, status=status.HTTP_200_OK)
+        # Return error message
+        return Response({
+            "message": "login failed",
+            "errors": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #Sign up
 @api_view(['POST'])
@@ -82,3 +91,17 @@ def signup(request):
 def ticketList(request):
     tickets = Ticket.objects.all()
     return render(request, 'virouteapp/templates/ticket_list.html', {'tickets': tickets})
+
+
+# Image
+def get_image_by_name(request, image_name):
+    image = get_object_or_404(Image, image_name=image_name)
+    
+    if not image.image_path:
+        return HttpResponse("Image does not exist", status=404)
+    
+    image_path = os.path.join(settings.MEDIA_ROOT, 'images', image.image_path.name)
+
+
+    with open(image_path, 'rb') as img:
+        return HttpResponse(img.read(), content_type="image/png")
