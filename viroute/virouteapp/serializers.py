@@ -13,11 +13,11 @@ class UserLoginSerializer(serializers.Serializer):
         try:
             user = User.objects.get(userEmail=userEmail)
         except User.DoesNotExist:
-            raise serializers.ValidationError("Invalid credentials")  
+            raise serializers.ValidationError("Your email does not exist, please check again!")  
 
         # Check password
         if not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
-            raise serializers.ValidationError("Invalid credentials")  
+            raise serializers.ValidationError("Your password does not exist, please check again!")  
 
         attrs['user'] = user 
         return attrs
@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer): # sign up
     class Meta:
         model = User
         fields = ['fullName', 'phoneNumber', 'userEmail', 'password']
-        # fields = ['userID', 'fullName', 'phoneNumber', 'userEmail', 'balance', 'citizenship', 'dateofbirth', 'password']
+        
 
     def create(self, validated_data):
         password = validated_data['password']
