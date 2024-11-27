@@ -1,16 +1,16 @@
-viroute/viroute/__pycache__/settings.cpython-312.pyc
-viroute/viroute/__pycache__/urls.cpython-312.pyc
-viroute/viroute/__pycache__/settings.cpython-312.pyc
-viroute/viroute/__pycache__/urls.cpython-312.pyc
-viroute/virouteapp/__pycache__/admin.cpython-312.pyc
-viroute/virouteapp/__pycache__/models.cpython-312.pyc
-viroute/virouteapp/__pycache__/views.cpython-312.pyc
+viroute/viroute/__pycache__/
+viroute/viroute/__pycache__/
+viroute/viroute/__pycache__/
+viroute/viroute/__pycache__/
+viroute/virouteapp/__pycache__/
+viroute/virouteapp/__pycache__/
+viroute/virouteapp/__pycache__/
 viroute/virouteapp/migrations/0001_initial.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-.env
+/.venv
 # C extensions
 *.so
 
@@ -45,3 +45,4 @@ wheels/
 media/
 staticfiles/
 static/
+virouteapp/mirgrations
