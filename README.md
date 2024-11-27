@@ -21,7 +21,6 @@ ViRoute is a web application built using Django and Django REST framework. It pr
     ```bash
     git clone https://github.com/khoidm2004/ViRoute
     git checkout -b Backend # Switch to the Backend branch
-    cd viroute
     ```
 
 2. Create a virtual environment and activate it:
@@ -64,6 +63,7 @@ ViRoute is a web application built using Django and Django REST framework. It pr
 5. Apply the migrations:
 
     ```bash
+    cd viroute
     python manage.py migrate
     python manage.py makemigrations
     ```
@@ -107,6 +107,6 @@ DATABASES = {
 
 9. Run the development server:
 
-    ```bash
-    python manage.py runserver
-    ```
+```bash
+python manage.py runserver
+```
