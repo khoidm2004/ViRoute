@@ -57,6 +57,7 @@ class User(models.Model):
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
     dateofbirth = models.DateField(null=False, default= '2003-12-15') # should be fixed later
     password = models.CharField(max_length=70,null=False,blank=False)
+    
     def save(self, *args, **kwargs): #Thang Thong chua giai thich cho tao, dit me 
         if not self.userID:
             if isinstance(self.dateofbirth, str):
@@ -70,6 +71,10 @@ class User(models.Model):
             self.userID = birth_date_str + last_four_digits
 
         super().save(*args, **kwargs)
+        
+    #String format for User
+    def __str__(self):
+        return f"Your informations: {self.userID}\n{self.fullName}\n{self.phoneNumber}\n{self.userEmail}\n{self.balance}\n{self.citizenship}\n{self.dateofbirth}"
 
 class UserTicket(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
