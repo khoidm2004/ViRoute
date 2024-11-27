@@ -58,7 +58,7 @@ class User(models.Model):
     dateofbirth = models.DateField(null=False, default= '2003-12-15') # should be fixed later
     password = models.CharField(max_length=70,null=False,blank=False)
     
-    def save(self, *args, **kwargs): #Thang Thong chua giai thich cho tao, dit me 
+    def save(self, *args, **kwargs):
         if not self.userID:
             if isinstance(self.dateofbirth, str):
                 self.dateofbirth = datetime.strptime(self.dateofbirth, '%Y-%m-%d').date()
@@ -67,7 +67,6 @@ class User(models.Model):
             
             phone_number_str = str(self.phoneNumber)
             last_four_digits = phone_number_str[-4:]
-            
             self.userID = birth_date_str + last_four_digits
 
         super().save(*args, **kwargs)
@@ -91,3 +90,8 @@ class AccountHasUser(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['account', 'user'], name='unique_account_user')
         ]
+        
+        
+class Image(models.Model):
+    image_name = models.CharField(max_length=255)
+    image_path = models.ImageField(upload_to='images/')
