@@ -85,7 +85,9 @@ def signup(request):
                     "balance": str(user.balance)
                 }
             }, status=status.HTTP_201_CREATED)
+            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 
 
 #Ticket list

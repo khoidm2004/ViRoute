@@ -2,19 +2,21 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-9)pym!8*i7k=!ep6rx0d^$p@!fnzf*1($8ub10&(65h4(h!*7n')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '43zsza&2#rm_d)o&2-wl0d7@7bv^&p-9+krctx9y2!#jnqu1=7')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-#ALLOWED_HOSTS = ['86.50.35.0']
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['86.50.35.0']
+#ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,8 +85,8 @@ DATABASES = {
         'NAME': 'viroute', #your name
         'USER': 'root',
         'PASSWORD': 'sherloque', #your password
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
+        'HOST':'https://viroute.scm.azurewebsites.net/',
+        'PORT':'3360',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
@@ -164,3 +166,8 @@ CORS_ALLOW_CREDENTIALS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+'''
+az webapp config appsettings set --resource-group myresourcegroup4virouteproject --name myDjangoApp 
+--settings DJANGO_SECRET_KEY=43zsza&2#rm_d)o&2-wl0d7@7bv^&p-9+krctx9y2!#jnqu1=7 DJANGO_DEBUG=False DJANGO_ALLOWED_HOSTS=myDjangoApp.azurewebsites.net
+'''
