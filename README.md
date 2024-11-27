@@ -1,6 +1,6 @@
 # ViRoute
 
-ViRoute is a web application built using Django and Django REST framework. It provides functionalities for route management, user authentication via GitHub, and more.
+ViRoute is a web application built using Django and Django REST framework. It provides functionalities for route management, and make a lot of MONEYYYYYY
 
 ## Features
 
