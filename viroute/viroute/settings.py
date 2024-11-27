@@ -14,8 +14,9 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-9)pym!8*i7k=!ep6rx0d^$p@!fnzf*1($8ub10&(65h4(h!*7n'
@@ -135,6 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -163,17 +166,6 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"  # Redirect URL after successful login
 LOGOUT_REDIRECT_URL = "/"  # Redirect URL after successful logout
 
-'''SOCIALACCOUNT_PROVIDERS = {
-    "github": {
-        "APP": {
-            "client_id": "Ov23li5qLxiU0WU7GNJc",  # Client ID of GitHub
-            "secret": "9643a077a202c2158e08dbb3fb4c42843c524032",  # secret key of GitHub
-            "key": "",
-            "redirect_uri": "http://127.0.0.1:8000/callback",  # URL callback for GitHub
-        }
-    }
-}
-'''
 ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/" 
 LOGOUT_REDIRECT_URL = "/"
