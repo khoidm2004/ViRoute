@@ -105,122 +105,128 @@ const Homescreen = () => {
   return (
     <>
       <div className="home">
-          <picture className="pics-homescreen">
+          <div className="pics-homescreen">
             <img src="../images/Train_home.jpg" alt="Train-home" className="image" />
             <div className="homescreen-optioncontainer">
-            <h1 className="homescreen-title">Where do you want to go?</h1>
-            <div className="information-container">
-            
-              <div className="search-start">
-                <Icon icon="material-symbols:search" className="icon" />
-                <input
-                  type="text"
-                  value={start}
-                  onChange={(e) => setStart(e.target.value)}
-                  placeholder="Enter your start"
-                  className="search-input"
-                />
-              </div>
-              <div className="swap-container"> 
-                <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
-              </div>
-              <div className="search-destination">
-                <Icon icon="material-symbols:search" className="icon" />
-                <input
-                  type="text"
-                  value={destination} 
-                  onChange={(e) => setDestination(e.target.value)}
-                  placeholder="Enter your destination"
-                  className="search-input"
-                />
-              </div>
-              <Button class="search-btn--find" type="button" onClick={findbusroute}>Find </Button>
-            </div>
-            <div className="departure-option" onClick={toggleTimeDropdown}>
-              <Icon icon="mage:clock" className="option-icon" />
-              <span className="departure-text">{getDisplayedTime()}</span>
-            </div>
-            {showTimeDropdown && (
-              <div className="time-dropdown">
-                <Select
-                  value={selectedTime || `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`}
-                  onChange={handleTimeChange}
-                  displayEmpty
-                  className="time-select"
-                >
-                  {getTimeOptions().map((option, index) => (
-                    <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
-                  ))}
-                </Select>
-                <TextField
-                  type="date"
-                  value={selectedDate}
-                  onChange={handleDateInput}
-                  className="date-select"
-                />
-                <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
-              </div>
-            )}
-            <button className="favorite-btn" onClick={toggleFavouritePlace}>
-              <Icon icon="ic:outline-plus" className="option-icon" />
-              <span className="addfav-text">Add favourite place</span>
-            </button>
-            {showFavouritePlace && (
-              <div className="favourite-form">
-                <TextField
-                  placeholder="Street address or place name"
-                  value={streetAddress}
-                  onChange={(e) => setStreetAddress(e.target.value)}
-                  fullWidth
-                  margin="normal"
-                  className="fav-input"
-                />
-                <TextField
-                  placeholder="Name your location"
-                  value={locationName}
-                  onChange={(e) => setLocationName(e.target.value)}
-                  fullWidth
-                  margin="normal"
-                  className="fav-input"
-                />
-                <div className="icon-selection">
-                  <span style={{ textAlign: 'left' }}>Select an icon</span>
-                  <div className="addfav-icons">
-                    <Icon
-                      icon="mdi:home"
-                      onClick={() => setSelectedIcon('mdi:home')}
-                      className={selectedIcon === 'mdi:home' ? 'icon-selected' : ''}
-                    />
-                    <Icon
-                      icon="mdi:work"
-                      onClick={() => setSelectedIcon('mdi:work')}
-                      className={selectedIcon === 'mdi:work' ? 'icon-selected' : ''}
-                    />
-                    <Icon
-                      icon="mdi:school"
-                      onClick={() => setSelectedIcon('mdi:school')}
-                      className={selectedIcon === 'mdi:school' ? 'icon-selected' : ''}
-                    />
-                  </div>
+              
+              <h1 className="homescreen-title">Where do you want to go?</h1>
+              <div className="information-container">
+
+                <div className="search-start">
+                  <Icon icon="material-symbols:search" className="icon" />
+                  <input
+                    type="text"
+                    value={start}
+                    onChange={(e) => setStart(e.target.value)}
+                    placeholder="Enter your start"
+                    className="search-input"
+                  />
                 </div>
-                {error && <div className="error-message">{error}</div>}
-                <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
-              </div>
-            )}  
-            <div className="places-container">
-              {favouritePlaces.map((place, index) => (
-                <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
-                  <Icon icon={place.selectedIcon} className="place-icon" />
-                  <div className="placetext-container">
-                    <span className="location-name">{place.locationName}</span>
-                    <span className="address-name">{place.streetAddress}</span>
-                  </div>
-                  <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
+                <div className="swap-container"> 
+                  <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
                 </div>
-              ))}
+                <div className="search-destination">
+                  <Icon icon="material-symbols:search" className="icon" />
+                  <input
+                    type="text"
+                    value={destination} 
+                    onChange={(e) => setDestination(e.target.value)}
+                    placeholder="Enter your destination"
+                    className="search-input"
+                  />
+                </div>
+                <Button class="search-btn--find" type="button" onClick={findbusroute}>Find </Button>
+              </div>
+              <div className="departure-option" onClick={toggleTimeDropdown}>
+                <Icon icon="mage:clock" className="option-icon" />
+                <span className="departure-text">{getDisplayedTime()}</span>
+              </div>
+
+              {showTimeDropdown && (
+                <div className="time-dropdown">
+                  <Select
+                    value={selectedTime || `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`}
+                    onChange={handleTimeChange}
+                    displayEmpty
+                    className="time-select"
+                  >
+                    {getTimeOptions().map((option, index) => (
+                      <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                  </Select>
+                  <TextField
+                    type="date"
+                    value={selectedDate}
+                    onChange={handleDateInput}
+                    className="date-select"
+                  />
+                  <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
+                </div>
+              )}
+
+              <button className="favorite-btn" onClick={toggleFavouritePlace}>
+                <Icon icon="ic:outline-plus" className="option-icon" />
+                <span className="addfav-text">Add favourite place</span>
+              </button>
+
+              {showFavouritePlace && (
+                <div className="favourite-form">
+                  <TextField
+                    placeholder="Street address or place name"
+                    value={streetAddress}
+                    onChange={(e) => setStreetAddress(e.target.value)}
+                    fullWidth
+                    margin="normal"
+                    className="fav-input"
+                  />
+                  <TextField
+                    placeholder="Name your location"
+                    value={locationName}
+                    onChange={(e) => setLocationName(e.target.value)}
+                    fullWidth
+                    margin="normal"
+                    className="fav-input"
+                  />
+                  <div className="icon-selection">
+                    <span style={{ textAlign: 'left' }}>Select an icon</span>
+                    <div className="addfav-icons">
+                      <Icon
+                        icon="mdi:home"
+                        onClick={() => setSelectedIcon('mdi:home')}
+                        className={selectedIcon === 'mdi:home' ? 'icon-selected' : ''}
+                      />
+                      <Icon
+                        icon="mdi:work"
+                        onClick={() => setSelectedIcon('mdi:work')}
+                        className={selectedIcon === 'mdi:work' ? 'icon-selected' : ''}
+                      />
+                      <Icon
+                        icon="mdi:school"
+                        onClick={() => setSelectedIcon('mdi:school')}
+                        className={selectedIcon === 'mdi:school' ? 'icon-selected' : ''}
+                      />
+                    </div>
+                  </div>
+                  {error && <div className="error-message">{error}</div>}
+                  <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
+                </div>
+              )}  
+
+              <div className="places-container">
+                {favouritePlaces.map((place, index) => (
+                  <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
+                    <Icon icon={place.selectedIcon} className="place-icon" />
+                    <div className="placetext-container">
+                      <span className="location-name">{place.locationName}</span>
+                      <span className="address-name">{place.streetAddress}</span>
+                    </div>
+                    <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          </picture>
+
           <div className="location-info-section">
               <div className="location-left">
                 <h2>Your location now</h2>

@@ -6,6 +6,7 @@ import ErrorNotify, { triggerErrorNotification } from '../notification/noti_erro
 import useUserInformationStore from '../../stores/userinfoStore';
 import HidePass from '../hidepass/hidePass.jsx';
 import authStore from '../../stores/authStore.js';
+import updateUser from '../../services/updateInfo.js';
 
 function UserInformation() {
   const user = authStore((state) => state.user);
@@ -52,27 +53,33 @@ function UserInformation() {
     document.getElementById('fileInput').click();
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async (e) => {
+    e.preventDefault(); // Prevent form submission default behavior
+  
     // Validate the tempFullName before saving
-    if (/^[A-Za-z\s]*$/.test(tempFullName)) {
-      setAvatar(tempAvatar);
-      setFullName(tempFullName); 
-      triggerSuccessNotification('Profile updated successfully!');
-      setNameError(''); 
-    } else {
-      setNameError('Full name can only contain letters and spaces.'); 
+    if (!/^[A-Za-z\s]*$/.test(tempFullName)) {
+      setNameError('Full name can only contain letters and spaces.');
+      return;
+    }
+  
+    try {
+      const updatedData = {
+        fullName: tempFullName || user.fullName,
+        phoneNumber: phone || user.phoneNumber,
+      };
+      
+      const response = await updateUser(user.userID, updatedData);
+  
+      if (response.status === 200) {
+        triggerSuccessNotification('Profile updated successfully!');
+        setNameError('');
+        setFullName(tempFullName); // Update the fullName in state
+      }
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Failed to update profile.';
+      triggerErrorNotification(errorMessage);
     }
   };
-
-  const handleChangePassword = () => {
-    if (newPassword === confirmPassword) {
-      triggerSuccessNotification('Password changed successfully!');
-      resetPasswords(); // Reset password fields after success
-    } else {
-      alert('Passwords do not match!');
-    }
-  };
-
   return (
 
     <div className="account-settings-container">
@@ -90,6 +97,7 @@ function UserInformation() {
         <div className="content">
           {activeTab === 'general' && (
             <div className="general-tab">
+
               <div className="balance-avatar-container">
                 <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
@@ -110,6 +118,7 @@ function UserInformation() {
                   <label>Balance: {user.balance} Euro</label>
                 </div>
               </div>
+
               <form onSubmit={handleSaveChanges}>
               <div className="form-group">
                 <label>Full Name</label>
@@ -127,7 +136,8 @@ function UserInformation() {
                   type="email"
                   value={email}
                   placeholder={user.userEmail}
-                  onChange={(e) => setEmail(e.target.value)}
+                  disabled
+                  readOnly
                 />
               </div>
               <div className="form-group">
@@ -135,7 +145,7 @@ function UserInformation() {
                 <input
                   type="tel"
                   value={phone}
-                  placeholder="Enter your mobile phone"
+                  placeholder={user.phoneNumber}
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
@@ -145,6 +155,8 @@ function UserInformation() {
               </form>
             </div>
           )}
+
+
 
           {activeTab === 'changePassword' && (
             <div className="change-password-tab">
