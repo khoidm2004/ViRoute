@@ -221,7 +221,15 @@ const Homescreen = () => {
             </div>
           </div>
           </picture>
+          <div className="location-info-section">
+              <div className="location-left">
+                <h2>Your location now</h2>
+                <p>Your location now:</p>
+                <p>Want to add your favourite place? <a href="/login">Login/Signup</a></p>
+              </div>
+                <Map className="map-container"/>  
           </div>
+        </div>
     </>
   );
 };
