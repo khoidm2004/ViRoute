@@ -6,7 +6,7 @@ const SetViewToLocation = ({ position }) => {
   const map = useMap();
   useEffect(() => {
     if (position) {
-      map.setView(position, 13); 
+      map.setView(position, 13);    
     }
   }, [position, map]);
   return null; 
