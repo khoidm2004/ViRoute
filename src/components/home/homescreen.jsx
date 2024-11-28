@@ -14,6 +14,8 @@ const Homescreen = () => {
   const [destination, setDestination] = useState('');
   const [startSuggestions, setStartSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
+  const [startSelected, setStartSelected] = useState(false);
+  const [destinationSelected, setDestinationSelected] = useState(false);
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const today = new Date().toISOString().split("T")[0];
   const [selectedTime, setSelectedTime] = useState('');
@@ -127,29 +129,76 @@ const Homescreen = () => {
       console.error('Error fetching suggestions:', error);
     }
   };
+
+  const fetchCurrentLocation = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const response = await axios.get(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+          );
+          setStart(response.data.display_name);
+        } catch (error) {
+          console.error('Error fetching current location:', error);
+        }
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  };
+
+  useEffect(() => {
+    fetchCurrentLocation();
+  }, []);
+
   useEffect(() => {
     fetchSuggestions(start, setStartSuggestions);
   }, [start]);
+
   useEffect(() => {
     fetchSuggestions(destination, setDestinationSuggestions);
   }, [destination]);
 
   const handleClickOutside = (event) => {
     if (
-      startInputRef.current && !startInputRef.current.contains(event.target) &&
-      destinationInputRef.current && !destinationInputRef.current.contains(event.target)
+      (!startInputRef.current || !startInputRef.current.contains(event.target)) &&
+      (!destinationInputRef.current || !destinationInputRef.current.contains(event.target)) &&
+      !event.target.closest('.suggestions-box') // Ngăn đóng khi nhấn vào danh sách gợi ý
     ) {
-      setStartSuggestions([]); // Đóng gợi ý "start"
-      setDestinationSuggestions([]); // Đóng gợi ý "destination"
+      setStartSuggestions([]);
+      setDestinationSuggestions([]);
     }
   };
+useEffect(() => {
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+const handleStartChange = (e) => {
+  const value = e.target.value;
+  setStart(value);
+  setStartSelected(false);
+  if (value) {
+    fetchSuggestions(value, setStartSuggestions);
+  } else {
+    setStartSuggestions([]); // Đóng gợi ý nếu input bị xóa
+  }
+};
+
+const handleDestinationChange = (e) => {
+  const value = e.target.value;
+  setDestination(value);
+  setDestinationSelected(false);
+  if (value) {
+    fetchSuggestions(value, setDestinationSuggestions);
+  } else {
+    setDestinationSuggestions([]); // Đóng gợi ý nếu input bị xóa
+  }
+};
+
 
   return (
     <>
@@ -164,29 +213,31 @@ const Homescreen = () => {
               <div className="search-start">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
-                  type="text"
-                  value={start}
-                  onChange={(e) => setStart(e.target.value)}
-                  placeholder="Enter your start"
-                  className="search-input"
-                />
-                {startSuggestions.length > 0 && (
-                  <div className="suggestions-box">
-                    <ul className="suggestions-list">
-                      {startSuggestions.map((suggestion) => (
-                        <li
-                          key={suggestion.place_id}
-                          onClick={() => {
-                            setStart(suggestion.display_name);
-                            setStartSuggestions([]);
-                          }}
-                        >
-                          {suggestion.display_name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                type="text"
+                value={start}
+                onChange={handleStartChange}
+                placeholder="Enter your start"
+                className="search-input"
+                ref={startInputRef}
+              />
+              {!startSelected && startSuggestions.length > 0 && (
+                <div className="suggestions-box">
+                  <ul className="suggestions-list">
+                    {startSuggestions.map((suggestion) => (
+                      <li
+                        key={suggestion.place_id}
+                        onClick={() => {
+                          setStart(suggestion.display_name);
+                          setStartSuggestions([]);
+                          setStartSelected(true);
+                        }}
+                      >
+                        {suggestion.display_name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               </div>
               <div className="swap-container">
                 <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
@@ -196,11 +247,12 @@ const Homescreen = () => {
                 <input
                   type="text"
                   value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
+                  onChange={handleDestinationChange}
                   placeholder="Enter your destination"
                   className="search-input"
+                  ref={destinationInputRef}
                 />
-                {destinationSuggestions.length > 0 && (
+                {!destinationSelected && destinationSuggestions.length > 0 && (
                   <div className="suggestions-box">
                     <ul className="suggestions-list">
                       {destinationSuggestions.map((suggestion) => (
@@ -209,6 +261,7 @@ const Homescreen = () => {
                           onClick={() => {
                             setDestination(suggestion.display_name);
                             setDestinationSuggestions([]);
+                            setDestinationSelected(true);
                           }}
                         >
                           {suggestion.display_name}
