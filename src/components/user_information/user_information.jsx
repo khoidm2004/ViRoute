@@ -65,7 +65,7 @@ function UserInformation() {
     try {
       const updatedData = {
         fullName: tempFullName || user.fullName,
-        phoneNumber: phone || user.phoneNumber,
+        //phoneNumber: phone || user.phoneNumber,
       };
       
       const response = await updateUser(user.userID, updatedData);
