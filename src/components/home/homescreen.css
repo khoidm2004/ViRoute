@@ -1,7 +1,6 @@
 .home {
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
 }
 
 .pics-homescreen {
@@ -42,10 +41,6 @@
 }
 
 
-::-webkit-scrollbar{
-  display:None;
-}
-
 .option-icon {
   font-size: 26px;
   color: rgba(0, 0, 0);
@@ -63,9 +58,9 @@
 .search-start {
   width: 600px;
   display: flex;
+  position:relative;
   align-items: center;
   padding: 10px;
-  border-radius: 30px;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex-grow: 1; /* Allow inputs to grow equally */
@@ -73,10 +68,10 @@
 
 .search-destination {
   width: 600px;
+  position:relative;
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius: 30px;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex-grow: 1; /* Allow inputs to grow equally */
@@ -92,6 +87,46 @@
   background: transparent;
   width: 100%; /* Ensures input field takes the full width */
   padding-left: 10px;
+}
+
+.search-input {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: black;
+  margin-left: var(--padding);
+  outline: none;
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.suggestions-box {
+  position: absolute;
+  top: 100%; /* Đặt suggestions ngay dưới input */
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.suggestions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestions-list li {
+  padding: 10px;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
 }
 
 .swap-icon {
