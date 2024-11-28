@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import './register.css';
 import HidePass from '../hidepass/hidePass.jsx';
 import SuccessNotify from '../notification/noti_success.jsx';
 import ErrorNotify from '../notification/noti_error.jsx'; 
 import Footer from '../footer/footer.jsx';
 import useRegister from '../../services/useRegister';
+import authStore from '../../stores/authStore.js';
 
 const Register = () => {
   const navigate = useNavigate();
