@@ -1,10 +1,46 @@
 .home {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   overflow-y: hidden;
-  padding: 0px 10px;
 }
+
+.pics-homescreen {
+    position: relative;
+    width: 100%; /* Full màn hình ngang */
+    height: 800px; /* Chiều cao màn hình trừ taskbar */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; /* Ẩn phần ảnh dư */
+    margin-top: 27px; /* Bù chiều cao taskbar */
+  }
+
+.pics-homescreen img {
+  width: 100%; /* Đảm bảo chiều rộng khớp với màn hình */
+  height: 1200px; /* Tự điều chỉnh chiều cao theo tỉ lệ */
+  object-fit: cover; /* Đảm bảo ảnh tràn khung mà không bị méo */
+}
+
+.homescreen-optioncontainer {
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 80%; 
+  padding: 20px;
+  box-sizing: border-box; 
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 30px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.homescreen-title {
+  text-align: center;
+  font-size: 40px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
 
 ::-webkit-scrollbar{
   display:None;
@@ -24,7 +60,18 @@
   margin-bottom: 1px;
 }
 
-.search {
+.search-start {
+  width: 600px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-grow: 1; /* Allow inputs to grow equally */
+}
+
+.search-destination {
   width: 600px;
   display: flex;
   align-items: center;
@@ -47,12 +94,11 @@
   padding-left: 10px;
 }
 
-/* Styling for the swap icon */
 .swap-icon {
   font-size: 36px;
   cursor: pointer;
   color: #555;
-  margin: 20px;
+  margin: 10px;
 }
 
 /* Search Button */
@@ -118,7 +164,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(60, 177, 41, 1);
+  background-color: #4CAF50;
   color: white;
   font-size: 14px;
   width: 200px;
@@ -175,7 +221,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 100%; /* Ensures it doesn't exceed the divider width */
+  max-width: 100%; 
 }
 
 .location-name {
@@ -197,10 +243,9 @@
   text-overflow: ellipsis;
 }
 
-.divider {
+.divider-home {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  margin: 40px 0;
+  background-color: rgba(0, 0, 0);
 }
 
 .error-message {
@@ -227,7 +272,7 @@
 .places-btn {
   display: flex;
   align-items: center;
-  background-color: rgba(60, 177, 41);
+  background-color: #3cb129;
   color: white;
   font-size: 14px;
   padding: 30px 35px;
@@ -270,23 +315,123 @@
 }
 
 .confirm-button{
-  background-color: #4CAF50;
+  background-color: #3cb129;
+}
+
+.location-info-section {
+  display: flex;
+  flex-direction: row;
+  padding: 50px;
+  background-color: rgba(60, 177, 41, 0.5);
+  height: 100%;
+}
+
+.location-left {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.location-left h2 {
+  font-size: 24px;
+  color: black;
+}
+
+.location-left p {
+  font-size: 16px;
+  color: black;
+}
+
+.location-left a {
+  color: #4CAF50;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.location-left a:hover {
+  text-decoration: underline;
 }
 
 .map-container {
-  height: 160%; 
-  max-height: 400px;
-  width: 100%; 
+  height: 100vh; 
+  max-height: 300px;
+  width: 100%;
   position: relative;
-  align-items: center;
-  bottom: 0;
 }
 
+/* Adjustments for screen width 480px and below */
 @media only screen and (max-width: 480px) {
-  .map-container {
-    display: none;
+  .homescreen-title {
+    font-size: 20px;
   }
-}
+
+  .information-container {
+    flex-direction: row; /* Đặt theo hàng */
+    flex-wrap: wrap; /* Đảm bảo không tràn ra ngoài */
+    justify-content: flex-start; /* Các thanh tìm kiếm vẫn xếp đều bên trái */
+  }
+
+  .search-start {
+    width: 50wh;
+  }
+  .search-destination {
+    width: 50wh;
+  }
+
+  .search-btn--find {
+    margin-left: auto; 
+  }
+
+  .swap-icon{
+    font-size: 30px;
+  }
+
+  .location-info-section {
+    flex-direction: column; /* Stack vertically on small screens */
+  }
+
+  .location-left {
+    width: auto;
+  }
+
+} 
+
 
 @media only screen and (min-width: 481px) and (max-width: 860px) {
+  .homescreen-title {
+    font-size: 28px;
+  }
+
+  .information-container {
+    flex-direction: row; /* Đặt theo hàng */
+    flex-wrap: wrap; /* Đảm bảo không tràn ra ngoài */
+    justify-content: flex-start; /* Các thanh tìm kiếm vẫn xếp đều bên trái */
+  }
+
+  .search-start {
+    width: 50wh;
+  }
+  .search-destination {
+    width: 50wh;
+  }
+
+  .search-btn--find {
+    margin-left: auto; 
+  }
+
+  .swap-icon{
+    font-size: 30px;
+  }
+
+  .location-info-section {
+    flex-direction: column; /* Stack vertically on small screens */
+  }
+
+  .location-left {
+    width: auto;
+  }
 }
