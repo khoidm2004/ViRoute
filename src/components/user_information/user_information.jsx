@@ -160,7 +160,7 @@ function UserInformation() {
 
           {activeTab === 'changePassword' && (
             <div className="change-password-tab">
-              <form onSubmit={handleChangePassword}>
+              <form >
               <div className="form-group">
                 <label>Current Password</label>
                 <HidePass

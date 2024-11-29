@@ -11,6 +11,7 @@ import Feedback from './components/feedback/feedback';
 import UserInformation from './components/user_information/user_information';
 import Tickets from './components/tickets/tickets';
 import NotFound from './components/not_found/not_found';
+import Reclaimpass from './components/reclaimpass/reclaimpass';
 import { Routes, Route} from 'react-router-dom';
 
 function AppRoutes() {
@@ -22,11 +23,12 @@ function AppRoutes() {
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
+          <Route path="/reclaimpass" element={<><Reclaimpass/></>}/>
 
           <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
 
-          <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
+          <Route path="/*" element={<><NotFound/></>}/>
         </Routes>
     );
   };
