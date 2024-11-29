@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import HidePass from '../hidepass/hidePass.jsx';
+import '../reclaimpass/reclaimpass.css'
+import Footer from '../footer/footer';
 
 const Reclaimpass = () => {
-    const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     return (
-        <div className="change-password-tab">
-              <form >
-              
+        <div className="reclaim-password-tab">
+          <h2 className="reclaim-header">Change the password</h2>
+              <form>
               <div className="form-group">
                 <label>New Password</label>
                 <HidePass

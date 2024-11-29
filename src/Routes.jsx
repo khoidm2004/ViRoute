@@ -23,12 +23,12 @@ function AppRoutes() {
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
-          <Route path="/reclaimpass" element={<><Reclaimpass/></>}/>
+          <Route path="/reclaimpass" element={<><Taskbar/><Reclaimpass/></>}/>
 
           <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
 
-          <Route path="/*" element={<><NotFound/></>}/>
+          <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
         </Routes>
     );
   };
