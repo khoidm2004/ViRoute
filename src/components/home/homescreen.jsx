@@ -7,6 +7,7 @@ import Footer from '../footer/footer.jsx';
 import Map from '../map/map.jsx';
 import authStore from '../../stores/authStore';
 import axios from 'axios';
+import Taskbar from '../taskbar/taskbar.jsx';
 
 const Homescreen = () => {
   const navigate = useNavigate();
