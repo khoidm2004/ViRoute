@@ -38,7 +38,6 @@ function UserInformation() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
   const handleFileChange = (event) => {
@@ -101,7 +100,7 @@ function UserInformation() {
               <div className="balance-avatar-container">
                 <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
-                    <img src={tempAvatar} alt="Avatar" /> {/* Show temp avatar */}
+                    <img src={tempAvatar} alt="Avatar"  /> {/* Show temp avatar */}
                   </div>
                   <input
                     type="file"
@@ -120,38 +119,38 @@ function UserInformation() {
               </div>
 
               <form onSubmit={handleSaveChanges}>
-              <div className="form-group">
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  value={tempFullName} // Use tempFullName for input
-                  placeholder={user.fullName}
-                  onChange={(e) => setTempFullName(e.target.value)} // Update tempFullName locally
-                />
-                {nameError && <span className="error-message">{nameError}</span>} {/* Show error if invalid */}
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  placeholder={user.userEmail}
-                  disabled
-                  readOnly
-                />
-              </div>
-              <div className="form-group">
-                <label>Mobile Phone</label>
-                <input
-                  type="tel"
-                  value={phone}
-                  placeholder={user.phoneNumber}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
-              <button type='submit' className="save-button">
-                Save changes
-              </button>
+                <div className="form-group">
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    value={tempFullName} // Use tempFullName for input
+                    placeholder={user.fullName}
+                    onChange={(e) => setTempFullName(e.target.value)} // Update tempFullName locally
+                  />
+                  {nameError && <span className="error-message">{nameError}</span>} {/* Show error if invalid */}
+                </div>
+                <div className="form-group">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    value={user.userEmail}
+                    placeholder={user.userEmail}
+                    disabled
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Mobile Phone</label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    placeholder={user.phoneNumber}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                <button type='submit' className="save-button">
+                  Save changes
+                </button>
               </form>
             </div>
           )}
@@ -161,34 +160,34 @@ function UserInformation() {
           {activeTab === 'changePassword' && (
             <div className="change-password-tab">
               <form >
-              <div className="form-group">
-                <label>Current Password</label>
-                <HidePass
-                  values={{ password: currentPassword, showPassword: showCurrentPassword }}
-                  handlePasswordChange={(e) => setCurrentPassword(e.target.value)}
-                  handleClickShowPassword={() => setShowCurrentPassword(!showCurrentPassword)}
-                  handleMouseDownPassword={(e) => e.preventDefault()}
-                />
-              </div>
-              <div className="form-group">
-                <label>New Password</label>
-                <HidePass
-                  values={{ password: newPassword, showPassword: showNewPassword }}
-                  handlePasswordChange={(e) => setNewPassword(e.target.value)}
-                  handleClickShowPassword={() => setShowNewPassword(!showNewPassword)}
-                  handleMouseDownPassword={(e) => e.preventDefault()}
-                />
-              </div>
-              <div className="form-group">
-                <label>Repeat New Password</label>
-                <HidePass
-                  values={{ password: confirmPassword, showPassword: showConfirmPassword }}
-                  handlePasswordChange={(e) => setConfirmPassword(e.target.value)}
-                  handleClickShowPassword={() => setShowConfirmPassword(!showConfirmPassword)}
-                  handleMouseDownPassword={(e) => e.preventDefault()}
-                />
-              </div>
-              <button type='submit' className="save-button" >Change password</button>
+                <div className="form-group">
+                  <label>Current Password</label>
+                  <HidePass
+                    values={{ password: currentPassword, showPassword: showCurrentPassword }}
+                    handlePasswordChange={(e) => setCurrentPassword(e.target.value)}
+                    handleClickShowPassword={() => setShowCurrentPassword(!showCurrentPassword)}
+                    handleMouseDownPassword={(e) => e.preventDefault()}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>New Password</label>
+                  <HidePass
+                    values={{ password: newPassword, showPassword: showNewPassword }}
+                    handlePasswordChange={(e) => setNewPassword(e.target.value)}
+                    handleClickShowPassword={() => setShowNewPassword(!showNewPassword)}
+                    handleMouseDownPassword={(e) => e.preventDefault()}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Repeat New Password</label>
+                  <HidePass
+                    values={{ password: confirmPassword, showPassword: showConfirmPassword }}
+                    handlePasswordChange={(e) => setConfirmPassword(e.target.value)}
+                    handleClickShowPassword={() => setShowConfirmPassword(!showConfirmPassword)}
+                    handleMouseDownPassword={(e) => e.preventDefault()}
+                  />
+                </div>
+                <button type='submit' className="save-button" >Change password</button>
               </form>
             </div>
           )}
