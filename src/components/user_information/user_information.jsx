@@ -7,6 +7,7 @@ import useUserInformationStore from '../../stores/userinfoStore';
 import HidePass from '../hidepass/hidePass.jsx';
 import authStore from '../../stores/authStore.js';
 import updateUser from '../../services/updateInfo.js';
+import Footer from '../footer/footer';
 
 function UserInformation() {
   const user = authStore((state) => state.user);
@@ -80,7 +81,7 @@ function UserInformation() {
     }
   };
   return (
-
+    <>
     <div className="account-settings-container">
       <h2 className="account-info-header">Account Information</h2>
       <div className="settings-box">
@@ -155,8 +156,6 @@ function UserInformation() {
             </div>
           )}
 
-
-
           {activeTab === 'changePassword' && (
             <div className="change-password-tab">
               <form >
@@ -195,6 +194,8 @@ function UserInformation() {
       </div>
       <SuccessNotify />
     </div>
+    <Footer/>
+    </>
   );
 }
 

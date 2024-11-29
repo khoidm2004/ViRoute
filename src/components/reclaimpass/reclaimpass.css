@@ -1,0 +1,21 @@
+.reclaim-password-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box; 
+}
+
+.reclaim-header {
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #333; 
+    text-align: center; 
+    margin-bottom: 20px;
+    letter-spacing: 1px; 
+}
+
