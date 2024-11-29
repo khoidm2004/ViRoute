@@ -12,6 +12,7 @@ import UserInformation from './components/user_information/user_information';
 import Tickets from './components/tickets/tickets';
 import NotFound from './components/not_found/not_found';
 import Reclaimpass from './components/reclaimpass/reclaimpass';
+import SuccessChange from './components/reclaimpass/success_change';
 import { Routes, Route} from 'react-router-dom';
 
 function AppRoutes() {
@@ -24,6 +25,7 @@ function AppRoutes() {
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
           <Route path="/reclaimpass" element={<><Taskbar/><Reclaimpass/></>}/>
+          <Route path="/reclaimpass/success_change" element={<><Taskbar/><SuccessChange/></>}/>
 
           <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
