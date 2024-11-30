@@ -1,22 +1,20 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+import dj_database_url
 
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '43zsza&2#rm_d)o&2-wl0d7@7bv^&p-9+krctx9y2!#jnqu1=7')
+SECRET_KEY = 'django-insecure-9)pym!8*i7k=!ep6rx0d^$p@!fnzf*1($8ub10&(65h4(h!*7n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = True
 
-ALLOWED_HOSTS = ['86.50.35.0']
-#ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -34,9 +32,8 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    #"allauth.socialaccount.providers.github",
+    "allauth.socialaccount.providers.github",
     "oauth2_provider",
-    'viroute',
     'corsheaders',
 ]
 
@@ -79,19 +76,14 @@ WSGI_APPLICATION = 'viroute.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'viroute', #your name
-        'USER': 'root',
-        'PASSWORD': 'sherloque', #your password
-        'HOST':'https://viroute.scm.azurewebsites.net/',
-        'PORT':'3360',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    }
+    'default': dj_database_url.config(
+        default='mysql://root:NUrjwwbhLgunSnbpwQfEcMyGFtGFtaqy@autorack.proxy.rlwy.net:57334/railway'
+    )
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -126,7 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -157,17 +149,13 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"  # Redirect URL after successful login
 LOGOUT_REDIRECT_URL = "/"  # Redirect URL after successful logout
 
+
 ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/" 
 LOGOUT_REDIRECT_URL = "/"
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-'''
-az webapp config appsettings set --resource-group myresourcegroup4virouteproject --name myDjangoApp 
---settings DJANGO_SECRET_KEY=43zsza&2#rm_d)o&2-wl0d7@7bv^&p-9+krctx9y2!#jnqu1=7 DJANGO_DEBUG=False DJANGO_ALLOWED_HOSTS=myDjangoApp.azurewebsites.net
-'''
