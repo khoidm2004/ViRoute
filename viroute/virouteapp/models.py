@@ -19,6 +19,12 @@ class Metro(Vehicle):
     metro_id = models.CharField(max_length=20, primary_key=True)
     #metro_plate = models.CharField(max_length=20, unique=True)
 
+class BusRoute(models.Model):
+    bus_id = models.CharField(max_length=20, primary_key=True)
+    bus_Name = models.CharField(max_length=100)
+    bus_start = models.CharField(max_length=100)
+    bus_end = models.CharField(max_length=100)
+
 class Ticket(models.Model):
     ticketID = models.IntegerField(validators=[MaxValueValidator(16)],null=False,unique=True,primary_key=True)
     departurePoint = models.CharField(max_length=50,null=False,blank=False)
