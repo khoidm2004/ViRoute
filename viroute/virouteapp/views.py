@@ -8,10 +8,6 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
-from django.core.exceptions import MultipleObjectsReturned
-from allauth.socialaccount.models import SocialAccount
-from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from dj_rest_auth.registration.views import SocialLoginView
 
 # Authen API
 from .models import User
@@ -108,3 +104,45 @@ def get_image_by_name(request, image_name):
 
     with open(image_path, 'rb') as img:
         return HttpResponse(img.read(), content_type="image/png")
+    
+@api_view(['PUT'])
+def update_user_info(request, user_id):
+    try:
+        try:
+            user = User.objects.get(userID=user_id)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "User not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        if request.content_type == 'application/json':
+            data = request.data
+        else:
+            raw_body = request.POST.get('_content')
+            if raw_body:
+                data = json.loads(raw_body)
+            else:
+                return Response(
+                    {"error": "Invalid content-type or missing data."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        serializer = UserSerializer(user, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {
+                    "message": "User updated successfully",
+                    "user": serializer.data
+                },
+                status=status.HTTP_200_OK
+            )
+        else:
+            return Response(
+                {"error": "Invalid data", "details": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    except Exception as e:
+        return Response(
+            {"error": "An unexpected error occurred", "details": str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
