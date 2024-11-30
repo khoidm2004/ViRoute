@@ -242,7 +242,7 @@ const handleDestinationChange = (e) => {
               </div>
               <div className="swap-container">
                 <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
-              </div>
+              </div> 
               <div className="search-destination">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
@@ -367,7 +367,7 @@ const handleDestinationChange = (e) => {
           <div className="location-info-section">
               <div className="location-left">
                 <h2>Your location now</h2>
-                <p>Your location now:</p>
+                <p>Your location now: {start || "Fetching location..."}</p>
                 <p>Want to add your favourite place? <a href="/login">Login/Signup</a></p>
               </div>
                 <Map className="map-container"/>  
