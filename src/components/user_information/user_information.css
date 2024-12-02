@@ -1,4 +1,3 @@
-/* Main container layout */
 .account-settings-container {
     display: flex;
     flex-direction: column;
@@ -59,7 +58,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     width: calc(100% - 200px); 
     max-width: 800px;
     box-sizing: border-box;
@@ -152,8 +151,66 @@
     width: 80%
   }
 
-  /* Toggle collapsed balance-avatar-container for mobile */
-/* Adjust layout for mobile screens */
+  .favourite-places-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .favourite-place-item {
+    padding:0;
+    border-bottom: 1px solid #ddd; 
+    align-items: center; 
+  }
+  
+  .favourite-place-item:last-child {
+    border-bottom: none; 
+  }
+  
+  .user-place-row {
+    display: flex;
+    align-items: center; 
+  }
+  
+  .user-place-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .user-place-icon {
+    margin-right: 10px; 
+    font-size: 30px; 
+    color: #000; 
+  }
+  
+  .user-place-name {
+    font-weight: bold;
+    color: #000; 
+    font-size: 24px;
+  }
+  
+  .user-place-address {
+    color: #000; 
+    font-size: 18px;
+  }
+
+  .delete-place-button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 24px;
+    margin-left: auto;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .delete-place-button:hover {
+    color: darkred;
+  }
+  
+  
 @media only screen and (max-width: 860px) {
   .settings-box {
       flex-direction: column; /* Stack tabs and content vertically */
@@ -190,5 +247,23 @@
   .tabs-container-button:focus {
     outline: none;
     box-shadow: 0 0 4px rgba(60, 177, 41, 0.8); /* Green shadow for focus */
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+  .user-place-icon {
+    font-size: 20px; 
+  }
+  
+  .user-place-name {
+    font-size: 16px;
+  }
+  
+  .user-place-address {
+    font-size: 14px;
+  }
+
+  .delete-place-button {
+    font-size: 16px;
   }
 }
