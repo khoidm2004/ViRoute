@@ -38,6 +38,30 @@ const useUserInformationStore = create((set) => ({
   }),
 
   applyTempFullName: () => set((state) => ({ fullName: state.tempFullName })),
+
+  favouritePlaces: JSON.parse(localStorage.getItem('favouritePlaces')) || [],
+  addFavouritePlace: (place) => set((state) => {
+    const isDuplicate = state.favouritePlaces.some(
+      (fav) =>
+        fav.locationName === place.locationName ||
+        fav.streetAddress === place.streetAddress
+    );
+  
+    if (isDuplicate) {
+      return { error: 'Duplicate name or address' };
+    }
+  
+    const updatedPlaces = [...state.favouritePlaces, place];
+    localStorage.setItem('favouritePlaces', JSON.stringify(updatedPlaces));
+    return { favouritePlaces: updatedPlaces, error: null };
+  }),
+  
+  
+  deleteFavoritePlace: (index) => set((state) => {
+    const updatedPlaces = state.favouritePlaces.filter((_, i) => i !== index);
+    localStorage.setItem('favouritePlaces', JSON.stringify(updatedPlaces));
+    return { favouritePlaces: updatedPlaces };
+  }),
 }));
 
 export default useUserInformationStore;

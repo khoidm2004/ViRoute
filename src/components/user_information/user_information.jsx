@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 import './user_information.css';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
 import ErrorNotify, { triggerErrorNotification } from '../notification/noti_error.jsx';
@@ -23,8 +24,9 @@ function UserInformation() {
     setAvatar,
     selectedFile,
     setSelectedFile,
-
+    favouritePlaces,
     resetPasswords,
+    deleteFavoritePlace
   } = useUserInformationStore();
   
   const [tempAvatar, setTempAvatar] = useState(avatar);
@@ -38,7 +40,6 @@ function UserInformation() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-
   const [phone, setPhone] = useState('');
 
   const handleFileChange = (event) => {
@@ -80,6 +81,11 @@ function UserInformation() {
       triggerErrorNotification(errorMessage);
     }
   };
+  
+  const handleDeletePlace = (indexToRemove) => {
+    deleteFavoritePlace(indexToRemove);
+  };
+
   return (
     <>
     <div className="account-settings-container">
@@ -91,6 +97,9 @@ function UserInformation() {
           </button>
           <button className={activeTab === 'changePassword' ? 'active' : ''} onClick={() => setActiveTab('changePassword')}>
             Change Password
+          </button>
+          <button className={activeTab === 'yourplace' ? 'active' : ''} onClick={() => setActiveTab('yourplace')}>
+            Your place
           </button>
         </div>
 
@@ -119,7 +128,7 @@ function UserInformation() {
                 </div>
               </div>
 
-              <form onSubmit={handleSaveChanges}>
+              <form onSubmit={handleSaveChanges} className="form-container">
                 <div className="form-group">
                   <label>Full Name</label>
                   <input
@@ -149,6 +158,7 @@ function UserInformation() {
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
+                <div className="spacer"></div>
                 <button type='submit' className="save-button">
                   Save changes
                 </button>
@@ -188,6 +198,35 @@ function UserInformation() {
                 </div>
                 <button type='submit' className="save-button" >Change password</button>
               </form>
+            </div>
+          )}
+
+          {activeTab === 'yourplace' && (
+            <div className="your-place-tab">
+              {favouritePlaces.length > 0 ? (
+                <ul className="favourite-places-list">
+                  {favouritePlaces.map((place, index) => (
+                    <li className="favourite-place-item" key={index}>
+                      <div className="user-place-row">
+                        <Icon icon={place.selectedIcon || 'mdi:map-marker'} className="user-place-icon" />
+                        <div className="user-place-details">
+                          <strong className="user-place-name">{place.locationName || 'N/A'}</strong>
+                          <div className="user-place-address">{place.streetAddress || 'N/A'}</div>
+                        </div>
+                        <button
+                          className="delete-place-button"
+                          onClick={() => handleDeletePlace(index)}
+                          aria-label="Delete place"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>You have no favourite places yet.</p>
+              )}
             </div>
           )}
         </div>
