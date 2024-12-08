@@ -18,7 +18,6 @@ const Tracking = () => {
   const [currentPage, setCurrentPage] = useState(1); 
   const itemsPerPage = 10;
 
- 
   useEffect(() => {
     const loadBuses = async () => {
       try {
@@ -37,19 +36,18 @@ const Tracking = () => {
   const handleSearch = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
-    
+
     if (term) {
       const filtered = buses.filter(bus => 
-        bus.bus_Name.includes(term) || 
+        bus.bus_Name.toLowerCase().includes(term.toLowerCase()) || 
         bus.bus_start.toLowerCase().includes(term.toLowerCase()) || 
         bus.bus_end.toLowerCase().includes(term.toLowerCase())
       );
       setFilteredBuses(filtered);
     } else {
-      setFilteredBuses([]); 
+      setFilteredBuses([]); // Clear suggestions when searchTerm is empty
     }
   };
-  
 
   const handleBusClick = async (bus_Name) => {
     if (activeBus === bus_Name) {
@@ -74,7 +72,6 @@ const Tracking = () => {
     }
   };
 
- 
   const busesToDisplay = searchTerm ? filteredBuses : buses;
 
   const sortedBuses = busesToDisplay.sort((a, b) => {
@@ -83,11 +80,9 @@ const Tracking = () => {
     return 0;
   });
 
-
   const indexOfLastBus = currentPage * itemsPerPage;
   const indexOfFirstBus = indexOfLastBus - itemsPerPage;
   const currentBuses = sortedBuses.slice(indexOfFirstBus, indexOfLastBus);
-
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -95,65 +90,83 @@ const Tracking = () => {
 
   return (
     <div className='full-width-wrapper'>
-    <div className='tracking-container'>
-      {loadingBuses ? (
-        <p>Loading buses...</p>
-      ) : errorBuses ? (
-        <p className="error">{errorBuses}</p>
-      ) : (
-        <>
-          <div className='search-tracking'>
-            <Icon icon="material-symbols:search" className='icon-bus-metro' />
-            <input
-              type="text"
-              placeholder="Enter the bus/metro number"
-              className="input-tracking"
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-          </div>
-          {currentBuses.map((bus, index) => (
-            <React.Fragment key={bus.number}>
-              <div
-                className={`tracking-item ${activeBus === bus.bus_Name ? 'active' : ''}`}
-                onClick={() => handleBusClick(bus.bus_Name)}
-              >
-                Bus {bus.bus_Name}: {bus.bus_start} - {bus.bus_end}
+      <div className='tracking-container'>
+        {loadingBuses ? (
+          <p>Loading buses...</p>
+        ) : errorBuses ? (
+          <p className="error">{errorBuses}</p>
+        ) : (
+          <>
+            <div className='search-tracking'>
+              <Icon icon="material-symbols:search" className='icon-bus-metro' />
+              <input
+                type="text"
+                placeholder="Enter the bus/metro number"
+                className="input-tracking"
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </div>
+            {/* Search Suggestions */}
+            {searchTerm && filteredBuses.length > 0 && (
+              <div className="search-suggestions">
+                {filteredBuses.map((bus) => (
+                  <div
+                    key={bus.bus_Name}
+                    className="suggestion-item"
+                    onClick={() => {
+                      setSearchTerm(bus.bus_Name);
+                      setFilteredBuses([]); // Clear suggestions
+                    }}
+                  >
+                    {bus.bus_Name} - {bus.bus_start} to {bus.bus_end}
+                  </div>
+                ))}
               </div>
-              {activeBus === bus.bus_Name && (
-                <div className="map-container-tracking active">
-                  {loadingImage ? (
-                    <p>Loading image...</p>
-                  ) : errorImage ? (
-                    <p className="error">{errorImage}</p>
-                  ) : imageUrl ? (
-                    <img src={imageUrl} alt={`Bus ${bus.bus_Name}`} className="bus-image" />
-                  ) : null}
-                </div>
-              )}
-              {index < currentBuses.length - 1 && <div className="divider" />}
-            </React.Fragment>
-          ))}
+            )}
 
-          {/* Pagination Controls */}
-          <div className="pagination">
-            <button
-              onClick={() => paginate(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <span>Page {currentPage} of {totalPages}</span>
-            <button
-              onClick={() => paginate(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
-          </div>
-        </>
-      )}
-    </div>
+            {currentBuses.map((bus, index) => (
+              <React.Fragment key={bus.number}>
+                <div
+                  className={`tracking-item ${activeBus === bus.bus_Name ? 'active' : ''}`}
+                  onClick={() => handleBusClick(bus.bus_Name)}
+                >
+                  Bus {bus.bus_Name}: {bus.bus_start} - {bus.bus_end}
+                </div>
+                {activeBus === bus.bus_Name && (
+                  <div className="map-container-tracking active">
+                    {loadingImage ? (
+                      <p>Loading image...</p>
+                    ) : errorImage ? (
+                      <p className="error">{errorImage}</p>
+                    ) : imageUrl ? (
+                      <img src={imageUrl} alt={`Bus ${bus.bus_Name}`} className="bus-image" />
+                    ) : null}
+                  </div>
+                )}
+                {index < currentBuses.length - 1 && <div className="divider" />}
+              </React.Fragment>
+            ))}
+
+            {/* Pagination Controls */}
+            <div className="pagination">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span>Page {currentPage} of {totalPages}</span>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

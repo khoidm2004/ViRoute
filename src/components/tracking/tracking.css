@@ -1,14 +1,16 @@
 .full-width-wrapper {
   width: 100vw;
-  position: relative; /* Ensures it takes full width */
-  height: calc(100vw - 100px); /* Ensure it takes full height, or adjust if needed */
+  position: relative; 
+  height: calc(100vw - 100px);
   min-height: 100vh;
 }
+
 .tracking-container {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .search-tracking {
   width: 152vh;
   display: flex;
@@ -101,15 +103,44 @@
   height: 200px; 
 }
 
+.bus-image {
+  width: 115vh; 
+  height: 100%; 
+  max-height: 300px; 
+  margin: 10px 0; 
+}
+
+/* Fixed Search Suggestions Styles */
+.search-suggestions {
+  position: absolute;
+  top: 100%; /* Ensures suggestions appear below the input field */
+  background-color: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 10;
+  margin-top: 5px; /* Adds some space between the input and suggestions */
+  color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: rgba(60, 177, 41, 0.8);
+}
 
 /* Responsive Adjustments */
 @media (max-width: 860px) {
   .search-tracking,
   .tracking-item {
-    width: 90vw; /* Limit to viewport width for smaller screens */
+    width: 90vw;
   }
 }
-
 
 @media only screen and (min-width: 481px) and (max-width: 860px) {
 
@@ -121,12 +152,12 @@
 
   .tracking-item {
     padding: 20px;
-    font-size: 18px; /* Slightly smaller font size */
+    font-size: 18px; 
   }
 
   .map-container-tracking {
-    width: 90vw; /* Fit the map within viewport width for smaller screens */
-    height: 200px; /* Adjust height accordingly */
+    width: 90vw; 
+    height: 200px; 
   }
 }
 
@@ -139,16 +170,16 @@
 
   .tracking-item {
     padding: 15px;
-    font-size: 16px; /* Further reduce font size for very small screens */
+    font-size: 16px; 
   }
 
   .icon-bus-metro {
-    font-size: 20px; /* Smaller icon */
+    font-size: 20px; 
     margin-right: 5px;
   }
 
   .map-container-tracking {
     width: 90vw;
-    height: 150px; /* Further reduce height on very small screens */
+    height: 150px;
   }
 }
