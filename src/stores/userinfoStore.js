@@ -1,4 +1,3 @@
-// temporary
 import { create } from 'zustand';
 
 const useUserInformationStore = create((set) => ({
@@ -40,28 +39,31 @@ const useUserInformationStore = create((set) => ({
   applyTempFullName: () => set((state) => ({ fullName: state.tempFullName })),
 
   favouritePlaces: JSON.parse(localStorage.getItem('favouritePlaces')) || [],
+  error: null,
+
   addFavouritePlace: (place) => set((state) => {
     const isDuplicate = state.favouritePlaces.some(
       (fav) =>
         fav.locationName === place.locationName ||
         fav.streetAddress === place.streetAddress
     );
-  
+
     if (isDuplicate) {
       return { error: 'Duplicate name or address' };
     }
-  
+
     const updatedPlaces = [...state.favouritePlaces, place];
     localStorage.setItem('favouritePlaces', JSON.stringify(updatedPlaces));
-    return { favouritePlaces: updatedPlaces, error: null };
+    return { favouritePlaces: updatedPlaces, error: null }; 
   }),
-  
-  
+
   deleteFavoritePlace: (index) => set((state) => {
     const updatedPlaces = state.favouritePlaces.filter((_, i) => i !== index);
     localStorage.setItem('favouritePlaces', JSON.stringify(updatedPlaces));
     return { favouritePlaces: updatedPlaces };
   }),
+
+  clearError: () => set({ error: null }),
 }));
 
 export default useUserInformationStore;

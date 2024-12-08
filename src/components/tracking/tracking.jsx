@@ -167,6 +167,38 @@ const Tracking = () => {
           </>
         )}
       </div>
+              )}
+              {index < currentBuses.length - 1 && <div className="divider" />}
+            </React.Fragment>
+          ))}
+
+          <div className="pagination">
+            <button
+              className={`page-button ${currentPage === 1 ? 'disabled' : ''}`}
+              onClick={() => paginate(1)}
+              disabled={currentPage === 1}
+            >
+              First page
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`page-button ${page === currentPage ? 'active' : ''}`}
+                onClick={() => paginate(page)}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              className={`page-button ${currentPage === totalPages ? 'disabled' : ''}`}
+              onClick={() => paginate(totalPages)}
+              disabled={currentPage === totalPages}
+            >
+              Last page
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
