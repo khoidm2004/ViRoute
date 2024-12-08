@@ -1,3 +1,7 @@
+.full-width-wrapper-feedback {
+  width: 100vw;
+  position: relative; 
+}
 .feedback-container {
   display: flex;
   justify-content: space-between;
