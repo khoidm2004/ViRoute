@@ -2,28 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import './tracking.css';
 import '../map/map.css';
-import fetchBuses from '../../services/fetchBus'; // Import fetchBuses
+import fetchBuses from '../../services/fetchBus'; 
 import fetchImage from '../../services/fetchImage';
 
 const Tracking = () => {
-  const [buses, setBuses] = useState([]); // State for bus data
+  const [buses, setBuses] = useState([]); 
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBuses, setFilteredBuses] = useState([]);
   const [activeBus, setActiveBus] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null); // State for the image URL
-  const [loadingImage, setLoadingImage] = useState(false); // State for loading indicator
-  const [errorImage, setErrorImage] = useState(null); // State for error messages
-  const [loadingBuses, setLoadingBuses] = useState(true); // State for bus loading
-  const [errorBuses, setErrorBuses] = useState(null); // State for bus error
-  const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const itemsPerPage = 10; // Number of buses per page
+  const [imageUrl, setImageUrl] = useState(null); 
+  const [loadingImage, setLoadingImage] = useState(false); 
+  const [errorImage, setErrorImage] = useState(null); 
+  const [loadingBuses, setLoadingBuses] = useState(true); 
+  const [errorBuses, setErrorBuses] = useState(null); 
+  const [currentPage, setCurrentPage] = useState(1); 
+  const itemsPerPage = 10;
 
-  // Fetch buses on component mount
+ 
   useEffect(() => {
     const loadBuses = async () => {
       try {
-        const data = await fetchBuses(); // Fetch bus data
-        setBuses(data); // Update state with fetched buses
+        const data = await fetchBuses(); 
+        setBuses(data); 
       } catch (error) {
         setErrorBuses('Failed to load buses.');
       } finally {
@@ -37,18 +37,24 @@ const Tracking = () => {
   const handleSearch = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
+    
     if (term) {
-      const filtered = buses.filter(bus => bus.bus_Name.includes(term));
+      const filtered = buses.filter(bus => 
+        bus.bus_Name.includes(term) || 
+        bus.bus_start.toLowerCase().includes(term.toLowerCase()) || 
+        bus.bus_end.toLowerCase().includes(term.toLowerCase())
+      );
       setFilteredBuses(filtered);
     } else {
-      setFilteredBuses([]);
+      setFilteredBuses([]); 
     }
   };
+  
 
   const handleBusClick = async (bus_Name) => {
     if (activeBus === bus_Name) {
       setActiveBus(null);
-      setImageUrl(null); // Reset image on deselect
+      setImageUrl(null);
       setErrorImage(null);
       return;
     }
@@ -60,7 +66,7 @@ const Tracking = () => {
 
     try {
       const url = await fetchImage(bus_Name);
-      setImageUrl(url); // Update state with the fetched image URL
+      setImageUrl(url);
     } catch (error) {
       setErrorImage('Failed to load image.');
     } finally {
@@ -68,7 +74,7 @@ const Tracking = () => {
     }
   };
 
-  // Sort buses alphabetically by bus_Name
+ 
   const busesToDisplay = searchTerm ? filteredBuses : buses;
 
   const sortedBuses = busesToDisplay.sort((a, b) => {
@@ -77,15 +83,14 @@ const Tracking = () => {
     return 0;
   });
 
-  // Pagination Logic
+
   const indexOfLastBus = currentPage * itemsPerPage;
   const indexOfFirstBus = indexOfLastBus - itemsPerPage;
   const currentBuses = sortedBuses.slice(indexOfFirstBus, indexOfLastBus);
 
-  // Change page
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Calculate total pages
   const totalPages = Math.ceil(sortedBuses.length / itemsPerPage);
 
   return (
