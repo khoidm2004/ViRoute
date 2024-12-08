@@ -9,7 +9,6 @@ import authStore from '../../stores/authStore';
 import axios from 'axios';
 import Taskbar from '../taskbar/taskbar.jsx';
 import useUserInformationStore from '../../stores/userinfoStore';
-import fetchBuses from '../../services/fetchBus.js';
 
 const Homescreen = () => {
   const { favouritePlaces, addFavouritePlace, deleteFavoritePlace } = useUserInformationStore();
@@ -20,6 +19,7 @@ const Homescreen = () => {
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [startSelected, setStartSelected] = useState(false);
   const [destinationSelected, setDestinationSelected] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState('');
   const [searchError, setSearchError] = useState('');
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const today = new Date().toISOString().split("T")[0];
@@ -83,7 +83,8 @@ const Homescreen = () => {
     };
 
     const { favouritePlaces, error: addError } = useUserInformationStore.getState();
-    addFavouritePlace(newPlace);
+  
+    useUserInformationStore.getState().addFavouritePlace(newPlace);
 
     if (addError) {
       setError(addError === 'Duplicate name or address'
@@ -92,6 +93,7 @@ const Homescreen = () => {
       return;
     }
 
+    addFavouritePlace(newPlace);
     setStreetAddress('');
     setLocationName('');
     setSelectedIcon('');
@@ -141,20 +143,49 @@ const Homescreen = () => {
     return `Departure now? (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
   };
 
-  const fetchSuggestions = async (query, setSuggestions) => {
-    if (!query) {
-      setSuggestions([]);
-      return;
-    }
+  const fetchSuggestions = async (query, setSuggestions, isDestination = false) => {
     try {
-      const response = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`);
-      const results = response.data.slice(0, 3);
-      setSuggestions(results);
+      if (!query && !isDestination) {
+        setSuggestions([]);
+        return;
+      }
+  
+      const { data } = await axios.get("https://test-production-1774.up.railway.app/api/bus_routes/");
+      const uniquePlaces = new Set();
+      const results = [];
+  
+      if (isDestination && start) {
+        // Lọc những điểm đến phù hợp với điểm xuất phát đã chọn
+        data.forEach((item) => {
+          if (item.bus_start.toLowerCase() === start.toLowerCase() && !uniquePlaces.has(item.bus_end)) {
+            results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
+            uniquePlaces.add(item.bus_end);
+          }
+        });
+      } else {
+        // Tìm kiếm thông thường cho cả điểm đi và điểm đến
+        data.forEach((item) => {
+          if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
+            results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
+            uniquePlaces.add(item.bus_start);
+          }
+          if (item.bus_end.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_end)) {
+            results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
+            uniquePlaces.add(item.bus_end);
+          }
+        });
+      }
+  
+      if (results.length > 0) {
+        setSuggestions(results.slice(0, 5));
+      } else {
+        setSuggestions([{ place_id: 'no_match', display_name: 'No matched finding' }]);
+      }
     } catch (error) {
-      console.error('Error fetching suggestions:', error);
+      console.error("Error fetching suggestions:", error.response?.data || error.message);
     }
-  };
-
+  };  
+  
   const fetchCurrentLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -163,7 +194,7 @@ const Homescreen = () => {
           const response = await axios.get(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
           );
-          setStart(response.data.display_name);
+          setCurrentLocation(response.data.display_name);
         } catch (error) {
           console.error('Error fetching current location:', error);
         }
@@ -172,10 +203,6 @@ const Homescreen = () => {
       console.error('Geolocation is not supported by this browser.');
     }
   };
-
-  useEffect(() => {
-    fetchCurrentLocation();
-  }, []);
 
   useEffect(() => {
     fetchSuggestions(start, setStartSuggestions);
@@ -189,7 +216,7 @@ const Homescreen = () => {
     if (
       (!startInputRef.current || !startInputRef.current.contains(event.target)) &&
       (!destinationInputRef.current || !destinationInputRef.current.contains(event.target)) &&
-      !event.target.closest('.suggestions-box')
+      !event.target.closest('.suggestions-box') 
     ) {
       setStartSuggestions([]);
       setDestinationSuggestions([]);
@@ -207,7 +234,9 @@ const handleStartChange = (e) => {
   setStart(value);
   setStartSelected(false);
   if (value) {
-    fetchSuggestions(value, setStartSuggestions);
+    fetchSuggestions(value, setStartSuggestions, true);
+  } else if (destination) {
+    fetchSuggestions('', setStartSuggestions, true);
   } else {
     setStartSuggestions([]);
   }
@@ -218,12 +247,17 @@ const handleDestinationChange = (e) => {
   setDestination(value);
   setDestinationSelected(false);
   if (value) {
-    fetchSuggestions(value, setDestinationSuggestions);
+    fetchSuggestions(value, setDestinationSuggestions, true);
+  } else if (start) {
+    fetchSuggestions('', setDestinationSuggestions, true);
   } else {
-    setDestinationSuggestions([]); 
+    setDestinationSuggestions([]);
   }
 };
 
+useEffect(() => {
+  fetchCurrentLocation();
+}, []);
 
   return (
     <>
@@ -241,6 +275,11 @@ const handleDestinationChange = (e) => {
                 type="text"
                 value={start}
                 onChange={handleStartChange}
+                onFocus={() => {
+                  if (destination) {
+                    fetchSuggestions('', setStartSuggestions, true);
+                  }
+                }}
                 placeholder="Enter your start"
                 className="search-input"
                 ref={startInputRef}
@@ -252,10 +291,13 @@ const handleDestinationChange = (e) => {
                       <li
                         key={suggestion.place_id}
                         onClick={() => {
-                          setStart(suggestion.display_name);
-                          setStartSuggestions([]);
-                          setStartSelected(true);
+                          if (suggestion.place_id !== 'no_match') {
+                            setStart(suggestion.display_name);
+                            setStartSuggestions([]);
+                            setStartSelected(true);
+                          }
                         }}
+                        className={suggestion.place_id === 'no_match' ? 'no-match' : ''}
                       >
                         {suggestion.display_name}
                       </li>
@@ -273,6 +315,11 @@ const handleDestinationChange = (e) => {
                   type="text"
                   value={destination}
                   onChange={handleDestinationChange}
+                  onFocus={() => {
+                    if (start) {
+                      fetchSuggestions('', setDestinationSuggestions, true);
+                    }
+                  }}
                   placeholder="Enter your destination"
                   className="search-input"
                   ref={destinationInputRef}
@@ -284,10 +331,13 @@ const handleDestinationChange = (e) => {
                         <li
                           key={suggestion.place_id}
                           onClick={() => {
-                            setDestination(suggestion.display_name);
-                            setDestinationSuggestions([]);
-                            setDestinationSelected(true);
+                            if (suggestion.place_id !== 'no_match') {
+                              setDestination(suggestion.display_name);
+                              setDestinationSuggestions([]);
+                              setDestinationSelected(true);
+                            }
                           }}
+                          className={suggestion.place_id === 'no_match' ? 'no-match' : ''}
                         >
                           {suggestion.display_name}
                         </li>
@@ -366,7 +416,7 @@ const handleDestinationChange = (e) => {
           <div className="location-info-section">
               <div className="location-left">
                 <h2>Your location now</h2>
-                <p>Your location now: {start || "Fetching location..."}</p>
+                <p>Your location now: {currentLocation || "Fetching location..."}</p>
                 <p>Want to add your favourite place? <a href="/login">Login/Signup</a></p>
               </div>
                 <Map className="map-container"/>  

@@ -134,20 +134,29 @@ const Tracking = () => {
             </React.Fragment>
           ))}
 
-          {/* Pagination Controls */}
           <div className="pagination">
             <button
-              onClick={() => paginate(currentPage - 1)}
+              className={`page-button ${currentPage === 1 ? 'disabled' : ''}`}
+              onClick={() => paginate(1)}
               disabled={currentPage === 1}
             >
-              Previous
+              First page
             </button>
-            <span>Page {currentPage} of {totalPages}</span>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`page-button ${page === currentPage ? 'active' : ''}`}
+                onClick={() => paginate(page)}
+              >
+                {page}
+              </button>
+            ))}
             <button
-              onClick={() => paginate(currentPage + 1)}
+              className={`page-button ${currentPage === totalPages ? 'disabled' : ''}`}
+              onClick={() => paginate(totalPages)}
               disabled={currentPage === totalPages}
             >
-              Next
+              Last page
             </button>
           </div>
         </>
