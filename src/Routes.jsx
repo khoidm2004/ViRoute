@@ -31,6 +31,8 @@ function AppRoutes() {
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
 
           <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
+
+          <Route path='/test' element={<h>Testing page</h>}/>
         </Routes>
     );
   };
