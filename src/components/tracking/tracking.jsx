@@ -37,28 +37,28 @@ const Tracking = () => {
     const term = event.target.value;
     setSearchTerm(term);
     if (term) {
-      const filtered = buses.filter(bus => bus.number.includes(term));
+      const filtered = buses.filter(bus => bus.bus_Name.includes(term));
       setFilteredBuses(filtered);
     } else {
       setFilteredBuses([]);
     }
   };
 
-  const handleBusClick = async (busNumber) => {
-    if (activeBus === busNumber) {
+  const handleBusClick = async (bus_Name) => {
+    if (activeBus === bus_Name) {
       setActiveBus(null);
       setImageUrl(null); // Reset image on deselect
       setErrorImage(null);
       return;
     }
 
-    setActiveBus(busNumber);
+    setActiveBus(bus_Name);
     setImageUrl(null);
     setErrorImage(null);
     setLoadingImage(true);
 
     try {
-      const url = await fetchImage(busNumber);
+      const url = await fetchImage(bus_Name);
       setImageUrl(url); // Update state with the fetched image URL
     } catch (error) {
       setErrorImage('Failed to load image.');
@@ -90,19 +90,19 @@ const Tracking = () => {
           {busesToDisplay.map((bus, index) => (
             <React.Fragment key={bus.number}>
               <div
-                className={`tracking-item ${activeBus === bus.number ? 'active' : ''}`}
-                onClick={() => handleBusClick(bus.number)}
+                className={`tracking-item ${activeBus === bus.bus_Name ? 'active' : ''}`}
+                onClick={() => handleBusClick(bus.bus_Name)}
               >
-                Bus {bus.number}: {bus.route}
+                Bus {bus.bus_Name}: {bus.bus_start} - {bus.bus_end}
               </div>
-              {activeBus === bus.number && (
+              {activeBus === bus.bus_Name && (
                 <div className="map-container-tracking active">
                   {loadingImage ? (
                     <p>Loading image...</p>
                   ) : errorImage ? (
                     <p className="error">{errorImage}</p>
                   ) : imageUrl ? (
-                    <img src={imageUrl} alt={`Bus ${bus.number}`} className="bus-image" />
+                    <img src={imageUrl} alt={`Bus ${bus.bus_Name}`} className="bus-image" />
                   ) : null}
                 </div>
               )}
