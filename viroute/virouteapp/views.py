@@ -11,7 +11,7 @@ from django.conf import settings
 
 # Authen API
 from .models import User
-from .serializers import UserLoginSerializer
+from .serializers import UserLoginSerializer, BusRouteSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from rest_framework.response import Response
@@ -21,7 +21,7 @@ from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 
 # Ticket list
-from .models import Ticket
+from .models import Ticket, BusRoute
 
 # Image
 from .models import Image
@@ -146,3 +146,9 @@ def update_user_info(request, user_id):
             {"error": "An unexpected error occurred", "details": str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@api_view(['GET'])
+def get_bus_routes(request):
+    bus_routes = BusRoute.objects.all()
+    serializer = BusRouteSerializer(bus_routes, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
