@@ -87,7 +87,7 @@ function UserInformation() {
   };
 
   return (
-    <>
+    <div className='full-width-wrapper-user'>
     <div className="account-settings-container">
       <h2 className="account-info-header">Account Information</h2>
       <div className="settings-box">
@@ -233,8 +233,7 @@ function UserInformation() {
       </div>
       <SuccessNotify />
     </div>
-    <Footer/>
-    </>
+    </div>
   );
 }
 

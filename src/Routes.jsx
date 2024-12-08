@@ -6,6 +6,7 @@ import Taskbar from './components/taskbar/taskbar';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import Feedback_page from './pages/Feedback_page.jsx';
+import UserInformation_page from './pages/userInformation_page.jsx';
 import RouteDetail from './components/home/routedetail';
 import UserInformation from './components/user_information/user_information';
 import NotFound from './components/not_found/not_found';
@@ -25,7 +26,7 @@ function AppRoutes() {
           <Route path="/reclaimpass" element={<><Taskbar/><Reclaimpass/></>}/>
           <Route path="/reclaimpass/success_change" element={<><Taskbar/><SuccessChange/></>}/>
 
-          <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
+          <Route path="/:id" element={<UserInformation_page/>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
 
           <Route path="/*" element={<><Taskbar/><NotFound/></>}/>

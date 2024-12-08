@@ -150,14 +150,14 @@ const Tracking = () => {
 
             {/* Pagination Controls */}
             <div className="pagination">
-              <button
+              <button 
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
               >
                 Previous
               </button>
               <span>Page {currentPage} of {totalPages}</span>
-              <button
+              <button 
                 onClick={() => paginate(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
