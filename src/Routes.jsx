@@ -1,4 +1,6 @@
 import React from 'react';
+import Home from './pages/Home.jsx';
+import Tracking_page from './pages/Tracking.jsx';
 import Footer from './components/footer/footer';
 import Taskbar from './components/taskbar/taskbar';
 import Login from './components/login/login';
@@ -18,8 +20,8 @@ import { Routes, Route} from 'react-router-dom';
 function AppRoutes() {
     return (
         <Routes>
-          <Route path="/" element={<><Taskbar/><Homescreen/></>} />
-          <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
+          <Route path="/" element={<Home/>} />
+          <Route path="/tracking" element={<Tracking_page/>}/>
           <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>   
           <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
           <Route path="/login" element={<><Login/></>} />

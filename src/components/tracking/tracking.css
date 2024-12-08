@@ -1,3 +1,8 @@
+.full-width-wrapper {
+  width: 100%;
+  position: relative; /* Ensures it takes full width */
+  height: 100%; /* Ensure it takes full height, or adjust if needed */
+}
 .tracking-container {
   display:flex;
   flex-direction: column;
