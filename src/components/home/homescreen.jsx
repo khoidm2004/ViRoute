@@ -8,8 +8,10 @@ import Map from '../map/map.jsx';
 import authStore from '../../stores/authStore';
 import axios from 'axios';
 import Taskbar from '../taskbar/taskbar.jsx';
+import useUserInformationStore from '../../stores/userinfoStore';
 
 const Homescreen = () => {
+  const { favouritePlaces, addFavouritePlace, deleteFavoritePlace } = useUserInformationStore();
   const navigate = useNavigate();
   const [start, setStart] = useState('');
   const [destination, setDestination] = useState('');
@@ -17,6 +19,7 @@ const Homescreen = () => {
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [startSelected, setStartSelected] = useState(false);
   const [destinationSelected, setDestinationSelected] = useState(false);
+  const [searchError, setSearchError] = useState('');
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const today = new Date().toISOString().split("T")[0];
   const [selectedTime, setSelectedTime] = useState('');
@@ -25,13 +28,17 @@ const Homescreen = () => {
   const [streetAddress, setStreetAddress] = useState('');
   const [locationName, setLocationName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('');
-  const [favouritePlaces, setFavouritePlaces] = useState([]);
   const [error, setError] = useState('');
   const startInputRef = useRef(null);
   const destinationInputRef = useRef(null);
   const user = authStore((state) => state.user);
 
   const findbusroute = () => {
+    if (!start || !destination) {
+      setSearchError('Please fill in both start and destination');
+      return;
+    }
+    setSearchError(''); 
     const busroute = `/route/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
@@ -67,12 +74,30 @@ const Homescreen = () => {
       setError('Please fill in all fields and select an icon');
       return;
     }
-    setFavouritePlaces([...favouritePlaces, { streetAddress, locationName, selectedIcon }]);
-    setShowFavouritePlace(false);
+
+    const newPlace = {
+      streetAddress,
+      locationName,
+      selectedIcon,
+    };
+
+    const { favouritePlaces, error: addError } = useUserInformationStore.getState();
+  
+    useUserInformationStore.getState().addFavouritePlace(newPlace);
+
+    if (addError) {
+      setError(addError === 'Duplicate name or address'
+        ? 'The address or name has already been used.'
+        : 'An unexpected error occurred.');
+      return;
+    }
+
+    addFavouritePlace(newPlace);
     setStreetAddress('');
     setLocationName('');
     setSelectedIcon('');
     setError('');
+    setShowFavouritePlace(false);
   };
 
   const getTimeOptions = () => {
@@ -97,12 +122,12 @@ const Homescreen = () => {
     return options;
   };
 
-  const deleteFavoritePlace = (index) => {
-    setFavouritePlaces(favouritePlaces.filter((_, i) => i !== index));
-  };
-
   const handlePlaceClick = (streetAddress) => {
     setStart(streetAddress);
+  };
+
+  const handleAddPlace = (place) => {
+    addFavouritePlace(place); // Thêm địa điểm vào danh sách yêu thích
   };
 
   const getDisplayedTime = () => {
@@ -242,7 +267,7 @@ const handleDestinationChange = (e) => {
               </div>
               <div className="swap-container">
                 <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
-              </div>
+              </div> 
               <div className="search-destination">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
@@ -274,6 +299,7 @@ const handleDestinationChange = (e) => {
                 </div>
                 <Button class="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
               </div>
+              {searchError && <div className="error-message">{searchError}</div>}
               <div className="departure-option" onClick={toggleTimeDropdown}>
                 <Icon icon="mage:clock" className="option-icon" />
                 <span className="departure-text">{getDisplayedTime()}</span>
@@ -305,7 +331,6 @@ const handleDestinationChange = (e) => {
                 <Icon icon="ic:outline-plus" className="option-icon" />
                 <span className="addfav-text">Add favourite place</span>
               </button>
-              {error && <div className="error-message">{error}</div>}
               {showFavouritePlace && (
                 <div className="favourite-form">
                   <TextField
@@ -344,30 +369,31 @@ const handleDestinationChange = (e) => {
                       />
                     </div>
                   </div>
-                  {error && <div className="error-message">{error}</div>}
                   <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
+                  {error && <div className="error-message">{error}</div>}
                 </div>
               )}  
-
+            {user && (
               <div className="places-container">
                 {favouritePlaces.map((place, index) => (
                   <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
-                    <Icon icon={place.selectedIcon} className="place-icon" />
+                    {place.selectedIcon &&<Icon icon={place.selectedIcon} className="place-icon" />}
                     <div className="placetext-container">
-                      <span className="location-name">{place.locationName}</span>
-                      <span className="address-name">{place.streetAddress}</span>
+                      {place.locationName &&<span className="location-name">{place.locationName}</span>}
+                      {place.streetAddress && <span className="address-name">{place.streetAddress}</span>}
                     </div>
                     <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
                   </div>
                 ))}
               </div>
+            )}
             </div>
           </div>
 
           <div className="location-info-section">
               <div className="location-left">
                 <h2>Your location now</h2>
-                <p>Your location now:</p>
+                <p>Your location now: {start || "Fetching location..."}</p>
                 <p>Want to add your favourite place? <a href="/login">Login/Signup</a></p>
               </div>
                 <Map className="map-container"/>  

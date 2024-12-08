@@ -1,0 +1,37 @@
+.success-changepass-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+    overflow-y: hidden;
+}
+
+::-webkit-scrollbar{
+    display:None;
+}
+
+.success-changepass-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    color: #3cb129;
+    margin-bottom: 30px;
+}
+
+.changepass-home-link {
+    font-size: 1.2rem;
+    color: white;
+    background-color: #3cb129;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.not-found-home-link:hover {
+    background-color: #3cb129;
+}
