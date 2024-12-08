@@ -9,6 +9,7 @@ import authStore from '../../stores/authStore';
 import axios from 'axios';
 import Taskbar from '../taskbar/taskbar.jsx';
 import useUserInformationStore from '../../stores/userinfoStore';
+import fetchBuses from '../../services/fetchBus.js';
 
 const Homescreen = () => {
   const { favouritePlaces, addFavouritePlace, deleteFavoritePlace } = useUserInformationStore();
