@@ -83,10 +83,6 @@ const Tracking = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   const busesToDisplay = searchTerm ? filteredBuses : buses;
   const totalPages = Math.ceil(busesToDisplay.length / ITEMS_PER_PAGE);
   const paginatedBuses = busesToDisplay.slice(
