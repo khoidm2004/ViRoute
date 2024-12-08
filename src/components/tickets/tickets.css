@@ -1,3 +1,10 @@
+.full-width-wrapper-tickets {
+  width: 100vw;
+  position: relative; 
+  height: calc(100vw-1000px);
+  min-height: 78vh;
+}
+
 .ticket-page {
   display: flex;
   flex-direction: row;
