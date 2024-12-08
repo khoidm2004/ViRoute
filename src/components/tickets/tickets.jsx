@@ -30,6 +30,7 @@ const Ticket = () => {
 //
   return (
       <>
+      <div className='full-width-wrapper-tickets'>
       <div className="ticket-page">
         <div className='download-container'>
             <h1>VIROUTE APP</h1>
@@ -60,6 +61,7 @@ const Ticket = () => {
             {/*  <p>{formatTime(timeLeft)}</p>*/}
             {/*</div>*/}
         </div>
+      </div>
       </div>
       </>
   );

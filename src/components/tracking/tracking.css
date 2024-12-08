@@ -1,7 +1,7 @@
 .full-width-wrapper {
   width: 100vw;
   position: relative; 
-  height: calc(100vw - 100px);
+  height: calc(100vw-1000px);
   min-height: 100vh;
 }
 
