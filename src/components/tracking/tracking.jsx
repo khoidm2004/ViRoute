@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import './tracking.css';
 import '../map/map.css';
-import Map from '../map/map';
 import fetchBuses from '../../services/fetchBus'; // Import fetchBuses
 import fetchImage from '../../services/fetchImage';
 
@@ -16,6 +15,8 @@ const Tracking = () => {
   const [errorImage, setErrorImage] = useState(null); // State for error messages
   const [loadingBuses, setLoadingBuses] = useState(true); // State for bus loading
   const [errorBuses, setErrorBuses] = useState(null); // State for bus error
+  const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const itemsPerPage = 10; // Number of buses per page
 
   // Fetch buses on component mount
   useEffect(() => {
@@ -67,7 +68,25 @@ const Tracking = () => {
     }
   };
 
+  // Sort buses alphabetically by bus_Name
   const busesToDisplay = searchTerm ? filteredBuses : buses;
+
+  const sortedBuses = busesToDisplay.sort((a, b) => {
+    if (a.bus_Name < b.bus_Name) return -1;
+    if (a.bus_Name > b.bus_Name) return 1;
+    return 0;
+  });
+
+  // Pagination Logic
+  const indexOfLastBus = currentPage * itemsPerPage;
+  const indexOfFirstBus = indexOfLastBus - itemsPerPage;
+  const currentBuses = sortedBuses.slice(indexOfFirstBus, indexOfLastBus);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(sortedBuses.length / itemsPerPage);
 
   return (
     <div className='tracking-container'>
@@ -87,7 +106,7 @@ const Tracking = () => {
               onChange={handleSearch}
             />
           </div>
-          {busesToDisplay.map((bus, index) => (
+          {currentBuses.map((bus, index) => (
             <React.Fragment key={bus.number}>
               <div
                 className={`tracking-item ${activeBus === bus.bus_Name ? 'active' : ''}`}
@@ -106,9 +125,26 @@ const Tracking = () => {
                   ) : null}
                 </div>
               )}
-              {index < busesToDisplay.length - 1 && <div className="divider" />}
+              {index < currentBuses.length - 1 && <div className="divider" />}
             </React.Fragment>
           ))}
+
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </>
       )}
     </div>
