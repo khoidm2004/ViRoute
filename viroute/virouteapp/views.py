@@ -27,6 +27,13 @@ from .models import Ticket, BusRoute
 from .models import Image
 from django.shortcuts import get_object_or_404
 
+# Feedback
+from .models import Feedback
+from .serializers import FeedbackSerializer
+import gspread
+from google.oauth2.service_account import Credentials
+
+
 #Get route/ map API
 def get_route(request):
     start = request.GET.get('start')
@@ -152,3 +159,24 @@ def get_bus_routes(request):
     bus_routes = BusRoute.objects.all()
     serializer = BusRouteSerializer(bus_routes, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+# User feedback
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SERVICE_ACCOUNT_FILE = 'viroute/credentials.json'  # Update path to credentials JSON file
+
+credentials = Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+gc = gspread.authorize(credentials)
+spreadsheet_id = '14MucS7dhQa-SFTRnub1Vzr_PtDY7zU4JVDuM5_51bqQ'  # Update Google Sheets ID
+sheet = gc.open_by_key(spreadsheet_id).sheet1
+
+@api_view(['POST'])
+def submit_feedback(request):
+    serializer = FeedbackSerializer(data=request.data)
+    if serializer.is_valid():
+        feedback = serializer.save()
+        # Log feedback to Google Sheets
+        sheet.append_row([feedback.user.username, feedback.feedback, feedback.created_at.strftime('%Y-%m-%d %H:%M:%S')])
+        return Response({"message": "Feedback submitted successfully"}, status=status.HTTP_201_CREATED)
+    else:
+        return Response({"error": "Invalid data", "details": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)

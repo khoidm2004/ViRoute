@@ -1,7 +1,7 @@
 import bcrypt
 from rest_framework import serializers
 from virouteapp.models import User
-from .models import BusRoute
+from .models import BusRoute, Feedback
 
 class UserLoginSerializer(serializers.Serializer):
     userEmail = serializers.EmailField()  
@@ -40,4 +40,9 @@ class UserSerializer(serializers.ModelSerializer): # sign up
 class BusRouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusRoute
+        fields = '__all__'
+        
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
         fields = '__all__'

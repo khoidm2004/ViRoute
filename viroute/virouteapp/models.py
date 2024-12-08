@@ -102,3 +102,13 @@ class AccountHasUser(models.Model):
 class Image(models.Model):
     image_name = models.CharField(max_length=255)
     image_path = models.ImageField(upload_to='images/')
+    
+    
+#creating feedback
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    feedback = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Feedback from {self.user}\n{self.feedback}"
