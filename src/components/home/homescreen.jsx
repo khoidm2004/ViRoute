@@ -421,8 +421,7 @@ useEffect(() => {
               </div>
                 <Map className="map-container"/>  
           </div>
-        </div>
-        <Footer/>
+        </div>        
     </>
   );
 };

@@ -4,7 +4,6 @@ body {
   height: 100vh;
   margin: 0;
 }
-
 .footer {
   display: flex;
   background-color: #e0e0e0;
@@ -12,8 +11,9 @@ body {
   font-family: Arial, sans-serif;
   align-items: center;
   justify-content: space-evenly;
-  width: 100vw;
+  width: 100%; /* Use 100% instead of 100vw */
   margin: 0 auto;
+  box-sizing: border-box; /* Ensure padding and borders are included in the width */
 }
 
 .footer-item-section {
@@ -121,6 +121,7 @@ body {
   bottom: 0;
 }
 
+/* Media Queries */
 @media only screen and (min-width: 480px) and (max-width: 1024px) {
   .footer {
     flex-direction: column;
@@ -133,7 +134,7 @@ body {
     margin-bottom: 32px;
     align-items: center;
   }
-  
+
   .footer-item-section .contact-item {
     align-self: self-start;
   }

@@ -1,15 +1,14 @@
 import React from 'react';
-import Footer from './components/footer/footer';
+import Home from './pages/Home.jsx';
+import Tracking_page from './pages/Tracking.jsx';
+import Ticket_page from './pages/Ticket_page.jsx';
 import Taskbar from './components/taskbar/taskbar';
 import Login from './components/login/login';
 import Register from './components/register/register';
-import Homescreen from './components/home/homescreen';
+import Feedback_page from './pages/Feedback_page.jsx';
+import UserInformation_page from './pages/userInformation_page.jsx';
 import RouteDetail from './components/home/routedetail';
-import Map from './components/map/map';
-import Tracking from './components/tracking/tracking';
-import Feedback from './components/feedback/feedback';
 import UserInformation from './components/user_information/user_information';
-import Tickets from './components/tickets/tickets';
 import NotFound from './components/not_found/not_found';
 import Reclaimpass from './components/reclaimpass/reclaimpass';
 import SuccessChange from './components/reclaimpass/success_change';
@@ -18,16 +17,16 @@ import { Routes, Route} from 'react-router-dom';
 function AppRoutes() {
     return (
         <Routes>
-          <Route path="/" element={<><Taskbar/><Homescreen/></>} />
-          <Route path="/tracking" element={<><Taskbar/><Tracking/></>}/>
-          <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>   
-          <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
+          <Route path="/" element={<Home/>} />
+          <Route path="/tracking" element={<Tracking_page/>}/>
+          <Route path="/tickets" element={<Ticket_page/>}/>   
+          <Route path="/feedback" element={<Feedback_page/>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
           <Route path="/reclaimpass" element={<><Taskbar/><Reclaimpass/></>}/>
           <Route path="/reclaimpass/success_change" element={<><Taskbar/><SuccessChange/></>}/>
 
-          <Route path="/:id" element={<><Taskbar/><UserInformation/></>} />
+          <Route path="/:id" element={<UserInformation_page/>} />
           <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
 
           <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
