@@ -96,8 +96,7 @@ const Tracking = () => {
           {index < paginatedBuses.length - 1 && <div className="divider" />}
         </React.Fragment>
       ))}
-
-      {/* Pagination */}
+      
       <div className="pagination">
         <button
           className={`page-button ${currentPage === 1 ? 'disabled' : ''}`}

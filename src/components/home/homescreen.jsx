@@ -82,8 +82,7 @@ const Homescreen = () => {
     };
 
     const { favouritePlaces, error: addError } = useUserInformationStore.getState();
-  
-    useUserInformationStore.getState().addFavouritePlace(newPlace);
+    addFavouritePlace(newPlace);
 
     if (addError) {
       setError(addError === 'Duplicate name or address'
@@ -92,7 +91,6 @@ const Homescreen = () => {
       return;
     }
 
-    addFavouritePlace(newPlace);
     setStreetAddress('');
     setLocationName('');
     setSelectedIcon('');
@@ -127,7 +125,7 @@ const Homescreen = () => {
   };
 
   const handleAddPlace = (place) => {
-    addFavouritePlace(place); // Thêm địa điểm vào danh sách yêu thích
+    addFavouritePlace(place); 
   };
 
   const getDisplayedTime = () => {
@@ -149,7 +147,7 @@ const Homescreen = () => {
     }
     try {
       const response = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`);
-      const results = response.data.slice(0, 3); // Lấy 3 kết quả đầu tiên
+      const results = response.data.slice(0, 3);
       setSuggestions(results);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
@@ -190,7 +188,7 @@ const Homescreen = () => {
     if (
       (!startInputRef.current || !startInputRef.current.contains(event.target)) &&
       (!destinationInputRef.current || !destinationInputRef.current.contains(event.target)) &&
-      !event.target.closest('.suggestions-box') // Ngăn đóng khi nhấn vào danh sách gợi ý
+      !event.target.closest('.suggestions-box')
     ) {
       setStartSuggestions([]);
       setDestinationSuggestions([]);
@@ -210,7 +208,7 @@ const handleStartChange = (e) => {
   if (value) {
     fetchSuggestions(value, setStartSuggestions);
   } else {
-    setStartSuggestions([]); // Đóng gợi ý nếu input bị xóa
+    setStartSuggestions([]);
   }
 };
 
@@ -221,7 +219,7 @@ const handleDestinationChange = (e) => {
   if (value) {
     fetchSuggestions(value, setDestinationSuggestions);
   } else {
-    setDestinationSuggestions([]); // Đóng gợi ý nếu input bị xóa
+    setDestinationSuggestions([]); 
   }
 };
 
@@ -300,33 +298,7 @@ const handleDestinationChange = (e) => {
                 <Button class="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
               </div>
               {searchError && <div className="error-message">{searchError}</div>}
-              <div className="departure-option" onClick={toggleTimeDropdown}>
-                <Icon icon="mage:clock" className="option-icon" />
-                <span className="departure-text">{getDisplayedTime()}</span>
-              </div>
-
-              {showTimeDropdown && (
-                <div className="time-dropdown">
-                  <Select
-                    value={selectedTime || `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`}
-                    onChange={handleTimeChange}
-                    displayEmpty
-                    className="time-select"
-                  >
-                    {getTimeOptions().map((option, index) => (
-                      <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
-                    ))}
-                  </Select>
-                  <TextField
-                    type="date"
-                    value={selectedDate}
-                    onChange={handleDateInput}
-                    className="date-select"
-                  />
-                  <Button variant="contained" onClick={confirmTimeSelection} class="confirm-button">Confirm</Button>
-                </div>
-              )}
-
+              //file time.js
               <button className="favorite-btn" onClick={toggleFavouritePlace}>
                 <Icon icon="ic:outline-plus" className="option-icon" />
                 <span className="addfav-text">Add favourite place</span>
