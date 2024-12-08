@@ -2,28 +2,30 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import SuccessNotify from '../notification/noti_success';
-import ErrorNotify from '../notification/noti_error'; // Import ErrorNotify
+import ErrorNotify from '../notification/noti_error';
 import PopupRepass from '../repass/repass';
 import HidePassLogin from '../hidepass/hidePassLogin';
 import Footer from '../footer/footer';
-import login from '../../services/useLogin.js'
+import login from '../../services/useLogin.js';
 import authStore from '../../stores/authStore';
 
 const Login = () => {
   const [userEmail, setEmail] = useState('');
   const [password, setPassword] = useState({
-      password: '',
-      showPassword: false,
+    password: '',
+    showPassword: false,
   });
   const [showNotification, setShowNotification] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Manage popup state locally
+  const [errorMessage, setErrorMessage] = useState('');
   const { login: setUser } = authStore();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log(userEmail);
+      console.log(password.password);
       const userData = await login(userEmail, password.password);
       setUser(userData);
       setShowNotification(true);
@@ -32,7 +34,8 @@ const Login = () => {
         navigate('/');
       }, 2000);
     } catch (error) {
-      setErrorMessage('Invalid login credentials. Please try again.'); 
+      setErrorMessage('Invalid login credentials. Please try again.');
+      setErrorMessage(error.message);
     }
   };
 
@@ -68,7 +71,7 @@ const Login = () => {
             handleClickShowPassword={togglePasswordVisibility}
             handlePasswordChange={(e) => setPassword({ ...password, password: e.target.value })}
           />
-          <label className="repass-text" onClick={() => setIsPopupOpen(!isPopupOpen)}>
+          <label className="repass-text" onClick={() => setIsPopupOpen(true)}>
             Forgot your password?
           </label>
           <button type="submit" className="login-button">Login</button>
@@ -76,9 +79,9 @@ const Login = () => {
             Don't have an account? Create new account
           </label>
         </form>
-        {isPopupOpen && <PopupRepass onClose={() => setIsPopupOpen(false)} />}
+        <PopupRepass isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
         {showNotification && <SuccessNotify message="Login Successful!" />}
-        {errorMessage && <ErrorNotify message={errorMessage} />} {/* Show error notification */}
+        {errorMessage && <ErrorNotify message={errorMessage} />}
       </div>
       <Footer style={{ margin: '0', padding: '0', width: '100vw' }} />
     </>

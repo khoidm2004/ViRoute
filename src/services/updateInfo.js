@@ -3,7 +3,7 @@ import axios from 'axios';
 const updateUser = async (userId, updatedInfo) => {
   try {
     const { data } = await axios.put(
-      `https://test-production-79d6.up.railway.app/update_user/${userId}`, // API endpoint
+      `https://test-production-1774.up.railway.app/update_user/${userId}`, // API endpoint
       updatedInfo, // Data to update
       {
         headers: {

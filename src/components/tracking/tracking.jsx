@@ -1,16 +1,20 @@
 import React, { useState } from 'react'; 
 import { Icon } from '@iconify/react';
 import './tracking.css';
-import '../map/map.css'; // Import map.css for map container styling
-import Map from '../map/map'; // Adjust the import path according to your project structure
+import '../map/map.css'; 
+import Map from '../map/map';
+import fetchImage from '../../services/fetchImage';
 
 const Tracking = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBuses, setFilteredBuses] = useState([]);
   const [activeBus, setActiveBus] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null); // State for the image URL
+  const [loadingImage, setLoadingImage] = useState(false); // State for loading indicator
+  const [errorImage, setErrorImage] = useState(null); // State for error messages
 
   const buses = [
-    { number: '1', route: 'Gia Lam Bus Station - Yen Nghia Bus Station' },
+    { number: '01', route: 'Gia Lam Bus Station - Yen Nghia Bus Station' },
     { number: '2', route: 'Some route 2' },
     { number: '3', route: 'Some route 3' },
     { number: '4', route: 'Some route 4' },
@@ -33,8 +37,27 @@ const Tracking = () => {
     }
   };
 
-  const handleBusClick = (busNumber) => {
-    setActiveBus(activeBus === busNumber ? null : busNumber);
+  const handleBusClick = async (busNumber) => {
+    if (activeBus === busNumber) {
+      setActiveBus(null);
+      setImageUrl(null); // Reset image on deselect
+      setErrorImage(null);
+      return;
+    }
+
+    setActiveBus(busNumber);
+    setImageUrl(null);
+    setErrorImage(null);
+    setLoadingImage(true);
+
+    try {
+      const url = await fetchImage(busNumber);
+      setImageUrl(url); // Update state with the fetched image URL
+    } catch (error) {
+      setErrorImage('Failed to load image.');
+    } finally {
+      setLoadingImage(false);
+    }
   };
 
   const busesToDisplay = searchTerm ? filteredBuses : buses;
@@ -61,7 +84,13 @@ const Tracking = () => {
           </div>
           {activeBus === bus.number && (
             <div className="map-container-tracking active">
-              <Map className="map-container-tracking" />
+              {loadingImage ? (
+                <p>Loading image...</p>
+              ) : errorImage ? (
+                <p className="error">{errorImage}</p>
+              ) : imageUrl ? (
+                <img src={imageUrl} alt={`Bus ${bus.number}`} className="bus-image" />
+              ) : null}
             </div>
           )}
           {index < busesToDisplay.length - 1 && <div className="divider" />}
