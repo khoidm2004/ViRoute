@@ -1,17 +1,13 @@
 import React from 'react';
 import Home from './pages/Home.jsx';
 import Tracking_page from './pages/Tracking.jsx';
-import Footer from './components/footer/footer';
+import Ticket_page from './pages/Ticket_page.jsx';
 import Taskbar from './components/taskbar/taskbar';
 import Login from './components/login/login';
 import Register from './components/register/register';
-import Homescreen from './components/home/homescreen';
+import Feedback_page from './pages/Feedback_page.jsx';
 import RouteDetail from './components/home/routedetail';
-import Map from './components/map/map';
-import Tracking from './components/tracking/tracking';
-import Feedback from './components/feedback/feedback';
 import UserInformation from './components/user_information/user_information';
-import Tickets from './components/tickets/tickets';
 import NotFound from './components/not_found/not_found';
 import Reclaimpass from './components/reclaimpass/reclaimpass';
 import SuccessChange from './components/reclaimpass/success_change';
@@ -22,8 +18,8 @@ function AppRoutes() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/tracking" element={<Tracking_page/>}/>
-          <Route path="/tickets" element={<><Taskbar/><Tickets/></>}/>   
-          <Route path="/feedback" element={<><Taskbar/><Feedback/></>}/>
+          <Route path="/tickets" element={<Ticket_page/>}/>   
+          <Route path="/feedback" element={<Feedback_page/>}/>
           <Route path="/login" element={<><Login/></>} />
           <Route path="/register" element={<><Register/></>}/> 
           <Route path="/reclaimpass" element={<><Taskbar/><Reclaimpass/></>}/>

@@ -1,7 +1,8 @@
 .full-width-wrapper {
-  width: 100%;
+  width: 100vw;
   position: relative; /* Ensures it takes full width */
-  height: 100%; /* Ensure it takes full height, or adjust if needed */
+  height: calc(100vw - 100px); /* Ensure it takes full height, or adjust if needed */
+  min-height: 100vh;
 }
 .tracking-container {
   display:flex;

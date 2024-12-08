@@ -4,7 +4,7 @@ import './tickets.css';
 import { Icon } from '@iconify/react';
 import Footer from '../footer/footer';
 
-const TicketPage = () => {
+const Ticket = () => {
   //const [timeLeft, setTimeLeft] = useState(300); // Countdown time in seconds (e.g., 5 minutes)
 //
   //// Function to format time in mm:ss
@@ -61,9 +61,8 @@ const TicketPage = () => {
             {/*</div>*/}
         </div>
       </div>
-      <Footer/>
       </>
   );
 };
 
-export default TicketPage;
+export default Ticket;

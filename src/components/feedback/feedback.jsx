@@ -29,7 +29,6 @@ const Feedback = () => {
             </div>
             <SuccessNotify />
         </div>
-        <Footer/>
         </>
     )
 }
