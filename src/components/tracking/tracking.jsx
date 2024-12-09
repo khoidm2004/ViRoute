@@ -91,7 +91,7 @@ const Tracking = () => {
   const totalPages = Math.ceil(sortedBuses.length / itemsPerPage);
 
   return (
-    <div className='full-width-wrapper'>
+    <div className='full-width-wrapper-tracking'>
       <div className='tracking-container'>
         {loadingBuses ? (
           <p>Loading buses...</p>
