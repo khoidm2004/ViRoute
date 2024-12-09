@@ -1,4 +1,4 @@
-.full-width-wrapper {
+.full-width-wrapper-tracking {
   width: 100vw;
   position: relative; 
   height: calc(100vw-1000px);
@@ -103,9 +103,8 @@
 }
 
 .bus-image {
-  width: 115vh; 
-  height: 100%; 
-  max-height: 300px; 
+  width: 74%;
+  max-height: 400px;  
   margin: 10px 0; 
 }
 

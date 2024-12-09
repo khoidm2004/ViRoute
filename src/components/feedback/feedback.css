@@ -1,6 +1,8 @@
 .full-width-wrapper-feedback {
   width: 100vw;
   position: relative; 
+  height: calc(100vw-100px);
+  min-height: 80vh;
 }
 .feedback-container {
   display: flex;
