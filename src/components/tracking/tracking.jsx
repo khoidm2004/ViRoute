@@ -4,6 +4,7 @@ import './tracking.css';
 import '../map/map.css';
 import fetchBuses from '../../services/fetchBus';
 import fetchImage from '../../services/fetchImage';
+import busesStore from '../../stores/busesStore';
 
 const Tracking = () => {
   const [buses, setBuses] = useState([]);
@@ -23,6 +24,8 @@ const Tracking = () => {
       try {
         const data = await fetchBuses();
         setBuses(data);
+        const initialSearchTerm = busesStore.getState().startLocation; 
+        setSearchTerm(initialSearchTerm); 
       } catch (error) {
         setErrorBuses('Failed to load buses.');
       } finally {
@@ -31,6 +34,25 @@ const Tracking = () => {
     };
     loadBuses();
   }, []);
+
+  useEffect(() => {
+    const initialSearchTerm = busesStore.getState().startLocation; 
+    setSearchTerm(initialSearchTerm); 
+  }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filtered = buses.filter((bus) =>
+        bus.bus_Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        bus.bus_start.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        bus.bus_end.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredBuses(filtered);
+    } else {
+      setFilteredBuses([]);
+    }
+  }, [searchTerm, buses]);
+  
 
   const handleSearch = (event) => {
     const term = event.target.value;
@@ -74,13 +96,10 @@ const Tracking = () => {
 
   const busesToDisplay = searchTerm ? filteredBuses : buses;
   const sortedBuses = [...busesToDisplay].sort((a, b) => a.bus_Name.localeCompare(b.bus_Name));
-
   const indexOfLastBus = currentPage * itemsPerPage;
   const indexOfFirstBus = indexOfLastBus - itemsPerPage;
   const currentBuses = sortedBuses.slice(indexOfFirstBus, indexOfLastBus);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   const totalPages = Math.ceil(sortedBuses.length / itemsPerPage);
 
   return (
@@ -96,32 +115,14 @@ const Tracking = () => {
               <Icon icon="material-symbols:search" className='icon-bus-metro' />
               <input
                 type="text"
-                placeholder="Enter the bus number"
+                placeholder="Enter the bus number/location"
                 className="input-tracking"
                 value={searchTerm}
                 onChange={handleSearch}
               />
             </div>
 
-            {searchTerm && filteredBuses.length > 0 && (
-              <div className="search-suggestions">
-                {filteredBuses.map((bus) => (
-                  <div
-                    key={bus.bus_Name}
-                    className="suggestion-item"
-                    onClick={() => {
-                      setSearchTerm(bus.bus_Name);
-                      setFilteredBuses([]);
-                    }}
-                  >
-                    {bus.bus_Name} - {bus.bus_start} to {bus.bus_end}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {busesToDisplay.length === 0 && <p>No buses found.</p>}
-
+            {busesToDisplay.length === 0 && <div className="nobuses">No buses found.</div>}
             {currentBuses.map((bus, index) => (
               <React.Fragment key={bus.bus_Name}>
                 <div
@@ -144,7 +145,7 @@ const Tracking = () => {
                 {index < currentBuses.length - 1 && <div className="divider" />}
               </React.Fragment>
             ))}
-
+            {totalPages > 1 && (
             <div className="pagination">
               <button
                 className={`page-button ${currentPage === 1 ? 'disabled' : ''}`}
@@ -170,6 +171,10 @@ const Tracking = () => {
                 Last page
               </button>
             </div>
+          )}
+          <div className="pagination-summary">
+            Total {totalPages} pages, {sortedBuses.length} bus route{sortedBuses.length !== 1 && 's'}
+          </div>
           </>
         )}
       </div>

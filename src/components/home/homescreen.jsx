@@ -8,6 +8,7 @@ import authStore from '../../stores/authStore';
 import axios from 'axios';
 import useUserInformationStore from '../../stores/userinfoStore';
 import fetchBuses from '../../services/fetchBus.js';
+import busesStore from '../../stores/busesStore';
 
 const Homescreen = () => {
   const { favouritePlaces, addFavouritePlace, deleteFavoritePlace } = useUserInformationStore();
@@ -247,6 +248,16 @@ const Homescreen = () => {
     fetchCurrentLocation();
   }, []);
 
+  const handleFindBus = () => {
+    if (bus_start.trim() === '') {
+      setSearchError('Please enter a valid start location');
+      return;
+    }
+    setSearchError('');
+    busesStore.getState().setStartLocation(bus_start);
+    navigate('/tracking');
+  };
+
   return (
     <>
       <div className="home">
@@ -264,7 +275,7 @@ const Homescreen = () => {
                   type="text"
                   value={bus_start}
                   onChange={(e) => handleInputChange(e, setStart, setStartSuggestions, 'bus_start', setStartSelected)}
-                  placeholder="Enter your start"
+                  placeholder="Enter your bus number/location"
                   className="search-input"
                   ref={startInputRef}
                 />
@@ -287,8 +298,9 @@ const Homescreen = () => {
                   </div>
                 )}
               </div>
-              
-              {/* Destination Search */}
+              {/*<div className="swap-container">
+                <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(bus_start); setDestination(bus_end); }} />
+              </div>  
               <div className="search-destination">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
@@ -317,9 +329,9 @@ const Homescreen = () => {
                     </ul>
                   </div>
                 )}
-              </div>
+              </div>*/}
 
-                <Button class="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
+                <Button class="search-btn--find" type="button" onClick={handleFindBus}>Find</Button>
               </div>
               {searchError && <div className="error-message">{searchError}</div>}
 
@@ -332,7 +344,7 @@ const Homescreen = () => {
                 <div className="favourite-form">
                   <div className="fav-box">
                     <input
-                      placeholder="Name your location"
+                      placeholder="Choose your favourite address"
                       value={locationName}
                       onChange={(e) => handleFavouriteChange(e)}
                       fullWidth
@@ -377,7 +389,7 @@ const Homescreen = () => {
                       />
                     </div>
                   </div>
-                  <Button variant="contained" className="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
+                  <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
                 </div>
               )}
 
