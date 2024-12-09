@@ -14,11 +14,6 @@ const RouteDetail = () => {
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedDate, setSelectedDate] = useState(today);
     const [showTimeDropdown, setShowTimeDropdown] = useState(false);
-    const { bus_start, bus_end } = useParams();
-    const findBusRoute = () => {
-        navigate(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
-    };
-
     const swapLocations = () => {
         setStart(destination);
         setDestination(start);

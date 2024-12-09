@@ -41,6 +41,13 @@ const Homescreen = () => {
       setSearchError('Please fill in both start and destination');
       return;
     }
+
+    const isStartValid = startSuggestions.some(suggestion => suggestion.display_name === start);
+    const isDestinationValid = destinationSuggestions.some(suggestion => suggestion.display_name === destination);
+    if (!isStartValid || !isDestinationValid) {
+      setSearchError('Please choose an existing location from the suggestion list');
+      return;
+    }
     
     setSearchError(''); 
     console.log(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
@@ -500,12 +507,16 @@ const handleFavouriteSuggestionClick = (suggestion) => {
           </div>
 
           <div className="location-info-section">
-              <div className="location-left">
-                <h2>Your location now</h2>
-                <p>Your location now: {currentLocation || "Fetching location..."}</p>
+            <div className="location-left">
+              <h2>Your location now</h2>
+              <p>Your location now: {currentLocation || "Fetching location..."}</p>
+              {user ? (
+                <p>Hello <a>{user.fullName}</a>, have a nice day!</p>
+              ) : (
                 <p>Want to add your favourite place? <a href="/login">Login/Signup</a></p>
-              </div>
-                <Map className="map-container"/>  
+              )}
+            </div>
+            <Map className="map-container"/>  
           </div>
         </div>        
     </>
