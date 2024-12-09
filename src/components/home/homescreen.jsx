@@ -272,8 +272,9 @@ const Homescreen = () => {
                   </div>
                 )}
               </div>
-              
-              {/* Destination Search */}
+              <div className="swap-container">
+                <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(bus_start); setDestination(bus_end); }} />
+              </div>  
               <div className="search-destination">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input

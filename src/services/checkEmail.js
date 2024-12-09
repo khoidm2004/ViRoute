@@ -17,16 +17,16 @@ const checkPass = async (userEmail) => {
         }
       );
   
-      return response.data;  // Lấy dữ liệu phản hồi từ server
+      return response.data; 
     } catch (error) {
       if (error.response) {
-        console.error('Error Response Data:', error.response.data);  // Lỗi phản hồi từ server
+        console.error('Error Response Data:', error.response.data);  
         alert(`Error: ${error.response.data.error}`);
       } else if (error.request) {
-        console.error('Error Request:', error.request);  // Lỗi khi không nhận được phản hồi từ server
+        console.error('Error Request:', error.request);
         alert('Error: No response from server');
       } else {
-        console.error('Error Message:', error.message);  // Lỗi khác
+        console.error('Error Message:', error.message); 
         alert(`Error: ${error.message}`);
       }
       throw error;
