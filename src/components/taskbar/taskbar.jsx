@@ -141,7 +141,7 @@ const Taskbar = () => {
                         </div>
                         {showUserDropdown && (
                             <div className="user-dropdown">
-                                <div className="user-dropdown-item" onClick={() => navigate(`/${user.userID}`)}>Edit Profile</div>
+                                <div className="user-dropdown-item" onClick={() => navigate(`/user/${user.userID}`)}>Edit Profile</div>
                                 <div className="user-dropdown-item" onClick={() => navigate('/feedback')}>Feedback</div>
                                 <div className="user-dropdown-item" onClick={handleLogout}>Logout</div>
                             </div>

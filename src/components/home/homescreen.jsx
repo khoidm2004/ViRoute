@@ -23,10 +23,6 @@ const Homescreen = () => {
   const [favouriteSuggestions, setFavouriteSuggestions] = useState([]);
   const favouriteInputRef = useRef(null);
   const [searchError, setSearchError] = useState('');
-  const [showTimeDropdown, setShowTimeDropdown] = useState(false);
-  const today = new Date().toISOString().split("T")[0];
-  const [selectedTime, setSelectedTime] = useState('');
-  const [selectedDate, setSelectedDate] = useState(today);
   const [showFavouritePlace, setShowFavouritePlace] = useState(false);
   const [streetAddress, setStreetAddress] = useState('');
   const [locationName, setLocationName] = useState('');
@@ -42,34 +38,16 @@ const Homescreen = () => {
       return;
     }
 
-    const isStartValid = startSuggestions.some(suggestion => suggestion.display_name === start);
-    const isDestinationValid = destinationSuggestions.some(suggestion => suggestion.display_name === destination);
-    if (!isStartValid || !isDestinationValid) {
-      setSearchError('Please choose an existing location from the suggestion list');
-      return;
-    }
+    //const isStartValid = startSuggestions.some(suggestion => suggestion.display_name === start);
+    //const isDestinationValid = destinationSuggestions.some(suggestion => suggestion.display_name === destination);
+    //if (!isStartValid || !isDestinationValid) {
+    //  setSearchError('Please choose an existing location from the suggestion list');
+    //  return;
+    //}
     
     setSearchError(''); 
     console.log(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
     navigate(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
-  };
-
-  const toggleTimeDropdown = () => {
-    setShowTimeDropdown(!showTimeDropdown);
-  };
-
-  const handleTimeChange = (event) => {
-    const selectedOption = event.target.value;
-    setSelectedTime(selectedOption);
-  };
-
-  const handleDateInput = (event) => {
-    const inputDate = event.target.value;
-    setSelectedDate(inputDate);
-  };
-
-  const confirmTimeSelection = () => {
-    setShowTimeDropdown(false);
   };
 
   const toggleFavouritePlace = () => {
@@ -121,29 +99,6 @@ const Homescreen = () => {
     setError('');
     setShowFavouritePlace(false);
   };
-  
-
-  const getTimeOptions = () => {
-    const now = new Date();
-    const options = [];
-    const isToday = selectedDate === today;
-    let startHour = 0;
-
-    if (isToday) {
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
-      options.push({ label: `Now (${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`, value: 'Now' });
-      startHour = Math.floor(currentMinutes / 15) * 15 + 15;
-    }
-
-    for (let minutes = startHour; minutes < 24 * 60; minutes += 15) {
-      const optionTime = new Date(selectedDate);
-      optionTime.setHours(0, minutes, 0, 0);
-      const label = optionTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      options.push({ label, value: label });
-    }
-
-    return options;
-  };
 
   const handlePlaceClick = (place) => {
     setStreetAddress(place.streetAddress);
@@ -153,18 +108,6 @@ const Homescreen = () => {
 
   const handleAddPlace = (place) => {
     addFavouritePlace(place); 
-  };
-
-  const getDisplayedTime = () => {
-    const isToday = selectedDate === today;
-    if (selectedTime === 'Now') {
-      return `Now (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
-    } else if (selectedTime && isToday) {
-      return `${selectedTime} (Today)`;
-    } else if (selectedTime) {
-      return `${selectedTime} (${new Date(selectedDate).toLocaleDateString()})`;
-    }
-    return `Departure now? (${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
   };
 
   const fetchSuggestions = async (query, setSuggestions, isDestination = false) => {
@@ -219,8 +162,7 @@ const Homescreen = () => {
       const { data } = await axios.get("https://test-production-1774.up.railway.app/api/bus_routes/");
       const uniquePlaces = new Set();
       const results = [];
-  
-      // Lọc gợi ý từ dữ liệu API
+
       data.forEach((item) => {
         if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
           results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
@@ -424,7 +366,7 @@ const handleFavouriteSuggestionClick = (suggestion) => {
                 <Button class="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
               </div>
               {searchError && <div className="error-message">{searchError}</div>}
-              //file time.js
+
               <button className="favorite-btn" onClick={toggleFavouritePlace}>
                 <Icon icon="ic:outline-plus" className="option-icon" />
                 <span className="addfav-text">Add favourite place</span>
