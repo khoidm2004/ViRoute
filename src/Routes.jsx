@@ -26,8 +26,8 @@ function AppRoutes() {
           <Route path="/reclaimpass" element={<><Taskbar/><Reclaimpass/></>}/>
           <Route path="/reclaimpass/success_change" element={<><Taskbar/><SuccessChange/></>}/>
 
-          <Route path="/:id" element={<UserInformation_page/>} />
-          <Route path="/:route" element={<><Taskbar/><RouteDetail/></>} />
+          <Route path="/user/:id" element={<UserInformation_page/>} />
+          <Route path="/route/:routes" element={<><Taskbar/><RouteDetail/></>} />
 
           <Route path="/*" element={<><Taskbar/><NotFound/></>}/>
 

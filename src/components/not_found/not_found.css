@@ -1,9 +1,15 @@
+.full-width-wrapper-notfound {
+    width: 100vw;
+    position: relative; 
+    height: calc(100vw-100px);
+    min-height: 63vh;
+  }
+
 .not-found-container {
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
     text-align: center;
     background-color: white;
     color: rgba(0, 0, 0, 0.5);
