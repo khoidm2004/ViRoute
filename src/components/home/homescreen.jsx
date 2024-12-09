@@ -20,6 +20,8 @@ const Homescreen = () => {
   const [startSelected, setStartSelected] = useState(false);
   const [destinationSelected, setDestinationSelected] = useState(false);
   const [currentLocation, setCurrentLocation] = useState('');
+  const [favouriteSuggestions, setFavouriteSuggestions] = useState([]);
+  const favouriteInputRef = useRef(null);
   const [searchError, setSearchError] = useState('');
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const today = new Date().toISOString().split("T")[0];
@@ -39,6 +41,15 @@ const Homescreen = () => {
       setSearchError('Please fill in both start and destination');
       return;
     }
+
+    const isStartValid = startSuggestions.some(suggestion => suggestion.display_name === start);
+    const isDestinationValid = destinationSuggestions.some(suggestion => suggestion.display_name === destination);
+
+    if (!isStartValid || !isDestinationValid) {
+      setSearchError('Please choose an existing location from the suggestion list');
+      return;
+    }
+    
     setSearchError(''); 
     const busroute = `/route/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
@@ -71,28 +82,39 @@ const Homescreen = () => {
   };
 
   const handleConfirmFavourite = () => {
-    if (!streetAddress || !locationName || !selectedIcon) {
+    const isValidSuggestion = favouriteSuggestions.some(
+      (suggestion) => suggestion.display_name === streetAddress
+    );
+  
+    //if (!isValidSuggestion) {
+      //setError('Please choose an existing location from the suggestion list');
+      //return;
+    //}
+  
+    if (!locationName || !selectedIcon) {
       setError('Please fill in all fields and select an icon');
       return;
     }
-
+  
     const newPlace = {
       streetAddress,
       locationName,
       selectedIcon,
     };
-
+  
     const { favouritePlaces, error: addError } = useUserInformationStore.getState();
   
     useUserInformationStore.getState().addFavouritePlace(newPlace);
-
+  
     if (addError) {
-      setError(addError === 'Duplicate name or address'
-        ? 'The address or name has already been used.'
-        : 'An unexpected error occurred.');
+      setError(
+        addError === 'Duplicate name or address'
+          ? 'The address or name has already been used.'
+          : 'An unexpected error occurred.'
+      );
       return;
     }
-
+  
     addFavouritePlace(newPlace);
     setStreetAddress('');
     setLocationName('');
@@ -100,6 +122,7 @@ const Homescreen = () => {
     setError('');
     setShowFavouritePlace(false);
   };
+  
 
   const getTimeOptions = () => {
     const now = new Date();
@@ -123,9 +146,11 @@ const Homescreen = () => {
     return options;
   };
 
-  const handlePlaceClick = (streetAddress) => {
-    setStart(streetAddress);
+  const handlePlaceClick = (place) => {
+    setStreetAddress(place.streetAddress);
+    setLocationName(place.locationName);
   };
+  
 
   const handleAddPlace = (place) => {
     addFavouritePlace(place); 
@@ -155,7 +180,6 @@ const Homescreen = () => {
       const results = [];
   
       if (isDestination && start) {
-        // Lọc những điểm đến phù hợp với điểm xuất phát đã chọn
         data.forEach((item) => {
           if (item.bus_start.toLowerCase() === start.toLowerCase() && !uniquePlaces.has(item.bus_end)) {
             results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
@@ -163,7 +187,6 @@ const Homescreen = () => {
           }
         });
       } else {
-        // Tìm kiếm thông thường cho cả điểm đi và điểm đến
         data.forEach((item) => {
           if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
             results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
@@ -185,6 +208,40 @@ const Homescreen = () => {
       console.error("Error fetching suggestions:", error.response?.data || error.message);
     }
   };  
+
+  const fetchFavouriteSuggestions = async (query, setSuggestions) => {
+    try {
+      if (!query) {
+        setSuggestions([]);
+        return;
+      }
+  
+      const { data } = await axios.get("https://test-production-1774.up.railway.app/api/bus_routes/");
+      const uniquePlaces = new Set();
+      const results = [];
+  
+      // Lọc gợi ý từ dữ liệu API
+      data.forEach((item) => {
+        if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
+          results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
+          uniquePlaces.add(item.bus_start);
+        }
+        if (item.bus_end.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_end)) {
+          results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
+          uniquePlaces.add(item.bus_end);
+        }
+      });
+  
+      if (results.length > 0) {
+        setSuggestions(results.slice(0, 5));
+      } else {
+        setSuggestions([{ place_id: 'no_match', display_name: 'No matched finding' }]);
+      }
+    } catch (error) {
+      console.error("Error fetching favourite suggestions:", error.response?.data || error.message);
+    }
+  };
+  
   
   const fetchCurrentLocation = async () => {
     if (navigator.geolocation) {
@@ -220,6 +277,7 @@ const Homescreen = () => {
     ) {
       setStartSuggestions([]);
       setDestinationSuggestions([]);
+      setFavouriteSuggestions([]);
     }
   };
 useEffect(() => {
@@ -258,6 +316,23 @@ const handleDestinationChange = (e) => {
 useEffect(() => {
   fetchCurrentLocation();
 }, []);
+
+const handleFavouriteChange = (e) => {
+  const value = e.target.value;
+  setStreetAddress(value);
+  if (value) {
+    fetchFavouriteSuggestions(value, setFavouriteSuggestions);
+  } else {
+    setFavouriteSuggestions([]);
+  }
+};
+
+const handleFavouriteSuggestionClick = (suggestion) => {
+  setStreetAddress(suggestion.display_name);
+  setLocationName('');
+  setFavouriteSuggestions([]);
+};
+
 
   return (
     <>
@@ -356,15 +431,32 @@ useEffect(() => {
               </button>
               {showFavouritePlace && (
                 <div className="favourite-form">
-                  <TextField
-                    placeholder="Street address or place name"
-                    value={streetAddress}
-                    onChange={(e) => setStreetAddress(e.target.value)}
-                    fullWidth
-                    margin="normal"
-                    className="fav-input"
-                  />
-                  <TextField
+                    <div className="fav-box">
+                      <input
+                        type="text"
+                        placeholder="Street address or place name"
+                        value={streetAddress}
+                        onChange={handleFavouriteChange}
+                        className="fav-input"
+                        ref={favouriteInputRef}
+                      />
+                      {favouriteSuggestions.length > 0 && (
+                        <div className="suggestions-box-fav">
+                          <ul className="suggestions-list-fav">
+                            {favouriteSuggestions.map((suggestion) => (
+                              <li
+                                key={suggestion.place_id}
+                                onClick={() => handleFavouriteSuggestionClick(suggestion)}
+                              >
+                                {suggestion.display_name}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  <div className="fav-box">
+                  <input
                     placeholder="Name your location"
                     value={locationName}
                     onChange={(e) => setLocationName(e.target.value)}
@@ -372,6 +464,7 @@ useEffect(() => {
                     margin="normal"
                     className="fav-input"
                   />
+                  </div>
                   <div className="icon-selection">
                     <span style={{ textAlign: 'left' }}>Select an icon</span>
                     <div className="addfav-icons">
@@ -393,7 +486,6 @@ useEffect(() => {
                     </div>
                   </div>
                   <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
-                  {error && <div className="error-message">{error}</div>}
                 </div>
               )}  
             {user && (
@@ -410,6 +502,7 @@ useEffect(() => {
                 ))}
               </div>
             )}
+            {error && <div className="error-message">{error}</div>}
             </div>
           </div>
 
