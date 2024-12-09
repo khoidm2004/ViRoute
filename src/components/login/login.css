@@ -69,7 +69,7 @@
   cursor: pointer;
 }
 
-.input-field {
+.input-field-login {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -83,6 +83,7 @@
   outline: none;
   box-sizing: border-box;
   background-clip: padding-box;
+  font: Roboto;
 }
 
 .input-field::placeholder {

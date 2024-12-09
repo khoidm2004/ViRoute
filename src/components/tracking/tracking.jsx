@@ -18,7 +18,6 @@ const Tracking = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Load buses on mount
   useEffect(() => {
     const loadBuses = async () => {
       try {
@@ -33,7 +32,6 @@ const Tracking = () => {
     loadBuses();
   }, []);
 
-  // Handle search term changes
   const handleSearch = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
@@ -48,10 +46,9 @@ const Tracking = () => {
     } else {
       setFilteredBuses([]);
     }
-    setCurrentPage(1); // Reset to the first page when searching
+    setCurrentPage(1);
   };
 
-  // Handle bus click to fetch image
   const handleBusClick = async (bus_Name) => {
     if (activeBus === bus_Name) {
       setActiveBus(null);
@@ -75,13 +72,9 @@ const Tracking = () => {
     }
   };
 
-  // Buses to display based on search term
   const busesToDisplay = searchTerm ? filteredBuses : buses;
-
-  // Sort buses by name
   const sortedBuses = [...busesToDisplay].sort((a, b) => a.bus_Name.localeCompare(b.bus_Name));
 
-  // Pagination logic
   const indexOfLastBus = currentPage * itemsPerPage;
   const indexOfFirstBus = indexOfLastBus - itemsPerPage;
   const currentBuses = sortedBuses.slice(indexOfFirstBus, indexOfLastBus);
@@ -103,14 +96,13 @@ const Tracking = () => {
               <Icon icon="material-symbols:search" className='icon-bus-metro' />
               <input
                 type="text"
-                placeholder="Enter the bus/metro number"
+                placeholder="Enter the bus number"
                 className="input-tracking"
                 value={searchTerm}
                 onChange={handleSearch}
               />
             </div>
 
-            {/* Search Suggestions */}
             {searchTerm && filteredBuses.length > 0 && (
               <div className="search-suggestions">
                 {filteredBuses.map((bus) => (
@@ -128,7 +120,6 @@ const Tracking = () => {
               </div>
             )}
 
-            {/* Display when no results */}
             {busesToDisplay.length === 0 && <p>No buses found.</p>}
 
             {currentBuses.map((bus, index) => (
@@ -154,7 +145,6 @@ const Tracking = () => {
               </React.Fragment>
             ))}
 
-            {/* Pagination */}
             <div className="pagination">
               <button
                 className={`page-button ${currentPage === 1 ? 'disabled' : ''}`}
