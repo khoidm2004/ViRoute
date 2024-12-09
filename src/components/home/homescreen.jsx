@@ -13,8 +13,8 @@ import useUserInformationStore from '../../stores/userinfoStore';
 const Homescreen = () => {
   const { favouritePlaces, addFavouritePlace, deleteFavoritePlace } = useUserInformationStore();
   const navigate = useNavigate();
-  const [start, setStart] = useState('');
-  const [destination, setDestination] = useState('');
+  const [bus_start, setStart] = useState('');
+  const [bus_end, setDestination] = useState('');
   const [startSuggestions, setStartSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [startSelected, setStartSelected] = useState(false);
@@ -35,13 +35,13 @@ const Homescreen = () => {
   const user = authStore((state) => state.user);
 
   const findbusroute = () => {
-    if (!start || !destination) {
+    if (!bus_start || !bus_end) {
       setSearchError('Please fill in both start and destination');
       return;
     }
     setSearchError(''); 
-    const busroute = `/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
-    navigate(busroute);
+    console.log(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
+    navigate(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
   };
 
   const toggleTimeDropdown = () => {
@@ -154,10 +154,10 @@ const Homescreen = () => {
       const uniquePlaces = new Set();
       const results = [];
   
-      if (isDestination && start) {
+      if (isDestination && bus_start) {
         // Lọc những điểm đến phù hợp với điểm xuất phát đã chọn
         data.forEach((item) => {
-          if (item.bus_start.toLowerCase() === start.toLowerCase() && !uniquePlaces.has(item.bus_end)) {
+          if (item.bus_start.toLowerCase() === bus_start.toLowerCase() && !uniquePlaces.has(item.bus_end)) {
             results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
             uniquePlaces.add(item.bus_end);
           }
@@ -205,12 +205,12 @@ const Homescreen = () => {
   };
 
   useEffect(() => {
-    fetchSuggestions(start, setStartSuggestions);
-  }, [start]);
+    fetchSuggestions(bus_start, setStartSuggestions);
+  }, [bus_start]);
 
   useEffect(() => {
-    fetchSuggestions(destination, setDestinationSuggestions);
-  }, [destination]);
+    fetchSuggestions(bus_end, setDestinationSuggestions);
+  }, [bus_end]);
 
   const handleClickOutside = (event) => {
     if (
@@ -235,7 +235,7 @@ const handleStartChange = (e) => {
   setStartSelected(false);
   if (value) {
     fetchSuggestions(value, setStartSuggestions, true);
-  } else if (destination) {
+  } else if (bus_end) {
     fetchSuggestions('', setStartSuggestions, true);
   } else {
     setStartSuggestions([]);
@@ -248,7 +248,7 @@ const handleDestinationChange = (e) => {
   setDestinationSelected(false);
   if (value) {
     fetchSuggestions(value, setDestinationSuggestions, true);
-  } else if (start) {
+  } else if (bus_start) {
     fetchSuggestions('', setDestinationSuggestions, true);
   } else {
     setDestinationSuggestions([]);
@@ -273,10 +273,10 @@ useEffect(() => {
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
                 type="text"
-                value={start}
+                value={bus_start}
                 onChange={handleStartChange}
                 onFocus={() => {
-                  if (destination) {
+                  if (bus_end) {
                     fetchSuggestions('', setStartSuggestions, true);
                   }
                 }}
@@ -307,16 +307,16 @@ useEffect(() => {
               )}
               </div>
               <div className="swap-container">
-                <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(destination); setDestination(start); }} />
+                <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(bus_start); setDestination(bus_end); }} />
               </div> 
               <div className="search-destination">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
                   type="text"
-                  value={destination}
+                  value={bus_end}
                   onChange={handleDestinationChange}
                   onFocus={() => {
-                    if (start) {
+                    if (bus_start) {
                       fetchSuggestions('', setDestinationSuggestions, true);
                     }
                   }}
