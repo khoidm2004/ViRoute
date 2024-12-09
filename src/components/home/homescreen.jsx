@@ -40,7 +40,7 @@ const Homescreen = () => {
       return;
     }
     setSearchError(''); 
-    const busroute = `/route/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
+    const busroute = `/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
     navigate(busroute);
   };
 

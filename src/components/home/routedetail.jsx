@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useParams} from 'react';
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 import { Select, MenuItem, Button } from '@mui/material';
@@ -14,10 +14,9 @@ const RouteDetail = () => {
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedDate, setSelectedDate] = useState(today);
     const [showTimeDropdown, setShowTimeDropdown] = useState(false);
-
+    const { bus_start, bus_end } = useParams();
     const findBusRoute = () => {
-        const busRoute = `${encodeURIComponent(start)}-${encodeURIComponent(destination)}`;
-        navigate(`/${busRoute}`);
+        navigate(`/${encodeURIComponent(start)}-${encodeURIComponent(destination)}`);
     };
 
     const swapLocations = () => {
@@ -150,7 +149,7 @@ const RouteDetail = () => {
                 </div>
                 <Map className="map-routedetail"/>
             </div>
-            
+            <p>{decodeURIComponent(start)} - {decodeURIComponent(destination)}</p>
         </>
     );
 };
