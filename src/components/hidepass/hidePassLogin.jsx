@@ -24,7 +24,7 @@ const HidePassLogin = ({ values, handleClickShowPassword, handleMouseDownPasswor
       placeholder="Password"
       sx={{
         width: "80%", 
-        fontSize: "25px",  
+        fontSize: "20px",  
         padding: "10px",  
         paddingLeft: "20px",
         color: "#000", 

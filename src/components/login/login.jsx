@@ -60,7 +60,7 @@ const Login = () => {
           <label className="text">Email:</label>
           <input
             type="email"
-            className="input-field"
+            className="input-field-login"
             placeholder="Email"
             value={userEmail}
             onChange={(e) => setEmail(e.target.value)}
