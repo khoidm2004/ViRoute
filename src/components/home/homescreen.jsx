@@ -64,12 +64,16 @@ const Homescreen = () => {
   };
   
 
-  const handleInputChange = (e, setField, setSuggestions, field) => {
+  const handleInputChange = (e, setField, setSuggestions, field, setSelected) => {
     const value = e.target.value;
     console.log('Input changed to:', value);
     setField(value);
-    setSuggestions([]); 
-    fetchSuggestions(value, setSuggestions, field);
+    setSelected(false);
+    if (value.trim() === '') {
+      setSuggestions([]);
+  } else {
+      fetchSuggestions(value, setSuggestions, field);
+  }
   };
   
 
@@ -138,7 +142,7 @@ const Homescreen = () => {
   const fetchSuggestions = (query, setSuggestions, field) => {
     console.log(`Fetching suggestions for: ${query}`);
     if (!query.trim()) {
-      setSuggestions([]); // Clear suggestions if the query is empty
+      setSuggestions([]); 
       return;
     }
   
@@ -244,7 +248,7 @@ const Homescreen = () => {
                 <input
                   type="text"
                   value={bus_start}
-                  onChange={(e) => handleInputChange(e, setStart, setStartSuggestions, 'bus_start')}
+                  onChange={(e) => handleInputChange(e, setStart, setStartSuggestions, 'bus_start', setStartSelected)}
                   placeholder="Enter your start"
                   className="search-input"
                   ref={startInputRef}
@@ -275,7 +279,7 @@ const Homescreen = () => {
                 <input
                   type="text"
                   value={bus_end}
-                  onChange={(e) => handleInputChange(e, setDestination, setDestinationSuggestions, 'bus_end')}
+                  onChange={(e) => handleInputChange(e, setDestination, setDestinationSuggestions, 'bus_end', setDestinationSelected)}
                   placeholder="Enter your destination"
                   className="search-input"
                   ref={destinationInputRef}
