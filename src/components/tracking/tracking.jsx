@@ -122,25 +122,7 @@ const Tracking = () => {
               />
             </div>
 
-            {searchTerm && filteredBuses.length > 0 && (
-              <div className="search-suggestions">
-                {filteredBuses.map((bus) => (
-                  <div
-                    key={bus.bus_Name}
-                    className="suggestion-item"
-                    onClick={() => {
-                      setSearchTerm(bus.bus_Name);
-                      setFilteredBuses([]);
-                    }}
-                  >
-                    {bus.bus_Name} - {bus.bus_start} to {bus.bus_end}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {busesToDisplay.length === 0 && <p>No buses found.</p>}
-
+            {busesToDisplay.length === 0 && <div className="nobuses">No buses found.</div>}
             {currentBuses.map((bus, index) => (
               <React.Fragment key={bus.bus_Name}>
                 <div
@@ -163,7 +145,7 @@ const Tracking = () => {
                 {index < currentBuses.length - 1 && <div className="divider" />}
               </React.Fragment>
             ))}
-
+            {totalPages > 1 && (
             <div className="pagination">
               <button
                 className={`page-button ${currentPage === 1 ? 'disabled' : ''}`}
@@ -189,6 +171,10 @@ const Tracking = () => {
                 Last page
               </button>
             </div>
+          )}
+          <div className="pagination-summary">
+            Total {totalPages} pages, {sortedBuses.length} bus routes{sortedBuses.length !== 1 && 's'}
+          </div>
           </>
         )}
       </div>

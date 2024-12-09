@@ -132,7 +132,19 @@
   background-color: rgba(60, 177, 41, 0.8);
 }
 
-/* Responsive Adjustments */
+.nobuses {
+  color: rgba(60, 177, 41);
+  font-size: 30px;
+  font-style: italic;
+}
+
+.pagination-summary {
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+}
+
 @media (max-width: 860px) {
   .search-tracking,
   .tracking-item {
