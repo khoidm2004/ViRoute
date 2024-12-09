@@ -83,7 +83,6 @@ const Login = () => {
         {showNotification && <SuccessNotify message="Login Successful!" />}
         {errorMessage && <ErrorNotify message={errorMessage} />}
       </div>
-      <Footer style={{ margin: '0', padding: '0', width: '100vw' }} />
     </>
   );
 };

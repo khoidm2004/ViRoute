@@ -173,7 +173,7 @@ const Tracking = () => {
             </div>
           )}
           <div className="pagination-summary">
-            Total {totalPages} pages, {sortedBuses.length} bus routes{sortedBuses.length !== 1 && 's'}
+            Total {totalPages} pages, {sortedBuses.length} bus route{sortedBuses.length !== 1 && 's'}
           </div>
           </>
         )}
