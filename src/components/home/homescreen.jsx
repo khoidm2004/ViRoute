@@ -3,12 +3,11 @@ import './homescreen.css';
 import { Icon } from '@iconify/react';
 import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../footer/footer.jsx';
 import Map from '../map/map.jsx';
 import authStore from '../../stores/authStore';
 import axios from 'axios';
-import Taskbar from '../taskbar/taskbar.jsx';
 import useUserInformationStore from '../../stores/userinfoStore';
+import fetchBuses from '../../services/fetchBus.js';
 
 const Homescreen = () => {
   const { favouritePlaces, addFavouritePlace, deleteFavoritePlace } = useUserInformationStore();
@@ -30,25 +29,49 @@ const Homescreen = () => {
   const [error, setError] = useState('');
   const startInputRef = useRef(null);
   const destinationInputRef = useRef(null);
+  const [buses, setBuses] = useState([]);
   const user = authStore((state) => state.user);
+  useEffect(() => {
+    console.log('Start Suggestions:', startSuggestions);    
+    fetchCurrentLocation();
+    fetchBusData();
+  }, [startSuggestions]); 
+  
+
+  const fetchBusData = async () => {
+    try {
+      const busData = await fetchBuses();
+      setBuses(busData);  
+    } catch (err) {
+      setError('Failed to fetch bus data');
+      console.error(err);
+    }
+  };
 
   const findbusroute = () => {
-    if (!bus_start || !bus_end) {
-      setSearchError('Please fill in both start and destination');
+    const isStartValid = buses.some(bus => bus.bus_start.toLowerCase() === bus_start.toLowerCase());
+    const isDestinationValid = buses.some(bus => bus.bus_end.toLowerCase() === bus_end.toLowerCase());
+  
+    if (!isStartValid && !isDestinationValid) { // Ensure at least one input is valid
+      setSearchError('You must select at least a valid start or destination from the available options');
       return;
     }
-
-    //const isStartValid = startSuggestions.some(suggestion => suggestion.display_name === start);
-    //const isDestinationValid = destinationSuggestions.some(suggestion => suggestion.display_name === destination);
-    //if (!isStartValid || !isDestinationValid) {
-    //  setSearchError('Please choose an existing location from the suggestion list');
-    //  return;
-    //}
-    
-    setSearchError(''); 
-    console.log(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
-    navigate(`/route/${encodeURIComponent(bus_start)}-${encodeURIComponent(bus_end)}`);
+  
+    setSearchError('');
+    const start = encodeURIComponent(bus_start || 'unknown');
+    const end = encodeURIComponent(bus_end || 'unknown');
+    navigate(`/route/${start}-${end}`);
   };
+  
+
+  const handleInputChange = (e, setField, setSuggestions, field) => {
+    const value = e.target.value;
+    console.log('Input changed to:', value);
+    setField(value);
+    setSuggestions([]); 
+    fetchSuggestions(value, setSuggestions, field);
+  };
+  
 
   const toggleFavouritePlace = () => {
     if (!user) {
@@ -62,11 +85,6 @@ const Homescreen = () => {
     const isValidSuggestion = favouriteSuggestions.some(
       (suggestion) => suggestion.display_name === streetAddress
     );
-  
-    //if (!isValidSuggestion) {
-      //setError('Please choose an existing location from the suggestion list');
-      //return;
-    //}
   
     if (!locationName || !selectedIcon) {
       setError('Please fill in all fields and select an icon');
@@ -104,53 +122,49 @@ const Homescreen = () => {
     setStreetAddress(place.streetAddress);
     setLocationName(place.locationName);
   };
-  
 
   const handleAddPlace = (place) => {
     addFavouritePlace(place); 
   };
 
-  const fetchSuggestions = async (query, setSuggestions, isDestination = false) => {
-    try {
-      if (!query && !isDestination) {
-        setSuggestions([]);
-        return;
-      }
-  
-      const { data } = await axios.get("https://test-production-1774.up.railway.app/api/bus_routes/");
-      const uniquePlaces = new Set();
-      const results = [];
-  
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  };
 
-      if (isDestination && bus_start) {
-        data.forEach((item) => {
-          if (item.bus_start.toLowerCase() === bus_start.toLowerCase() && !uniquePlaces.has(item.bus_end)) {
-            results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
-            uniquePlaces.add(item.bus_end);
-          }
-        });
-      } else {
-        data.forEach((item) => {
-          if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
-            results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
-            uniquePlaces.add(item.bus_start);
-          }
-          if (item.bus_end.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_end)) {
-            results.push({ place_id: `${item.bus_id}_end`, display_name: item.bus_end });
-            uniquePlaces.add(item.bus_end);
-          }
-        });
-      }
-  
-      if (results.length > 0) {
-        setSuggestions(results.slice(0, 5));
-      } else {
-        setSuggestions([{ place_id: 'no_match', display_name: 'No matched finding' }]);
-      }
-    } catch (error) {
-      console.error("Error fetching suggestions:", error.response?.data || error.message);
+  const fetchSuggestions = (query, setSuggestions, field) => {
+    console.log(`Fetching suggestions for: ${query}`);
+    if (!query.trim()) {
+      setSuggestions([]); // Clear suggestions if the query is empty
+      return;
     }
-  };  
+  
+    const uniqueSuggestions = new Set();
+    const results = [];
+  
+    buses.forEach((bus) => {
+      if (field === 'bus_start' && bus.bus_start.toLowerCase().includes(query.toLowerCase())) {
+        if (!uniqueSuggestions.has(bus.bus_start)) {
+          uniqueSuggestions.add(bus.bus_start);
+          results.push({ display_name: bus.bus_start });
+        }
+      } else if (field === 'bus_end' && bus.bus_end.toLowerCase().includes(query.toLowerCase())) {
+        if (!uniqueSuggestions.has(bus.bus_end)) {
+          uniqueSuggestions.add(bus.bus_end);
+          results.push({ display_name: bus.bus_end });
+        }
+      }
+    });
+  
+    console.log('Suggestions:', results);
+    setSuggestions(results.slice(0, 5)); // Limit to 5 suggestions
+  };
+  
+  
+  const debouncedFetchSuggestions = useRef(debounce(fetchSuggestions, 300)).current;
 
   const fetchFavouriteSuggestions = async (query, setSuggestions) => {
     try {
@@ -159,9 +173,10 @@ const Homescreen = () => {
         return;
       }
   
-      const { data } = await axios.get("https://test-production-1774.up.railway.app/api/bus_routes/");
+      const { data } = await fetchBuses();
       const uniquePlaces = new Set();
       const results = [];
+
 
       data.forEach((item) => {
         if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
@@ -177,104 +192,41 @@ const Homescreen = () => {
       if (results.length > 0) {
         setSuggestions(results.slice(0, 5));
       } else {
-        setSuggestions([{ place_id: 'no_match', display_name: 'No matched finding' }]);
+        setSuggestions([]);
       }
     } catch (error) {
-      console.error("Error fetching favourite suggestions:", error.response?.data || error.message);
+      console.error('Error fetching favourite suggestions:', error);
     }
   };
-  
-  
-  const fetchCurrentLocation = async () => {
+
+  useEffect(() => {
+    fetchFavouriteSuggestions('', setFavouriteSuggestions);
+    setStreetAddress('');
+    setLocationName('');
+    setSelectedIcon('');
+  }, []);
+
+  const fetchCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude, longitude } = position.coords;
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+  
         try {
           const response = await axios.get(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
           );
           setCurrentLocation(response.data.display_name);
         } catch (error) {
-          console.error('Error fetching current location:', error);
+          console.error("Error fetching location:", error);
         }
       });
-    } else {
-      console.error('Geolocation is not supported by this browser.');
     }
   };
 
   useEffect(() => {
-    fetchSuggestions(bus_start, setStartSuggestions);
-  }, [bus_start]);
-
-  useEffect(() => {
-    fetchSuggestions(bus_end, setDestinationSuggestions);
-  }, [bus_end]);
-
-  const handleClickOutside = (event) => {
-    if (
-      (!startInputRef.current || !startInputRef.current.contains(event.target)) &&
-      (!destinationInputRef.current || !destinationInputRef.current.contains(event.target)) &&
-      !event.target.closest('.suggestions-box') 
-    ) {
-      setStartSuggestions([]);
-      setDestinationSuggestions([]);
-      setFavouriteSuggestions([]);
-    }
-  };
-useEffect(() => {
-  document.addEventListener('mousedown', handleClickOutside);
-  return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-  };
-}, []);
-
-const handleStartChange = (e) => {
-  const value = e.target.value;
-  setStart(value);
-  setStartSelected(false);
-  if (value) {
-    fetchSuggestions(value, setStartSuggestions, true);
-  } else if (bus_end) {
-    fetchSuggestions('', setStartSuggestions, true);
-  } else {
-    setStartSuggestions([]);
-  }
-};
-
-const handleDestinationChange = (e) => {
-  const value = e.target.value;
-  setDestination(value);
-  setDestinationSelected(false);
-  if (value) {
-    fetchSuggestions(value, setDestinationSuggestions, true);
-  } else if (bus_start) {
-    fetchSuggestions('', setDestinationSuggestions, true);
-  } else {
-    setDestinationSuggestions([]);
-  }
-};
-
-useEffect(() => {
-  fetchCurrentLocation();
-}, []);
-
-const handleFavouriteChange = (e) => {
-  const value = e.target.value;
-  setStreetAddress(value);
-  if (value) {
-    fetchFavouriteSuggestions(value, setFavouriteSuggestions);
-  } else {
-    setFavouriteSuggestions([]);
-  }
-};
-
-const handleFavouriteSuggestionClick = (suggestion) => {
-  setStreetAddress(suggestion.display_name);
-  setLocationName('');
-  setFavouriteSuggestions([]);
-};
-
+    fetchCurrentLocation();
+  }, []);
 
   return (
     <>
@@ -286,75 +238,28 @@ const handleFavouriteSuggestionClick = (suggestion) => {
               <h1 className="homescreen-title">Where do you want to go?</h1>
               <div className="information-container">
 
+              {/* Start Search */}
               <div className="search-start">
                 <Icon icon="material-symbols:search" className="icon" />
                 <input
-                type="text"
-                value={bus_start}
-                onChange={handleStartChange}
-                onFocus={() => {
-                  if (bus_end) {
-                    fetchSuggestions('', setStartSuggestions, true);
-                  }
-                }}
-                placeholder="Enter your start"
-                className="search-input"
-                ref={startInputRef}
-              />
-              {!startSelected && startSuggestions.length > 0 && (
-                <div className="suggestions-box">
-                  <ul className="suggestions-list">
-                    {startSuggestions.map((suggestion) => (
-                      <li
-                        key={suggestion.place_id}
-                        onClick={() => {
-                          if (suggestion.place_id !== 'no_match') {
+                  type="text"
+                  value={bus_start}
+                  onChange={(e) => handleInputChange(e, setStart, setStartSuggestions, 'bus_start')}
+                  placeholder="Enter your start"
+                  className="search-input"
+                  ref={startInputRef}
+                />
+                {startSuggestions.length > 0 && !startSelected && (
+                  <div className="suggestions-box">
+                    <ul className="suggestions-list">
+                      {startSuggestions.map((suggestion, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
                             setStart(suggestion.display_name);
                             setStartSuggestions([]);
                             setStartSelected(true);
-                          }
-                        }}
-                        className={suggestion.place_id === 'no_match' ? 'no-match' : ''}
-                      >
-                        {suggestion.display_name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              </div>
-              <div className="swap-container">
-                <Icon icon="eva:swap-fill" className="swap-icon" onClick={() => { setStart(bus_start); setDestination(bus_end); }} />
-              </div> 
-              <div className="search-destination">
-                <Icon icon="material-symbols:search" className="icon" />
-                <input
-                  type="text"
-                  value={bus_end}
-                  onChange={handleDestinationChange}
-                  onFocus={() => {
-                    if (bus_start) {
-                      fetchSuggestions('', setDestinationSuggestions, true);
-                    }
-                  }}
-                  placeholder="Enter your destination"
-                  className="search-input"
-                  ref={destinationInputRef}
-                />
-                {!destinationSelected && destinationSuggestions.length > 0 && (
-                  <div className="suggestions-box">
-                    <ul className="suggestions-list">
-                      {destinationSuggestions.map((suggestion) => (
-                        <li
-                          key={suggestion.place_id}
-                          onClick={() => {
-                            if (suggestion.place_id !== 'no_match') {
-                              setDestination(suggestion.display_name);
-                              setDestinationSuggestions([]);
-                              setDestinationSelected(true);
-                            }
                           }}
-                          className={suggestion.place_id === 'no_match' ? 'no-match' : ''}
                         >
                           {suggestion.display_name}
                         </li>
@@ -362,7 +267,39 @@ const handleFavouriteSuggestionClick = (suggestion) => {
                     </ul>
                   </div>
                 )}
-                </div>
+              </div>
+              
+              {/* Destination Search */}
+              <div className="search-destination">
+                <Icon icon="material-symbols:search" className="icon" />
+                <input
+                  type="text"
+                  value={bus_end}
+                  onChange={(e) => handleInputChange(e, setDestination, setDestinationSuggestions, 'bus_end')}
+                  placeholder="Enter your destination"
+                  className="search-input"
+                  ref={destinationInputRef}
+                />
+                {destinationSuggestions.length > 0 && !destinationSelected && (
+                  <div className="suggestions-box">
+                    <ul className="suggestions-list">
+                      {destinationSuggestions.map((suggestion, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            setDestination(suggestion.display_name);
+                            setDestinationSuggestions([]);
+                            setDestinationSelected(true);
+                          }}
+                        >
+                          {suggestion.display_name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
                 <Button class="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
               </div>
               {searchError && <div className="error-message">{searchError}</div>}
