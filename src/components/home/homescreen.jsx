@@ -35,7 +35,10 @@ const Homescreen = () => {
     console.log('Start Suggestions:', startSuggestions);    
     fetchCurrentLocation();
     fetchBusData();
-  }, [startSuggestions]); 
+    if (buses.length > 0) {
+      fetchFavouriteSuggestions('', setFavouriteSuggestions);
+    };
+  }, [startSuggestions],[buses]); 
   
 
   const fetchBusData = async () => {
@@ -71,7 +74,11 @@ const Homescreen = () => {
     setSuggestions([]); 
     fetchSuggestions(value, setSuggestions, field);
   };
-  
+  const handleFavouriteChange = (e) => {
+    const value = e.target.value;
+    setLocationName(value);
+    fetchFavouriteSuggestions(value, setFavouriteSuggestions); 
+  };
 
   const toggleFavouritePlace = () => {
     if (!user) {
@@ -82,8 +89,9 @@ const Homescreen = () => {
   };
 
   const handleConfirmFavourite = () => {
-    const isValidSuggestion = favouriteSuggestions.some(
-      (suggestion) => suggestion.display_name === streetAddress
+    // Validate if the location name exists in bus_start or bus_end
+    const isValidLocation = buses.some(
+      (bus) => bus.bus_start.toLowerCase() === locationName.toLowerCase() || bus.bus_end.toLowerCase() === locationName.toLowerCase()
     );
   
     if (!locationName || !selectedIcon) {
@@ -91,15 +99,17 @@ const Homescreen = () => {
       return;
     }
   
+    if (!isValidLocation) {
+      setError('The location must be a valid bus start or bus end location');
+      return;
+    }
+  
     const newPlace = {
-      streetAddress,
       locationName,
       selectedIcon,
     };
   
     const { favouritePlaces, error: addError } = useUserInformationStore.getState();
-  
-    useUserInformationStore.getState().addFavouritePlace(newPlace);
   
     if (addError) {
       setError(
@@ -111,15 +121,15 @@ const Homescreen = () => {
     }
   
     addFavouritePlace(newPlace);
-    setStreetAddress('');
     setLocationName('');
     setSelectedIcon('');
     setError('');
     setShowFavouritePlace(false);
   };
+  
+  
 
   const handlePlaceClick = (place) => {
-    setStreetAddress(place.streetAddress);
     setLocationName(place.locationName);
   };
 
@@ -168,17 +178,21 @@ const Homescreen = () => {
 
   const fetchFavouriteSuggestions = async (query, setSuggestions) => {
     try {
+      if (!Array.isArray(buses) || buses.length === 0) {
+        console.log('Bus data is not available yet.');
+        setSuggestions([]); // Clear suggestions if buses data is not ready
+        return;
+      }
+  
       if (!query) {
         setSuggestions([]);
         return;
       }
   
-      const { data } = await fetchBuses();
       const uniquePlaces = new Set();
       const results = [];
-
-
-      data.forEach((item) => {
+  
+      buses.forEach((item) => {
         if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
           results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
           uniquePlaces.add(item.bus_start);
@@ -190,14 +204,15 @@ const Homescreen = () => {
       });
   
       if (results.length > 0) {
-        setSuggestions(results.slice(0, 5));
+        setSuggestions(results.slice(0, 5)); // Limit to 5 suggestions
       } else {
-        setSuggestions([]);
+        setSuggestions([]); // No matches found
       }
     } catch (error) {
       console.error('Error fetching favourite suggestions:', error);
     }
   };
+  
 
   useEffect(() => {
     fetchFavouriteSuggestions('', setFavouriteSuggestions);
@@ -308,41 +323,35 @@ const Homescreen = () => {
                 <Icon icon="ic:outline-plus" className="option-icon" />
                 <span className="addfav-text">Add favourite place</span>
               </button>
+
               {showFavouritePlace && (
                 <div className="favourite-form">
-                    <div className="fav-box">
-                      <input
-                        type="text"
-                        placeholder="Street address or place name"
-                        value={streetAddress}
-                        onChange={handleFavouriteChange}
-                        className="fav-input"
-                        ref={favouriteInputRef}
-                      />
-                      {favouriteSuggestions.length > 0 && (
-                        <div className="suggestions-box-fav">
-                          <ul className="suggestions-list-fav">
-                            {favouriteSuggestions.map((suggestion) => (
-                              <li
-                                key={suggestion.place_id}
-                                onClick={() => handleFavouriteSuggestionClick(suggestion)}
-                              >
-                                {suggestion.display_name}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
                   <div className="fav-box">
-                  <input
-                    placeholder="Name your location"
-                    value={locationName}
-                    onChange={(e) => setLocationName(e.target.value)}
-                    fullWidth
-                    margin="normal"
-                    className="fav-input"
-                  />
+                    <input
+                      placeholder="Name your location"
+                      value={locationName}
+                      onChange={(e) => handleFavouriteChange(e)}
+                      fullWidth
+                      margin="normal"
+                      className="fav-input"
+                    />
+                    {favouriteSuggestions.length > 0 && (
+                      <div className="suggestions-box-fav">
+                        <ul className="suggestions-list-fav">
+                          {favouriteSuggestions.map((suggestion) => (
+                            <li
+                              key={suggestion.place_id}
+                              onClick={() => {
+                                setLocationName(suggestion.display_name);
+                                setFavouriteSuggestions([]);
+                              }}
+                            >
+                              {suggestion.display_name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                   <div className="icon-selection">
                     <span style={{ textAlign: 'left' }}>Select an icon</span>
@@ -364,22 +373,25 @@ const Homescreen = () => {
                       />
                     </div>
                   </div>
-                  <Button variant="contained" class="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
+                  <Button variant="contained" className="confirm-button" onClick={handleConfirmFavourite}>Confirm</Button>
                 </div>
-              )}  
+              )}
+
+
             {user && (
               <div className="places-container">
-                {favouritePlaces.map((place, index) => (
-                  <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
-                    {place.selectedIcon &&<Icon icon={place.selectedIcon} className="place-icon" />}
-                    <div className="placetext-container">
-                      {place.locationName &&<span className="location-name">{place.locationName}</span>}
-                      {place.streetAddress && <span className="address-name">{place.streetAddress}</span>}
-                    </div>
-                    <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
+              {favouritePlaces.map((place, index) => (
+                <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
+                  {place.selectedIcon && <Icon icon={place.selectedIcon} className="place-icon" />}
+                  <div className="placetext-container">
+                    {place.locationName && <span className="location-name">{place.locationName}</span>}
+                    {/* Removed the address-name rendering */}
                   </div>
-                ))}
-              </div>
+                  <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
+                </div>
+              ))}
+            </div>
+            
             )}
             {error && <div className="error-message">{error}</div>}
             </div>
