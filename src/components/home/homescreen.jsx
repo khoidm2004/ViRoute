@@ -22,7 +22,6 @@ const Homescreen = () => {
   const [favouriteSuggestions, setFavouriteSuggestions] = useState([]);
   const favouriteInputRef = useRef(null);
   const [searchError, setSearchError] = useState('');
-  const today = new Date().toISOString().split("T")[0];
   const [showFavouritePlace, setShowFavouritePlace] = useState(false);
   const [streetAddress, setStreetAddress] = useState('');
   const [locationName, setLocationName] = useState('');
@@ -178,6 +177,7 @@ const Homescreen = () => {
       const uniquePlaces = new Set();
       const results = [];
 
+
       data.forEach((item) => {
         if (item.bus_start.toLowerCase().includes(query.toLowerCase()) && !uniquePlaces.has(item.bus_start)) {
           results.push({ place_id: `${item.bus_id}_start`, display_name: item.bus_start });
@@ -303,7 +303,7 @@ const Homescreen = () => {
                 <Button class="search-btn--find" type="button" onClick={findbusroute}>Find</Button>
               </div>
               {searchError && <div className="error-message">{searchError}</div>}
-              //file time.js
+
               <button className="favorite-btn" onClick={toggleFavouritePlace}>
                 <Icon icon="ic:outline-plus" className="option-icon" />
                 <span className="addfav-text">Add favourite place</span>
