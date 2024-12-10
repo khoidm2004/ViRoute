@@ -78,6 +78,10 @@
   background-color: rgba(60, 177, 41, 0.8);
 }
 
+.form-spacing {
+  height: 16px;
+}
+
 @media only screen and (min-width: 480px) and (max-width: 1024px) {
   .feedback-container {
     flex-direction: column;
