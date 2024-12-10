@@ -18,14 +18,15 @@
 
 .feedback-text h1 {
   color: black;
-  margin-top: 50px;
-  font-size: 32px;
+  margin-top: 30px;
+  font-size: 50px;
+  font-weight: 700;
 }
 
 .feedback-text h2 {
   color: black;
-  font-weight: 400;
-  font-size: 24px;
+  font-weight: 500;
+  font-size: 30px;
   margin-right: 50px;
 }
 
