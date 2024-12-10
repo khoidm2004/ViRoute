@@ -55,12 +55,14 @@ class User(models.Model):
     phoneNumber = PhoneNumberField(unique=True, null=False, validators=[MinLengthValidator(10)],blank=False)
     userEmail = models.EmailField (max_length=100,unique=True,null=False,blank=False)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    citizenship = models.CharField(max_length=100,null=False,default= 'Vietnam') # should be fixed later 
+    citizenship = models.CharField(max_length=100,null=False,default= 'Vietnam') 
     accounts = models.ManyToManyField(Account, through='AccountHasUser')
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
-    dateofbirth = models.DateField(null=False, default= '2003-12-15') # should be fixed later
+    dateofbirth = models.DateField(null=False, default= '2003-12-15') 
     password = models.CharField(max_length=70,null=False,blank=False)
-    def save(self, *args, **kwargs): #Thang Thong chua giai thich cho tao, dit me 
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    
+    def save(self, *args, **kwargs): 
         if not self.userID:
             if isinstance(self.dateofbirth, str):
                 self.dateofbirth = datetime.strptime(self.dateofbirth, '%Y-%m-%d').date()

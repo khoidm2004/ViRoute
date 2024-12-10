@@ -48,6 +48,18 @@ class FavPlaceSerializer(serializers.ModelSerializer):
         model = FavPlace
         fields = '__all__'
         
+class UpdateAvatarSerializer(serializers.ModelSerializer):
+    avatar = serializers.ImageField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['avatar']
+
+    def update(self, instance, validated_data):
+        instance.avatar = validated_data.get('avatar', instance.avatar)
+        instance.save()
+        return instance
+        
 '''class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
