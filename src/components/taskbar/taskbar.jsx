@@ -91,7 +91,7 @@ const Taskbar = () => {
 
                 {/* Login/Signup or Logout */}
                 <div className="mobile-menu-item" onClick={ user ?  handleLogout : () => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                    <span>{user ? 'Logout' : 'Login/Signup'}</span>
+                    <span>{user ? 'Logout' : 'Login'}</span>
                 </div>
             </div>
             )}
@@ -150,7 +150,7 @@ const Taskbar = () => {
                 ) : (
                     <div className="login-content" onClick={() => navigate('/login')}>
                         <img className="login-avatar" src={avatar} alt="User Avatar" />
-                        <span className='login-text'>Login/ Sign up</span>
+                        <span className='login-text'>Log In</span>
                     </div>
                 )}
             </div>

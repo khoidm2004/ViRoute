@@ -134,7 +134,7 @@ const Tracking = () => {
                 {activeBus === bus.bus_Name && (
                   <div className="map-container-tracking active">
                     {loadingImage ? (
-                      <p>Loading image...</p>
+                      <div className="loadingimage">Loading image...</div>
                     ) : errorImage ? (
                       <p className="error">{errorImage}</p>
                     ) : imageUrl ? (
