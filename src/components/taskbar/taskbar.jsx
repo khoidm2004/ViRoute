@@ -16,7 +16,7 @@ const Taskbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const defaultAvatar = `../images/Default_avatar.png`;
-    const userAvatar = user.avatar
+    const userAvatar = user && user.avatar
       ? `https://test-production-1774.up.railway.app${user.avatar}?t=${Date.now()}`
       : defaultAvatar;
 
