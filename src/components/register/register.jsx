@@ -131,7 +131,6 @@ const Register = () => {
         {showSuccessNoti && <SuccessNotify message={notificationMessage} />}
         {showErrorNoti && <ErrorNotify message={notificationMessage} />}
       </div>
-      <Footer />
     </>
   );
 };

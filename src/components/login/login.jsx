@@ -60,7 +60,7 @@ const Login = () => {
           <label className="text">Email:</label>
           <input
             type="email"
-            className="input-field"
+            className="input-field-login"
             placeholder="Email"
             value={userEmail}
             onChange={(e) => setEmail(e.target.value)}
@@ -83,7 +83,6 @@ const Login = () => {
         {showNotification && <SuccessNotify message="Login Successful!" />}
         {errorMessage && <ErrorNotify message={errorMessage} />}
       </div>
-      <Footer style={{ margin: '0', padding: '0', width: '100vw' }} />
     </>
   );
 };

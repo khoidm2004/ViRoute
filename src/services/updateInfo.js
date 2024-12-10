@@ -7,7 +7,7 @@ const updateUser = async (userId, updatedInfo) => {
       updatedInfo, // Data to update
       {
         headers: {
-          'Content-Type': 'application/json', // Optional: specify headers if needed
+          'Content-Type': 'application/json', 
         },
       }
     );

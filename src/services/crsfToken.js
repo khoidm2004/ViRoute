@@ -6,7 +6,7 @@ const getCsrfToken = async () => {
       'https://test-production-1774.up.railway.app/api/csrf_token/',
       { withCredentials: true }
     );
-    return response.data.csrf_token; // Adjust if response structure differs
+    return response.data.csrf_token; 
   } catch (error) {
     if (error.response) {
       console.error('Error Response Data:', error.response.data);
