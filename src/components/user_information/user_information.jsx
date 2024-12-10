@@ -8,7 +8,8 @@ import useUserInformationStore from '../../stores/userinfoStore';
 import HidePass from '../hidepass/hidePass.jsx';
 import authStore from '../../stores/authStore.js';
 import updateUser from '../../services/updateInfo.js';
-import Footer from '../footer/footer';
+import saveImage from '../../services/saveImage';  
+import fetchAvatar from '../../services/fetchAvatar.js';
 
 function UserInformation() {
   const user = authStore((state) => state.user);
@@ -42,11 +43,15 @@ function UserInformation() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [phoneNumber, setPhone] = useState('');
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file);
-      setTempAvatar(URL.createObjectURL(file)); // Update temp avatar locally
+      setSelectedFile(file);  // Lưu file vào state
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setTempAvatar(reader.result);  // Cập nhật hình ảnh tạm thời để hiển thị ngay
+      };
+      reader.readAsDataURL(file);  // Đọc file hình ảnh
     }
   };
 
@@ -66,7 +71,13 @@ function UserInformation() {
       const updatedData = {
         fullName: tempFullName || user.fullName,
       };
-      
+      if (selectedFile) {
+        const imageUrl = await saveImage(selectedFile); 
+        updatedData.avatar = imageUrl;
+        const imageUrl_api = await fetchAvatar(imageUrl)
+        setAvatar(imageUrl_api); 
+        setTempAvatar(imageUrl_api); 
+      }
       const response = await updateUser(user.userID, updatedData);
   
       if (response.success) {
@@ -163,7 +174,7 @@ function UserInformation() {
                     value={phoneNumber}
                     placeholder={user.phoneNumber}
                     onChange={(e) => setPhone(e.target.value)}
-                    readonly
+                    readOnly
                     disabled
                   />
                 </div>
