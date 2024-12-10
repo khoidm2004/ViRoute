@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './feedback.css';
 import Footer from '../footer/footer.jsx';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
+import authStore from '../../stores/authStore'; // Import authStore để lấy thông tin người dùng
 
 const Feedback = () => {
+    const user = authStore((state) => state.user); // Lấy thông tin người dùng từ store
+
     const [formData, setFormData] = useState({
         Email: '',
         Name: '',
-        Organization: '',
+        Score: '',
         Feedback: ''
     });
+
+    useEffect(() => {
+        // Tự động điền email và tên khi component được mount
+        if (user) {
+            setFormData((prevData) => ({
+                ...prevData,
+                Email: user.userEmail || '',
+                Name: user.fullName || ''
+            }));
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,12 +34,18 @@ const Feedback = () => {
     };
 
     const handleSend = async (e) => {
-        e.preventDefault(); // Ngăn chặn tải lại trang
+        e.preventDefault();
+
+        if (!formData.Score) {
+            alert('Please select a score between 1 and 5');
+            return;
+        }
+
         const dataToSend = [
             {
                 Name: formData.Name,
                 Email: formData.Email,
-                "Rating (1-5)": "5", // Hoặc thêm một trường để người dùng nhập giá trị này
+                Score: formData.Score,
                 Feedback: formData.Feedback
             }
         ];
@@ -41,7 +61,7 @@ const Feedback = () => {
 
             if (response.ok) {
                 triggerSuccessNotification('Send Successful!');
-                setFormData({ Email: '', Name: '', Organization: '', Feedback: '' });
+                setFormData({ Email: user.userEmail || '', Name: user.fullName || '', Score: '', Feedback: '' });
             } else {
                 alert('Failed to send feedback. Please try again.');
             }
@@ -78,14 +98,20 @@ const Feedback = () => {
                             placeholder="*Your name"
                             required
                         />
-                        <label>Company or Organization</label>
-                        <input
-                            type="text"
-                            name="Organization"
-                            value={formData.Organization}
+                        <label>Give us a score (1-5)</label>
+                        <select
+                            name="Score"
+                            value={formData.Score}
                             onChange={handleChange}
-                            placeholder="The name of your organization"
-                        />
+                            required
+                        >
+                            <option value="" disabled>Select a score</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                         <label>Opinion</label>
                         <input
                             type="text"

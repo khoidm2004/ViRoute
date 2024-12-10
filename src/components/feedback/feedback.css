@@ -57,6 +57,16 @@
   color: black;
 }
 
+.feedback-form select {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: black;
+}
+
 .feedback-form input::placeholder {
   color: #aaa;
   font-size: 14px;
