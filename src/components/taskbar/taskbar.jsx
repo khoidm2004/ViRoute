@@ -16,9 +16,10 @@ const Taskbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const defaultAvatar = `../images/Default_avatar.png`;
-    const userAvatar = user && user.avatar 
-        ? `https://test-production-1774.up.railway.app/media/${user.avatar}` 
-        : defaultAvatar;
+    const userAvatar = user.avatar
+      ? `https://test-production-1774.up.railway.app${user.avatar}?t=${Date.now()}`
+      : defaultAvatar;
+
     console.log("avatar in taskbar: ", userAvatar);
     const cities = [
         { code: 'hcm', name: 'Ho Chi Minh' },
@@ -153,7 +154,7 @@ const Taskbar = () => {
                     </div>
                 ) : (
                     <div className="login-content" onClick={() => navigate('/login')}>
-                        <img className="login-avatar" src={avatar} alt="User Avatar" />
+                        <img className="login-avatar" src={defaultAvatar} alt="User Avatar" />
                         <span className='login-text'>Login/ Sign up</span>
                     </div>
                 )}
