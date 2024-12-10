@@ -5,7 +5,7 @@ const saveImage = async (file) => {
       const user = authStore.getState().user; // Lấy user từ store
       const formData = new FormData();
       formData.append('avatar', file);
-      formData.append('userID', user.userID); // Thêm userID vào payload
+      formData.append('userID', user.userID); 
   
       const response = await axios.put(
         `https://test-production-1774.up.railway.app/update-avatar/`,
@@ -16,8 +16,12 @@ const saveImage = async (file) => {
           },
         }
       );
-      console.log(response.data);
-      return response.data.avatar_url; // Giả sử API trả về URL của avatar mới
+      console.log("Lưu ảnh, ", response.data.avatar_url);
+      const croppedAvatarUrl = response.data.avatar_url.split('/media/')[1];
+      console.log("Cropped Avatar URL:", croppedAvatarUrl);
+      //const new_url = `https://test-production-1774.up.railway.app${response.data.avatar_url}`;
+      //console.log("Avatar name:", new_url)
+      return croppedAvatarUrl; 
     } catch (error) {
       console.error('Error uploading image:', error);
       throw new Error('Error uploading image');

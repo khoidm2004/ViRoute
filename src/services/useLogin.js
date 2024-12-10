@@ -6,7 +6,6 @@ const login = async (userEmail, password) => {
       password,
     });
     if (data.access_token) {
-      // Lưu token vào localStorage sau khi đăng nhập thành công
       localStorage.setItem('access_token', data.access_token);
       console.log('Token saved:', data.access_token);
     } else {
