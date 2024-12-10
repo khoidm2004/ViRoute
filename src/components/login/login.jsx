@@ -18,6 +18,7 @@ const Login = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Manage popup state locally
   const [errorMessage, setErrorMessage] = useState('');
+  const [loginAttempts, setLoginAttempts] = useState(0); // Track failed login attempts
   const { login: setUser } = authStore();
   const navigate = useNavigate();
 
@@ -29,13 +30,14 @@ const Login = () => {
       const userData = await login(userEmail, password.password);
       setUser(userData);
       setShowNotification(true);
+      setErrorMessage(''); // Clear error message on successful login
       setTimeout(() => {
         setShowNotification(false);
         navigate('/');
       }, 2000);
     } catch (error) {
-      setErrorMessage('Invalid login credentials. Please try again.');
-      setErrorMessage(error.message);
+      setLoginAttempts((prevAttempts) => prevAttempts + 1); // Increment login attempts
+      setErrorMessage(`Attempt ${loginAttempts + 1}: Invalid login credentials. Please try again.`);
     }
   };
 
@@ -71,9 +73,6 @@ const Login = () => {
             handleClickShowPassword={togglePasswordVisibility}
             handlePasswordChange={(e) => setPassword({ ...password, password: e.target.value })}
           />
-          z<label className="repass-text" onClick={() => setIsPopupOpen(true)}>
-            Forgot your password?
-          </label>
           <button type="submit" className="login-button">Login</button>
           <label className="reg-text" onClick={() => navigate('/register')}>
             Don't have an account? Create new account

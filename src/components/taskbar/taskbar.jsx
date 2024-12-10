@@ -155,7 +155,7 @@ const Taskbar = () => {
                 ) : (
                     <div className="login-content" onClick={() => navigate('/login')}>
                         <img className="login-avatar" src={defaultAvatar} alt="User Avatar" />
-                        <span className='login-text'>Login/ Sign up</span>
+                        <span className='login-text'>Log In</span>
                     </div>
                 )}
             </div>
