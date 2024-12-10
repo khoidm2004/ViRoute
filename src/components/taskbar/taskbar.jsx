@@ -17,7 +17,7 @@ const Taskbar = () => {
     const location = useLocation();
     const defaultAvatar = `../images/Default_avatar.png`;
     const userAvatar = user && user.avatar
-      ? `https://test-production-1774.up.railway.app${user.avatar}?t=${Date.now()}`
+      ? `https://test-production-1774.up.railway.app/media/${user.avatar}?t=${Date.now()}`
       : defaultAvatar;
 
     console.log("avatar in taskbar: ", userAvatar);

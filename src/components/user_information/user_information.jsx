@@ -18,7 +18,7 @@ function UserInformation() {
     return null; 
   }
   const defaultAvatar = `../images/Default_avatar.png`;
-  const userAvatar = `https://test-production-1774.up.railway.app${user.avatar}?t=${Date.now()}`;
+  const userAvatar = `https://test-production-1774.up.railway.app/media/${user.avatar}?t=${Date.now()}`;
   const {
     activeTab,
     setActiveTab,

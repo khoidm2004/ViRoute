@@ -17,9 +17,11 @@ const saveImage = async (file) => {
         }
       );
       console.log("Lưu ảnh, ", response.data.avatar_url);
+      const croppedAvatarUrl = response.data.avatar_url.split('/media/')[1];
+      console.log("Cropped Avatar URL:", croppedAvatarUrl);
       //const new_url = `https://test-production-1774.up.railway.app${response.data.avatar_url}`;
       //console.log("Avatar name:", new_url)
-      return response.data.avatar_url; 
+      return croppedAvatarUrl; 
     } catch (error) {
       console.error('Error uploading image:', error);
       throw new Error('Error uploading image');
