@@ -3,7 +3,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import MinLengthValidator,MaxValueValidator
 from datetime import datetime
 
-
+class Image(models.Model):
+    image_name = models.CharField(max_length=255)
+    image_path = models.ImageField(upload_to='images/')
+    
 class Vehicle(models.Model):
     route = models.CharField(max_length=100)
     plate_number = models.CharField(max_length=20, unique=True)
@@ -18,12 +21,6 @@ class Bus(Vehicle):
 class Metro(Vehicle):
     metro_id = models.CharField(max_length=20, primary_key=True)
     #metro_plate = models.CharField(max_length=20, unique=True)
-
-class BusRoute(models.Model):
-    bus_id = models.CharField(max_length=20, primary_key=True)
-    bus_Name = models.CharField(max_length=100)
-    bus_start = models.CharField(max_length=100)
-    bus_end = models.CharField(max_length=100)
 
 class Ticket(models.Model):
     ticketID = models.IntegerField(validators=[MaxValueValidator(16)],null=False,unique=True,primary_key=True)
@@ -63,9 +60,7 @@ class User(models.Model):
     tickets = models.ManyToManyField(Ticket, through='UserTicket')
     dateofbirth = models.DateField(null=False, default= '2003-12-15') # should be fixed later
     password = models.CharField(max_length=70,null=False,blank=False)
-    favourite_place = models.CharField(max_length=255,null=True,blank=True)
-    
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs): #Thang Thong chua giai thich cho tao, dit me 
         if not self.userID:
             if isinstance(self.dateofbirth, str):
                 self.dateofbirth = datetime.strptime(self.dateofbirth, '%Y-%m-%d').date()
@@ -74,13 +69,10 @@ class User(models.Model):
             
             phone_number_str = str(self.phoneNumber)
             last_four_digits = phone_number_str[-4:]
+            
             self.userID = birth_date_str + last_four_digits
 
         super().save(*args, **kwargs)
-        
-    #String format for User
-    def __str__(self):
-        return f"Your informations: {self.userID}\n{self.fullName}\n{self.phoneNumber}\n{self.userEmail}\n{self.balance}\n{self.citizenship}\n{self.dateofbirth}\n{self.favourite_place}"
 
 class UserTicket(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
@@ -98,12 +90,18 @@ class AccountHasUser(models.Model):
             models.UniqueConstraint(fields=['account', 'user'], name='unique_account_user')
         ]
         
-        
-class Image(models.Model):
-    image_name = models.CharField(max_length=255)
-    image_path = models.ImageField(upload_to='images/')
+class BusRoute(models.Model):
+    bus_id = models.CharField(max_length=20, primary_key=True)
+    bus_Name = models.CharField(max_length=100)
+    bus_start = models.CharField(max_length=100)
+    bus_end = models.CharField(max_length=100)
     
-    
+class FavPlace(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    icon = models.CharField(max_length=255,null=False,blank = False)
+    fav_place = models.CharField(max_length=255,null=False,blank = False)
+    name = models.CharField(max_length=255,null=False,blank = False, default='default')
+'''    
 #creating feedback
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -112,3 +110,4 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback from {self.user}\n{self.feedback}"
+    '''

@@ -1,7 +1,8 @@
 import bcrypt
 from rest_framework import serializers
 from virouteapp.models import User
-from .models import BusRoute, Feedback
+from .models import BusRoute,FavPlace
+
 
 class UserLoginSerializer(serializers.Serializer):
     userEmail = serializers.EmailField()  
@@ -18,7 +19,7 @@ class UserLoginSerializer(serializers.Serializer):
 
         # Check password
         if not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
-            raise serializers.ValidationError("Your password does not exist, please check again!")  
+            raise serializers.ValidationError("Your password is not correct, please check again!")  
 
         attrs['user'] = user 
         return attrs
@@ -27,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer): # sign up
     class Meta:
         model = User
         fields = ['fullName', 'phoneNumber', 'userEmail', 'password']
-        
+        # fields = ['userID', 'fullName', 'phoneNumber', 'userEmail', 'balance', 'citizenship', 'dateofbirth', 'password']
 
     def create(self, validated_data):
         password = validated_data['password']
@@ -42,7 +43,12 @@ class BusRouteSerializer(serializers.ModelSerializer):
         model = BusRoute
         fields = '__all__'
         
-class FeedbackSerializer(serializers.ModelSerializer):
+class FavPlaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FavPlace
+        fields = '__all__'
+        
+'''class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
-        fields = '__all__'
+        fields = '__all__'''
