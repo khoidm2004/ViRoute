@@ -55,9 +55,8 @@ function UserInformation() {
   };
 
   const handleSaveChanges = async (e) => {
-    e.preventDefault(); // Prevent form submission default behavior
+    e.preventDefault(); 
   
-    // Validate the tempFullName before saving
     if (!/^[A-Za-z\s]*$/.test(tempFullName)) {
       setNameError('Full name can only contain letters and spaces.');
       return;
@@ -66,21 +65,29 @@ function UserInformation() {
     try {
       const updatedData = {
         fullName: tempFullName || user.fullName,
-        //phoneNumber: phoneNumber || user.phoneNumber,
       };
       
       const response = await updateUser(user.userID, updatedData);
   
-      if (response.status === 200) {
+      if (response.success) {
         triggerSuccessNotification('Profile updated successfully!');
         setNameError('');
-        setFullName(tempFullName); // Update the fullName in state
+        
+        authStore.setState({
+          user: {
+            ...user, 
+            fullName: updatedData.fullName,
+          },
+        });
+      } else {
+        throw new Error(response.message);
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Failed to update profile.';
+      const errorMessage = error.message || 'Failed to update profile.';
       triggerErrorNotification(errorMessage);
     }
   };
+  
   
   const handleDeletePlace = (indexToRemove) => {
     deleteFavoritePlace(indexToRemove);
@@ -133,11 +140,11 @@ function UserInformation() {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    value={tempFullName} // Use tempFullName for input
+                    value={tempFullName} 
                     placeholder={user.fullName}
-                    onChange={(e) => setTempFullName(e.target.value)} // Update tempFullName locally
+                    onChange={(e) => setTempFullName(e.target.value)} 
                   />
-                  {nameError && <span className="error-message">{nameError}</span>} {/* Show error if invalid */}
+                  {nameError && <span className="error-message">{nameError}</span>} 
                 </div>
                 <div className="form-group">
                   <label>Email</label>

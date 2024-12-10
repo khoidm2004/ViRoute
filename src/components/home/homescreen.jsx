@@ -150,6 +150,9 @@ const Homescreen = () => {
   const handlePlaceClick = (place) => {
     setLocationName(place.locationName);
     setStreetAddress(place.streetAddress);
+    setStart(place.streetAddress); // Set as the start location
+    setStartSelected(true); // Mark the input as selected
+    setStartSuggestions([]);
   };
 
   const handleAddPlace = (place) => {
@@ -418,7 +421,7 @@ const Homescreen = () => {
             {user && (
               <div className="places-container">
               {favouritePlaces.map((place, index) => (
-                <div key={index} className="places-btn" onClick={() => handlePlaceClick(place.streetAddress)}>
+                <div key={index} className="places-btn" onClick={() => handlePlaceClick(place)}>
                   {place.selectedIcon && <Icon icon={place.selectedIcon} className="place-icon" />}
                   <div className="placetext-container">
                     {place.locationName && <span className="location-name">{place.locationName}</span>}
