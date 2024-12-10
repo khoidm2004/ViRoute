@@ -71,9 +71,9 @@ const Login = () => {
             handleClickShowPassword={togglePasswordVisibility}
             handlePasswordChange={(e) => setPassword({ ...password, password: e.target.value })}
           />
-          z<label className="repass-text" onClick={() => setIsPopupOpen(true)}>
+          {/*<label className="repass-text" onClick={() => setIsPopupOpen(true)}>
             Forgot your password?
-          </label>
+          </label>*/}
           <button type="submit" className="login-button">Login</button>
           <label className="reg-text" onClick={() => navigate('/register')}>
             Don't have an account? Create new account
