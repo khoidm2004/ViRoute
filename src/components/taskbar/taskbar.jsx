@@ -15,7 +15,11 @@ const Taskbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
-
+    const defaultAvatar = `../images/Default_avatar.png`;
+    const userAvatar = user && user.avatar 
+        ? `https://test-production-1774.up.railway.app/media/${user.avatar}` 
+        : defaultAvatar;
+    console.log("avatar in taskbar: ", userAvatar);
     const cities = [
         { code: 'hcm', name: 'Ho Chi Minh' },
         { code: 'hn', name: 'Hanoi' },
@@ -52,7 +56,7 @@ const Taskbar = () => {
                 { user && (
                     <div className="mobile-menu-item user-info" onClick={() => { navigate(`/${user.userID}`); setIsMobileMenuOpen(false); }}>
                         <div className="user-info">
-                            <img className="user-avatar" src={avatar} alt="User Avatar" />
+                            <img className="user-avatar" src={user.avatar ? userAvatar : defaultAvatar} alt="User Avatar" />
                             <div className="welcome-container">
                                 <span className="welcome-text">Welcome,</span>
                                 <span className="user-name">{user.fullName}</span>
@@ -133,7 +137,7 @@ const Taskbar = () => {
                 { user ? (
                     <div className="taskbar-item user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
                         <div className="user-info"> 
-                            <img className="user-avatar" src={avatar} alt="User Avatar" />
+                            <img className="user-avatar" src={user.avatar ? userAvatar : defaultAvatar} alt="User Avatar" />
                             <div className="welcome-container">
                                 <span className="welcome-text">Welcome,</span>
                                 <span className="user-name">{user.fullName}</span>

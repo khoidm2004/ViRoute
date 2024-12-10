@@ -71,7 +71,7 @@ const Login = () => {
             handleClickShowPassword={togglePasswordVisibility}
             handlePasswordChange={(e) => setPassword({ ...password, password: e.target.value })}
           />
-          <label className="repass-text" onClick={() => setIsPopupOpen(true)}>
+          z<label className="repass-text" onClick={() => setIsPopupOpen(true)}>
             Forgot your password?
           </label>
           <button type="submit" className="login-button">Login</button>

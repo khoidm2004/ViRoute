@@ -8,8 +8,7 @@ import useUserInformationStore from '../../stores/userinfoStore';
 import HidePass from '../hidepass/hidePass.jsx';
 import authStore from '../../stores/authStore.js';
 import updateUser from '../../services/updateInfo.js';
-import saveImage from '../../services/saveImage';  
-import fetchAvatar from '../../services/fetchAvatar.js';
+import saveImage from '../../services/saveImage.js';
 
 function UserInformation() {
   const user = authStore((state) => state.user);
@@ -18,11 +17,11 @@ function UserInformation() {
     navigate('/'); 
     return null; 
   }
+  const defaultAvatar = `../images/Default_avatar.png`;
+  const userAvatar = `https://test-production-1774.up.railway.app/media/${user.avatar}`;
   const {
     activeTab,
     setActiveTab,
-    avatar,
-    setAvatar,
     selectedFile,
     setSelectedFile,
     favouritePlaces,
@@ -30,10 +29,9 @@ function UserInformation() {
     deleteFavoritePlace
   } = useUserInformationStore();
   
-  const [tempAvatar, setTempAvatar] = useState(avatar);
+  const [tempAvatar, setTempAvatar] = useState();
   const [tempFullName, setTempFullName] = useState(''); 
   const [nameError, setNameError] = useState(''); 
-  const [fullName, setFullName] = useState('')
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -43,15 +41,11 @@ function UserInformation() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [phoneNumber, setPhone] = useState('');
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
     if (file) {
-      setSelectedFile(file);  // Lưu file vào state
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setTempAvatar(reader.result);  // Cập nhật hình ảnh tạm thời để hiển thị ngay
-      };
-      reader.readAsDataURL(file);  // Đọc file hình ảnh
+      setSelectedFile(file);
+      setTempAvatar(URL.createObjectURL(file)); 
     }
   };
 
@@ -72,11 +66,8 @@ function UserInformation() {
         fullName: tempFullName || user.fullName,
       };
       if (selectedFile) {
-        const imageUrl = await saveImage(selectedFile); 
-        updatedData.avatar = imageUrl;
-        const imageUrl_api = await fetchAvatar(imageUrl)
-        setAvatar(imageUrl_api); 
-        setTempAvatar(imageUrl_api); 
+        const image_name = await saveImage(selectedFile);  //avatars/screenshot_8.png
+        updatedData.avatar = image_name;
       }
       const response = await updateUser(user.userID, updatedData);
   
@@ -88,8 +79,10 @@ function UserInformation() {
           user: {
             ...user, 
             fullName: updatedData.fullName,
+            avatar: updatedData.avatar,
           },
         });
+        console.log("Avatar after user.avatar: ", user.avatar)
       } else {
         throw new Error(response.message);
       }
@@ -128,7 +121,7 @@ function UserInformation() {
               <div className="balance-avatar-container">
                 <div className="avatar-section" onClick={handleUploadClick}>
                   <div className="avatar">
-                    <img src={tempAvatar} alt="Avatar"  /> {/* Show temp avatar */}
+                    <img src={user.avatar ? userAvatar : defaultAvatar} alt="Avatar"  /> {/* Show temp avatar */}
                   </div>
                   <input
                     type="file"
@@ -174,7 +167,7 @@ function UserInformation() {
                     value={phoneNumber}
                     placeholder={user.phoneNumber}
                     onChange={(e) => setPhone(e.target.value)}
-                    readOnly
+                    readonly
                     disabled
                   />
                 </div>
