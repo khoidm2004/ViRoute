@@ -96,7 +96,7 @@ const Taskbar = () => {
 
                 {/* Login/Signup or Logout */}
                 <div className="mobile-menu-item" onClick={ user ?  handleLogout : () => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                    <span>{user ? 'Logout' : 'Login/Signup'}</span>
+                    <span>{user ? 'Logout' : 'Login'}</span>
                 </div>
             </div>
             )}

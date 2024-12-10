@@ -146,6 +146,10 @@
   color: #555;
 }
 
+.loadingimage{
+  color:#555;
+}
+
 @media (max-width: 860px) {
   .search-tracking,
   .tracking-item {

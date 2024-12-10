@@ -18,14 +18,15 @@
 
 .feedback-text h1 {
   color: black;
-  margin-top: 50px;
-  font-size: 32px;
+  margin-top: 30px;
+  font-size: 50px;
+  font-weight: 700;
 }
 
 .feedback-text h2 {
   color: black;
-  font-weight: 400;
-  font-size: 24px;
+  font-weight: 500;
+  font-size: 30px;
   margin-right: 50px;
 }
 
@@ -56,6 +57,16 @@
   color: black;
 }
 
+.feedback-form select {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: black;
+}
+
 .feedback-form input::placeholder {
   color: #aaa;
   font-size: 14px;
@@ -75,6 +86,10 @@
 
 .feedback-form button:hover {
   background-color: rgba(60, 177, 41, 0.8);
+}
+
+.form-spacing {
+  height: 16px;
 }
 
 @media only screen and (min-width: 480px) and (max-width: 1024px) {
