@@ -55,7 +55,7 @@ const Homescreen = () => {
     const isStartValid = buses.some(bus => bus.bus_start.toLowerCase() === bus_start.toLowerCase());
     const isDestinationValid = buses.some(bus => bus.bus_end.toLowerCase() === bus_end.toLowerCase());
   
-    if (!isStartValid && !isDestinationValid) { // Ensure at least one input is valid
+    if (!isStartValid && !isDestinationValid) { 
       setSearchError('You must select at least a valid start or destination from the available options');
       return;
     }
@@ -66,7 +66,6 @@ const Homescreen = () => {
     navigate(`/route/${start}-${end}`);
   };
   
-
   const handleInputChange = (e, setField, setSuggestions, field) => {
     const value = e.target.value;
     console.log('Input changed to:', value);
@@ -74,11 +73,23 @@ const Homescreen = () => {
     setSuggestions([]); 
     fetchSuggestions(value, setSuggestions, field);
   };
-  const handleFavouriteChange = (e) => {
+  
+  const handleStreetAddressChange = (e) => {
     const value = e.target.value;
-    setLocationName(value);
-    fetchFavouriteSuggestions(value, setFavouriteSuggestions); 
+    setStreetAddress(value);
+    if (value.trim()) {
+        fetchFavouriteSuggestions(value, setFavouriteSuggestions);
+    } else {
+        setFavouriteSuggestions([]); // Clear suggestions if input is empty
+    }
+    console.log("Updated favourite suggestions:", favouriteSuggestions);
   };
+
+  
+  const handleLocationNameChange = (e) => {
+    setLocationName(e.target.value);
+  };
+  
 
   const toggleFavouritePlace = () => {
     if (!user) {
@@ -89,23 +100,23 @@ const Homescreen = () => {
   };
 
   const handleConfirmFavourite = () => {
-    // Validate if the location name exists in bus_start or bus_end
-    const isValidLocation = buses.some(
-      (bus) => bus.bus_start.toLowerCase() === locationName.toLowerCase() || bus.bus_end.toLowerCase() === locationName.toLowerCase()
+    const isValidAddress = buses.some(
+      (bus) => bus.bus_start.toLowerCase() === streetAddress.toLowerCase() || bus.bus_end.toLowerCase() === streetAddress.toLowerCase()
     );
   
-    if (!locationName || !selectedIcon) {
+    if (!locationName || !selectedIcon || !streetAddress) {
       setError('Please fill in all fields and select an icon');
       return;
     }
   
-    if (!isValidLocation) {
+    if (!isValidAddress) {
       setError('The location must be a valid bus start or bus end location');
       return;
     }
   
     const newPlace = {
       locationName,
+      streetAddress,
       selectedIcon,
     };
   
@@ -121,6 +132,7 @@ const Homescreen = () => {
     }
   
     addFavouritePlace(newPlace);
+    setStreetAddress()
     setLocationName('');
     setSelectedIcon('');
     setError('');
@@ -131,6 +143,7 @@ const Homescreen = () => {
 
   const handlePlaceClick = (place) => {
     setLocationName(place.locationName);
+    setStreetAddress(place.streetAddress);
   };
 
   const handleAddPlace = (place) => {
@@ -148,8 +161,7 @@ const Homescreen = () => {
   const fetchSuggestions = (query, setSuggestions, field) => {
     console.log(`Fetching suggestions for: ${query}`);
     if (!query.trim()) {
-      setSuggestions([]); // Clear suggestions if the query is empty
-      return;
+      setSuggestions([]); 
     }
   
     const uniqueSuggestions = new Set();
@@ -170,7 +182,7 @@ const Homescreen = () => {
     });
   
     console.log('Suggestions:', results);
-    setSuggestions(results.slice(0, 5)); // Limit to 5 suggestions
+    setSuggestions(results.slice(0, 5));
   };
   
   
@@ -180,7 +192,7 @@ const Homescreen = () => {
     try {
       if (!Array.isArray(buses) || buses.length === 0) {
         console.log('Bus data is not available yet.');
-        setSuggestions([]); // Clear suggestions if buses data is not ready
+        setSuggestions([]); 
         return;
       }
   
@@ -204,9 +216,9 @@ const Homescreen = () => {
       });
   
       if (results.length > 0) {
-        setSuggestions(results.slice(0, 5)); // Limit to 5 suggestions
+        setSuggestions(results.slice(0, 5)); 
       } else {
-        setSuggestions([]); // No matches found
+        setSuggestions([]); 
       }
     } catch (error) {
       console.error('Error fetching favourite suggestions:', error);
@@ -330,11 +342,18 @@ const Homescreen = () => {
                     <input
                       placeholder="Name your location"
                       value={locationName}
-                      onChange={(e) => handleFavouriteChange(e)}
+                      onChange={handleLocationNameChange}
                       fullWidth
                       margin="normal"
                       className="fav-input"
                     />
+                    <input
+                        type="text"
+                        placeholder="Street address or place name"
+                        value={streetAddress}
+                        onChange={handleStreetAddressChange}
+                        className="fav-input"
+                      />
                     {favouriteSuggestions.length > 0 && (
                       <div className="suggestions-box-fav">
                         <ul className="suggestions-list-fav">
@@ -342,8 +361,8 @@ const Homescreen = () => {
                             <li
                               key={suggestion.place_id}
                               onClick={() => {
-                                setLocationName(suggestion.display_name);
-                                setFavouriteSuggestions([]);
+                                setStreetAddress(suggestion.display_name);
+                                setFavouriteSuggestions([]); // Clear suggestions after selection
                               }}
                             >
                               {suggestion.display_name}
@@ -385,7 +404,7 @@ const Homescreen = () => {
                   {place.selectedIcon && <Icon icon={place.selectedIcon} className="place-icon" />}
                   <div className="placetext-container">
                     {place.locationName && <span className="location-name">{place.locationName}</span>}
-                    {/* Removed the address-name rendering */}
+                    {place.streetAddress && <span className="address-name">{place.streetAddress}</span>}
                   </div>
                   <span className="delete-icon" onClick={(e) => { e.stopPropagation(); deleteFavoritePlace(index); }}>&times;</span>
                 </div>

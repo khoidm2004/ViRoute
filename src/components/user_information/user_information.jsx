@@ -40,7 +40,7 @@ function UserInformation() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhone] = useState('');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -66,7 +66,7 @@ function UserInformation() {
     try {
       const updatedData = {
         fullName: tempFullName || user.fullName,
-        //phoneNumber: phone || user.phoneNumber,
+        //phoneNumber: phoneNumber || user.phoneNumber,
       };
       
       const response = await updateUser(user.userID, updatedData);
@@ -153,9 +153,11 @@ function UserInformation() {
                   <label>Mobile Phone</label>
                   <input
                     type="tel"
-                    value={phone}
+                    value={phoneNumber}
                     placeholder={user.phoneNumber}
                     onChange={(e) => setPhone(e.target.value)}
+                    readonly
+                    disabled
                   />
                 </div>
                 <div className="spacer"></div>

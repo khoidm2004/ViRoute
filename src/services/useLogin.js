@@ -5,7 +5,13 @@ const login = async (userEmail, password) => {
       userEmail,
       password,
     });
-    console.log('Login response data:', data);
+    if (data.access_token) {
+      // Lưu token vào localStorage sau khi đăng nhập thành công
+      localStorage.setItem('access_token', data.access_token);
+      console.log('Token saved:', data.access_token);
+    } else {
+      console.error('Token not found in response');
+    }
     return data.user;
   } catch (error) {
     console.error('Login error:', error.response?.data || error.message);
