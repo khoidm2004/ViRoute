@@ -2,20 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './feedback.css';
 import Footer from '../footer/footer.jsx';
 import SuccessNotify, { triggerSuccessNotification } from '../notification/noti_success.jsx';
-import authStore from '../../stores/authStore'; // Import authStore để lấy thông tin người dùng
+import authStore from '../../stores/authStore';
 
 const Feedback = () => {
-    const user = authStore((state) => state.user); // Lấy thông tin người dùng từ store
-
+    const user = authStore((state) => state.user); 
     const [formData, setFormData] = useState({
         Email: '',
         Name: '',
-        Score: '',
         Feedback: ''
     });
 
     useEffect(() => {
-        // Tự động điền email và tên khi component được mount
         if (user) {
             setFormData((prevData) => ({
                 ...prevData,
@@ -36,16 +33,10 @@ const Feedback = () => {
     const handleSend = async (e) => {
         e.preventDefault();
 
-        if (!formData.Score) {
-            alert('Please select a score between 1 and 5');
-            return;
-        }
-
         const dataToSend = [
             {
                 Name: formData.Name,
                 Email: formData.Email,
-                Score: formData.Score,
                 Feedback: formData.Feedback
             }
         ];
@@ -61,13 +52,12 @@ const Feedback = () => {
 
             if (response.ok) {
                 triggerSuccessNotification('Send Successful!');
-                setFormData({ Email: user.userEmail || '', Name: user.fullName || '', Score: '', Feedback: '' });
+                setFormData({ Email: user.userEmail || '', Name: user.fullName || '', Feedback: '' });
             } else {
                 alert('Failed to send feedback. Please try again.');
             }
         } catch (error) {
             console.error('Error sending feedback:', error);
-            alert('An error occurred. Please try again.');
         }
     };
 
@@ -98,20 +88,6 @@ const Feedback = () => {
                             placeholder="*Your name"
                             required
                         />
-                        <label>Give us a score (1-5)</label>
-                        <select
-                            name="Score"
-                            value={formData.Score}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="" disabled>Select a score</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
                         <label>Opinion</label>
                         <input
                             type="text"
