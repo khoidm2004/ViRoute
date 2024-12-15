@@ -11,8 +11,10 @@ const updateUser = async (userId, updatedInfo) => {
         },
       }
     );
+    console.log(data);
     return { success: true, data };
   } catch (error) {
+    console.log(error)
     return {
       success: false,
       message: error.response?.data?.message || 'Failed to update user info',
