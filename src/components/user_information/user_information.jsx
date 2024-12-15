@@ -13,10 +13,22 @@ import saveImage from '../../services/saveImage.js';
 function UserInformation() {
   const user = authStore((state) => state.user);
   const navigate = useNavigate();
+  
   if (!user) {
     navigate('/'); 
     return null; 
   }
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      authStore.setState({
+        ...parsedUser,
+        phoneNumber: parsedUser.phoneNumber || '', 
+        userEmail: parsedUser.userEmail || '',
+      });
+    }
+  }, []);
   const defaultAvatar = `../images/Default_avatar.png`;
   const userAvatar = `https://test-production-1774.up.railway.app/media/${user.avatar}?t=${Date.now()}`;
   const {
@@ -39,7 +51,7 @@ function UserInformation() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [phoneNumber, setPhone] = useState('');
+  const [phoneNumber, setPhone] = useState(user.phoneNumber || '');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -64,6 +76,10 @@ function UserInformation() {
     try {
       const updatedData = {
         fullName: tempFullName || user.fullName,
+        avatar: user.avatar,
+        userID: user.userID,
+        phoneNumber: phoneNumber || user.phoneNumber,
+        userEmail: user.userEmail,
       };
       if (selectedFile) {
         const image_name = await saveImage(selectedFile);  //avatars/screenshot_8.png
@@ -80,8 +96,11 @@ function UserInformation() {
             ...user, 
             fullName: updatedData.fullName,
             avatar: updatedData.avatar,
+            phoneNumber: updatedData.phoneNumber,
+            userEmail: updatedData.userEmail,
           },
         });
+        localStorage.setItem('user', JSON.stringify(updatedData));
         console.log("Avatar after user.avatar: ", user.avatar)
       } else {
         throw new Error(response.message);
