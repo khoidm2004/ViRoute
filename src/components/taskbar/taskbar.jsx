@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Taskbar.css';
+import './taskbar.css';
 import { Icon } from '@iconify/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useUserInformationStore from '../../stores/userinfoStore';
