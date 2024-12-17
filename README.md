@@ -11,6 +11,11 @@
 - [Nhi Nguyen](https://github.com/nhingnguyen) (Designer + Frontend Dev)
 
 ## Tech stacks 💻
+- UX/UI Design: Figma
+- Frontend: React
+- Backend: Django
+- Database: MySQL + SheetDB
+- Deployment: Vercel + Railway
 
 ## [Demo▶️]
 
